@@ -23,9 +23,29 @@ This class will build and manage the View that will display the results of the a
 This class will gather user input and pass the new commands to the Model for parsing into `Delta` objects that will be queried by the `UITurtleView` class.
 
 ### UICommandHistoryView
-This class will display the command history of the user. 
+This class will display the command history of the user.
 
 This section describes how the user will interact with your program (keep it simple to start). Describe the overall appearance of program's user interface components and how users interact with these components (especially those specific to your program, i.e., means of input other than menus or toolbars). Include one or more pictures of the user interface (these pictures can be hand drawn and scanned in, created with a standard drawing program, or screen shots from a dummy program that serves as a exemplar). Describe any erroneous situations that are reported to the user (i.e., bad input data, empty data, etc.).
+
+### UIUserCommandListView
+List of commands that can be clicked on to run directly.
+
+
+### UISettingsMenu
+Will contain the following items in menus:
+* Change background color
+* Change pen color
+* Change language
+* Help page button
+* Change turtle image
+
+### UIErrorNotifier
+This UI will generate error popups that will alert the user to problems that occur in the program running. Potential errors include:
+
+* Incorrect Syntax
+* References vars that don’t exist
+* Move a turtle that doesn't exist
+
 
 # API Details
 David
@@ -54,6 +74,35 @@ Carine
 * Our design also involves a parser that will pass a sort of abstract syntax tree to the controller representing the components of each "command" written by a user.  We wanted the controller to be able to handle a "command" line recursively because one "command" line might actually be composed of multiple commands that need to first be executed before the ultimate command is executed.  Thus, an abstract syntax tree would facilitate this recursive functionality because "parent" commands are still connected to "child" commands in an abstract syntax tree, but the abstraction of the tree does not require concrete source code that might not yet be determinable if child commands have not yet been executed.  A con to an abstract syntax tree is that an additional layer of code needs to be generated for the controller to be able to execute logic on the information passed from the parser.  Ultimately, however, the pros of abstraction for functionality like loops that rely on execution of other commands first.  
 
 # Team Responsibilities
-Nick
 
-This section describes the program components each team member plans to take primary and secondary responsibility for and a high-level plan of how the team will complete the program.
+### David
+
+* Parser
+* Command Implementation
+
+### Nick
+
+* Turtle view
+* Settings UI
+* Delta objects --> Displaying Turtle
+* Error UI
+
+### Carine
+
+* Model
+* Command implementation (continued)
+
+### Timothy
+
+* Console
+* Variable List
+* Command History
+* User Defined Commands List
+* UIManager
+
+### Z
+
+* Controller
+* Will Create the Delta objects
+* Parse String --> Commands (Nodes)
+* Execute Commands
