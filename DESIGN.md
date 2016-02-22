@@ -1,7 +1,10 @@
 # Introduction
 David
 
-This section describes the problem your team is trying to solve by writing this program, the primary design goals of the project (i.e., where is it most flexible), and the primary architecture of the design (i.e., what is closed and what is open). Discuss the program at a high-level (i.e., without referencing specific classes, data structures, or code).
+In our SLOGO project, we hoping to effectively use API's to communicate between the front-end and the back-end, allowing both sub-groups of our team to work independently. The API's will each allow the appropriate amount of access to information within the component, and should ideally be flexible enough to permit future extensions. The primary design goals of our project are to close the implementation of the parser, so that it is flexible when implementing new commands. Additionally, our design aims to facilitate a flexible communication of information from the Model to the View, so that it is able to accurately reflect changes from a command. 
+
+From a high-level, our project will be split into three components, the Model, the View, and the Controller. The controller will handle the parsing of commands, and the routing of information between the Model and the View. As such, both the front-end and the back-end teams will have some part in shaping the controller component. 
+
 
 # Design Overview
 Z
@@ -30,7 +33,18 @@ This section describes how the user will interact with your program (keep it sim
 # API Details
 David
 
-This section describes each API introduced in the Overview in detail. Describe how each API supports specific features given in the assignment specification, what resources it might use, how it is intended to be used, and how it could be extended to include additional requirements (from the assignment specification or discussed by your team). Finally, justify the decision to create each class introduced with respect to the design's key goals, principles, and abstractions. Your APIs should be written as Java interfaces, types that cannot contain instance variables or private methods, in appropriate packages. These should be Java code files that compile and contain extensive comments to explain the purpose of each interface and each method within the interface (note this code can be generated directly from a UML diagram). Include any Exceptions you plan to throw because of errors that might occur within your methods. Note, this does not require that all of these types will remain as interfaces in the final implementation, just that the goal is for you to focus on each type's behavior and purpose.
+### External Front-end API
+The API of the front-end team will center around accepting packets of information that represent a change in state from a given command. As such, they will have methods that allow the controller to relay this information. This information will contain descriptions of the current state of the turtle, any new lines drawn, previous command history, variables defined, and user-defined commands. We would also like to implement some of this functionality, such as the command history and variables defined, using JavaFX property bindings, meaning that in order to properly display these modules, they will need to be given property bindings. Additionally, the front-end team will implement a method that allows the Controller to pass along any errors that have been generated during the execution of a command. 
+
+### Internal Front-end API
+In order to allow for ideal extensibility, the internal API for extending the front-end will focus on modularity of the different parts of the GUI. In essence, the responsibilities for implementing an additional feature to the front-end will involve only an additional class and a new reference in the main GUI handler. In this case, new features may require modifications to the external API, since these new modules could require additional information from the back-end. Since all of this behavior is encapsulated behind an interface, however, this internal extension does not significantly affect the exterior appearance of the component. 
+
+### External Back-end API
+The goal of the external portion of the back-end API is to allow for a simple interface that accepts a string input command, and returns the changes in state as a result of this command. The other team will not have to worry about the parsing of the command, or how the state is stored internally, but rather only the changes in state that the back-end returns. As such, the packets of information that the back-end returns must contain all of the information necessary to describe the change in state as a result of a command. Another key aspect of this API is the ability to generate helpful exceptions, primarily as a result of an invalid command. This external API will allow the other team to capture an accurate representation of why a particular error was thrown. 
+
+### Internal Back-end API
+The goal of the internal portion of the back-end API is to allow for a wide range of input commands, while being flexible with the state it returns. As such, we have decided to have the back-end API implement a variety of methods, such as moveTurtleForward() or rotate() for example, that allow all of the commands that change the state to have easy access. Another focus of this internal API is the extensibility of the parsing of input commands. To tackle this, we will implement a new class to represent each command that will handle its own execution and the parsing of its parameters, since the format of each command varies. This means that each 'command' object will implement an interface that allows for other nodes to access its return value, execute it, and parse a string into its children. 
+
 
 # API Example Code
 Everyone
