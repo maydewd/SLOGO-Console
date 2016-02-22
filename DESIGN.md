@@ -1,13 +1,13 @@
 # Introduction
 David
 
-In our SLOGO project, we hoping to effectively use API's to communicate between the front-end and the back-end, allowing both sub-groups of our team to work independently. The API's will each allow the appropriate amount of access to information within the component, and should ideally be flexible enough to permit future extensions. This abstraction should allow us to implement new features without large-scale refactoring of our existing features. The primary design goals of our project are to close the implementation of the parser, so that it is flexible when implementing new commands. Additionally, our design aims to facilitate a flexible communication of information from the Model to the View, so that it is able to accurately reflect changes from a command. 
+In our SLOGO project, we hoping to effectively use API's to communicate between the front-end and the back-end, allowing both sub-groups of our team to work independently. The API's will each allow the appropriate amount of access to information within the component, and should ideally be flexible enough to permit future extensions. This abstraction should allow us to implement new features without large-scale refactoring of our existing features. The primary design goals of our project are to close the implementation of the parser, so that it is flexible when implementing new commands. Additionally, our design aims to facilitate a flexible communication of information from the Model to the View, so that it is able to accurately reflect changes from a command.
 
-From a high-level, our project will be split into three components, the Model, the View, and the Controller. The controller will handle the parsing of commands, and the routing of information between the Model and the View. As such, both the front-end and the back-end teams will have some part in shaping the controller component. The Model and the View will also be linked in some ways, since we will use linked properties to automatically change some elements of the View. 
+From a high-level, our project will be split into three components, the Model, the View, and the Controller. The controller will handle the parsing of commands, and the routing of information between the Model and the View. As such, both the front-end and the back-end teams will have some part in shaping the controller component. The Model and the View will also be linked in some ways, since we will use linked properties to automatically change some elements of the View.
 
 
 # Design Overview
-The View will call updateDisplay() on the Controller passing a command String that the user has entered. UpdateDisplay() will return a List of Delta objects to the view, each of which will hold the information for a one step change. To do that the Controller will call parseString on the Parser who will return a List of Root Nodes back to it. Each Node will be of a type related to the command that it implements and will have an execute method that returns another Node. Upon receipt of the Root Nodes the Controller will call execute() on those in a sequence receiving a List of Deltas as a result. While the Nodes append to the List of Deltas recursively they will call the Controller's command  methods such as moveForward, moveBackward etc that in turn will call the respective methods of the Model who will also adjust the Turtle position. 
+The View will call updateDisplay() on the Controller passing a command String that the user has entered. UpdateDisplay() will return a List of Delta objects to the view, each of which will hold the information for a one step change. To do that the Controller will call parseString on the Parser who will return a List of Root Nodes back to it. Each Node will be of a type related to the command that it implements and will have an execute method that returns another Node. Upon receipt of the Root Nodes the Controller will call execute() on those in a sequence receiving a List of Deltas as a result. While the Nodes append to the List of Deltas recursively they will call the Controller's command  methods such as moveForward, moveBackward etc that in turn will call the respective methods of the Model who will also adjust the Turtle position.
 ![UML Diagram](https://github.com/duke-compsci308-spring2016/slogo_team19/blob/master/examples/ClassDiagram.png)
 # User Interface
 Timothy and Nick
@@ -52,13 +52,13 @@ This UI will generate error popups that will alert the user to problems that occ
 David
 
 ### External Front-end API
-The API of the front-end team will center around accepting packets of information that represent a change in state from a given command. As such, they will have methods that allow the controller to relay this information. This information will contain descriptions of the current state of the turtle, any new lines drawn, previous command history, variables defined, and user-defined commands. We would also like to implement some of this functionality, such as the command history and variables defined, using JavaFX property bindings, meaning that in order to properly display these modules, they will need to be given property bindings. This will likely be facilitated by the controller, but will ultimately result in a weak dependence with the Model. Additionally, the front-end team will implement a method that allows the Controller to pass along any errors that have been generated during the execution or parsing of a command. 
+The API of the front-end team will center around accepting packets of information that represent a change in state from a given command. As such, they will have methods that allow the controller to relay this information. This information will contain descriptions of the current state of the turtle, any new lines drawn, previous command history, variables defined, and user-defined commands. We would also like to implement some of this functionality, such as the command history and variables defined, using JavaFX property bindings, meaning that in order to properly display these modules, they will need to be given property bindings. This will likely be facilitated by the controller, but will ultimately result in a weak dependence with the Model. Additionally, the front-end team will implement a method that allows the Controller to pass along any errors that have been generated during the execution or parsing of a command.
 
 ### Internal Front-end API
-In order to allow for ideal extensibility, the internal API for extending the front-end will focus on modularity of the different parts of the GUI. In essence, the responsibilities for implementing an additional feature to the front-end will involve only an additional class and a new reference in the main GUI Manager. In this case, new features may require modifications to the external API, since these new modules could require additional information from the back-end. Since all of this behavior is encapsulated behind an interface, however, this internal extension does not significantly affect the exterior appearance of the component. A specific example of this is to add a new module, such as the currently active variables, the UI Manager will simply initialize a module that specifically handles this component of the View, while adding a method that accepts a property that represents a map of variables. 
+In order to allow for ideal extensibility, the internal API for extending the front-end will focus on modularity of the different parts of the GUI. In essence, the responsibilities for implementing an additional feature to the front-end will involve only an additional class and a new reference in the main GUI Manager. In this case, new features may require modifications to the external API, since these new modules could require additional information from the back-end. Since all of this behavior is encapsulated behind an interface, however, this internal extension does not significantly affect the exterior appearance of the component. A specific example of this is to add a new module, such as the currently active variables, the UI Manager will simply initialize a module that specifically handles this component of the View, while adding a method that accepts a property that represents a map of variables.
 
 ### External Back-end API
-The goal of the external portion of the back-end API is to allow for a simple interface that accepts a string input command, and returns the changes in state as a result of this command. The other team will not have to worry about the parsing of the command, or how the state is stored internally, but rather only the changes in state that the back-end returns. As such, the packets of information that the back-end returns must contain all of the information necessary to describe the change in state as a result of a command. Since the formatting of the input string is dependent on the language being used, the back-end will also need a way of setting the active language based on user input received from the front-end. Another key aspect of this API is the ability to generate helpful exceptions, primarily as a result of an invalid command. This external API will allow the other team to capture an accurate representation of why a particular error was thrown. 
+The goal of the external portion of the back-end API is to allow for a simple interface that accepts a string input command, and returns the changes in state as a result of this command. The other team will not have to worry about the parsing of the command, or how the state is stored internally, but rather only the changes in state that the back-end returns. As such, the packets of information that the back-end returns must contain all of the information necessary to describe the change in state as a result of a command. Since the formatting of the input string is dependent on the language being used, the back-end will also need a way of setting the active language based on user input received from the front-end. Another key aspect of this API is the ability to generate helpful exceptions, primarily as a result of an invalid command. This external API will allow the other team to capture an accurate representation of why a particular error was thrown.
 
 ### Internal Back-end API
 The goal of the internal portion of the back-end API is to allow for a wide range of input commands, while being flexible with the state it returns. As such, we have decided to have the back-end API implement a variety of methods, such as moveTurtleForward() or rotate() for example, that allow all of the commands that change the state to have easy access. Another focus of this internal API is the extensibility of the parsing of input commands. To tackle this, we will implement a new class to represent each command that will handle its own execution and the parsing of its parameters, since the format of each command varies. This means that each 'command' object will implement an interface that allows for other nodes to access its return value, execute it, and parse a string into its children. As the number of commands grows, this will simplify the parsing logic away from one big loop, instead putting the onus onto each specific command to handle how it is represented in string form. Additionally, since each command knows how to appropriately change the state of the model, it can implement its own appropriate execute() method that makes the necessary calls to the controller( which then routes them to the model)
@@ -80,7 +80,7 @@ Parser.parseString(inputString)
 PenUpNode.execute()
 Controller.penUp()
 Model.penUp()
-Tutle.penUp = true;
+Turtle.penUp = true;
 
 AbstractCommandNode.execute(), which recursively executes all nodes in this tree, returning a List<Delta>
 Model.addHistoricalCommand(inputString)
@@ -88,18 +88,13 @@ View.updateDisplay(List<Delta>)
 
 * Use Case 'set a color to use for the pen"
 View.changePenColor(selection)
-Model.changePenColor(selection) // sets PenColor = selection so the next time a Delta is generated, the Delta's color property will reflect the updated PenColor 
+Model.changePenColor(selection) // sets PenColor = selection so the next time a Delta is generated, the Delta's color property will reflect the updated PenColor
 
 
-It is especially important in helping others understand how to use your APIs to provide example code. It should be clear from this code which objects are responsible for completing each part of the task, but you do not have to implement the called functions.
+* Use case 'Click clear in UI'
+View.reset() // private
+myModel.reset();
 
-* Show actual "sequence of code" that implements the following use case:
-  * *The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail, and the command is added to the environment's history.*
-
-
-* Note, clearly show the flow of calls to public methods needed to complete this example, indicating which class contains each method called. It is not necessary to understand exactly how parsing works in order to complete this example, just what the result of parsing the command will be.
-
-* Additionally, each member of the team should create one use case of their own (and example code) for the part of the project for which they intend to take responsibility. These can still be done as a group, but should represent a variety of areas of the overall project.
 
 # Design Considerations
 Carine
@@ -112,18 +107,16 @@ Carine
 # Team Responsibilities
 
 ### David
-David will be primarily working on the parser for the strings entered through the console. Specifically, this will include building out a tree structure of commands with individual nodes representing each command in the string and the necessary information contained therein.  Moreover, this structure will include the commands themselves, while the model will house the logic required to build out their delta functions. 
+David will be primarily working on the parser for the strings entered through the console. Specifically, this will include building out a tree structure of commands with individual nodes representing each command in the string and the necessary information contained therein.  Moreover, this structure will include the commands themselves, while the model will house the logic required to build out their delta functions.
 
 ### Nick
 In a broad sense, Nick will be handling the front end user interactions. This will include the screen itself displaying the lines and the turtle that draws them, a settings UI bar which will allow the user to change the image of the "turtle," the color of its pen, background color, language, and a button to a help page.  Tangential to these implementations, and thus also Nick's responsibility are handling and decoding the delta objects passed in from the backend, and implementing an Error pop up UI to handle any exceptions.
 
 ### Carine
-Carine will be implementing the model of our design. This means that she will create a mediary between the controller and the individual command classes to help determine how exactly each command is going to be implemented.  Additionally this class will house all of the data required for the program, such as historical commands, variables, turtle location, and anything else that might be necessary.  She will also assist in writing out the logic to build the commands delta functions, before passing them back to the model, and then controller. 
+Carine will be implementing the model of our design. This means that she will create a mediary between the controller and the individual command classes to help determine how exactly each command is going to be implemented.  Additionally this class will house all of the data required for the program, such as historical commands, variables, turtle location, and anything else that might be necessary.  She will also assist in writing out the logic to build the commands delta functions, before passing them back to the model, and then controller.
 
 ### Timothy
 Timothy will be handling the more data-centric aspects of the UI.  This will include the console, where the user can type their new commands, a list of all current variables and their values, a list of all past commands, and a list of the User Defined commands.  Additionally, Timothy will be implementing the overarching UIManager class to mediate and update the view.
 
 ### Z
 Z will be in charge of the controller, which ties the backend to the frontend such that neither one has any access or knowledge of the other.  As this class necessitates having a working knowledge of all other aspects of the project, Z will be helping out with the link between the string parser to the command nodes, and the creation of delta objects. Finally and most importantly he will write out the code to actually issue the commands and ensure that they are passed back to the frontend for display.
-
-
