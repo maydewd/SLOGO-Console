@@ -86,6 +86,10 @@ AbstractCommandNode.execute(), which recursively executes all nodes in this tree
 Model.addHistoricalCommand(inputString)
 View.updateDisplay(List<Delta>)
 
+* Use Case 'set a color to use for the pen"
+View.changePenColor(selection)
+Model.changePenColor(selection) // sets PenColor = selection so the next time a Delta is generated, the Delta's color property will reflect the updated PenColor 
+
 
 It is especially important in helping others understand how to use your APIs to provide example code. It should be clear from this code which objects are responsible for completing each part of the task, but you do not have to implement the called functions.
 
