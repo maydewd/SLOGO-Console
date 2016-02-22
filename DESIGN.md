@@ -76,6 +76,18 @@ AbstractCommandNode.execute(), which recursively executes all nodes in this tree
 Model.addHistoricalCommand(inputString)
 View.updateDisplay(List<Delta>)
 
+* Use Case 'pu'
+Controller.parseString('pu')
+Parser.parseString(inputString)
+PenUpNode.execute()
+Controller.penUp()
+Model.penUp()
+Tutle.penUp = true;
+
+AbstractCommandNode.execute(), which recursively executes all nodes in this tree, returning a List<Delta>
+Model.addHistoricalCommand(inputString)
+View.updateDisplay(List<Delta>)
+
 
 It is especially important in helping others understand how to use your APIs to provide example code. It should be clear from this code which objects are responsible for completing each part of the task, but you do not have to implement the called functions.
 
@@ -98,33 +110,18 @@ Carine
 # Team Responsibilities
 
 ### David
-
-* Parser
-* Command Implementation
+David will be primarily working on the parser for the strings entered through the console. Specifically, this will include building out a tree structure of commands with individual nodes representing each command in the string and the necessary information contained therein.  Moreover, this structure will include the commands themselves, while the model will house the logic required to build out their delta functions. 
 
 ### Nick
-
-* Turtle view
-* Settings UI
-* Delta objects --> Displaying Turtle
-* Error UI
+In a broad sense, Nick will be handling the front end user interactions. This will include the screen itself displaying the lines and the turtle that draws them, a settings UI bar which will allow the user to change the image of the "turtle," the color of its pen, background color, language, and a button to a help page.  Tangential to these implementations, and thus also Nick's responsibility are handling and decoding the delta objects passed in from the backend, and implementing an Error pop up UI to handle any exceptions.
 
 ### Carine
-
-* Model
-* Command implementation (continued)
+Carine will be implementing the model of our design. This means that she will create a mediary between the controller and the individual command classes to help determine how exactly each command is going to be implemented.  Additionally this class will house all of the data required for the program, such as historical commands, variables, turtle location, and anything else that might be necessary.  She will also assist in writing out the logic to build the commands delta functions, before passing them back to the model, and then controller. 
 
 ### Timothy
-
-* Console
-* Variable List
-* Command History
-* User Defined Commands List
-* UIManager
+Timothy will be handling the more data-centric aspects of the UI.  This will include the console, where the user can type their new commands, a list of all current variables and their values, a list of all past commands, and a list of the User Defined commands.  Additionally, Timothy will be implementing the overarching UIManager class to mediate and update the view.
 
 ### Z
+Z will be in charge of the controller, which ties the backend to the frontend such that neither one has any access or knowledge of the other.  As this class necessitates having a working knowledge of all other aspects of the project, Z will be helping out with the link between the string parser to the command nodes, and the creation of delta objects. Finally and most importantly he will write out the code to actually issue the commands and ensure that they are passed back to the frontend for display.
 
-* Controller
-* Will Create the Delta objects
-* Parse String --> Commands (Nodes)
-* Execute Commands
+
