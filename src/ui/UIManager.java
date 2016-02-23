@@ -1,5 +1,6 @@
 package ui;
 
+import app.FrontEndControllerInterface;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 public class UIManager {
 
     public static final double DEFAULT_SPACING = 10;
-    public static final double DEFAULT_X_SIZE = 600;
+    public static final double DEFAULT_X_SIZE = 400;
     public static final double DEFAULT_Y_SIZE = 400;
 
 
@@ -24,7 +25,7 @@ public class UIManager {
     private UIConsoleView consoleView;
 //    private UICommandHistoryView commandHistoryView;
 //    private UIUserCommandListView userCommandListView;
-//    private UISettingsMenu settingsMenu;
+    private UISettingsView settingsMenu;
 //    private UIErrorNotifier errorNotifier;
 
     private Pane myMainPaneNamedDane;
@@ -32,7 +33,7 @@ public class UIManager {
     private Group group;
     private Scene uiSceneView;
 
-    public UIManager(Stage primaryStage){
+    public UIManager(Stage primaryStage, FrontEndControllerInterface controller){
         // Init vars
         stage = primaryStage;
         group = new Group();
@@ -40,14 +41,15 @@ public class UIManager {
         stage.setScene(uiSceneView);
 
         // Create the views
-        turtleView = new UITurtleView(this);
+        turtleView = new UITurtleView(controller);
         consoleView = new UIConsoleView(this);
+        settingsMenu = new UISettingsView(controller);
 
         // Initialize Pane
         myMainPaneNamedDane = new VBox(DEFAULT_SPACING);
-        myMainPaneNamedDane.getChildren().addAll(turtleView.getNode(), consoleView.getNode());
+        myMainPaneNamedDane.getChildren().addAll(settingsMenu.getNode(), turtleView.getNode(), consoleView.getNode());
 
-        group.getChildren().add(myMainPaneNamedDane);
+        group.getChildren().addAll(myMainPaneNamedDane);
 
         setupInput();
         stage.show();
