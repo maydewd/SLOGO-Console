@@ -8,39 +8,39 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.paint.Color;
 
-public class UISettingsView implements UIView{
+public class UISettingsView implements UIView {
 	public static final int DEFAULT_WIDTH = 400;
-    public static final int DEFAULT_HEIGHT = 25;
-    
-    private Node uiNode;
-    private ColorPicker colorPicker;
-    private FrontEndControllerInterface controller;
+	public static final int DEFAULT_HEIGHT = 25;
+
+	private Node uiNode;
+	private ColorPicker colorPicker;
+	private FrontEndControllerInterface controller;
 
 	public UISettingsView(FrontEndControllerInterface c) {
 		MenuBar settings = new MenuBar();
 		uiNode = settings;
 		controller = c;
-		
-		
+
+
 		//Color Menu
 		Menu colorSettings = new Menu("Color Settings");
-		
+
 		MenuItem penColor = new MenuItem("Pen Color");
 		penColor.setOnAction(e -> selectPenColor());
 		MenuItem backgroundColor = new MenuItem("Background Color");
 		penColor.setOnAction(e -> selectBackgroundColor());
-		
+
 		colorSettings.getItems().addAll(penColor, backgroundColor);
-		
+
 		//Turtle Menu
 		Menu turtleSettings = new Menu("Turtle");
 		MenuItem turtleImage = new MenuItem("Change Turtle Image");
 		turtleImage.setOnAction(e -> controller.setPenColor(Color.BLACK));
 		turtleSettings.getItems().addAll(turtleImage);
-		
+
 		//Language Menu
 		Menu languageSettings = new Menu("Language");
-		
+
 		MenuItem english = new MenuItem("English");
 		english.setOnAction(e -> controller.setLanguage("English"));
 		MenuItem spanish = new MenuItem("Spanish");
@@ -57,20 +57,20 @@ public class UISettingsView implements UIView{
 		portuguese.setOnAction(e -> controller.setLanguage("Portuguese"));
 		MenuItem russian = new MenuItem("Russian");
 		russian.setOnAction(e -> controller.setLanguage("Russian"));
-		
+
 		languageSettings.getItems().addAll(english, spanish, chinese, french, german, italian, portuguese, russian);
-		
+
 		//Help Button
 		Menu helpSettings = new Menu("Help");
-		
+
 		MenuItem help = new MenuItem("Get Help");
 		help.setOnAction(e -> controller.setPenColor(Color.BLACK));
-		
+
 		helpSettings.getItems().addAll(help);
-		
-		
+
+
 		settings.getMenus().addAll(colorSettings, turtleSettings, languageSettings, helpSettings);
-		
+
 		((MenuBar) uiNode).setPrefSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 
@@ -78,14 +78,15 @@ public class UISettingsView implements UIView{
 	public int getWidth() {
 		return DEFAULT_WIDTH;
 	}
-	
-	private void selectPenColor(){
+
+	private void selectPenColor() {
 		colorPicker = new ColorPicker();
 		colorPicker.setOnAction(e -> controller.setPenColor(colorPicker.getValue()));
 	}
-	private void selectBackgroundColor(){
-		 colorPicker = new ColorPicker();
-		 colorPicker.setOnAction(e -> controller.setBackgroundColor(colorPicker.getValue()));
+
+	private void selectBackgroundColor() {
+		colorPicker = new ColorPicker();
+		colorPicker.setOnAction(e -> controller.setBackgroundColor(colorPicker.getValue()));
 	}
 
 	@Override

@@ -11,49 +11,48 @@ import javafx.scene.layout.Pane;
 public class UIConsoleView implements UIView {
 
 
-    public static final int DEFAULT_WIDTH = 400;
-    public static final int DEFAULT_HEIGHT = 100;
+	public static final int DEFAULT_WIDTH = 400;
+	public static final int DEFAULT_HEIGHT = 100;
 
-    private int width;
-    private int height;
-    private Node uiNode;
-    private TextArea commandField;
-    private UIManager uiManager;
+	private int width;
+	private int height;
+	private Node uiNode;
+	private TextArea commandField;
+	private UIManager uiManager;
 
 
+	public UIConsoleView(UIManager manager) {
+		width = DEFAULT_WIDTH;
+		height = DEFAULT_HEIGHT;
 
-    public UIConsoleView(UIManager manager){
-        width = DEFAULT_WIDTH;
-        height = DEFAULT_HEIGHT;
+		uiNode = new Pane();
+		commandField = new TextArea();
+		uiManager = manager;
 
-        uiNode = new Pane();
-        commandField = new TextArea();
-        uiManager = manager;
+		uiNode.setStyle("-fx-background-color: red;");
+		((Pane) uiNode).setPrefSize(width, height);
+		((Pane) uiNode).getChildren().add(commandField);
+		commandField.setOnKeyReleased(event -> {
+			if (event.getCode().equals(KeyCode.ENTER)) {
+				uiManager.debugPostNewCommand(commandField.getText());
+				commandField.clear();
+			}
+		});
 
-        uiNode.setStyle("-fx-background-color: red;");
-        ((Pane) uiNode).setPrefSize(width, height);
-        ((Pane) uiNode).getChildren().add(commandField);
-        commandField.setOnKeyReleased(event -> {
-            if(event.getCode().equals(KeyCode.ENTER)){
-                uiManager.debugPostNewCommand(commandField.getText());
-                commandField.clear();
-            }
-        });
+	}
 
-    }
+	@Override
+	public int getWidth() {
+		return width;
+	}
 
-    @Override
-    public int getWidth() {
-        return width;
-    }
+	@Override
+	public int getHeight() {
+		return height;
+	}
 
-    @Override
-    public int getHeight() {
-        return height;
-    }
-
-    @Override
-    public Node getNode() {
-        return uiNode;
-    }
+	@Override
+	public Node getNode() {
+		return uiNode;
+	}
 }

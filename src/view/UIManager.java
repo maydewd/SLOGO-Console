@@ -13,61 +13,62 @@ import javafx.stage.Stage;
  */
 public class UIManager {
 
-    public static final double DEFAULT_SPACING = 10;
-    public static final double DEFAULT_X_SIZE = 400;
-    public static final double DEFAULT_Y_SIZE = 400;
+	public static final double DEFAULT_SPACING = 10;
+	public static final double DEFAULT_X_SIZE = 400;
+	public static final double DEFAULT_Y_SIZE = 400;
 
 
-    private UITurtleView turtleView;
-    private UIConsoleView consoleView;
-//    private UICommandHistoryView commandHistoryView;
+	private UITurtleView turtleView;
+	private UIConsoleView consoleView;
+	//    private UICommandHistoryView commandHistoryView;
 //    private UIUserCommandListView userCommandListView;
-    private UISettingsView settingsMenu;
+	private UISettingsView settingsMenu;
 //    private UIErrorNotifier errorNotifier;
 
-    private Pane myMainPaneNamedDane;
-    private Stage stage;
-    private Group group;
-    private Scene uiSceneView;
+	private Pane myMainPaneNamedDane;
+	private Stage stage;
+	private Group group;
+	private Scene uiSceneView;
 
-    public UIManager(Stage primaryStage, FrontEndControllerInterface controller){
-        // Init vars
-        stage = primaryStage;
-        group = new Group();
-        uiSceneView = new Scene(group);
-        stage.setScene(uiSceneView);
+	public UIManager(Stage primaryStage, FrontEndControllerInterface controller) {
+		// Init vars
+		stage = primaryStage;
+		group = new Group();
+		uiSceneView = new Scene(group);
+		stage.setScene(uiSceneView);
 
-        // Create the views
-        turtleView = new UITurtleView(controller);
-        consoleView = new UIConsoleView(this);
-        settingsMenu = new UISettingsView(controller);
+		// Create the views
+		turtleView = new UITurtleView(controller);
+		consoleView = new UIConsoleView(this);
+		settingsMenu = new UISettingsView(controller);
 
-        // Initialize Pane
-        myMainPaneNamedDane = new VBox(DEFAULT_SPACING);
-        myMainPaneNamedDane.getChildren().addAll(settingsMenu.getNode(), turtleView.getNode(), consoleView.getNode());
+		// Initialize Pane
+		myMainPaneNamedDane = new VBox(DEFAULT_SPACING);
+		myMainPaneNamedDane.getChildren().addAll(settingsMenu.getNode(), turtleView.getNode(), consoleView.getNode());
 
-        group.getChildren().addAll(myMainPaneNamedDane);
+		group.getChildren().addAll(myMainPaneNamedDane);
 
-        setupInput();
-        stage.show();
-    }
+		setupInput();
+		stage.show();
+	}
 
-    /**
-     * This method for debugging only
-     //TODO: Remove this method
-     * @param command
-     */
-    public void debugPostNewCommand(String command){
-        System.out.println(command);
-    }
+	/**
+	 * This method for debugging only
+	 * //TODO: Remove this method
+	 *
+	 * @param command
+	 */
+	public void debugPostNewCommand(String command) {
+		System.out.println(command);
+	}
 
-    private void setupInput(){
+	private void setupInput() {
 //      Quit the program if you press ESCAPE
 //      Helpful for debugging.
-        this.stage.getScene().setOnKeyPressed(event -> {
-                if(event.getCode().equals(KeyCode.ESCAPE)){
-                    System.exit(0);
-                }
-        });
-    }
+		this.stage.getScene().setOnKeyPressed(event -> {
+			if (event.getCode().equals(KeyCode.ESCAPE)) {
+				System.exit(0);
+			}
+		});
+	}
 }

@@ -9,11 +9,11 @@ import view.UIManager;
  */
 public class SLogoEngine {
 
-    private UIManager uiManager;
-    private FrontEndControllerInterface controller;
+	private UIManager uiManager;
+	private FrontEndControllerInterface controller;
 
-    public void start(Stage stage){
-        uiManager = new UIManager(stage, controller);
+	public void start(Stage stage) {
+		uiManager = new UIManager(stage, controller);
 
-    }
+	}
 }

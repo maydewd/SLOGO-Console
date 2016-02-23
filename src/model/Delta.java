@@ -1,33 +1,37 @@
 package model;
 
-public class Delta {	
+public class Delta {
 	private int oldX;
 	private int oldY;
 	private int newX;
 	private int newY;
 	private boolean isPenDown;
 
-	public Delta(int ox, int oy, int nx, int ny, boolean l){
+	public Delta(int ox, int oy, int nx, int ny, boolean l) {
 		oldX = ox;
 		oldY = oy;
 		newX = nx;
 		newY = ny;
 		isPenDown = l;
 	}
-	
-	public int getOldX(){
+
+	public int getOldX() {
 		return oldX;
 	}
-	public int getOldY(){
+
+	public int getOldY() {
 		return oldY;
 	}
-	public int getNewX(){
+
+	public int getNewX() {
 		return newX;
 	}
-	public int getNewY(){
+
+	public int getNewY() {
 		return newY;
 	}
-	public boolean getPenDown(){
+
+	public boolean getPenDown() {
 		return isPenDown;
 	}
 }

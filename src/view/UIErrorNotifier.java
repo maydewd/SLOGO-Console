@@ -2,7 +2,7 @@ package view;
 
 import javafx.scene.Node;
 
-public class UIErrorNotifier implements UIView{
+public class UIErrorNotifier implements UIView {
 
 	public UIErrorNotifier() {
 		// TODO Auto-generated constructor stub
