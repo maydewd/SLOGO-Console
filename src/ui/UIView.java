@@ -11,5 +11,9 @@ public interface UIView {
 
     int getHeight();
 
+    /**
+     * This method returns the Node that contains all of UI for this View
+     * @return view Node
+     */
     Node getNode();
 }

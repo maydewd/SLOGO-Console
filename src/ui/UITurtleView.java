@@ -1,13 +1,12 @@
 package ui;
 
 import javafx.scene.Node;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
 
 /**
  * Created by Tim on 22/02/16.
  */
-public class UITurtleView implements UIView{
+public class UITurtleView implements UIView {
 
     public static final int DEFAULT_WIDTH = 400;
     public static final int DEFAULT_HEIGHT = 400;
@@ -15,15 +14,18 @@ public class UITurtleView implements UIView{
     private int width;
     private int height;
     private Node uiNode;
+    private UIManager uiManager;
 
-    public UITurtleView(){
+    public UITurtleView(UIManager manager){
         width = DEFAULT_WIDTH;
         height = DEFAULT_HEIGHT;
+        this.uiManager = manager;
 
-        Canvas c = new Canvas();
-        uiNode = new Canvas();
-        uiNode.setStyle("-fx-background: #FFFFFF;");
-        uiNode.autosize();
+
+        uiNode = new Pane();
+        uiNode.setStyle("-fx-background-color: black;");
+        ((Pane) uiNode).setPrefSize(width, height);
+
     }
 
     @Override

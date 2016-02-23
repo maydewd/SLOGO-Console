@@ -1,9 +1,13 @@
 package ui;
 
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
@@ -17,7 +21,7 @@ public class UIManager {
 
 
     private UITurtleView turtleView;
-//    private UIConsoleView consoleView;
+    private UIConsoleView consoleView;
 //    private UICommandHistoryView commandHistoryView;
 //    private UIUserCommandListView userCommandListView;
 //    private UISettingsMenu settingsMenu;
@@ -32,16 +36,39 @@ public class UIManager {
         // Init vars
         stage = primaryStage;
         group = new Group();
-        uiSceneView = new Scene(group, DEFAULT_X_SIZE, DEFAULT_Y_SIZE);
+        uiSceneView = new Scene(group);
         stage.setScene(uiSceneView);
 
         // Create the views
-        turtleView = new UITurtleView();
+        turtleView = new UITurtleView(this);
+        consoleView = new UIConsoleView(this);
 
         // Initialize Pane
         myMainPaneNamedDane = new VBox(DEFAULT_SPACING);
-        myMainPaneNamedDane.getChildren().addAll(turtleView.getNode());
+        myMainPaneNamedDane.getChildren().addAll(turtleView.getNode(), consoleView.getNode());
 
+        group.getChildren().add(myMainPaneNamedDane);
+
+        setupInput();
         stage.show();
+    }
+
+    /**
+     * This method for debugging only
+     //TODO: Remove this method
+     * @param command
+     */
+    public void debugPostNewCommand(String command){
+        System.out.println(command);
+    }
+
+    private void setupInput(){
+//      Quit the program if you press ESCAPE
+//      Helpful for debugging.
+        this.stage.getScene().setOnKeyPressed(event -> {
+                if(event.getCode().equals(KeyCode.ESCAPE)){
+                    System.exit(0);
+                }
+        });
     }
 }

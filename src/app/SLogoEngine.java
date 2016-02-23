@@ -14,6 +14,5 @@ public class SLogoEngine {
 
     public void start(Stage stage){
         uiManager = new UIManager(stage);
-
     }
 }
