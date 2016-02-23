@@ -16,7 +16,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         SLogoEngine engine = new SLogoEngine();
 
-        engine.init(primaryStage);
-        engine.start();
+        engine.start(primaryStage);
     }
 }
