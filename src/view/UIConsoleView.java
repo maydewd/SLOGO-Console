@@ -1,10 +1,8 @@
-package ui;
+package view;
 
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 /**
@@ -35,7 +33,7 @@ public class UIConsoleView implements UIView {
         uiNode.setStyle("-fx-background-color: red;");
         ((Pane) uiNode).setPrefSize(width, height);
         ((Pane) uiNode).getChildren().add(commandField);
-        commandField.setOnKeyPressed(event -> {
+        commandField.setOnKeyReleased(event -> {
             if(event.getCode().equals(KeyCode.ENTER)){
                 uiManager.debugPostNewCommand(commandField.getText());
                 commandField.clear();

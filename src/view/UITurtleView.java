@@ -1,11 +1,12 @@
-package ui;
+package view;
 
 
 
-import app.FrontEndControllerInterface;
+import controller.FrontEndControllerInterface;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import model.Delta;
 
 /**
  * Created by Tim on 22/02/16.

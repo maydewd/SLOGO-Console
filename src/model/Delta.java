@@ -1,17 +1,18 @@
-package ui;
+package model;
 
 public class Delta {	
-	int oldX;
-	int oldY;
-	int newX;
-	int newY;
-	boolean line;
+	private int oldX;
+	private int oldY;
+	private int newX;
+	private int newY;
+	private boolean isPenDown;
+
 	public Delta(int ox, int oy, int nx, int ny, boolean l){
 		oldX = ox;
 		oldY = oy;
 		newX = nx;
 		newY = ny;
-		line = l;
+		isPenDown = l;
 	}
 	
 	public int getOldX(){
@@ -26,7 +27,7 @@ public class Delta {
 	public int getNewY(){
 		return newY;
 	}
-	public boolean getLine(){
-		return line;
+	public boolean getPenDown(){
+		return isPenDown;
 	}
 }

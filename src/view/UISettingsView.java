@@ -1,6 +1,6 @@
-package ui;
+package view;
 
-import app.FrontEndControllerInterface;
+import controller.FrontEndControllerInterface;
 import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Menu;
@@ -13,8 +13,8 @@ public class UISettingsView implements UIView{
     public static final int DEFAULT_HEIGHT = 25;
     
     private Node uiNode;
-    ColorPicker colorPicker;
-    FrontEndControllerInterface controller;
+    private ColorPicker colorPicker;
+    private FrontEndControllerInterface controller;
 
 	public UISettingsView(FrontEndControllerInterface c) {
 		MenuBar settings = new MenuBar();

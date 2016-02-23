@@ -1,9 +1,8 @@
 package app;
 
-import javafx.scene.Group;
-import javafx.scene.Scene;
+import controller.FrontEndControllerInterface;
 import javafx.stage.Stage;
-import ui.UIManager;
+import view.UIManager;
 
 /**
  * Created by Tim on 18/02/16.
