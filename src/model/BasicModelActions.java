@@ -4,7 +4,7 @@ import java.util.List;
 import controller.commands.AbstractCommandNode;
 
 
-public interface BasicCommandActions {
+public interface BasicModelActions {
 
     public void setTurtleCoordinates (Point newPoint);
 
