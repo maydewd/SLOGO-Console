@@ -1,5 +1,7 @@
 package app;
 
+import java.io.File;
+
 import javafx.scene.paint.Color;
 
 public interface FrontEndControllerInterface {
@@ -12,4 +14,6 @@ public interface FrontEndControllerInterface {
 	public Color getPenColor();
 
 	public Color getBackgroundColor();
+
+	public void setTurtleImage(File file);
 }

@@ -10,7 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 /**
  * Created by Tim on 22/02/16.
  */
-public class UITurtleView implements UIView {
+public class UITurtleView implements UIView{
 
     public static final int DEFAULT_WIDTH = 400;
     public static final int DEFAULT_HEIGHT = 400;
@@ -27,7 +27,7 @@ public class UITurtleView implements UIView {
         height = DEFAULT_HEIGHT;
         controller = c;
         
-        canvas = new Canvas();
+        canvas = new Canvas(width, height);
         uiNode = canvas;
         graphicsContext = canvas.getGraphicsContext2D();
         ((Canvas) uiNode).setHeight(height);
@@ -42,8 +42,7 @@ public class UITurtleView implements UIView {
     		graphicsContext.strokeLine(scaleX(d.oldX), scaleY(d.oldY), scaleX(d.newX), scaleY(d.newY));
     	}	
     }
-    
-    
+   
     /*
      * Scales values to the turtleView Scale
      */
@@ -56,17 +55,17 @@ public class UITurtleView implements UIView {
     }
     
     @Override
-    public int getWidth() {
+    public int getWidth(){
         return width;
     }
 
     @Override
-    public int getHeight() {
+    public int getHeight(){
         return height;
     }
 
     @Override
-    public Node getNode() {
+    public Node getNode(){
         return uiNode;
     }
 }

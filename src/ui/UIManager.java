@@ -26,7 +26,7 @@ public class UIManager {
 //    private UICommandHistoryView commandHistoryView;
 //    private UIUserCommandListView userCommandListView;
     private UISettingsView settingsMenu;
-//    private UIErrorNotifier errorNotifier;
+    private UIErrorNotifier errorNotifier;
 
     private Pane myMainPaneNamedDane;
     private Stage stage;

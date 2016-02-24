@@ -13,7 +13,7 @@ import javafx.scene.layout.Pane;
 public class UIConsoleView implements UIView {
 
 
-    public static final int DEFAULT_WIDTH = 400;
+    public static final int DEFAULT_WIDTH = 600;
     public static final int DEFAULT_HEIGHT = 100;
 
     private int width;
@@ -21,8 +21,6 @@ public class UIConsoleView implements UIView {
     private Node uiNode;
     private TextArea commandField;
     private UIManager uiManager;
-
-
 
     public UIConsoleView(UIManager manager){
         width = DEFAULT_WIDTH;
