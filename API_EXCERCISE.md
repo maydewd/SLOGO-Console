@@ -7,10 +7,10 @@ Initially we misunderstood how things are drawn on the screen, so we were discus
 After, we understood that all that is displayed on the screen is drawn by the turtle, then we started pursuing a design architecture that makes more sense for this purpose.
 
 ## Model
-Parses user input into commands and generates actions that are to be taken by the turtle which are then passed back to the View to be rendered.
+Parses user input into controller.commands and generates actions that are to be taken by the turtle which are then passed back to the View to be rendered.
 
 ## View / Controller
-Handles user input, displaying information to user, and rendering the movement commands from the Model.
+Handles user input, displaying information to user, and rendering the movement controller.commands from the Model.
 
 
 # Whiteboard Discussion

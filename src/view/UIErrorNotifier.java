@@ -1,21 +1,13 @@
-package ui;
+package view;
 
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class UIErrorNotifier implements UIView{
-	
-	public static final int DEFAULT_WIDTH = 200;
-	public static final int DEFAULT_HEIGHT = 50;
-	
-	private int width;
-	private int height;
-	private Node uiNode;
+
+public class UIErrorNotifier implements UIView {
 
 	public UIErrorNotifier() {
-		width = DEFAULT_WIDTH;
-		height = DEFAULT_HEIGHT;
 	}
 	
 	/*
@@ -56,12 +48,12 @@ public class UIErrorNotifier implements UIView{
 
 	@Override
 	public int getWidth() {
-		return width;
+		return 0;
 	}
 
 	@Override
 	public int getHeight() {
-		return height;
+		return 0;
 	}
 
 	@Override

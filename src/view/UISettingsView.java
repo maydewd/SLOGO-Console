@@ -1,15 +1,14 @@
-package ui;
+package view;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import app.FrontEndControllerInterface;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import controller.FrontEndControllerInterface;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ColorPicker;
@@ -97,10 +96,10 @@ public class UISettingsView implements UIView{
             }
 		});
 		turtleSettings.getItems().addAll(turtleImage);
-		
+
 		//Language Menu
 		Menu languageSettings = new Menu("Language");
-		
+
 		MenuItem english = new MenuItem("English");
 		english.setOnAction(e -> controller.setLanguage("English"));
 		MenuItem spanish = new MenuItem("Spanish");
@@ -117,12 +116,12 @@ public class UISettingsView implements UIView{
 		portuguese.setOnAction(e -> controller.setLanguage("Portuguese"));
 		MenuItem russian = new MenuItem("Russian");
 		russian.setOnAction(e -> controller.setLanguage("Russian"));
-		
+
 		languageSettings.getItems().addAll(english, spanish, chinese, french, german, italian, portuguese, russian);
-		
+
 		//Help Button
 		Menu helpSettings = new Menu("Help");
-		
+
 		MenuItem help = new MenuItem("Get Help");
 		help.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -141,6 +140,7 @@ public class UISettingsView implements UIView{
 		
 		helpSettings.getItems().addAll(help);
 		settings.getMenus().addAll(penColor, backgroundColor, turtleSettings, languageSettings, helpSettings);
+
 		((MenuBar) uiNode).setPrefSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 
@@ -148,7 +148,7 @@ public class UISettingsView implements UIView{
 	public int getWidth() {
 		return DEFAULT_WIDTH;
 	}
-	
+
 	@Override
 	public int getHeight() {
 		return DEFAULT_HEIGHT;

@@ -1,6 +1,6 @@
 package ui;
 
-import app.FrontEndControllerInterface;
+import controller.FrontEndControllerInterface;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import view.UIErrorNotifier;
+import view.UISettingsView;
 
 /**
  * Created by Tim on 22/02/16.

@@ -2,10 +2,12 @@ package ui;
 
 
 
-import app.FrontEndControllerInterface;
+import controller.FrontEndControllerInterface;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import model.Delta;
+import view.UIView;
 
 /**
  * Created by Tim on 22/02/16.
@@ -38,8 +40,8 @@ public class UITurtleView implements UIView{
     public void updateTurtleView(Delta d){
     	graphicsContext.setStroke(controller.getPenColor());
     	graphicsContext.setFill(controller.getBackgroundColor());
-    	if(d.line){
-    		graphicsContext.strokeLine(scaleX(d.oldX), scaleY(d.oldY), scaleX(d.newX), scaleY(d.newY));
+    	if(d.getPenDown()){
+    		graphicsContext.strokeLine(scaleX(d.getOldX()), scaleY(d.getOldY()), scaleX(d.getNewX()), scaleY(d.getNewY()));
     	}	
     }
    
