@@ -1,10 +1,10 @@
 package model;
 
 public class Point {
-    
+
     private double myX;
     private double myY;
-    
+
     public Point (double x, double y) {
         setX(x);
         setY(y);
@@ -25,6 +25,5 @@ public class Point {
     public void setY (double y) {
         myY = y;
     };
-    
 
 }

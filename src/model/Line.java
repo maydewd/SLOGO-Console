@@ -1,7 +1,7 @@
 package model;
 
 public class Line {
-    
+
     private Point myStart;
     private Point myEnd;
 
