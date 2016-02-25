@@ -1,6 +1,6 @@
 package model;
 
-import controller.commands.AbstractCommandNode;
+import controller.commands.AbstractExpressionNode;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
 import javafx.scene.image.Image;
@@ -28,6 +28,6 @@ public interface BasicModelSettings {
 
     public ListProperty<String> getCommandHistoryProperty ();
 
-    public MapProperty<String, AbstractCommandNode> getUserCommandsProperty ();
+    public MapProperty<String, AbstractExpressionNode> getUserCommandsProperty ();
 
 }

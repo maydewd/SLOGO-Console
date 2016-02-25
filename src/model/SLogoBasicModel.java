@@ -1,7 +1,7 @@
 package model;
 
 import java.util.List;
-import controller.commands.AbstractCommandNode;
+import controller.commands.AbstractExpressionNode;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
@@ -83,13 +83,13 @@ public class SLogoBasicModel implements IBasicModel {
     }
 
     @Override
-    public AbstractCommandNode getUserCommand (String name) {
+    public AbstractExpressionNode getUserCommand (String name) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void setUserCommand (String name, AbstractCommandNode commandRoot) {
+    public void setUserCommand (String name, AbstractExpressionNode commandRoot) {
         // TODO Auto-generated method stub
 
     }
@@ -161,7 +161,7 @@ public class SLogoBasicModel implements IBasicModel {
     }
 
     @Override
-    public MapProperty<String, AbstractCommandNode> getUserCommandsProperty () {
+    public MapProperty<String, AbstractExpressionNode> getUserCommandsProperty () {
         // TODO Auto-generated method stub
         return null;
     }

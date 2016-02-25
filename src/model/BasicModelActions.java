@@ -1,7 +1,7 @@
 package model;
 
 import java.util.List;
-import controller.commands.AbstractCommandNode;
+import controller.commands.AbstractExpressionNode;
 
 
 public interface BasicModelActions {
@@ -30,9 +30,9 @@ public interface BasicModelActions {
 
     public double getVariable (String name);
 
-    public AbstractCommandNode getUserCommand (String name);
+    public AbstractExpressionNode getUserCommand (String name);
 
-    public void setUserCommand (String name, AbstractCommandNode commandRoot);
+    public void setUserCommand (String name, AbstractExpressionNode commandRoot);
 
     public String getLanguage ();
 
