@@ -42,6 +42,8 @@ public interface IBasicSLogoCommands {
 
     public double isShowing ();
 
+    public double getVariable (String name);
+
     public double setVariable (String name, double value);
 
 }
