@@ -5,9 +5,12 @@ import controller.parser.IBasicSLogoCommands;
 public abstract class AbstractExpressionNode {
     
     private String myText;
+    
+    private SyntaxType myType;
 
-    public AbstractExpressionNode (String text) {
+    public AbstractExpressionNode (String text, SyntaxType type) {
         setText(text);
+        setType(type);
     }
     
     public abstract AbstractExpressionNode parseChildren(StringBuffer remainingCommand);
@@ -24,6 +27,14 @@ public abstract class AbstractExpressionNode {
     
     private void setText(String text) {
         myText = text;
+    }
+    
+    public SyntaxType getType() {
+        return myType;
+    }
+    
+    private void setType(SyntaxType type) {
+        myType = type;
     }
     
 
