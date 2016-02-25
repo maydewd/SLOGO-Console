@@ -7,7 +7,7 @@ import controller.parser.ParsingException;
 
 public abstract class AbstractExpressionNode {
     
-    private ResourceBundle myErrorResources = ResourceBundle.getBundle("resources.languages.errors");
+    private ResourceBundle myErrorResources = ResourceBundle.getBundle("resources.languages.Errors");
 
     private String myText;
 
