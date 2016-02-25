@@ -1,9 +1,11 @@
 package controller.commands;
 
 public enum SyntaxType {
-    CONSTANT,
-    VARIABLE,
-    COMMAND,
-    LIST,
-    COMMENT
+                        COMMENT,
+                        CONSTANT,
+                        VARIABLE,
+                        COMMAND,
+                        LISTSTART,
+                        LISTEND
+
 }

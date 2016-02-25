@@ -18,7 +18,7 @@ public abstract class AbstractExpressionNode {
         setType(type);
     }
 
-    public abstract double execute (IBasicSLogoCommands commands);
+    public abstract double execute (IBasicSLogoCommands commands) throws ParsingException;
 
     public abstract boolean areParametersComplete ();
 
