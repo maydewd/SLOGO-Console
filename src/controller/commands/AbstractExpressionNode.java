@@ -1,41 +1,51 @@
 package controller.commands;
 
+import java.util.ResourceBundle;
 import controller.parser.IBasicSLogoCommands;
+import controller.parser.ParsingException;
+
 
 public abstract class AbstractExpressionNode {
     
+    private ResourceBundle myErrorResources = ResourceBundle.getBundle("resources.languages.errors");
+
     private String myText;
-    
+
     private SyntaxType myType;
 
     public AbstractExpressionNode (String text, SyntaxType type) {
         setText(text);
         setType(type);
     }
+
+    public abstract double execute (IBasicSLogoCommands commands);
+
+    public abstract boolean areParametersComplete ();
+
+    public abstract void addParameter (AbstractExpressionNode node) throws ParsingException;
     
-    public abstract AbstractExpressionNode parseChildren(StringBuffer remainingCommand);
+    protected String getErrorMessage(String errorName) {
+        return getErrorResources().getString(errorName);
+    }
     
-    public abstract void execute(IBasicSLogoCommands commands);
-    
-    public abstract boolean areParametersComplete();
-    
-    public abstract void addParameter(AbstractExpressionNode node);
-    
-    public String getText() {
+    private ResourceBundle getErrorResources() {
+        return myErrorResources;
+    }
+
+    public String getText () {
         return myText;
     }
-    
-    private void setText(String text) {
+
+    private void setText (String text) {
         myText = text;
     }
-    
-    public SyntaxType getType() {
+
+    public SyntaxType getType () {
         return myType;
     }
-    
-    private void setType(SyntaxType type) {
+
+    private void setType (SyntaxType type) {
         myType = type;
     }
-    
 
 }
