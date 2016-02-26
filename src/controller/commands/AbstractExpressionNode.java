@@ -6,8 +6,9 @@ import controller.parser.ParsingException;
 
 
 public abstract class AbstractExpressionNode {
-    
-    private ResourceBundle myErrorResources = ResourceBundle.getBundle("resources.languages.Errors");
+
+    private ResourceBundle myErrorResources =
+            ResourceBundle.getBundle("resources.languages.Errors");
 
     private String myText;
 
@@ -23,12 +24,12 @@ public abstract class AbstractExpressionNode {
     public abstract boolean areParametersComplete ();
 
     public abstract void addParameter (AbstractExpressionNode node) throws ParsingException;
-    
-    protected String getErrorMessage(String errorName) {
+
+    protected String getErrorMessage (String errorName) {
         return getErrorResources().getString(errorName);
     }
-    
-    private ResourceBundle getErrorResources() {
+
+    private ResourceBundle getErrorResources () {
         return myErrorResources;
     }
 

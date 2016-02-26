@@ -4,15 +4,15 @@ import controller.parser.IBasicSLogoCommands;
 import controller.parser.ParsingException;
 
 
-public class PenUpNode extends SimpleProcedureNode {
+public class XCoordinateNode extends SimpleProcedureNode {
 
-    public PenUpNode (String text) {
+    public XCoordinateNode (String text) {
         super(text);
     }
 
     @Override
     public double execute (IBasicSLogoCommands commands) throws ParsingException {
-        return commands.setPenUp();
+        return commands.getXCoord();
     }
 
 }

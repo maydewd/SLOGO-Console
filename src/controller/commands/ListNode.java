@@ -5,10 +5,11 @@ import java.util.List;
 import controller.parser.IBasicSLogoCommands;
 import controller.parser.ParsingException;
 
+
 public class ListNode extends AbstractExpressionNode {
-    
+
     private List<AbstractExpressionNode> myChildren = new LinkedList<AbstractExpressionNode>();
-    
+
     private boolean isClosed;
 
     public ListNode (String token) {
@@ -38,8 +39,8 @@ public class ListNode extends AbstractExpressionNode {
             getChildren().add(node);
         }
     }
-    
-    private List<AbstractExpressionNode> getChildren() {
+
+    private List<AbstractExpressionNode> getChildren () {
         return myChildren;
     }
 

@@ -8,7 +8,7 @@ public abstract class SimpleProcedureNode extends AbstractExpressionNode {
 
     private List<AbstractExpressionNode> myParameters = new LinkedList<AbstractExpressionNode>();
     private int myNumberParameters;
-    
+
     public SimpleProcedureNode (String text) {
         this(text, 0);
     }
@@ -26,9 +26,9 @@ public abstract class SimpleProcedureNode extends AbstractExpressionNode {
     protected List<AbstractExpressionNode> getParameters () {
         return myParameters;
     }
-    
+
     @Override
-    public void addParameter(AbstractExpressionNode node) {
+    public void addParameter (AbstractExpressionNode node) {
         getParameters().add(node);
     }
 

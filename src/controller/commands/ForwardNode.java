@@ -3,8 +3,9 @@ package controller.commands;
 import controller.parser.IBasicSLogoCommands;
 import controller.parser.ParsingException;
 
+
 public class ForwardNode extends SimpleProcedureNode {
-    
+
     private static final int FORWARD_NUM_PARAMS = 1;
 
     public ForwardNode (String text) {
