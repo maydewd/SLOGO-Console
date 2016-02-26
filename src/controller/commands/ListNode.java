@@ -16,7 +16,7 @@ public class ListNode extends AbstractExpressionNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) {
+    public double execute (IBasicSLogoCommands commands) throws ParsingException {
         double lastValue = 0;
         for (AbstractExpressionNode childNode : getChildren()) {
             lastValue = childNode.execute(commands);
