@@ -20,16 +20,16 @@ public abstract class SimpleProcedureNode extends AbstractExpressionNode {
 
     @Override
     public boolean areParametersComplete () {
-        return getParameters().size() >= getNumberParameters();
+        return getChildren().size() >= getNumberParameters();
     }
 
-    protected List<AbstractExpressionNode> getParameters () {
+    protected List<AbstractExpressionNode> getChildren () {
         return myParameters;
     }
 
     @Override
     public void addParameter (AbstractExpressionNode node) {
-        getParameters().add(node);
+        getChildren().add(node);
     }
 
     private int getNumberParameters () {

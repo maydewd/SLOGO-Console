@@ -1,5 +1,6 @@
 package controller.commands;
 
+import java.util.List;
 import java.util.ResourceBundle;
 import controller.parser.IBasicSLogoCommands;
 import controller.parser.ParsingException;
@@ -48,5 +49,7 @@ public abstract class AbstractExpressionNode {
     private void setType (SyntaxType type) {
         myType = type;
     }
+    
+    protected abstract List<AbstractExpressionNode> getChildren() throws ParsingException;
 
 }

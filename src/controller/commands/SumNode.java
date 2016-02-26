@@ -15,7 +15,7 @@ public class SumNode extends SimpleProcedureNode {
     @Override
     public double execute (IBasicSLogoCommands commands) throws ParsingException {
         double sum = 0;
-        for (AbstractExpressionNode node : getParameters()) {
+        for (AbstractExpressionNode node : getChildren()) {
             sum += node.execute(commands);
         }
         return sum;

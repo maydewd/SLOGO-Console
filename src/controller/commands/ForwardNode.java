@@ -14,7 +14,7 @@ public class ForwardNode extends SimpleProcedureNode {
 
     @Override
     public double execute (IBasicSLogoCommands commands) throws ParsingException {
-        double pixelValue = getParameters().get(0).execute(commands);
+        double pixelValue = getChildren().get(0).execute(commands);
         return commands.moveForward(pixelValue);
     }
 

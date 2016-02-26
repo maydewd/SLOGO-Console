@@ -40,7 +40,7 @@ public class ListNode extends AbstractExpressionNode {
         }
     }
 
-    private List<AbstractExpressionNode> getChildren () {
+    protected List<AbstractExpressionNode> getChildren () {
         return myChildren;
     }
 

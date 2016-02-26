@@ -15,7 +15,7 @@ public class RandomNode extends SimpleProcedureNode {
 
     @Override
     public double execute (IBasicSLogoCommands commands) throws ParsingException {
-        return new Random().nextDouble() * getParameters().get(0).execute(commands);
+        return new Random().nextDouble() * getChildren().get(0).execute(commands);
     }
 
 }

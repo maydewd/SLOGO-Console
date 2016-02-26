@@ -14,8 +14,8 @@ public class EqualNode extends SimpleProcedureNode {
 
     @Override
     public double execute (IBasicSLogoCommands commands) throws ParsingException {
-        double firstValue = getParameters().get(0).execute(commands);
-        for (AbstractExpressionNode child : getParameters().subList(1, getParameters().size())) {
+        double firstValue = getChildren().get(0).execute(commands);
+        for (AbstractExpressionNode child : getChildren().subList(1, getChildren().size())) {
             if (child.execute(commands) != firstValue) {
                 return 0;
             }

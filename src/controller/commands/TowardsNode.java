@@ -14,8 +14,8 @@ public class TowardsNode extends SimpleProcedureNode {
 
     @Override
     public double execute (IBasicSLogoCommands commands) throws ParsingException {
-        double leftValue = getParameters().get(0).execute(commands);
-        double rightValue = getParameters().get(1).execute(commands);
+        double leftValue = getChildren().get(0).execute(commands);
+        double rightValue = getChildren().get(1).execute(commands);
         return commands.faceTowards(leftValue, rightValue);
     }
 

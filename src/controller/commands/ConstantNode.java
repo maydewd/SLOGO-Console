@@ -1,5 +1,6 @@
 package controller.commands;
 
+import java.util.List;
 import controller.parser.IBasicSLogoCommands;
 import controller.parser.ParsingException;
 
@@ -35,6 +36,12 @@ public class ConstantNode extends AbstractExpressionNode {
 
     private void setValue (double myValue) {
         this.myValue = myValue;
+    }
+
+    @Override
+    protected List<AbstractExpressionNode> getChildren () throws ParsingException {
+        // TODO Add message
+        throw new ParsingException();
     }
 
 }
