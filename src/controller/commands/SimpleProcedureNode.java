@@ -2,6 +2,7 @@ package controller.commands;
 
 import java.util.LinkedList;
 import java.util.List;
+import controller.parser.ParsingException;
 
 
 public abstract class SimpleProcedureNode extends AbstractExpressionNode {
@@ -28,7 +29,7 @@ public abstract class SimpleProcedureNode extends AbstractExpressionNode {
     }
 
     @Override
-    public void addParameter (AbstractExpressionNode node) {
+    public void addParameter (AbstractExpressionNode node) throws ParsingException {
         getChildren().add(node);
     }
 
