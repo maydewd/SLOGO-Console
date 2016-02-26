@@ -12,9 +12,9 @@ public interface BasicModelSettings {
 
     public void setBackgroundColor (RGBColor color);
 
-    public Image getTurtleImage ();
+    public String getTurtleImage ();
 
-    public void setTurtleImage (Image image);
+    public void setTurtleImage (String image);
 
     public RGBColor getPenColor ();
 

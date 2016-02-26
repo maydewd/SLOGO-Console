@@ -10,9 +10,9 @@ public interface BasicModelActions {
 
     public Point getTurtleCoordinates ();
 
-    public void getTurtleHeading ();
+    public double getTurtleHeading ();
 
-    public double setTurtleHeading ();
+    public void setTurtleHeading (double heading);
 
     public void setPenDown (boolean penDown);
 
@@ -26,9 +26,9 @@ public interface BasicModelActions {
 
     public List<Line> getLines ();
 
-    public void setVariable (String name, double value);
+    public void setVariable (String name, Object value);
 
-    public double getVariable (String name);
+    public Object getVariable (String name);
 
     public AbstractCommandNode getUserCommand (String name);
 
