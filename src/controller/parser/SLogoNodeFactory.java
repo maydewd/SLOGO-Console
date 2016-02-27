@@ -1,25 +1,27 @@
 package controller.parser;
 
+import java.lang.reflect.Constructor;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
-import controller.commands.AbstractExpressionNode;
-import controller.commands.ConstantNode;
-import controller.commands.ListEndNode;
-import controller.commands.ListNode;
-import controller.commands.VariableNode;
+import controller.commands.*;
 import model.BasicModelActions;
 
 
 public class SLogoNodeFactory {
 
-    private Map<String, Pattern> myPatternMap;
+    private static final String COMMAND_PACKAGE = "controller.commands.";
 
-    public SLogoNodeFactory (BasicModelActions modelActions, Map<String, Pattern> patternMap) {
+    private Map<String, Pattern> myPatternMap;
+    private ResourceBundle myCurrentLanguageBundle;
+
+    public SLogoNodeFactory (Map<String, Pattern> patternMap) {
         // TODO implement multi-language functionality
+
         setPatternMap(patternMap);
     }
 
-    public AbstractExpressionNode createNode (String token) throws ParsingException {
+    public AbstractExpressionNode createNode (String token, ResourceBundle languageBundle) throws ParsingException {
         if (getPattern("Constant").matcher(token).find()) {
             return createConstantNode(token);
         }
@@ -27,7 +29,7 @@ public class SLogoNodeFactory {
             return createVariableNode(token);
         }
         else if (getPattern("Command").matcher(token).find()) {
-            return createCommandNode(token);
+            return createCommandNode(token, languageBundle);
         }
         else if (getPattern("ListStart").matcher(token).find()) {
             return createListStart(token);
@@ -49,11 +51,14 @@ public class SLogoNodeFactory {
         return new VariableNode(token);
     }
 
-    private AbstractExpressionNode createCommandNode (String token) throws ParsingException {
-        String functionName = getTranslatedName(token);
+    private AbstractExpressionNode createCommandNode (String token, ResourceBundle languageBundle) throws ParsingException {
+        String functionName = getTranslatedName(token, languageBundle);
         if (functionName != null) {
             try {
-                return (AbstractExpressionNode) Class.forName(functionName).newInstance();
+                Constructor<?> nodeConstructor =
+                        Class.forName(COMMAND_PACKAGE + functionName + "Node")
+                                .getConstructor(String.class);
+                return (AbstractExpressionNode) nodeConstructor.newInstance(token);
             }
             catch (ReflectiveOperationException e) {
                 // TODO add message
@@ -74,9 +79,10 @@ public class SLogoNodeFactory {
         return new ListEndNode(token);
     }
 
-    private String getTranslatedName (String token) {
+    private String getTranslatedName (String token, ResourceBundle languageBundle) {
         // TODO get translated name
-        return null;
+        
+        return token;
     }
 
     private Pattern getPattern (String key) {
@@ -89,5 +95,13 @@ public class SLogoNodeFactory {
 
     private void setPatternMap (Map<String, Pattern> patternMap) {
         myPatternMap = patternMap;
+    }
+
+    public ResourceBundle getCurrentLanguageBundle () {
+        return myCurrentLanguageBundle;
+    }
+
+    public void setCurrentLanguageBundle (ResourceBundle currentLanguageBundle) {
+        myCurrentLanguageBundle = currentLanguageBundle;
     }
 }

@@ -1,14 +1,12 @@
 package controller.parser;
 
+import controller.commands.AbstractExpressionNode;
+
 public interface IBasicSLogoCommands {
 
     public double moveForward (double pixels);
 
     public double moveBack (double pixels);
-
-    public double moveLeft (double pixels);
-
-    public double moveRight (double pixels);
 
     public double rotateLeft (double degrees);
 
@@ -45,5 +43,7 @@ public interface IBasicSLogoCommands {
     public double getVariable (String name);
 
     public double setVariable (String name, double value);
+    
+    public double makeFunction (String name, AbstractExpressionNode params, AbstractExpressionNode body);
 
 }

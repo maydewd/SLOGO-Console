@@ -10,9 +10,9 @@ public interface BasicModelActions {
 
     public Point getTurtleCoordinates ();
 
-    public void getTurtleHeading ();
+    public double getTurtleHeading ();
 
-    public double setTurtleHeading ();
+    public double setTurtleHeading (double heading);
 
     public void setPenDown (boolean penDown);
 

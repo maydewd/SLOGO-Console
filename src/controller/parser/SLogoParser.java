@@ -16,12 +16,12 @@ public class SLogoParser {
     private SLogoNodeFactory myNodeFactory;
 
     private ResourceBundle myPatternResources =
-            ResourceBundle.getBundle("resources.languages/Syntax.properties");
+            ResourceBundle.getBundle("resources.languages.Syntax");
     private Map<String, Pattern> myPatternMap;
 
-    public SLogoParser (BasicModelActions modelActions) {
-        setNodeFactory(new SLogoNodeFactory(modelActions, getPatternMap()));
+    public SLogoParser () {
         initializePatternMap();
+        setNodeFactory(new SLogoNodeFactory(getPatternMap()));
     }
 
     private void initializePatternMap () {
@@ -33,25 +33,25 @@ public class SLogoParser {
         setPatternMap(patternMap);
     }
 
-    public List<AbstractExpressionNode> parse (String inputString) throws ParsingException {
+    public List<AbstractExpressionNode> parse (String inputString, ResourceBundle languageBundle) throws ParsingException {
         String commentsRemoved = removeComments(inputString);
         Queue<String> tokens = getTokens(commentsRemoved);
         List<AbstractExpressionNode> allRoots = new LinkedList<AbstractExpressionNode>();
         while (!tokens.isEmpty()) {
-            AbstractExpressionNode root = parseHelper(tokens);
+            AbstractExpressionNode root = parseHelper(tokens, languageBundle);
             allRoots.add(root);
         }
         return allRoots;
     }
 
-    private AbstractExpressionNode parseHelper (Queue<String> tokens) throws ParsingException {
-        AbstractExpressionNode node = getNodeFactory().createNode(tokens.poll());
+    private AbstractExpressionNode parseHelper (Queue<String> tokens, ResourceBundle languageBundle) throws ParsingException {
+        AbstractExpressionNode node = getNodeFactory().createNode(tokens.poll(), languageBundle);
         while (!node.areParametersComplete()) {
             if (tokens.isEmpty()) {
                 // TODO add message that additional parameters are expected
                 throw new ParsingException();
             }
-            node.addParameter(parseHelper(tokens));
+            node.addParameter(parseHelper(tokens, languageBundle));
         }
         return node;
     }
@@ -80,5 +80,14 @@ public class SLogoParser {
 
     private void setPatternMap (Map<String, Pattern> patternMap) {
         myPatternMap = patternMap;
+    }
+
+    /**
+     * Testing
+     */
+    public static void main (String[] args) throws ParsingException {
+        IBasicSLogoCommands commands = null;
+        SLogoParser test = new SLogoParser();
+        test.parse("Forward 50", ResourceBundle.getBundle("resources.languages.English"));
     }
 }
