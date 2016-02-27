@@ -12,7 +12,7 @@ public interface BasicModelActions {
 
     public double getTurtleHeading ();
 
-    public double setTurtleHeading (double heading);
+    public void setTurtleHeading (double heading);
 
     public void setPenDown (boolean penDown);
 

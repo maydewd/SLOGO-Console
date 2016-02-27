@@ -23,18 +23,18 @@ public class SLogoBasicModel implements IBasicModel {
 	private RGBColor myPenColor;
 	private RGBColor myBackgroundColor;
 	private String myLanguage;
-	private MapProperty<String, Object> myVariables;
+	private MapProperty<String, Double> myVariables;
 	private ListProperty<String> myCommandHistory;
-	private MapProperty<String, AbstractCommandNode> myUserCommands;
+	private MapProperty<String, AbstractExpressionNode> myUserCommands;
 	private ListProperty<Line> myLines;
 	
 	public SLogoBasicModel () {
 		this.myTurtles = new SimpleListProperty<Turtle>();
 		myTurtles.add(new Turtle(DEFAULT_HEADING, DEFAULT_LOCATION, DEFAULT_PENDOWN, DEFAULT_VISIBILITY, DEFAULT_IMAGE));
 		setCurrentTurtle();
-		this.myVariables = new SimpleMapProperty<String, Object>();
+		this.myVariables = new SimpleMapProperty<String, Double>();
 		this.myCommandHistory = new SimpleListProperty<String>();
-		this.myUserCommands = new SimpleMapProperty<String, AbstractCommandNode>();
+		this.myUserCommands = new SimpleMapProperty<String, AbstractExpressionNode>();
 		this.myLines = new SimpleListProperty<Line>();
 	}
 	
@@ -104,15 +104,15 @@ public class SLogoBasicModel implements IBasicModel {
     }
 
     @Override
-    public void setVariable(String name, Object value) {
+    public void setVariable(String name, double value) {
 		// TODO Auto-generated method stub
 		myVariables.put(name, value);
 	}
 
     @Override
-	public Object getVariable(String name) {
+	public double getVariable(String name) {
 		// TODO Auto-generated method stub
-		return myVariables.get(name);
+		return myVariables.get(name).doubleValue();
 	}
 
     @Override

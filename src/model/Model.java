@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 
-import controller.commands.AbstractCommandNode;
+import controller.commands.AbstractExpressionNode;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -15,16 +15,16 @@ import view.UIView;
 public abstract class Model extends Observable {
 
 	private String myLanguage;
-	private MapProperty<String, Object> myVariables;
+	private MapProperty<String, Double> myVariables;
 	private ListProperty<String> myCommandHistory;
-	private MapProperty<String, AbstractCommandNode> myUserCommands;
+	private MapProperty<String, AbstractExpressionNode> myUserCommands;
 	private ListProperty<Line> myLines;
 	
 	public Model(String lang) {
 		// TODO Auto-generated constructor stub
 		this.myLanguage = lang;
 		this.myCommandHistory = new SimpleListProperty<String>();
-		this.myUserCommands = new SimpleMapProperty<String, AbstractCommandNode>();
+		this.myUserCommands = new SimpleMapProperty<String, AbstractExpressionNode>();
 	}
 	
 	public String getLanguage() {
@@ -42,17 +42,17 @@ public abstract class Model extends Observable {
 		return myCommandHistory;
 	}
 
-	public AbstractCommandNode getUserCommand(String name) {
+	public AbstractExpressionNode getUserCommand(String name) {
 		// TODO Auto-generated method stub
 		return myUserCommands.get(name);
 	}
 
-	public void setUserCommand(String name, AbstractCommandNode commandRoot) {
+	public void setUserCommand(String name, AbstractExpressionNode commandRoot) {
 		// TODO Auto-generated method stub
 		myUserCommands.put(name, commandRoot);
 	}
 	
-	public MapProperty<String, AbstractCommandNode> getUserCommandsProperty() {
+	public MapProperty<String, AbstractExpressionNode> getUserCommandsProperty() {
 		// TODO Auto-generated method stub
 		return myUserCommands;
 	}
@@ -71,14 +71,14 @@ public abstract class Model extends Observable {
 		
 	}
 
-	public void setVariable(String name, Object value) {
+	public void setVariable(String name, double value) {
 		// TODO Auto-generated method stub
 		myVariables.put(name, value);
 	}
 
-	public Object getVariable(String name) {
+	public double getVariable(String name) {
 		// TODO Auto-generated method stub
-		return myVariables.get(name);
+		return myVariables.get(name).doubleValue();
 	}
 	
 	 public void clearLines () {

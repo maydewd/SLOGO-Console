@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import app.Main;
-import controller.commands.AbstractCommandNode;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
 import javafx.scene.image.Image;
