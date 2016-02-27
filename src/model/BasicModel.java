@@ -3,14 +3,16 @@ package model;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
-
+import java.util.Observer;
 import app.Main;
+import controller.commands.AbstractExpressionNode;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
+import javafx.beans.property.ReadOnlyListProperty;
 import javafx.scene.image.Image;
 import view.UIView;
 
-public class BasicModel extends Model implements BasicModelActions, BasicModelSettings {
+public class BasicModel extends Model implements IBasicModel {
 	
 	private static final double DEFAULT_HEADING = 0.0;
 	private static final Point DEFAULT_LOCATION = new Point(0,0);
@@ -84,46 +86,90 @@ public class BasicModel extends Model implements BasicModelActions, BasicModelSe
 		return myTurtle.getVisibility().get();
 	}
 
-	@Override
-	public RGBColor getBackgroundColor() {
-		// TODO Auto-generated method stub
-		return myBackgroundColor;
-	}
 
-	@Override
-	public void setBackgroundColor(RGBColor color) {
-		// TODO Auto-generated method stub
-		myBackgroundColor = color;
-		setChanged();
-		notifyObservers();
-	}
+    @Override
+    public void moveTurtleForward (double pixels) {
+        // TODO Auto-generated method stub
+        
+    }
 
-	@Override
-	public String getTurtleImage() {
-		// TODO Auto-generated method stub
-		return myTurtle.getImage().get();
-	}
+    @Override
+    public ReadOnlyListProperty<Line> getLines () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public void setTurtleImage(String image) {
-		// TODO Auto-generated method stub
-		myTurtle.getImage().set(image);
-		setChanged();
-		notifyObservers();
-	}
+    @Override
+    public MapProperty<String, Double> variableMapProperty () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public RGBColor getPenColor() {
-		// TODO Auto-generated method stub
-		return myPenColor;
-	}
+    @Override
+    public MapProperty<String, List<String>> definedCommandsProperty () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public void setPenColor(RGBColor color) {
-		// TODO Auto-generated method stub
-		myPenColor = color;
-		
-	}
+    @Override
+    public MapProperty<String, AbstractExpressionNode> userCommandsBodiesProperty () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ListProperty<String> commandHistoryProperty () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ReadOnlyListProperty<String> languageOptionsProperty () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int getActiveLanguageIndex () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public ListProperty<RGBColor> colorOptionsProperty () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int getActiveBackgroundColorIndex () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getActivePenColorIndex () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public ListProperty<String> turtleImageOptionsProperty () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int getActiveTurtleImageIndex () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void addCoreTurtleObserver (Observer observer) {
+        // TODO Auto-generated method stub
+        
+    }
 
 
 

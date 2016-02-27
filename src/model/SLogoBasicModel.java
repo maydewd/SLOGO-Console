@@ -1,10 +1,12 @@
 package model;
 
 import java.util.List;
+import java.util.Observer;
 import controller.commands.AbstractExpressionNode;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
+import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.scene.image.Image;
@@ -38,6 +40,11 @@ public class SLogoBasicModel implements IBasicModel {
 		this.myLines = new SimpleListProperty<Line>();
 	}
 	
+    private void setCurrentTurtle () {
+        // TODO Auto-generated method stub
+        
+    }
+
     @Override
     public void setTurtleCoordinates (Point newPoint) {
         // TODO Auto-generated method stub
@@ -97,128 +104,91 @@ public class SLogoBasicModel implements IBasicModel {
     	myLines.clear();
     }
 
+    
+
     @Override
-    public List<Line> getLines () {
+    public MapProperty<String, Double> variableMapProperty () {
         // TODO Auto-generated method stub
-        return myLines;
+        return null;
     }
 
     @Override
-    public void setVariable(String name, double value) {
-		// TODO Auto-generated method stub
-		myVariables.put(name, value);
-	}
-
-    @Override
-	public double getVariable(String name) {
-		// TODO Auto-generated method stub
-		return myVariables.get(name).doubleValue();
-	}
-
-    @Override
-    public AbstractExpressionNode getUserCommand (String name) {
+    public MapProperty<String, List<String>> definedCommandsProperty () {
         // TODO Auto-generated method stub
-    	return myUserCommands.get(name);
+        return null;
     }
 
     @Override
-    public void setUserCommand (String name, AbstractExpressionNode commandRoot) {
+    public MapProperty<String, AbstractExpressionNode> userCommandsBodiesProperty () {
         // TODO Auto-generated method stub
-    	myUserCommands.put(name, commandRoot);
+        return null;
     }
 
     @Override
-    public String getLanguage () {
+    public ListProperty<String> commandHistoryProperty () {
         // TODO Auto-generated method stub
-        return myLanguage;
+        return null;
     }
 
     @Override
-    public void addCommandToHistory (String command) {
+    public ReadOnlyListProperty<String> languageOptionsProperty () {
         // TODO Auto-generated method stub
-    	myCommandHistory.get().add(command);
+        return null;
     }
 
     @Override
-	public RGBColor getBackgroundColor() {
-		// TODO Auto-generated method stub
-		return myBackgroundColor;
-	}
-
-	@Override
-	public void setBackgroundColor(RGBColor color) {
-		// TODO Auto-generated method stub
-		myBackgroundColor = color;
-	}
-
-	@Override
-	public String getTurtleImage() {
-		// TODO Auto-generated method stub
-		return myTurtle.getImage().get();
-	}
-
-	@Override
-	public void setTurtleImage(String image) {
-		// TODO Auto-generated method stub
-		myTurtle.getImage().set(image);
-	}
-
-	@Override
-	public RGBColor getPenColor() {
-		// TODO Auto-generated method stub
-		return myPenColor;
-	}
-
-	@Override
-	public void setPenColor(RGBColor color) {
-		// TODO Auto-generated method stub
-		myPenColor = color;
-		
-	}
-
-    @Override
-    public void setLanguage (String language) {
+    public int getActiveLanguageIndex () {
         // TODO Auto-generated method stub
-    	myLanguage = language;
+        return 0;
     }
 
     @Override
-    public ListProperty<String> getVariableListProperty () {
+    public ListProperty<RGBColor> colorOptionsProperty () {
         // TODO Auto-generated method stub
-    	ListProperty<String> variables = new SimpleListProperty<String>();
-		variables.get().addAll(myVariables.keySet());
-		return variables;
+        return null;
     }
 
     @Override
-    public ListProperty<String> getCommandHistoryProperty () {
+    public int getActiveBackgroundColorIndex () {
         // TODO Auto-generated method stub
-    	return myCommandHistory;
+        return 0;
     }
 
     @Override
-    public MapProperty<String, AbstractExpressionNode> getUserCommandsProperty () {
+    public int getActivePenColorIndex () {
         // TODO Auto-generated method stub
-    	return myUserCommands;
+        return 0;
     }
 
     @Override
-    public void addListener (InvalidationListener listener) {
+    public ListProperty<String> turtleImageOptionsProperty () {
         // TODO Auto-generated method stub
-
+        return null;
     }
 
     @Override
-    public void removeListener (InvalidationListener listener) {
+    public int getActiveTurtleImageIndex () {
         // TODO Auto-generated method stub
-
+        return 0;
     }
 
-	@Override
-	public void setCurrentTurtle() {
-		// TODO Auto-generated method stub
-		myTurtle = myTurtles.get(0);
-	}
+    @Override
+    public void addCoreTurtleObserver (Observer observer) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void moveTurtleForward (double pixels) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public ReadOnlyListProperty<Line> getLines () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 
 }
