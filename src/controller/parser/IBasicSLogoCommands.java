@@ -1,5 +1,6 @@
 package controller.parser;
 
+import java.util.List;
 import controller.commands.AbstractExpressionNode;
 
 public interface IBasicSLogoCommands {
@@ -44,6 +45,6 @@ public interface IBasicSLogoCommands {
 
     public double setVariable (String name, double value);
     
-    public double makeFunction (String name, AbstractExpressionNode params, AbstractExpressionNode body);
+    public double makeFunction (String name, List<AbstractExpressionNode> params, AbstractExpressionNode body);
 
 }

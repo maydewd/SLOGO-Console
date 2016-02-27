@@ -1,5 +1,6 @@
 package controller.parser;
 
+import java.util.List;
 import controller.commands.AbstractExpressionNode;
 import model.BasicModelActions;
 import model.Point;
@@ -15,11 +16,11 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
     @Override
     public double moveForward (double pixels) {
-//        Point oldCoords = getModelActions().getTurtleCoordinates();
-//        double heading = getModelActions().getTurtleHeading();
-//        double newX = oldCoords.getX() + Math.cos(heading) * pixels;
-//        double newY = oldCoords.getY() + Math.sin(heading) * pixels;
-//        getModelActions().setTurtleCoordinates(new Point(newX, newY));
+        // Point oldCoords = getModelActions().getTurtleCoordinates();
+        // double heading = getModelActions().getTurtleHeading();
+        // double newX = oldCoords.getX() + Math.cos(heading) * pixels;
+        // double newY = oldCoords.getY() + Math.sin(heading) * pixels;
+        // getModelActions().setTurtleCoordinates(new Point(newX, newY));
         return 0;
     }
 
@@ -139,7 +140,7 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
     @Override
     public double makeFunction (String name,
-                                AbstractExpressionNode params,
+                                List<AbstractExpressionNode> params,
                                 AbstractExpressionNode body) {
         // TODO Auto-generated method stub
         return 0;

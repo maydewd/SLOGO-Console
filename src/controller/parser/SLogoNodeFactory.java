@@ -1,40 +1,44 @@
 package controller.parser;
 
 import java.lang.reflect.Constructor;
+import java.util.Enumeration;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import controller.commands.*;
-import model.BasicModelActions;
 
 
 public class SLogoNodeFactory {
 
     private static final String COMMAND_PACKAGE = "controller.commands.";
+    private static final String LANGUAGE_PACKAGE = "resources.languages.";
+    private static final String NO_MATCH = "NO MATCH";
 
-    private Map<String, Pattern> myPatternMap;
-    private ResourceBundle myCurrentLanguageBundle;
+    private Map<String, Pattern> myTypePatterns;
+    private String myCurrentLanguage;
+    private Map<String, Pattern> myCommandPatterns;
 
     public SLogoNodeFactory (Map<String, Pattern> patternMap) {
-        // TODO implement multi-language functionality
-
-        setPatternMap(patternMap);
+        setTypePatternMap(patternMap);
     }
 
-    public AbstractExpressionNode createNode (String token, ResourceBundle languageBundle) throws ParsingException {
-        if (getPattern("Constant").matcher(token).find()) {
+    public AbstractExpressionNode createNode (String token,
+                                              String currentLanguage) throws ParsingException {
+        if (getTypePattern("Constant").matcher(token).find()) {
             return createConstantNode(token);
         }
-        else if (getPattern("Variable").matcher(token).find()) {
+        else if (getTypePattern("Variable").matcher(token).find()) {
             return createVariableNode(token);
         }
-        else if (getPattern("Command").matcher(token).find()) {
-            return createCommandNode(token, languageBundle);
+        else if (getTypePattern("Command").matcher(token).find()) {
+            return createCommandNode(token, currentLanguage);
         }
-        else if (getPattern("ListStart").matcher(token).find()) {
+        else if (getTypePattern("ListStart").matcher(token).find()) {
             return createListStart(token);
         }
-        else if (getPattern("ListEnd").matcher(token).find()) {
+        else if (getTypePattern("ListEnd").matcher(token).find()) {
             return createListEnd(token);
         }
         else {
@@ -51,9 +55,10 @@ public class SLogoNodeFactory {
         return new VariableNode(token);
     }
 
-    private AbstractExpressionNode createCommandNode (String token, ResourceBundle languageBundle) throws ParsingException {
-        String functionName = getTranslatedName(token, languageBundle);
-        if (functionName != null) {
+    private AbstractExpressionNode createCommandNode (String token,
+                                                      String currentLanguage) throws ParsingException {
+        String functionName = getTranslatedName(token, currentLanguage);
+        if (functionName != NO_MATCH) {
             try {
                 Constructor<?> nodeConstructor =
                         Class.forName(COMMAND_PACKAGE + functionName + "Node")
@@ -79,29 +84,56 @@ public class SLogoNodeFactory {
         return new ListEndNode(token);
     }
 
-    private String getTranslatedName (String token, ResourceBundle languageBundle) {
-        // TODO get translated name
-        
-        return token;
+    private String getTranslatedName (String token, String currentLocale) {
+        if (!currentLocale.equals(getCurrentLanguage())) {
+            loadNewLanguage(currentLocale);
+        }
+        for (Entry<String, Pattern> entry : getCommandPatterns().entrySet()) {
+            if (entry.getValue().matcher(token).matches()) {
+                return entry.getKey();
+            }
+        }
+        return NO_MATCH;
     }
 
-    private Pattern getPattern (String key) {
-        return getPatternMap().get(key);
+    private void loadNewLanguage (String newLanguage) {
+        ResourceBundle newBundle = ResourceBundle.getBundle(LANGUAGE_PACKAGE + newLanguage);
+        Enumeration<String> iter = newBundle.getKeys();
+        Map<String, Pattern> newPatterns = new LinkedHashMap<String, Pattern>();
+        while (iter.hasMoreElements()) {
+            String key = iter.nextElement();
+            String regex = newBundle.getString(key);
+            newPatterns.put(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
+        }
+        setCommandPatterns(newPatterns);
+        setCurrentLanguage(newLanguage);
     }
 
-    private Map<String, Pattern> getPatternMap () {
-        return myPatternMap;
+    private Pattern getTypePattern (String key) {
+        return getTypePatternMap().get(key);
     }
 
-    private void setPatternMap (Map<String, Pattern> patternMap) {
-        myPatternMap = patternMap;
+    private Map<String, Pattern> getTypePatternMap () {
+        return myTypePatterns;
     }
 
-    public ResourceBundle getCurrentLanguageBundle () {
-        return myCurrentLanguageBundle;
+    private void setTypePatternMap (Map<String, Pattern> patternMap) {
+        myTypePatterns = patternMap;
     }
 
-    public void setCurrentLanguageBundle (ResourceBundle currentLanguageBundle) {
-        myCurrentLanguageBundle = currentLanguageBundle;
+    private String getCurrentLanguage () {
+        return myCurrentLanguage;
+    }
+
+    private void setCurrentLanguage (String newLanguage) {
+        myCurrentLanguage = newLanguage;
+    }
+
+    private Map<String, Pattern> getCommandPatterns () {
+        return myCommandPatterns;
+    }
+
+    private void setCommandPatterns (Map<String, Pattern> newPatterns) {
+        myCommandPatterns = newPatterns;
     }
 }
