@@ -2,9 +2,14 @@ package model;
 
 import java.util.List;
 import controller.commands.AbstractExpressionNode;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.MapProperty;
+import javafx.beans.property.ReadOnlyListProperty;
 
 
 public interface BasicModelActions {
+
+    public void moveTurtleForward (double pixels);
 
     public void setTurtleCoordinates (Point newPoint);
 
@@ -24,18 +29,28 @@ public interface BasicModelActions {
 
     public void clearLines ();
 
-    public List<Line> getLines ();
+    public ReadOnlyListProperty<Line> getLines ();
 
-    public void setVariable (String name, double value);
+    public MapProperty<String, Double> variableMapProperty ();
 
-    public double getVariable (String name);
+    public MapProperty<String, List<String>> definedCommandsProperty ();
 
-    public AbstractExpressionNode getUserCommand (String name);
+    public MapProperty<String, AbstractExpressionNode> userCommandsBodiesProperty ();
 
-    public void setUserCommand (String name, AbstractExpressionNode commandRoot);
+    public ListProperty<String> commandHistoryProperty ();
 
-    public String getLanguage ();
+    public ReadOnlyListProperty<String> languageOptionsProperty ();
 
-    public void addCommandToHistory (String command);
+    public int getActiveLanguageIndex ();
+
+    public ListProperty<RGBColor> colorOptionsProperty ();
+
+    public int getActiveBackgroundColorIndex ();
+
+    public int getActivePenColorIndex ();
+
+    public ListProperty<String> turtleImageOptionsProperty ();
+
+    public int getActiveTurtleImageIndex ();
 
 }
