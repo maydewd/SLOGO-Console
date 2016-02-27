@@ -32,11 +32,22 @@ public class UIConsoleView implements UIView {
 		uiNode.setStyle("-fx-background-color: red;");
 		((Pane) uiNode).setPrefSize(width, height);
 		((Pane) uiNode).getChildren().add(commandField);
-		commandField.setOnKeyReleased(event -> {
+		commandField.setOnKeyPressed(event -> {
 			if (event.getCode().equals(KeyCode.ENTER)) {
-				uiManager.debugPostNewCommand(commandField.getText());
-				commandField.clear();
+				if(!event.isShiftDown()){
+					uiManager.debugPostNewCommand(commandField.getText());
+					commandField.clear();
+					commandField.setEditable(false);
+				} else {
+					// Shift + Enter for multiline commands
+					commandField.appendText("\n");
+				}
 			}
+		});
+
+		// Solves an extra enter keypress after keypress returns
+		commandField.setOnKeyReleased(event -> {
+			commandField.setEditable(true);
 		});
 
 	}
