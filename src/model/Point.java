@@ -1,28 +1,28 @@
 package model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-
 public class Point {
 
-    private DoubleProperty myX;
-    private DoubleProperty myY;
+    private double myX;
+    private double myY;
 
     public Point (double x, double y) {
-    	myX = new SimpleDoubleProperty(x);
-    	myY = new SimpleDoubleProperty(y);
-    }
-
-    public void reset(Point newPoint) {
-    	myX.set(newPoint.getX().get());
-    	myY.set(newPoint.getY().get());
+    	setX(x);
+    	setY(y);
     }
     
-    public DoubleProperty getX () {
+    public double getX () {
         return myX;
     }
+    
+    private void setX( double x) {
+        myX = x;
+    }
 
-    public DoubleProperty getY () {
+    public double getY () {
         return myY;
+    }
+    
+    private void setY(double y) {
+        myY = y;
     }
 }
