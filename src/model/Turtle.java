@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import javafx.beans.property.IntegerProperty;
 
 
 public class Turtle {
@@ -8,9 +9,9 @@ public class Turtle {
     private double myHeading = 0;
     private Point myLocation = new Point(0, 0);
     private boolean isPenDown = true;
-    private int myPenColorIndex;
+    private IntegerProperty myPenColorIndexProperty;
     private boolean isVisible = true;
-    private int myImageIndex;
+    private IntegerProperty myImageIndexProperty;
 
     public Turtle (int penColorIndex, int imageIndex) {
         setMyPenColorIndex(penColorIndex);
@@ -48,7 +49,7 @@ public class Turtle {
         // TODO Add in line creation
         return null;
     }
-    
+
     public List<Line> moveForward (double pixels) {
         // TODO implement and add line creation
         return null;
@@ -62,12 +63,12 @@ public class Turtle {
         isPenDown = penDown;
     }
 
-    public int getPenColorIndex () {
-        return myPenColorIndex;
+    public IntegerProperty getPenColorIndexProperty () {
+        return myPenColorIndexProperty;
     }
 
     public void setMyPenColorIndex (int penColorIndex) {
-        myPenColorIndex = penColorIndex;
+        myPenColorIndexProperty.set(penColorIndex);
     }
 
     public boolean isVisible () {
@@ -78,12 +79,12 @@ public class Turtle {
         this.isVisible = isVisible;
     }
 
-    public int getImageIndex () {
-        return myImageIndex;
+    public IntegerProperty getImageIndexProperty () {
+        return myImageIndexProperty;
     }
 
     public void setMyImageIndex (int imageIndex) {
-        myImageIndex = imageIndex;
+        myImageIndexProperty.set(imageIndex);
     }
 
 }

@@ -1,19 +1,23 @@
 package model;
 
 import java.util.Observable;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
 
+
 public class BasicTurtleModel extends Observable {
-    
+
     private Turtle myTurtle;
     private ListProperty<Line> myLines = new SimpleListProperty<Line>();
+    private IntegerProperty myBackgroundColorIndexProperty = new SimpleIntegerProperty(0);
 
     public BasicTurtleModel () {
         setMyTurtle(new Turtle(0, 0));
     }
-    
+
     public void moveTurtleForward (double pixels) {
         getMyTurtle().moveForward(pixels);
     }
@@ -57,13 +61,13 @@ public class BasicTurtleModel extends Observable {
     public ReadOnlyListProperty<Line> getReadOnlyLines () {
         return linesProperty();
     }
-    
-    public int getActivePenColorIndex () {
-        return getMyTurtle().getPenColorIndex();
+
+    public IntegerProperty getActivePenColorIndex () {
+        return getMyTurtle().getPenColorIndexProperty();
     }
-    
-    public int getActiveTurtleImageIndex () {
-        return getMyTurtle().getImageIndex();
+
+    public IntegerProperty getActiveTurtleImageIndex () {
+        return getMyTurtle().getImageIndexProperty();
     }
 
     private Turtle getMyTurtle () {
@@ -73,9 +77,13 @@ public class BasicTurtleModel extends Observable {
     private void setMyTurtle (Turtle myTurtle) {
         this.myTurtle = myTurtle;
     }
-    
-    private ListProperty<Line> linesProperty() {
+
+    private ListProperty<Line> linesProperty () {
         return myLines;
+    }
+
+    public IntegerProperty backgroundColorIndexProperty () {
+        return myBackgroundColorIndexProperty;
     }
 
 }
