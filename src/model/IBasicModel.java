@@ -1,10 +1,12 @@
 package model;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Observer;
 import controller.commands.AbstractExpressionNode;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
+import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 
 
@@ -36,27 +38,29 @@ public interface IBasicModel {
 
     public MapProperty<String, List<String>> definedCommandsProperty ();
 
-    public MapProperty<String, AbstractExpressionNode> userCommandsBodiesProperty ();
+    public Map<String, AbstractExpressionNode> userCommandsBodies ();
 
     public ListProperty<String> commandHistoryProperty ();
 
     public ReadOnlyListProperty<String> languageOptionsProperty ();
 
-    public int getActiveLanguageIndex ();
+    public ReadOnlyIntegerProperty getActiveLanguageIndex ();
+    
+    public void setActiveLanguageIndex (int languageIndex);
 
     public ListProperty<RGBColor> colorOptionsProperty ();
 
-    public int getActiveBackgroundColorIndex ();
+    public ReadOnlyIntegerProperty getActiveBackgroundColorIndex ();
 
     public void setActiveBackgroundColorIndex (int backgroundColorIndex);
 
-    public int getActivePenColorIndex ();
+    public ReadOnlyIntegerProperty getActivePenColorIndex ();
 
     public void setActivePenColorIndex (int penColorIndex);
 
     public ListProperty<String> turtleImageOptionsProperty ();
 
-    public int getActiveTurtleImageIndex ();
+    public ReadOnlyIntegerProperty getActiveTurtleImageIndex ();
 
     public void setActiveTurtleImageIndex (int turtleImageIndex);
 
