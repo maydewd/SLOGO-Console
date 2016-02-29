@@ -2,15 +2,15 @@ package controller.parser;
 
 import java.util.List;
 import controller.commands.AbstractExpressionNode;
-import model.BasicModelActions;
+import model.IBasicModel;
 import model.Point;
 
 
 public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
-    private BasicModelActions myModelActions;
+    private IBasicModel myModelActions;
 
-    public BasicSLogoInterpreter (BasicModelActions basicModel) {
+    public BasicSLogoInterpreter (IBasicModel basicModel) {
         setModelActions(basicModel);
     }
 
@@ -146,11 +146,11 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
         return 0;
     }
 
-    public BasicModelActions getModelActions () {
+    public IBasicModel getModelActions () {
         return myModelActions;
     }
 
-    public void setModelActions (BasicModelActions modelActions) {
+    public void setModelActions (IBasicModel modelActions) {
         myModelActions = modelActions;
     }
 }
