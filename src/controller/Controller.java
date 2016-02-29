@@ -1,14 +1,12 @@
 package controller;
 
-import java.awt.List;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.LinkedList;
 
 import controller.parser.BasicSLogoInterpreter;
 import controller.parser.ParsingException;
 import controller.parser.SLogoParser;
-import model.BasicModel;
-import model.IBasicModel;
-import model.Model;
+import model.BasicModelActions;
 import view.UIView;
 import controller.commands.AbstractExpressionNode;
 public class Controller implements ControllerInterface {
@@ -19,22 +17,22 @@ public class Controller implements ControllerInterface {
 	}
 
 	@Override
-	public void setUp(IBasicModel myModel, UIView myView) {
+	public void setUp(BasicModelActions myModel, UIView myView) {
 		// TODO Auto-generated method stub
 		myParser = new SLogoParser();
-		myInterpreter = new BasicSLogoInterpreter((BasicModel)myModel);
+		myInterpreter = new BasicSLogoInterpreter(myModel);
 		
 	}
 
 	@Override
 	public void executeCommand(String command, String language) {
 		// TODO Auto-generated method stub
-		java.util.List<AbstractExpressionNode> myNodes= new ArrayList<AbstractExpressionNode>();
+		List<AbstractExpressionNode> myNodes= new LinkedList<AbstractExpressionNode>();
 		try{
 			myNodes= myParser.parse(command, language);
 		}
 		catch(ParsingException e){
-		 e.printStackTrace();
+			e.printStackTrace();
 		}
 		for(int i=0;i<myNodes.size();i++){
 			try{
