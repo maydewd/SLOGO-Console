@@ -81,7 +81,7 @@ public class UISettingsView implements UIView{
                 
                 File file = fileChooser.showOpenDialog(null);
                 if(file != null){
-                	 bms.setTurtleImage(new Image(file.toURI().toString()));
+                	 bms.setTurtleImage(file.toURI().toString());
                 }
                
             }
