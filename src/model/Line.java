@@ -4,10 +4,12 @@ public class Line {
 
     private Point myStart;
     private Point myEnd;
+    private boolean myVisibility;
 
-    public Line (Point start, Point end) {
+    public Line (Point start, Point end, boolean visible) {
         setStart(start);
         setEnd(end);
+        setVisibility(visible);
     }
 
     public Point getStart () {
@@ -24,6 +26,14 @@ public class Line {
 
     public void setEnd (Point end) {
         myEnd = end;
+    }
+    
+    public void setVisibility (boolean v) {
+    	myVisibility = v;
+    }
+    
+    public boolean getVisibility () {
+    	return myVisibility;
     }
 
 }

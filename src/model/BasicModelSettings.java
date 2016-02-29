@@ -1,6 +1,6 @@
 package model;
 
-import controller.commands.AbstractCommandNode;
+import controller.commands.AbstractExpressionNode;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
 import javafx.scene.image.Image;
@@ -12,9 +12,9 @@ public interface BasicModelSettings {
 
     public void setBackgroundColor (RGBColor color);
 
-    public Image getTurtleImage ();
+    public String getTurtleImage ();
 
-    public void setTurtleImage (Image image);
+    public void setTurtleImage (String image);
 
     public RGBColor getPenColor ();
 
@@ -28,6 +28,6 @@ public interface BasicModelSettings {
 
     public ListProperty<String> getCommandHistoryProperty ();
 
-    public MapProperty<String, AbstractCommandNode> getUserCommandsProperty ();
+    public MapProperty<String, AbstractExpressionNode> getUserCommandsProperty ();
 
 }
