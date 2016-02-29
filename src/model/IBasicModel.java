@@ -48,11 +48,17 @@ public interface IBasicModel {
 
     public int getActiveBackgroundColorIndex ();
 
+    public void setActiveBackgroundColorIndex (int backgroundColorIndex);
+
     public int getActivePenColorIndex ();
+
+    public void setActivePenColorIndex (int penColorIndex);
 
     public ListProperty<String> turtleImageOptionsProperty ();
 
     public int getActiveTurtleImageIndex ();
+
+    public void setActiveTurtleImageIndex (int turtleImageIndex);
 
     public void addCoreTurtleObserver (Observer observer);
 
