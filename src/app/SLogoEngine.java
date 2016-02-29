@@ -1,10 +1,9 @@
 package app;
 
-import controller.FrontEndControllerInterface;
 import javafx.stage.Stage;
 import model.IBasicModel;
 import model.SLogoBasicModel;
-import view.UIManager;
+import ui.UIManager;
 
 
 /**
@@ -13,12 +12,11 @@ import view.UIManager;
 public class SLogoEngine {
 
     private UIManager uiManager;
-    private FrontEndControllerInterface controller;
 
     public void start (Stage stage) {
         IBasicModel basicModel = new SLogoBasicModel();
         // TODO pass this model to UIManager
-        uiManager = new UIManager(stage, controller);
+        uiManager = new UIManager(stage, basicModel);
 
     }
 }

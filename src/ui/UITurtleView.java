@@ -2,10 +2,12 @@ package ui;
 
 
 
-import controller.FrontEndControllerInterface;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import model.BasicModelSettings;
 import model.Delta;
 import view.UIView;
 
@@ -22,12 +24,11 @@ public class UITurtleView implements UIView{
     private Node uiNode;
     private GraphicsContext graphicsContext;
     private Canvas canvas;
-    private FrontEndControllerInterface controller;
+    private BasicModelSettings bms;
 
-    public UITurtleView(FrontEndControllerInterface c){
+    public UITurtleView(){
         width = DEFAULT_WIDTH;
         height = DEFAULT_HEIGHT;
-        controller = c;
         
         canvas = new Canvas(width, height);
         uiNode = canvas;
@@ -37,9 +38,10 @@ public class UITurtleView implements UIView{
 
     }
     
-    public void updateTurtleView(Delta d){
-    	graphicsContext.setStroke(controller.getPenColor());
-    	graphicsContext.setFill(controller.getBackgroundColor());
+    public void updateTurtleView(Delta d, BasicModelSettings b){
+        bms = b;
+    	graphicsContext.setStroke(Color.rgb(bms.getPenColor().getRed(), bms.getPenColor().getBlue(),bms.getPenColor().getGreen()));
+    	graphicsContext.setFill(Color.rgb(bms.getBackgroundColor().getRed(), bms.getBackgroundColor().getBlue(),bms.getBackgroundColor().getGreen()));
     	if(d.getPenDown()){
     		graphicsContext.strokeLine(scaleX(d.getOldX()), scaleY(d.getOldY()), scaleX(d.getNewX()), scaleY(d.getNewY()));
     	}	

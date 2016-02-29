@@ -7,18 +7,17 @@ import java.net.URISyntaxException;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
-import controller.FrontEndControllerInterface;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import model.BasicModelSettings;
+import model.RGBColor;
 
 public class UISettingsView implements UIView{
 	public static final int DEFAULT_WIDTH = 600;
@@ -26,34 +25,25 @@ public class UISettingsView implements UIView{
     public static final String HELP_PAGE = "https://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/commands.php";
     
     private Node uiNode;
-    FrontEndControllerInterface controller;
+    private BasicModelSettings bms;
 
-	public UISettingsView(FrontEndControllerInterface c) {
+	public UISettingsView(BasicModelSettings b) {
+	    bms = b;
 		MenuBar settings = new MenuBar();
 		uiNode = settings;
-		controller = c;
 		ColorPicker penColorPicker = new ColorPicker();
+		penColorPicker.setOnMouseClicked(e-> bms.setPenColor(new RGBColor((int) 
+		                                                            penColorPicker.getValue().getRed(), 
+		                                                            (int) penColorPicker.getValue().getBlue(), 
+		                                                            (int) penColorPicker.getValue().getGreen())));
 		penColorPicker.setValue(Color.BLACK);
-		
 		ColorPicker bColorPicker = new ColorPicker();
 		
 		//Color Menu
 		Menu penColor = new Menu("Pen Color");
 		
 		CustomMenuItem penColorSelector = new CustomMenuItem(penColorPicker);
-		penColorSelector.setOnAction(new EventHandler<ActionEvent>() {
-            @SuppressWarnings("unchecked")
-			@Override
-            public void handle(ActionEvent event) {
-            	penColorPicker.setOnAction(new EventHandler() {
-					@Override
-					public void handle(Event event) {
-						Color c = penColorPicker.getValue();
-		        		controller.setPenColor(c);
-					}
-                });
-            }
-		});
+		penColorSelector.setOnAction(e -> penColorPicker.getOnMouseClicked());
 		
 		penColor.getItems().addAll(penColorSelector);
 		
@@ -68,7 +58,7 @@ public class UISettingsView implements UIView{
 					@Override
 					public void handle(Event event) {
 						Color c = bColorPicker.getValue();
-		        		controller.setPenColor(c);
+						bms.setBackgroundColor(new RGBColor((int) c.getRed(), (int) c.getBlue(), (int) c.getGreen()));
 					}
                 });
             }
@@ -80,6 +70,7 @@ public class UISettingsView implements UIView{
 		Menu turtleSettings = new Menu("Turtle");
 		MenuItem turtleImage = new MenuItem("Change Turtle Image");
 		turtleImage.setOnAction(new EventHandler<ActionEvent>() {
+		    
             @Override
             public void handle(ActionEvent event) {
             	//ADD ERROR CHECKING
@@ -90,7 +81,7 @@ public class UISettingsView implements UIView{
                 
                 File file = fileChooser.showOpenDialog(null);
                 if(file != null){
-                	 controller.setTurtleImage(file);
+                	 bms.setTurtleImage(new Image(file.toURI().toString()));
                 }
                
             }
@@ -101,21 +92,21 @@ public class UISettingsView implements UIView{
 		Menu languageSettings = new Menu("Language");
 
 		MenuItem english = new MenuItem("English");
-		english.setOnAction(e -> controller.setLanguage("English"));
+		english.setOnAction(e -> bms.setLanguage("English"));
 		MenuItem spanish = new MenuItem("Spanish");
-		spanish.setOnAction(e -> controller.setLanguage("Spanish"));
+		spanish.setOnAction(e -> bms.setLanguage("Spanish"));
 		MenuItem chinese = new MenuItem("Chinese");
-		chinese.setOnAction(e -> controller.setLanguage("Chinese"));
+		chinese.setOnAction(e -> bms.setLanguage("Chinese"));
 		MenuItem french = new MenuItem("French");
-		french.setOnAction(e -> controller.setLanguage("French"));
+		french.setOnAction(e -> bms.setLanguage("French"));
 		MenuItem german = new MenuItem("German");
-		german.setOnAction(e -> controller.setLanguage("German"));
+		german.setOnAction(e -> bms.setLanguage("German"));
 		MenuItem italian = new MenuItem("Italian");
-		italian.setOnAction(e -> controller.setLanguage("Italian"));
+		italian.setOnAction(e -> bms.setLanguage("Italian"));
 		MenuItem portuguese = new MenuItem("Portuguese");
-		portuguese.setOnAction(e -> controller.setLanguage("Portuguese"));
+		portuguese.setOnAction(e -> bms.setLanguage("Portuguese"));
 		MenuItem russian = new MenuItem("Russian");
-		russian.setOnAction(e -> controller.setLanguage("Russian"));
+		russian.setOnAction(e -> bms.setLanguage("Russian"));
 
 		languageSettings.getItems().addAll(english, spanish, chinese, french, german, italian, portuguese, russian);
 

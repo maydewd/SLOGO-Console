@@ -1,6 +1,5 @@
 package ui;
 
-import controller.FrontEndControllerInterface;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -10,6 +9,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import model.BasicModelSettings;
+import model.IBasicModel;
 import view.UIErrorNotifier;
 import view.UISettingsView;
 
@@ -35,7 +36,7 @@ public class UIManager {
     private Group group;
     private Scene uiSceneView;
 
-    public UIManager(Stage primaryStage, FrontEndControllerInterface controller){
+    public UIManager(Stage primaryStage, IBasicModel b){
         // Init vars
         stage = primaryStage;
         group = new Group();
@@ -43,9 +44,9 @@ public class UIManager {
         stage.setScene(uiSceneView);
 
         // Create the views
-        turtleView = new UITurtleView(controller);
+        turtleView = new UITurtleView();
         consoleView = new UIConsoleView(this);
-        settingsMenu = new UISettingsView(controller);
+        settingsMenu = new UISettingsView(b);
 
         // Initialize Pane
         myMainPaneNamedDane = new VBox(DEFAULT_SPACING);
