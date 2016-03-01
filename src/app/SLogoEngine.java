@@ -15,8 +15,6 @@ public class SLogoEngine {
 
     public void start (Stage stage) {
         IBasicModel basicModel = new SLogoBasicModel();
-        // TODO pass this model to UIManager
         uiManager = new UIManager(stage, basicModel);
-
     }
 }

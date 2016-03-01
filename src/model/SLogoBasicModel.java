@@ -72,7 +72,7 @@ public class SLogoBasicModel implements IBasicModel {
     }
 
     @Override
-    public MapProperty<String, Double> variableMapProperty () {
+    public MapProperty<String, Double> getVariableMapProperty() {
         return getMyOptionsModel().variableMapProperty();
     }
 

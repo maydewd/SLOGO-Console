@@ -1,27 +1,24 @@
 package view;
 
 
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import model.IBasicModel;
+import model.LineInfo;
 
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
-import javafx.scene.Node;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Line;
-import model.IBasicModel;
-import model.LineInfo;
 
 /**
  * Created by Tim on 22/02/16.
  */
 public class UITurtleView implements UIView, Observer{
 
-    public static final int DEFAULT_WIDTH = 400;
+    public static final int DEFAULT_WIDTH = 500;
     public static final int DEFAULT_HEIGHT = 400;
 
     private int width;
