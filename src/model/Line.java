@@ -5,13 +5,13 @@ public class Line {
     private Point myStart;
     private Point myEnd;
     private boolean myVisibility;
-    private RGBColor myColor;
+    private int myColor;
 
-    public Line (Point start, Point end, boolean visible, RGBColor color) {
+    public Line (Point start, Point end, boolean visible, int colorInd) {
         setStart(start);
         setEnd(end);
         setVisibility(visible);
-        setColor(color);
+        setColor(colorInd);
     }
 
     public Point getStart () {
@@ -38,11 +38,11 @@ public class Line {
     	myVisibility = v;
     }
 
-    public RGBColor getColor () {
+    public int getColor () {
         return myColor;
     }
 
-    private void setColor (RGBColor color) {
+    private void setColor (int color) {
         myColor = color;
     }
 

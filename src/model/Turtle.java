@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.IntegerProperty;
 
@@ -44,15 +45,14 @@ public class Turtle {
         return myLocation;
     }
 
-    public List<Line> setLocation (Point location) {
-        myLocation = location;
+    public void setLocation (Point location) {
+    	myLocation = location;
         // TODO Add in line creation
-        return null;
     }
 
     public List<Line> moveForward (double pixels) {
         // TODO implement and add line creation
-        return null;
+    	return null;
     }
 
     public boolean isPenDown () {
