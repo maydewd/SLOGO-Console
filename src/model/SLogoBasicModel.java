@@ -87,7 +87,7 @@ public class SLogoBasicModel implements IBasicModel {
     }
 
     @Override
-    public ListProperty<String> commandHistoryProperty () {
+    public ListProperty<String> commandHistoryProperty() {
         return getMyOptionsModel().commandHistoryProperty();
     }
 

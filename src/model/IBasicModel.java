@@ -40,7 +40,7 @@ public interface IBasicModel {
 
     public Map<String, AbstractExpressionNode> userCommandsBodies ();
 
-    public ListProperty<String> commandHistoryProperty ();
+    public ListProperty<String> commandHistoryProperty();
 
     public ReadOnlyListProperty<String> languageOptionsProperty ();
 
