@@ -1,15 +1,15 @@
 package controller;
 
-import java.util.List;
-import java.util.LinkedList;
-
+import controller.commands.AbstractExpressionNode;
 import controller.parser.BasicSLogoInterpreter;
 import controller.parser.ParsingException;
 import controller.parser.SLogoParser;
 import javafx.beans.property.MapProperty;
 import model.IBasicModel;
 import view.UIView;
-import controller.commands.AbstractExpressionNode;
+
+import java.util.LinkedList;
+import java.util.List;
 public class ConsoleController {
 	private SLogoParser myParser;
 	private BasicSLogoInterpreter myInterpreter;

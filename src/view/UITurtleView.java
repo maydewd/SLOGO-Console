@@ -1,26 +1,23 @@
 package view;
 
 
-
-import java.util.HashSet;
-import java.util.Observable;
-import java.util.Observer;
 import javafx.scene.Node;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import model.IBasicModel;
 import model.LineInfo;
 
+import java.util.HashSet;
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * Created by Tim on 22/02/16.
  */
-public class UITurtleView extends UIView implements Observer{
+public class UITurtleView extends UIView implements Observer {
 
     private static final int HEADING_OFFSET = 90;
     public static final int DEFAULT_WIDTH = 400;

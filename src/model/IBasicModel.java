@@ -34,7 +34,7 @@ public interface IBasicModel {
 
     public ReadOnlyListProperty<LineInfo> getLines ();
 
-    public MapProperty<String, Double> variableMapProperty ();
+    public MapProperty<String, Double> variableMapProperty();
 
     public MapProperty<String, List<String>> definedCommandsProperty ();
 

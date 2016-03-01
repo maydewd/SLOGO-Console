@@ -1,26 +1,19 @@
 package view;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import javafx.application.HostServices;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import model.IBasicModel;
-import model.RGBColor;
 
-public class UISettingsView extends UIView{
-	public static final int DEFAULT_WIDTH = 600;
+
+public class UISettingsView extends UIView {
+	public static final int DEFAULT_WIDTH = 500;
     public static final int DEFAULT_HEIGHT = 25;
     public static final String HELP_PAGE = "https://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/commands.php";
     
