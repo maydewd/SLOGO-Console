@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 
 public class Turtle {
@@ -10,9 +11,9 @@ public class Turtle {
     private double myHeading = 0;
     private Point myLocation = new Point(0, 0);
     private boolean isPenDown = true;
-    private IntegerProperty myPenColorIndexProperty;
+    private IntegerProperty myPenColorIndexProperty = new SimpleIntegerProperty();
     private boolean isVisible = true;
-    private IntegerProperty myImageIndexProperty;
+    private IntegerProperty myImageIndexProperty = new SimpleIntegerProperty();
 
     public Turtle (int penColorIndex, int imageIndex) {
         setMyPenColorIndex(penColorIndex);

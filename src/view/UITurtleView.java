@@ -80,7 +80,11 @@ public class UITurtleView implements UIView, Observer{
                 line.setEndX(scaleX(l.getEnd().getX()));
                 line.setEndY(scaleY(l.getEnd().getY()));
                 
-                line.setStroke(Color.rgb(l.getColor().getRed(), l.getColor().getGreen(), l.getColor().getBlue()));
+                line.setStroke(Color.rgb(bm.colorOptionsProperty().get(l.getColor()).getRed(),
+                                         bm.colorOptionsProperty().get(l.getColor()).getGreen(),
+                                         bm.colorOptionsProperty().get(l.getColor()).getBlue()));
+                                         
+                                                                         
                 displayedLines.add(l);
             }
         }

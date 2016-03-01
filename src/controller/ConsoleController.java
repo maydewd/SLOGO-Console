@@ -9,10 +9,10 @@ import controller.parser.SLogoParser;
 import model.IBasicModel;
 import view.UIView;
 import controller.commands.AbstractExpressionNode;
-public class Controller {
+public class ConsoleController {
 	private SLogoParser myParser;
 	private BasicSLogoInterpreter myInterpreter;
-	public Controller(IBasicModel myModel, UIView myView) {
+	public ConsoleController(IBasicModel myModel, UIView myView) {
 		myParser = new SLogoParser();
 		myInterpreter = new BasicSLogoInterpreter(myModel);
 	}

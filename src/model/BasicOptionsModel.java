@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import controller.commands.AbstractExpressionNode;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -13,6 +14,8 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleMapProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 public class BasicOptionsModel {
@@ -47,17 +50,19 @@ public class BasicOptionsModel {
     }
 
     private void initializeLanguageOptions () {
-        ListProperty<String> languageOptions = new SimpleListProperty<String>();
-        languageOptions.addAll(Arrays.asList(LANGUAGE_OPTIONS));
+    	ObservableList<String> langs = FXCollections.observableArrayList(Arrays.asList(LANGUAGE_OPTIONS));
+        ListProperty<String> languageOptions = new SimpleListProperty<String>(langs);
         myLanguageOptionsProperty = languageOptions;
     }
 
     private void initializeColors () {
-        colorOptionsProperty().addAll(INITIAL_COLORS);
+    	ObservableList<RGBColor> colors = FXCollections.observableArrayList(Arrays.asList(INITIAL_COLORS));
+        colorOptionsProperty().setValue(colors);
     }
 
     private void initializeTurtleImages () {
-        turtleImageOptionsProperty().addAll(INITIAL_IMAGES);
+    	ObservableList<String> imgs = FXCollections.observableArrayList(Arrays.asList(INITIAL_IMAGES));
+        turtleImageOptionsProperty().addAll(imgs);
     }
 
     public MapProperty<String, Double> variableMapProperty () {
