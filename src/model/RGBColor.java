@@ -1,38 +1,50 @@
 package model;
 
 public class RGBColor {
-    
-    private int red;
-    private int green;
-    private int blue;
-    
-    public RGBColor(int red, int green, int blue) {
+
+    private int myRed;
+    private int myGreen;
+    private int myBlue;
+
+    public RGBColor (int red, int green, int blue) {
         setRed(red);
         setGreen(green);
         setBlue(blue);
     }
 
     public int getRed () {
-        return red;
+        return myRed;
     }
 
     private void setRed (int red) {
-        this.red = red;
+        if (red > 255 || red < 0) {
+            // TODO add message
+            throw new IllegalArgumentException();
+        }
+        myRed = red;
     }
 
     public int getGreen () {
-        return green;
+        return myGreen;
     }
 
     private void setGreen (int green) {
-        this.green = green;
+        if (green > 255 || green < 0) {
+            // TODO add message
+            throw new IllegalArgumentException();
+        }
+        myGreen = green;
     }
 
     public int getBlue () {
-        return blue;
+        return myBlue;
     }
 
     private void setBlue (int blue) {
-        this.blue = blue;
+        if (blue > 255 || blue < 0) {
+            // TODO add message
+            throw new IllegalArgumentException();
+        }
+        myBlue = blue;
     }
 }

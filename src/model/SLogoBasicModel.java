@@ -1,224 +1,174 @@
 package model;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Observer;
 import controller.commands.AbstractExpressionNode;
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleMapProperty;
-import javafx.scene.image.Image;
+import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.ReadOnlyListProperty;
 
 
 public class SLogoBasicModel implements IBasicModel {
 
-	private static final double DEFAULT_HEADING = 0.0;
-	private static final Point DEFAULT_LOCATION = new Point(0,0);
-	private static final boolean DEFAULT_PENDOWN = false;
-	private static final boolean DEFAULT_VISIBILITY = true;
-	private static final String DEFAULT_IMAGE = "";
+    BasicTurtleModel myTurtleModel = new BasicTurtleModel();
+    BasicOptionsModel myOptionsModel = new BasicOptionsModel();
 
-	private ListProperty<Turtle> myTurtles;
-	private Turtle myTurtle;
-	private RGBColor myPenColor;
-	private RGBColor myBackgroundColor;
-	private String myLanguage;
-	private MapProperty<String, Double> myVariables;
-	private ListProperty<String> myCommandHistory;
-	private MapProperty<String, AbstractExpressionNode> myUserCommands;
-	private ListProperty<Line> myLines;
-	
-	public SLogoBasicModel () {
-		this.myTurtles = new SimpleListProperty<Turtle>();
-		myTurtles.add(new Turtle(DEFAULT_HEADING, DEFAULT_LOCATION, DEFAULT_PENDOWN, DEFAULT_VISIBILITY, DEFAULT_IMAGE));
-		setCurrentTurtle();
-		this.myVariables = new SimpleMapProperty<String, Double>();
-		this.myCommandHistory = new SimpleListProperty<String>();
-		this.myUserCommands = new SimpleMapProperty<String, AbstractExpressionNode>();
-		this.myLines = new SimpleListProperty<Line>();
-	}
-	
+    @Override
+    public void moveTurtleForward (double pixels) {
+        getMyTurtleModel().moveTurtleForward(pixels);
+    }
+
     @Override
     public void setTurtleCoordinates (Point newPoint) {
-        // TODO Auto-generated method stub
-    	myLines.add(new Line(myTurtle.getLocation(), newPoint, myTurtle.getPenDown().get()));
-    	myTurtle.getLocation().reset(newPoint);
-    	/*
-    	 * setChanged();
-    	 * notifyObservers();
-    	 */
+        getMyTurtleModel().setTurtleCoordinates(newPoint);
     }
 
     @Override
     public Point getTurtleCoordinates () {
-        // TODO Auto-generated method stub
-    	return myTurtle.getLocation();
+        return getMyTurtleModel().getTurtleCoordinates();
     }
 
     @Override
     public double getTurtleHeading () {
-        // TODO Auto-generated method stub
-    	return myTurtle.getHeading().get();
+        return getMyTurtleModel().getTurtleHeading();
     }
 
-	@Override
-	public void setTurtleHeading(double heading) {
-		// TODO Auto-generated method stub
-		myTurtle.getHeading().set(heading);
-	}
+    @Override
+    public void setTurtleHeading (double heading) {
+        getMyTurtleModel().setTurtleHeading(heading);
+    }
 
-	@Override
-	public void setPenDown(boolean penDown) {
-		// TODO Auto-generated method stub
-		myTurtle.getPenDown().set(penDown);
-	}
+    @Override
+    public void setPenDown (boolean penDown) {
+        getMyTurtleModel().setPenDown(penDown);
+    }
 
-	@Override
-	public boolean getPenDown() {
-		// TODO Auto-generated method stub
-		return myTurtle.getPenDown().get();
-	}
+    @Override
+    public boolean getPenDown () {
+        return getMyTurtleModel().getPenDown();
+    }
 
-	@Override
-	public void setTurtleVisibility(boolean visible) {
-		// TODO Auto-generated method stub
-		myTurtle.getVisibility().set(visible);
-	}
+    @Override
+    public void setTurtleVisibility (boolean visible) {
+        getMyTurtleModel().setTurtleVisibility(visible);
+    }
 
-	@Override
-	public boolean getTurtleVisibility() {
-		// TODO Auto-generated method stub
-		return myTurtle.getVisibility().get();
-	}
+    @Override
+    public boolean getTurtleVisibility () {
+        return getMyTurtleModel().getTurtleVisibility();
+    }
 
     @Override
     public void clearLines () {
-        // TODO Auto-generated method stub
-    	myLines.clear();
+        getMyTurtleModel().clearLines();
     }
 
     @Override
-    public List<Line> getLines () {
-        // TODO Auto-generated method stub
-        return myLines;
+
+    public ReadOnlyListProperty<LineInfo> getLines () {
+        return getMyTurtleModel().getReadOnlyLines();
     }
 
     @Override
-    public void setVariable(String name, double value) {
-		// TODO Auto-generated method stub
-		myVariables.put(name, value);
-	}
-
-    @Override
-	public double getVariable(String name) {
-		// TODO Auto-generated method stub
-		return myVariables.get(name).doubleValue();
-	}
-
-    @Override
-    public AbstractExpressionNode getUserCommand (String name) {
-        // TODO Auto-generated method stub
-    	return myUserCommands.get(name);
+    public MapProperty<String, Double> variableMapProperty () {
+        return getMyOptionsModel().variableMapProperty();
     }
 
     @Override
-    public void setUserCommand (String name, AbstractExpressionNode commandRoot) {
-        // TODO Auto-generated method stub
-    	myUserCommands.put(name, commandRoot);
+    public MapProperty<String, List<String>> definedCommandsProperty () {
+        return getMyOptionsModel().definedCommandsProperty();
     }
 
     @Override
-    public String getLanguage () {
-        // TODO Auto-generated method stub
-        return myLanguage;
+    public Map<String, AbstractExpressionNode> userCommandsBodies () {
+        return getMyOptionsModel().userCommandsBodies();
     }
 
     @Override
-    public void addCommandToHistory (String command) {
-        // TODO Auto-generated method stub
-    	myCommandHistory.get().add(command);
+    public ListProperty<String> commandHistoryProperty () {
+        return getMyOptionsModel().commandHistoryProperty();
     }
 
     @Override
-	public RGBColor getBackgroundColor() {
-		// TODO Auto-generated method stub
-		return myBackgroundColor;
-	}
-
-	@Override
-	public void setBackgroundColor(RGBColor color) {
-		// TODO Auto-generated method stub
-		myBackgroundColor = color;
-	}
-
-	@Override
-	public String getTurtleImage() {
-		// TODO Auto-generated method stub
-		return myTurtle.getImage().get();
-	}
-
-	@Override
-	public void setTurtleImage(String image) {
-		// TODO Auto-generated method stub
-		myTurtle.getImage().set(image);
-	}
-
-	@Override
-	public RGBColor getPenColor() {
-		// TODO Auto-generated method stub
-		return myPenColor;
-	}
-
-	@Override
-	public void setPenColor(RGBColor color) {
-		// TODO Auto-generated method stub
-		myPenColor = color;
-		
-	}
-
-    @Override
-    public void setLanguage (String language) {
-        // TODO Auto-generated method stub
-    	myLanguage = language;
+    public ReadOnlyListProperty<String> languageOptionsProperty () {
+        return getMyOptionsModel().languageOptionsProperty();
     }
 
     @Override
-    public ListProperty<String> getVariableListProperty () {
-        // TODO Auto-generated method stub
-    	ListProperty<String> variables = new SimpleListProperty<String>();
-		variables.get().addAll(myVariables.keySet());
-		return variables;
+    public ReadOnlyIntegerProperty getActiveLanguageIndex () {
+        return getMyOptionsModel().getActiveLanguageIndex();
     }
 
     @Override
-    public ListProperty<String> getCommandHistoryProperty () {
-        // TODO Auto-generated method stub
-    	return myCommandHistory;
+    public void setActiveLanguageIndex (int languageIndex) {
+        getMyOptionsModel().setActiveLanguageIndex(languageIndex);
     }
 
     @Override
-    public MapProperty<String, AbstractExpressionNode> getUserCommandsProperty () {
-        // TODO Auto-generated method stub
-    	return myUserCommands;
+    public ListProperty<RGBColor> colorOptionsProperty () {
+        return getMyOptionsModel().colorOptionsProperty();
     }
 
     @Override
-    public void addListener (InvalidationListener listener) {
-        // TODO Auto-generated method stub
-
+    public ReadOnlyIntegerProperty getActiveBackgroundColorIndex () {
+        return getMyTurtleModel().backgroundColorIndexProperty();
     }
 
     @Override
-    public void removeListener (InvalidationListener listener) {
-        // TODO Auto-generated method stub
-
+    public void setActiveBackgroundColorIndex (int backgroundColorIndex) {
+        // TODO add message
+        if (backgroundColorIndex >= getMyOptionsModel().colorOptionsProperty().size()) {
+            throw new IllegalArgumentException();
+        }
+        getMyTurtleModel().backgroundColorIndexProperty().set(backgroundColorIndex);
     }
 
-	@Override
-	public void setCurrentTurtle() {
-		// TODO Auto-generated method stub
-		myTurtle = myTurtles.get(0);
-	}
+    @Override
+    public ReadOnlyIntegerProperty getActivePenColorIndex () {
+        return getMyTurtleModel().getActivePenColorIndex();
+    }
 
+    @Override
+    public void setActivePenColorIndex (int penColorIndex) {
+        // TODO Add message
+        if (penColorIndex >= getMyOptionsModel().colorOptionsProperty().size()) {
+            throw new IllegalArgumentException();
+        }
+        getMyTurtleModel().getActivePenColorIndex().set(penColorIndex);
+    }
+
+    @Override
+    public ListProperty<String> turtleImageOptionsProperty () {
+        return getMyOptionsModel().turtleImageOptionsProperty();
+    }
+
+    @Override
+    public ReadOnlyIntegerProperty getActiveTurtleImageIndex () {
+        return getMyTurtleModel().getActiveTurtleImageIndex();
+    }
+
+    @Override
+    public void setActiveTurtleImageIndex (int turtleImageIndex) {
+        // TODO add message
+        if (turtleImageIndex >= getMyOptionsModel().turtleImageOptionsProperty().size()) {
+            throw new IllegalArgumentException();
+        }
+        getMyTurtleModel().getActiveTurtleImageIndex().set(turtleImageIndex);
+    }
+
+    @Override
+    public void addCoreTurtleObserver (Observer observer) {
+        getMyTurtleModel().addObserver(observer);
+    }
+
+    private BasicTurtleModel getMyTurtleModel () {
+        return myTurtleModel;
+    }
+
+    private BasicOptionsModel getMyOptionsModel () {
+        return myOptionsModel;
+    }
 
 }
