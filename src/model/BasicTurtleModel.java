@@ -11,7 +11,7 @@ import javafx.beans.property.SimpleListProperty;
 public class BasicTurtleModel extends Observable {
 
     private Turtle myTurtle;
-    private ListProperty<Line> myLines = new SimpleListProperty<Line>();
+    private ListProperty<LineInfo> myLines = new SimpleListProperty<LineInfo>();
     private IntegerProperty myBackgroundColorIndexProperty = new SimpleIntegerProperty(0);
 
     public BasicTurtleModel () {
@@ -58,7 +58,7 @@ public class BasicTurtleModel extends Observable {
         linesProperty().clear();
     }
 
-    public ReadOnlyListProperty<Line> getReadOnlyLines () {
+    public ReadOnlyListProperty<LineInfo> getReadOnlyLines () {
         return linesProperty();
     }
 
@@ -78,7 +78,7 @@ public class BasicTurtleModel extends Observable {
         this.myTurtle = myTurtle;
     }
 
-    private ListProperty<Line> linesProperty () {
+    private ListProperty<LineInfo> linesProperty () {
         return myLines;
     }
 

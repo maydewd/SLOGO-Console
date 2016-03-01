@@ -1,13 +1,13 @@
 package model;
 
-public class Line {
+public class LineInfo {
 
     private Point myStart;
     private Point myEnd;
     private boolean myVisibility;
     private RGBColor myColor;
-
-    public Line (Point start, Point end, boolean visible, RGBColor color) {
+    
+    public LineInfo (Point start, Point end, boolean visible, RGBColor color) {
         setStart(start);
         setEnd(end);
         setVisibility(visible);

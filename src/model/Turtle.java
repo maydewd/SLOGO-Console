@@ -44,13 +44,13 @@ public class Turtle {
         return myLocation;
     }
 
-    public List<Line> setLocation (Point location) {
+    public List<LineInfo> setLocation (Point location) {
         myLocation = location;
         // TODO Add in line creation
         return null;
     }
 
-    public List<Line> moveForward (double pixels) {
+    public List<LineInfo> moveForward (double pixels) {
         // TODO implement and add line creation
         return null;
     }
