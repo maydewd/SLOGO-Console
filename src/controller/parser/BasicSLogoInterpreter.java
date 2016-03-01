@@ -16,12 +16,8 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
     @Override
     public double moveForward (double pixels) {
-        // Point oldCoords = getModelActions().getTurtleCoordinates();
-        // double heading = getModelActions().getTurtleHeading();
-        // double newX = oldCoords.getX() + Math.cos(heading) * pixels;
-        // double newY = oldCoords.getY() + Math.sin(heading) * pixels;
-        // getModelActions().setTurtleCoordinates(new Point(newX, newY));
-        return 0;
+        getModelActions().moveTurtleForward(pixels);
+        return pixels;
     }
 
     @Override
@@ -45,7 +41,7 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
     public double setHeading (double pixels) {
         double oldHeading = getModelActions().getTurtleHeading();
         // TODO
-        return 0;
+        return pixels;
     }
 
     @Override
