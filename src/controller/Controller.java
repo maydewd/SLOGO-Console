@@ -13,17 +13,17 @@ public class Controller {
 	private SLogoParser myParser;
 	private BasicSLogoInterpreter myInterpreter;
 	public Controller(IBasicModel myModel, UIView myView) {
-		// TODO Auto-generated constructor stub
 		myParser = new SLogoParser();
 		myInterpreter = new BasicSLogoInterpreter(myModel);
 	}
 
 	public void executeCommand(String command, String language) {
-		// TODO Auto-generated method stub
 		List<AbstractExpressionNode> myNodes= new LinkedList<AbstractExpressionNode>();
 		try{
 			myNodes= myParser.parse(command, language);
 		}
+		
+		//Show the error
 		catch(ParsingException e){
 			e.printStackTrace();
 		}
