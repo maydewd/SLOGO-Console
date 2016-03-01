@@ -28,16 +28,16 @@ public class BasicOptionsModel {
     // TODO add initial images
     private static final String[] INITIAL_IMAGES = {};
 
-    private MapProperty<String, Double> myVariableMap = new SimpleMapProperty<String, Double>();
+    private MapProperty<String, Double> myVariableMap = new SimpleMapProperty<String, Double>(FXCollections.observableHashMap());
     private MapProperty<String, List<String>> myDefinedCommands =
-            new SimpleMapProperty<String, List<String>>();
+            new SimpleMapProperty<String, List<String>>(FXCollections.observableHashMap());
     private Map<String, AbstractExpressionNode> myUserCommandsBodies =
             new HashMap<String, AbstractExpressionNode>();
-    private ListProperty<String> myCommandHistoryProperty = new SimpleListProperty<String>();
-    private ListProperty<RGBColor> myColorOptionsProperty = new SimpleListProperty<RGBColor>();
-    private ListProperty<String> myImageOptionsProperty = new SimpleListProperty<String>();
+    private ListProperty<String> myCommandHistoryProperty = new SimpleListProperty<String>(FXCollections.observableArrayList());
+    private ListProperty<RGBColor> myColorOptionsProperty = new SimpleListProperty<RGBColor>(FXCollections.observableArrayList());
+    private ListProperty<String> myImageOptionsProperty = new SimpleListProperty<String>(FXCollections.observableArrayList());
     private ReadOnlyListProperty<String> myLanguageOptionsProperty;
-    private IntegerProperty myActiveLanguageIndex = new SimpleIntegerProperty();
+    private IntegerProperty myActiveLanguageIndex = new SimpleIntegerProperty(0);
 
     public BasicOptionsModel () {
         initialize();
