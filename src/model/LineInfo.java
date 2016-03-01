@@ -1,12 +1,12 @@
 package model;
 
-public class Line {
+public class LineInfo {
 
     private Point myStart;
     private Point myEnd;
     private boolean myVisibility;
 
-    public Line (Point start, Point end, boolean visible) {
+    public LineInfo (Point start, Point end, boolean visible) {
         setStart(start);
         setEnd(end);
         setVisibility(visible);

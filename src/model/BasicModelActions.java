@@ -24,7 +24,7 @@ public interface BasicModelActions {
 
     public void clearLines ();
 
-    public List<Line> getLines ();
+    public List<LineInfo> getLines ();
 
     public void setVariable (String name, double value);
 

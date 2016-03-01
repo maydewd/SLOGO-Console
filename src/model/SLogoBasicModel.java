@@ -26,7 +26,7 @@ public class SLogoBasicModel implements IBasicModel {
 	private MapProperty<String, Double> myVariables;
 	private ListProperty<String> myCommandHistory;
 	private MapProperty<String, AbstractExpressionNode> myUserCommands;
-	private ListProperty<Line> myLines;
+	private ListProperty<LineInfo> myLines;
 	
 	public SLogoBasicModel () {
 		this.myTurtles = new SimpleListProperty<Turtle>();
@@ -35,13 +35,13 @@ public class SLogoBasicModel implements IBasicModel {
 		this.myVariables = new SimpleMapProperty<String, Double>();
 		this.myCommandHistory = new SimpleListProperty<String>();
 		this.myUserCommands = new SimpleMapProperty<String, AbstractExpressionNode>();
-		this.myLines = new SimpleListProperty<Line>();
+		this.myLines = new SimpleListProperty<LineInfo>();
 	}
 	
     @Override
     public void setTurtleCoordinates (Point newPoint) {
         // TODO Auto-generated method stub
-    	myLines.add(new Line(myTurtle.getLocation(), newPoint, myTurtle.getPenDown().get()));
+    	myLines.add(new LineInfo(myTurtle.getLocation(), newPoint, myTurtle.getPenDown().get()));
     	myTurtle.getLocation().reset(newPoint);
     	/*
     	 * setChanged();
@@ -98,7 +98,7 @@ public class SLogoBasicModel implements IBasicModel {
     }
 
     @Override
-    public List<Line> getLines () {
+    public List<LineInfo> getLines () {
         // TODO Auto-generated method stub
         return myLines;
     }

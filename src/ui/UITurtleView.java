@@ -2,19 +2,28 @@ package ui;
 
 
 
+import java.util.HashSet;
+import java.util.Observable;
+import java.util.Observer;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Line;
+import model.BasicModel;
+import model.BasicModelActions;
 import model.BasicModelSettings;
-import model.Delta;
+import model.IBasicModel;
+import model.LineInfo;
 import view.UIView;
 
 /**
  * Created by Tim on 22/02/16.
  */
-public class UITurtleView implements UIView{
+public class UITurtleView implements UIView, Observer{
 
     public static final int DEFAULT_WIDTH = 400;
     public static final int DEFAULT_HEIGHT = 400;
@@ -22,39 +31,28 @@ public class UITurtleView implements UIView{
     private int width;
     private int height;
     private Node uiNode;
-    private GraphicsContext graphicsContext;
-    private Canvas canvas;
-    private BasicModelSettings bms;
+    private Pane canvas;
+    private IBasicModel bm;
+    private HashSet<LineInfo> displayedLines; 
 
-    public UITurtleView(){
+    public UITurtleView(IBasicModel c){
         width = DEFAULT_WIDTH;
         height = DEFAULT_HEIGHT;
-        
-        canvas = new Canvas(width, height);
+        bm = c;
+        canvas = new Pane();
+        canvas.setPrefSize(width, height);
         uiNode = canvas;
-        graphicsContext = canvas.getGraphicsContext2D();
-        ((Canvas) uiNode).setHeight(height);
-        ((Canvas) uiNode).setWidth(width);
 
-    }
-    
-    public void updateTurtleView(Delta d, BasicModelSettings b){
-        bms = b;
-    	graphicsContext.setStroke(Color.rgb(bms.getPenColor().getRed(), bms.getPenColor().getBlue(),bms.getPenColor().getGreen()));
-    	graphicsContext.setFill(Color.rgb(bms.getBackgroundColor().getRed(), bms.getBackgroundColor().getBlue(),bms.getBackgroundColor().getGreen()));
-    	if(d.getPenDown()){
-    		graphicsContext.strokeLine(scaleX(d.getOldX()), scaleY(d.getOldY()), scaleX(d.getNewX()), scaleY(d.getNewY()));
-    	}	
     }
    
     /*
      * Scales values to the turtleView Scale
      */
-    private int scaleX(int x){
-    	return x;
+    private double scaleX(double d){
+    	return d;
     }
     
-    private int scaleY(int y){
+    private double scaleY(double y){
     	return y;
     }
     
@@ -71,5 +69,36 @@ public class UITurtleView implements UIView{
     @Override
     public Node getNode(){
         return uiNode;
+    }
+
+    @Override
+    public void update (Observable o, Object arg) {
+        if(bm.getLines().isEmpty()){
+            canvas.getChildren().clear();
+        }
+        for(LineInfo l: bm.getLines()){
+            if(!displayedLines.contains(l) && l.getVisibility()){
+                Line line = new Line();
+                line.setStartX(scaleX(l.getStart().getX().doubleValue()));
+                line.setStartY(scaleY(l.getStart().getY().doubleValue()));
+                line.setEndX(scaleX(l.getEnd().getX().doubleValue()));
+                line.setEndY(scaleY(l.getEnd().getY().doubleValue()));
+                line.setStroke(Color.rgb(bm.getPenColor().getRed(), bm.getPenColor().getGreen(), bm.getPenColor().getBlue()));
+                canvas.getChildren().add(line);
+                displayedLines.add(l);
+            }
+        }
+        for(Node i: canvas.getChildren()){
+            if(i instanceof ImageView){
+                canvas.getChildren().remove(i);
+            }
+        }
+        if(bm.getTurtleVisibility()){
+            ImageView t = new ImageView(bm.getTurtleImage());
+            t.setX(scaleX(bm.getTurtleCoordinates().getX().get()));
+            t.setY(scaleY(bm.getTurtleCoordinates().getY().get()));
+            t.setRotate(bm.getTurtleHeading());
+            canvas.getChildren().add(t);
+        }
     }
 }

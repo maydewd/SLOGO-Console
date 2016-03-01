@@ -14,6 +14,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import model.BasicModelSettings;
@@ -30,42 +31,53 @@ public class UISettingsView implements UIView{
 	public UISettingsView(BasicModelSettings b) {
 	    bms = b;
 		MenuBar settings = new MenuBar();
-		uiNode = settings;
+		Pane bar = new Pane();
+		bar.setPrefSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		uiNode = bar;
+		
+		//pen color picker initialization
 		ColorPicker penColorPicker = new ColorPicker();
-		penColorPicker.setOnMouseClicked(e-> bms.setPenColor(new RGBColor((int) 
+		penColorPicker.setOnAction(e-> bms.setPenColor(new RGBColor((int) 
 		                                                            penColorPicker.getValue().getRed(), 
 		                                                            (int) penColorPicker.getValue().getBlue(), 
 		                                                            (int) penColorPicker.getValue().getGreen())));
 		penColorPicker.setValue(Color.BLACK);
+		
+		//background color picker initialization
 		ColorPicker bColorPicker = new ColorPicker();
+		bColorPicker.setOnAction(e-> bms.setPenColor(new RGBColor((int) 
+                                                                            bColorPicker.getValue().getRed(), 
+                                                                            (int) bColorPicker.getValue().getBlue(), 
+                                                                            (int) bColorPicker.getValue().getGreen())));
+                bColorPicker.setValue(Color.WHITE);
 		
-		//Color Menu
-		Menu penColor = new Menu("Pen Color");
-		
-		CustomMenuItem penColorSelector = new CustomMenuItem(penColorPicker);
-		penColorSelector.setOnAction(e -> penColorPicker.getOnMouseClicked());
-		
-		penColor.getItems().addAll(penColorSelector);
-		
-		Menu backgroundColor = new Menu("Background Color");
-		
-		CustomMenuItem backgroundColorSelector = new CustomMenuItem(bColorPicker);
-		backgroundColorSelector.setOnAction(new EventHandler<ActionEvent>() {
-            @SuppressWarnings("unchecked")
-			@Override
-            public void handle(ActionEvent event) {
-            	bColorPicker.setOnAction(new EventHandler() {
-					@Override
-					public void handle(Event event) {
-						Color c = bColorPicker.getValue();
-						bms.setBackgroundColor(new RGBColor((int) c.getRed(), (int) c.getBlue(), (int) c.getGreen()));
-					}
-                });
-            }
-		});
-		
-		backgroundColor.getItems().addAll(backgroundColorSelector);
-		
+//		//Color Menu
+//		Menu penColor = new Menu("Pen Color");
+//		
+//		CustomMenuItem penColorSelector = new CustomMenuItem(penColorPicker);
+//		penColorSelector.setOnAction(e -> penColorPicker.getOnMouseClicked());
+//		
+//		penColor.getItems().addAll(penColorSelector);
+//		
+//		Menu backgroundColor = new Menu("Background Color");
+//		
+//		CustomMenuItem backgroundColorSelector = new CustomMenuItem(bColorPicker);
+//		backgroundColorSelector.setOnAction(new EventHandler<ActionEvent>() {
+//            @SuppressWarnings("unchecked")
+//			@Override
+//            public void handle(ActionEvent event) {
+//            	bColorPicker.setOnAction(new EventHandler() {
+//					@Override
+//					public void handle(Event event) {
+//						Color c = bColorPicker.getValue();
+//						bms.setBackgroundColor(new RGBColor((int) c.getRed(), (int) c.getBlue(), (int) c.getGreen()));
+//					}
+//                });
+//            }
+//		});
+//		
+//		backgroundColor.getItems().addAll(backgroundColorSelector);
+//		
 		//Turtle Menu
 		Menu turtleSettings = new Menu("Turtle");
 		MenuItem turtleImage = new MenuItem("Change Turtle Image");
@@ -130,9 +142,10 @@ public class UISettingsView implements UIView{
 		
 		
 		helpSettings.getItems().addAll(help);
-		settings.getMenus().addAll(penColor, backgroundColor, turtleSettings, languageSettings, helpSettings);
-
-		((MenuBar) uiNode).setPrefSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		settings.getMenus().addAll(turtleSettings, languageSettings, helpSettings);
+		settings.setPrefHeight(DEFAULT_HEIGHT);
+		bar.getChildren().addAll(penColorPicker, bColorPicker, settings);
+		
 	}
 
 	@Override

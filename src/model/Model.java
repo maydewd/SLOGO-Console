@@ -18,7 +18,7 @@ public abstract class Model extends Observable {
 	private MapProperty<String, Double> myVariables;
 	private ListProperty<String> myCommandHistory;
 	private MapProperty<String, AbstractExpressionNode> myUserCommands;
-	private ListProperty<Line> myLines;
+	private ListProperty<LineInfo> myLines;
 	
 	public Model(String lang) {
 		// TODO Auto-generated constructor stub
@@ -87,12 +87,12 @@ public abstract class Model extends Observable {
 	  }
 
 
-	    public List<Line> getLines () {
+	    public List<LineInfo> getLines () {
 	        // TODO Auto-generated method stub
 	        return myLines;
 	    }	
 	
-	  public void addLine (Line l) {
+	  public void addLine (LineInfo l) {
 		  myLines.add(l);
 	  }
 

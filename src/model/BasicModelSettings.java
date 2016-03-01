@@ -3,7 +3,6 @@ package model;
 import controller.commands.AbstractExpressionNode;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
-import javafx.scene.image.Image;
 
 
 public interface BasicModelSettings {

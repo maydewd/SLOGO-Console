@@ -44,7 +44,7 @@ public class UIManager {
         stage.setScene(uiSceneView);
 
         // Create the views
-        turtleView = new UITurtleView();
+        turtleView = new UITurtleView(b);
         consoleView = new UIConsoleView(this);
         settingsMenu = new UISettingsView(b);
 

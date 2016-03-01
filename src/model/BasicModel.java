@@ -32,7 +32,7 @@ public class BasicModel extends Model implements BasicModelActions, BasicModelSe
 	@Override
 	public void setTurtleCoordinates(Point newPoint) {
 		// TODO Auto-generated method stub
-		addLine(new Line(myTurtle.getLocation(), newPoint, myTurtle.getPenDown().get()));
+		addLine(new LineInfo(myTurtle.getLocation(), newPoint, myTurtle.getPenDown().get()));
 		myTurtle.getLocation().reset(newPoint);
 		setChanged();
 		notifyObservers();
