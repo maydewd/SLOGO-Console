@@ -53,7 +53,12 @@ public class Turtle {
     }
 
     public List<LineInfo> moveForward (double pixels) {
-        // TODO implement and add line creation
+        // TODO add line creation
+    	Point oldCoords = this.getLocation();
+        double heading = this.getHeading();
+        double newX = oldCoords.getX() + Math.cos(heading) * pixels;
+        double newY = oldCoords.getY() + Math.sin(heading) * pixels;
+        this.setLocation(new Point(newX, newY));
     	return null;
     }
 
