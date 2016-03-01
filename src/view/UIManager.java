@@ -21,7 +21,7 @@ public class UIManager {
 
     private UITurtleView turtleView;
     private UIConsoleView consoleView;
-//    private UICommandHistoryView commandHistoryView;
+    private UICommandHistoryView commandHistoryView;
 //    private UIUserCommandListView userCommandListView;
     private UISettingsView settingsMenu;
     private UIErrorNotifier errorNotifier;

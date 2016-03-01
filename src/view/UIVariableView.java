@@ -1,5 +1,6 @@
 package view;
 
+import controller.VariableViewController;
 import javafx.beans.property.MapProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -8,10 +9,14 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import model.IBasicModel;
+import model.Variable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +35,7 @@ public class UIVariableView extends BaseUIView {
 	private ListView varValueListView;
 	private IBasicModel myModel;
 	private Pane uiNode;
+	private VariableViewController myController;
 
 	private ObservableList<Double> varValueOL;
 	private ObservableList<String> varNameOL;
@@ -48,7 +54,18 @@ public class UIVariableView extends BaseUIView {
 	}
 
 	private void initialize(){
-		variableProperty = myModel.getVariableMapProperty();
+		variableProperty = myModel.variableMapProperty();
+		myController = new VariableViewController(this, myModel);
+
+		TableView variableTable = new TableView();
+
+		TableColumn<Variable, String> variableName = new TableColumn<>("Name");
+		TableColumn<Variable, Double> variableValue = new TableColumn<>("Value");
+
+		variableName.setCellValueFactory(new PropertyValueFactory<>("name"));
+		variableValue.setCellValueFactory(new PropertyValueFactory<>("value"));
+
+
 		variableProperty.addListener(new ChangeListener<ObservableMap<String, Double>>() {
 			@Override
 			public void changed(ObservableValue<? extends ObservableMap<String, Double>> observable, ObservableMap<String, Double> oldValue, ObservableMap<String, Double> newValue) {
@@ -82,7 +99,7 @@ public class UIVariableView extends BaseUIView {
 		// Populate Pane containers and return correct Node
 		varListPaneContainer.getChildren().addAll(varNameListView, varValueListView);
 		uiNode.getChildren().addAll(varListLabel, varListPaneContainer);
-		this.setNode(uiNode);
+		this.setNode(variableTable);
 	}
 
 
