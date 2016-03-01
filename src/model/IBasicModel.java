@@ -32,7 +32,7 @@ public interface IBasicModel {
 
     public void clearLines ();
 
-    public ReadOnlyListProperty<Line> getLines ();
+    public ReadOnlyListProperty<LineInfo> getLines ();
 
     public MapProperty<String, Double> variableMapProperty ();
 

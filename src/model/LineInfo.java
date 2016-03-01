@@ -1,17 +1,17 @@
 package model;
 
-public class Line {
+public class LineInfo {
 
     private Point myStart;
     private Point myEnd;
     private boolean myVisibility;
     private int myColor;
-
-    public Line (Point start, Point end, boolean visible, int colorInd) {
+    
+    public LineInfo (Point start, Point end, boolean visible, int color) {
         setStart(start);
         setEnd(end);
         setVisibility(visible);
-        setColor(colorInd);
+        setColor(color);
     }
 
     public Point getStart () {
