@@ -15,7 +15,7 @@ public class DifferenceNode extends SimpleProcedureNode {
     @Override
     public double execute (IBasicSLogoCommands commands) throws ParsingException {
         double difference = getChildren().get(0).execute(commands);
-        for (AbstractExpressionNode node : getChildren()) {
+        for (AbstractExpressionNode node : getChildren().subList(1, getChildren().size())) {
             difference -= node.execute(commands);
         }
         return difference;

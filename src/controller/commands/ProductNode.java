@@ -15,7 +15,7 @@ public class ProductNode extends SimpleProcedureNode {
     @Override
     public double execute (IBasicSLogoCommands commands) throws ParsingException {
         double product = getChildren().get(0).execute(commands);
-        for (AbstractExpressionNode node : getChildren()) {
+        for (AbstractExpressionNode node : getChildren().subList(1, getChildren().size())) {
             product *= node.execute(commands);
         }
         return product;
