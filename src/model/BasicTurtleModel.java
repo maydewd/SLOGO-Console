@@ -6,12 +6,13 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 
 
 public class BasicTurtleModel extends Observable {
 
     private Turtle myTurtle;
-    private ListProperty<LineInfo> myLines = new SimpleListProperty<LineInfo>();
+    private ListProperty<LineInfo> myLines = new SimpleListProperty<LineInfo>(FXCollections.observableArrayList());
     private IntegerProperty myBackgroundColorIndexProperty = new SimpleIntegerProperty(0);
 
     public BasicTurtleModel () {

@@ -11,9 +11,9 @@ public class Turtle {
     private double myHeading = 0;
     private Point myLocation = new Point(0, 0);
     private boolean isPenDown = true;
-    private IntegerProperty myPenColorIndexProperty = new SimpleIntegerProperty();
+    private IntegerProperty myPenColorIndexProperty = new SimpleIntegerProperty(0);
     private boolean isVisible = true;
-    private IntegerProperty myImageIndexProperty = new SimpleIntegerProperty();
+    private IntegerProperty myImageIndexProperty = new SimpleIntegerProperty(0);
 
     public Turtle (int penColorIndex, int imageIndex) {
         setMyPenColorIndex(penColorIndex);
@@ -49,17 +49,21 @@ public class Turtle {
 
     public void setLocation (Point location) {
         myLocation = location;
-        // TODO Add in line creation
     }
 
     public List<LineInfo> moveForward (double pixels) {
-        // TODO add line creation
-    	Point oldCoords = this.getLocation();
-        double heading = this.getHeading();
-        double newX = oldCoords.getX() + Math.cos(heading) * pixels;
-        double newY = oldCoords.getY() + Math.sin(heading) * pixels;
-        this.setLocation(new Point(newX, newY));
-    	return null;
+
+        // TODO implement and add line creation
+        double newX = myLocation.getX() + Math.cos(myHeading) * pixels;
+        double newY = myLocation.getY() + Math.sin(myHeading) * pixels;
+    	Point newLoc = new Point(newX, newY);
+    	
+    	ArrayList<LineInfo> myLines = new ArrayList<LineInfo>();
+    	myLines.add(new LineInfo(myLocation, newLoc, isPenDown, myPenColorIndexProperty.get()));
+    	
+        setLocation(newLoc);
+        
+        return myLines;
     }
 
     public boolean isPenDown () {
