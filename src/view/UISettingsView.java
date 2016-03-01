@@ -17,7 +17,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-import model.BasicModelSettings;
 import model.IBasicModel;
 import model.RGBColor;
 
@@ -33,6 +32,8 @@ public class UISettingsView implements UIView{
 	    bms = b;
 		MenuBar settings = new MenuBar();
 		uiNode = settings;
+		
+		
 		
 		//Turtle Menu
 //		Menu turtleSettings = new Menu("Turtle");

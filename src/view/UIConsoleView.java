@@ -4,7 +4,6 @@ import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
-import ui.UIManager;
 
 /**
  * Created by Tim on 22/02/16.

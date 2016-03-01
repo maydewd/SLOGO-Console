@@ -3,7 +3,7 @@ package app;
 import javafx.stage.Stage;
 import model.IBasicModel;
 import model.SLogoBasicModel;
-import ui.UIManager;
+import view.UIManager;
 
 
 /**

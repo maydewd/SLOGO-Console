@@ -1,4 +1,4 @@
-package ui;
+package view;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -9,11 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import model.BasicModelSettings;
 import model.IBasicModel;
-import view.UIErrorNotifier;
-import view.UISettingsView;
-import view.UITurtleView;
 
 /**
  * Created by Tim on 22/02/16.
