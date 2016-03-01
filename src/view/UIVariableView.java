@@ -65,41 +65,11 @@ public class UIVariableView extends BaseUIView {
 		variableName.setCellValueFactory(new PropertyValueFactory<>("name"));
 		variableValue.setCellValueFactory(new PropertyValueFactory<>("value"));
 
-
-		variableProperty.addListener(new ChangeListener<ObservableMap<String, Double>>() {
-			@Override
-			public void changed(ObservableValue<? extends ObservableMap<String, Double>> observable, ObservableMap<String, Double> oldValue, ObservableMap<String, Double> newValue) {
-				varValueOL.clear();
-				varNameOL.clear();
-				for (String s: newValue.keySet()){
-					varNameOL.add(s);
-					varValueOL.add(newValue.get(s));
-				}
-			}
-		});
-		uiNode = new VBox();
-		Pane varListPaneContainer = new HBox();
-		Label varListLabel = new Label("Variable List");
-
-
-		// Initialize var display UI
-		List<String> variableNames = new ArrayList<>();
-		List<Double> variableValues = new ArrayList<>();
-
-		varValueOL = FXCollections.observableList(variableValues);
-		varNameOL = FXCollections.observableList(variableNames);
-
-		varNameListView = new ListView<>(varNameOL);
-		varValueListView = new ListView<>(varValueOL);
-		varNameListView.setPrefSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		varValueListView.setPrefSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		variableProperty = myModel.variableMapProperty();
 
 		updateView();
 
-		// Populate Pane containers and return correct Node
-		varListPaneContainer.getChildren().addAll(varNameListView, varValueListView);
-		uiNode.getChildren().addAll(varListLabel, varListPaneContainer);
-		this.setNode(variableTable);
+		this.setNode(uiNode);
 	}
 
 
