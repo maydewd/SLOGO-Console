@@ -52,6 +52,7 @@ public class Turtle {
     }
 
     public List<LineInfo> moveForward (double pixels) {
+
         // TODO implement and add line creation
         double newX = myLocation.getX() + Math.cos(myHeading) * pixels;
         double newY = myLocation.getY() + Math.sin(myHeading) * pixels;

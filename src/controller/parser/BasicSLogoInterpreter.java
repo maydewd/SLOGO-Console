@@ -39,20 +39,27 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
     @Override
     public double setHeading (double pixels) {
-        double oldHeading = getModelActions().getTurtleHeading();
-        // TODO
+        getModelActions().setTurtleHeading(pixels);
         return pixels;
+
     }
 
     @Override
     public double faceTowards (double x, double y) {
         // TODO Auto-generated method stub
+    	Point oldCoords=getModelActions().getTurtleCoordinates();
+    	double newX=x-oldCoords.getX();
+    	double newY=y-oldCoords.getY();
+    	double pixels = Math.atan(newX/newY);
+    	pixels=360*pixels/(Math.PI);
+    	getModelActions().setTurtleHeading(pixels);
         return 0;
     }
 
     @Override
     public double setXY (double x, double y) {
         // TODO Auto-generated method stub
+    	getModelActions().setTurtleCoordinates(new Point(x,y));
         return 0;
     }
 
