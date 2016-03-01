@@ -21,10 +21,14 @@ public class BasicTurtleModel extends Observable {
 
     public void moveTurtleForward (double pixels) {
         getMyTurtle().moveForward(pixels);
+        setChanged();
+        notifyObservers();
     }
 
     public void setTurtleCoordinates (Point newPoint) {
         getMyTurtle().setLocation(newPoint);
+        setChanged();
+        notifyObservers();
     }
 
     public Point getTurtleCoordinates () {
@@ -37,6 +41,8 @@ public class BasicTurtleModel extends Observable {
 
     public void setTurtleHeading (double heading) {
         getMyTurtle().setHeading(heading);
+        setChanged();
+        notifyObservers();
     }
 
     public void setPenDown (boolean penDown) {
@@ -49,6 +55,8 @@ public class BasicTurtleModel extends Observable {
 
     public void setTurtleVisibility (boolean isVisible) {
         getMyTurtle().setVisible(isVisible);
+        setChanged();
+        notifyObservers();
     }
 
     public boolean getTurtleVisibility () {
