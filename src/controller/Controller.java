@@ -12,15 +12,10 @@ import controller.commands.AbstractExpressionNode;
 public class Controller {
 	private SLogoParser myParser;
 	private BasicSLogoInterpreter myInterpreter;
-	public Controller() {
+	public Controller(IBasicModel myModel, UIView myView) {
 		// TODO Auto-generated constructor stub
-	}
-
-	public void setUp(IBasicModel myModel, UIView myView) {
-		// TODO Auto-generated method stub
 		myParser = new SLogoParser();
 		myInterpreter = new BasicSLogoInterpreter(myModel);
-		
 	}
 
 	public void executeCommand(String command, String language) {
