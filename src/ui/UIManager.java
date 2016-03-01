@@ -13,6 +13,7 @@ import model.BasicModelSettings;
 import model.IBasicModel;
 import view.UIErrorNotifier;
 import view.UISettingsView;
+import view.UITurtleView;
 
 /**
  * Created by Tim on 22/02/16.

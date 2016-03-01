@@ -7,7 +7,7 @@ public class LineInfo {
     private boolean myVisibility;
     private RGBColor myColor;
     
-    public LineInfo (Point start, Point end, boolean visible) {
+    public LineInfo (Point start, Point end, boolean visible, RGBColor color) {
         setStart(start);
         setEnd(end);
         setVisibility(visible);

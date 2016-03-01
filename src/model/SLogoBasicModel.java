@@ -67,7 +67,7 @@ public class SLogoBasicModel implements IBasicModel {
 
     @Override
 
-    public ReadOnlyListProperty<Line> getLines () {
+    public ReadOnlyListProperty<LineInfo> getLines () {
         return getMyTurtleModel().getReadOnlyLines();
     }
 
