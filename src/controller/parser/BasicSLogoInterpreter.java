@@ -1,5 +1,6 @@
 package controller.parser;
 
+import java.util.ArrayList;
 import java.util.List;
 import controller.commands.AbstractExpressionNode;
 import model.IBasicModel;
@@ -48,19 +49,30 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
     public double faceTowards (double x, double y) {
         // TODO Auto-generated method stub
     	Point oldCoords=getModelActions().getTurtleCoordinates();
+    	double oldHeading = getModelActions().getTurtleHeading();
     	double newX=x-oldCoords.getX();
     	double newY=y-oldCoords.getY();
-    	double pixels = Math.atan(newX/newY);
-    	pixels=360*pixels/(Math.PI);
+    	double pixels = Math.atan(newY/newX);
+    	if((newX<=0 && newY>=0) || (newX>=0 && newY>=0)){
+    		pixels=180*pixels/(Math.PI);
+    	}
+    	else{
+    		pixels=180+180*pixels/(Math.PI);
+    	}
     	getModelActions().setTurtleHeading(pixels);
-        return 0;
+        return Math.abs(pixels - oldHeading);
     }
 
     @Override
     public double setXY (double x, double y) {
         // TODO Auto-generated method stub
+    	Point currentLoc = getModelActions().getTurtleCoordinates();
+    	double deltaX = Math.abs(currentLoc.getX() - x);
+    	double deltaY = Math.abs(currentLoc.getY() - y);
+    	double dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
     	getModelActions().setTurtleCoordinates(new Point(x,y));
-        return 0;
+        // TODO Auto-generated method stub
+        return dist;
     }
 
     @Override
@@ -93,11 +105,7 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
     @Override
     public double goHome () {
-    	Point currentLoc = getModelActions().getTurtleCoordinates();
-    	double dist = Math.sqrt(Math.pow(currentLoc.getX(), 2) + Math.pow(currentLoc.getY(), 2));
-    	getModelActions().setTurtleCoordinates(new Point(0,0));
-        // TODO Auto-generated method stub
-        return dist;
+    	return setXY(0,0);
     }
 
     @Override
@@ -161,7 +169,16 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
                                 List<AbstractExpressionNode> params,
                                 AbstractExpressionNode body) {
         // TODO Auto-generated method stub
-        return 0;
+    	ArrayList<String> paramStrings = new ArrayList<String>();
+   
+    	for (int i=0; i< params.size(); i++) {
+    		paramStrings.add(params.get(i).getText());
+    	}
+    	
+    	getModelActions().definedCommandsProperty().put(name, paramStrings);
+    	getModelActions().userCommandsBodies().put(name, body);
+    	
+        return 1;
     }
 
     private IBasicModel getModelActions () {
