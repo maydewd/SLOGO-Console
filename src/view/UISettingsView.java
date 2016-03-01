@@ -16,7 +16,7 @@ import javafx.scene.shape.Rectangle;
 import model.IBasicModel;
 import model.RGBColor;
 
-public class UISettingsView implements UIView{
+public class UISettingsView extends UIView{
 	public static final int DEFAULT_WIDTH = 600;
     public static final int DEFAULT_HEIGHT = 25;
     public static final String HELP_PAGE = "https://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/commands.php";
@@ -26,9 +26,8 @@ public class UISettingsView implements UIView{
 
 	public UISettingsView(IBasicModel b) {
 	    bm = b;
-	    Pane bar = new Pane();
 	    MenuBar settings = new MenuBar();
-	    uiNode = bar;
+	    uiNode = settings;
 	    
 	    //Language Selector
 	    Menu languageSettings = new Menu("Language");
@@ -44,6 +43,8 @@ public class UISettingsView implements UIView{
             for(int i = 0; i < bm.colorOptionsProperty().getSize(); i++){
                 MenuItem button = new MenuItem("");
                 Rectangle fill = new Rectangle();
+                fill.setScaleX(10);
+                fill.setScaleY(10);
                 fill.setFill(Color.rgb(bm.colorOptionsProperty().get(i).getRed(),
                                        bm.colorOptionsProperty().get(i).getGreen(),
                                        bm.colorOptionsProperty().get(i).getBlue()));
@@ -53,7 +54,7 @@ public class UISettingsView implements UIView{
                 penColorSettings.getItems().add(button);
             }
             
-          //Pen Color Selector
+          //Background Color Selector
             Menu backgroundColorSettings = new Menu("Background Color");
             for(int i = 0; i < bm.colorOptionsProperty().getSize(); i++){
                 MenuItem button = new MenuItem("");
