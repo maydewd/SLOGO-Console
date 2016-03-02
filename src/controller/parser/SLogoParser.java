@@ -90,11 +90,4 @@ public class SLogoParser {
         mySyntaxPatterns = patternMap;
     }
 
-    /**
-     * Testing
-     */
-    public static void main (String[] args) throws ParsingException {
-        // SLogoParser test = new SLogoParser();
-        // test.parse("Forward 50", "ENGLISH");
-    }
 }
