@@ -50,17 +50,17 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
         // TODO Auto-generated method stub
     	Point oldCoords=getModelActions().getTurtleCoordinates();
     	double oldHeading = getModelActions().getTurtleHeading();
-    	double newX=x-oldCoords.getX();
-    	double newY=y-oldCoords.getY();
-    	double pixels = Math.atan(newY/newX);
-    	if((newX<=0 && newY>=0) || (newX>=0 && newY>=0)){
-    		pixels=180*pixels/(Math.PI);
+    	double diffX=x-oldCoords.getX();
+    	double diffY=y-oldCoords.getY();
+    	double degrees = Math.atan(diffY/diffX);
+    	if(diffY>0){
+    		degrees=180*degrees/(Math.PI);
     	}
     	else{
-    		pixels=180+180*pixels/(Math.PI);
+    		degrees=180+180*degrees/(Math.PI);
     	}
-    	getModelActions().setTurtleHeading(pixels);
-        return Math.abs(pixels - oldHeading);
+    	getModelActions().setTurtleHeading(degrees);
+        return Math.abs(degrees - oldHeading);
     }
 
     @Override
