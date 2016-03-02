@@ -9,7 +9,8 @@ import model.IBasicModel;
 /**
  * Created by Tim on 22/02/16.
  */
-public class UIConsoleView extends BaseUIView {
+public class ConsoleView extends BaseUIView {
+
 	public static final int DEFAULT_WIDTH = 500;
 	public static final int DEFAULT_HEIGHT = 100;
 
@@ -19,7 +20,7 @@ public class UIConsoleView extends BaseUIView {
 	private ConsoleController consoleController;
 
 
-	public UIConsoleView(UIManager manager, IBasicModel model) {
+	public ConsoleView(UIManager manager, IBasicModel model) {
 		super(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
 		uiPane = new Pane();

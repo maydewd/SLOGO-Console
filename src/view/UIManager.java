@@ -19,14 +19,13 @@ public class UIManager {
     public static final double DEFAULT_X_SIZE = 400;
     public static final double DEFAULT_Y_SIZE = 400;
 
-
-    private UITurtleView turtleView;
-    private UIConsoleView consoleView;
-    private UICommandHistoryView commandHistoryView;
-//    private UIUserCommandListView userCommandListView;
-    private UISettingsView settingsMenu;
-//    private UIErrorNotifier errorNotifier;
-    private UIVariableView variableView;
+    private TurtleView turtleView;
+    private ConsoleView consoleView;
+    private CommandHistoryView commandHistoryView;
+    private UserCommandView userCommandListView;
+    private SettingsView settingsMenu;
+    private ErrorNotifier errorNotifier;
+    private VariableView variableView;
 
     private Pane myMainPaneNamedDane;
     private Pane sidePane;
@@ -46,10 +45,13 @@ public class UIManager {
 	    myModel = b;
 
         // Create the views
-        turtleView = new UITurtleView(b);
-        consoleView = new UIConsoleView(this, myModel);
-        settingsMenu = new UISettingsView(myModel, hostServices);
-        variableView = new UIVariableView(myModel);
+        turtleView = new TurtleView(b);
+        consoleView = new ConsoleView(this, myModel);
+        settingsMenu = new SettingsView(b, hostServices);
+        variableView = new VariableView(myModel);
+
+        commandHistoryView = new CommandHistoryView(myModel, "Command History", myModel.commandHistoryProperty());
+        userCommandListView = new UserCommandView(myModel);
 
         // Initialize Pane
         paneContainer = new HBox(0);
@@ -59,7 +61,9 @@ public class UIManager {
 		                                         consoleView.getNode());
 
         sidePane = new VBox(DEFAULT_SPACING);
-        sidePane.getChildren().addAll(variableView.getNode());
+        sidePane.getChildren().addAll(  variableView.getNode(),
+                                        commandHistoryView.getNode(),
+                                        userCommandListView.getNode());
         paneContainer.getChildren().addAll(myMainPaneNamedDane, sidePane);
 
         group.getChildren().add(paneContainer);

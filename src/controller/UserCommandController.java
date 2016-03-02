@@ -1,11 +1,8 @@
 package controller;
 
 import javafx.beans.property.MapProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import model.IBasicModel;
 import model.Variable;
 import view.UIView;
@@ -16,25 +13,25 @@ import java.util.List;
 /**
  * Created by Tim on 01/03/16.
  */
-public class VariableViewController implements IListDataController{
+public class UserCommandController implements IListDataController {
 
 	private IBasicModel myModel;
-	private UIView variableView;
+	private UIView userCommandView;
 
 	private ObservableList<Variable> variableOL;
 	private MapProperty<String, Double> variableMapProperty;
-	private List<Variable> variableList;
+	private List<Variable> userCommandList;
 
-	public VariableViewController(UIView varView, IBasicModel model) {
-		this.variableView = varView;
+	public UserCommandController(UIView varView, IBasicModel model) {
+		this.userCommandView = varView;
 		this.myModel = model;
 	}
 
 	@Override
 	public void initDataIntoOL() {
 		variableMapProperty = myModel.variableMapProperty();
-		variableList = new ArrayList<>();
-		variableOL = FXCollections.observableArrayList(variableList);
+		userCommandList = new ArrayList<>();
+		variableOL = FXCollections.observableArrayList(userCommandList);
 
 		// Set up binding between this observableList and property
 		variableMapProperty.addListener((observable, oldValue, newValue) -> {
@@ -57,4 +54,5 @@ public class VariableViewController implements IListDataController{
 	public ObservableList getDataOL() {
 		return variableOL;
 	}
+
 }

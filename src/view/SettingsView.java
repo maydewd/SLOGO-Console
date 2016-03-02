@@ -12,7 +12,7 @@ import javafx.scene.shape.Circle;
 import model.IBasicModel;
 
 
-public class UISettingsView extends UIView {
+public class SettingsView extends UIView {
 	public static final int DEFAULT_WIDTH = 500;
     public static final int DEFAULT_HEIGHT = 25;
     public static final String HELP_PAGE = "https://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/commands.php";
@@ -21,7 +21,8 @@ public class UISettingsView extends UIView {
     private IBasicModel bm;
     private HostServices myHostServices;
 
-	public UISettingsView(IBasicModel b, HostServices hostServices) {
+	public SettingsView(IBasicModel b, HostServices hostServices) {
+
 	    bm = b;
 	    MenuBar settings = new MenuBar();
 	    uiNode = settings;

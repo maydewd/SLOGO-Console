@@ -1,33 +1,44 @@
 package controller;
 
 import javafx.beans.property.ListProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
 import model.IBasicModel;
+import view.UIView;
 
 /**
  * Created by Tim on 01/03/16.
  */
-public class CommandHistoryController {
+public class CommandHistoryController implements IListDataController{
 
+	private UIView myView;
 	private IBasicModel myModel;
 	ListProperty<String> commandHistoryProperty;
 
-	public CommandHistoryController(IBasicModel model){
+	public CommandHistoryController(UIView view, IBasicModel model){
+		myView = view;
 		myModel = model;
+
+		initialize();
+	}
+
+	private void initialize(){
 		commandHistoryProperty = myModel.commandHistoryProperty();
-		commandHistoryProperty.addListener(new ChangeListener<ObservableList<String>>() {
-			@Override
-			public void changed(ObservableValue<? extends ObservableList<String>> observable,
-			                    ObservableList<String> oldValue,
-			                    ObservableList<String> newValue) {
-
-			}
+		commandHistoryProperty.addListener((observable, oldValue, newValue) -> {
+			updateOLData();
 		});
+	}
 
+	@Override
+	public void initDataIntoOL() {
+	}
 
-		ListView commandHistory = new ListView();
+	@Override
+	public ObservableList getDataOL() {
+		return commandHistoryProperty;
+	}
+
+	@Override
+	public void updateOLData() {
+
 	}
 }

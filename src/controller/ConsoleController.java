@@ -33,7 +33,7 @@ public class ConsoleController {
 		catch(ParsingException e){
 			e.printStackTrace();
 		}
-		for(int i=0;i<myNodes.size();i++){
+		for (int i = 0; i < myNodes.size(); i++){
 			try{
 				myNodes.get(i).execute(myInterpreter);
 			}

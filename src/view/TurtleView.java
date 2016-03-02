@@ -17,7 +17,8 @@ import java.util.Observer;
 /**
  * Created by Tim on 22/02/16.
  */
-public class UITurtleView extends UIView implements Observer {
+public class TurtleView extends UIView implements Observer {
+
 
     private static final int HEADING_OFFSET = 90;
     public static final int DEFAULT_WIDTH = 400;
@@ -30,7 +31,7 @@ public class UITurtleView extends UIView implements Observer {
     private IBasicModel bm;
     private HashSet<LineInfo> displayedLines; 
 
-    public UITurtleView(IBasicModel c){
+    public TurtleView(IBasicModel c){
         width = DEFAULT_WIDTH;
         height = DEFAULT_HEIGHT;
         bm = c;
