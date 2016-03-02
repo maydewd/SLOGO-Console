@@ -38,6 +38,7 @@ public class VariableView extends BaseListView {
 		myController = new VariableViewController(this, myModel);
 
 		tableView = new TableView();
+		tableView.setPrefSize(getWidth(), getHeight());
 
 		variableOL = FXCollections.observableArrayList();
 
