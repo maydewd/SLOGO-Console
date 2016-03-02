@@ -38,10 +38,10 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
     }
 
     @Override
-    public double setHeading (double pixels) {
+    public double setHeading (double degrees) {
 
-        getModelActions().setTurtleHeading(pixels);
-        return pixels;
+        getModelActions().setTurtleHeading(-degrees);
+        return degrees;
     }
 
     @Override
