@@ -1,17 +1,15 @@
 package controller.commands;
 
-import java.util.HashSet;
-import java.util.Set;
 import controller.parser.IBasicSLogoCommands;
 import controller.parser.ParsingException;
 
 
-public class EqualNode extends SimpleProcedureNode {
+public class OrNode extends SimpleProcedureNode {
 
-    private static final int EQUAL_NUM_PARAMS = 2;
+    private static final int OR_NUM_PARAMS = 2;
 
-    public EqualNode (String text) {
-        super(text, EQUAL_NUM_PARAMS);
+    public OrNode (String text) {
+        super(text, OR_NUM_PARAMS);
     }
 
     /**
@@ -19,11 +17,11 @@ public class EqualNode extends SimpleProcedureNode {
      */
     @Override
     public double execute (IBasicSLogoCommands commands) throws ParsingException {
-        Set<Double> values = new HashSet<>();
+        boolean allNonZero = false;
         for (AbstractExpressionNode child : getChildren()) {
-            values.add(child.execute(commands));
+            allNonZero |= child.execute(commands) != 0;
         }
-        return values.size() == 1 ? 1 : 0;
+        return allNonZero ? 1 : 0;
     }
 
 }

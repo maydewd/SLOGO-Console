@@ -23,14 +23,14 @@ public class VariableNode extends AbstractExpressionNode {
 
     @Override
     public void addParameter (AbstractExpressionNode node) throws ParsingException {
-        // TODO add message
-        throw new ParsingException();
+        String error = String.format(getErrorMessage("NoChildAllowed"), SyntaxType.VARIABLE);
+        throw new ParsingException(error);
     }
 
     @Override
     protected List<AbstractExpressionNode> getChildren () throws ParsingException {
-        // TODO Add message
-        throw new ParsingException();
+        String error = String.format(getErrorMessage("CantGetChildren"), SyntaxType.VARIABLE);
+        throw new ParsingException(error);
     }
 
 }
