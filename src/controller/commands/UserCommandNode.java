@@ -16,6 +16,7 @@ public class UserCommandNode extends SimpleProcedureNode {
         for (int i=0; i < parameters.size(); i++) {
             commands.setVariable(parameters.get(i), getChildren().get(i).execute(commands));
         }
+        // TODO add check to verify that the function exists!
         return commands.getUserMethodBody(getText()).execute(commands);
     }
 
