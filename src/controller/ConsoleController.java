@@ -25,6 +25,7 @@ public class ConsoleController {
 		List<AbstractExpressionNode> myNodes= new LinkedList<AbstractExpressionNode>();
 		try{
 		        MapProperty<String, List<String>> commandsProperty = myModel.definedCommandsProperty();
+		        myModel.commandHistoryProperty().add(command);
 			myNodes= myParser.parse(command, language, commandsProperty);
 		}
 		
