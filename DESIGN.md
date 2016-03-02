@@ -15,6 +15,9 @@ Timothy and Nick
 ### UIManager
 This class will be started and handled by our Application level class `SLogoEngine`. This class will construct the UI classes and maintain references to them. It will also distribute links between the Model and this `Controller/View`.
 
+### BaseUIView
+This serves as a base class for all of the UI elements. It provides the framework upon which the modular UI design is implemented.
+
 ### UITurtleView
 This class will build and manage the View that will display the results of the actions taken by the turtle by the controller.commands entered by the user. It will receive it's direction by querying the Model every update cycle for a list of `Delta` objects that will instruct the View on how things should be updated from the last update.
 
@@ -50,6 +53,9 @@ This UI will generate error popups that will alert the user to problems that occ
 
 # API Details
 David
+
+### IBasicModel
+This interface defines the contract of the model with the other backends. Seeing as the Model is essentially a datastore, the majority of the Model is getters and setters for values of various types. We offset most of the calculating effort into the Controller and let the model just be to store and update informatino. 
 
 ### External Front-end API
 The API of the front-end team will center around accepting packets of information that represent a change in state from a given command. As such, they will have methods that allow the controller to relay this information. This information will contain descriptions of the current state of the turtle, any new lines drawn, previous command history, variables defined, and user-defined controller.commands. We would also like to implement some of this functionality, such as the command history and variables defined, using JavaFX property bindings, meaning that in order to properly display these modules, they will need to be given property bindings. This will likely be facilitated by the controller, but will ultimately result in a weak dependence with the Model. Additionally, the front-end team will implement a method that allows the Controller to pass along any errors that have been generated during the execution or parsing of a command.
