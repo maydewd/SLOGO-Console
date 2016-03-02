@@ -16,6 +16,8 @@ public class SLogoNodeFactory {
 
     private static final String COMMAND_PACKAGE = "controller.commands.";
     private static final String LANGUAGE_PACKAGE = "resources.languages.";
+    private ResourceBundle myErrorResources =
+            ResourceBundle.getBundle("resources.languages.Errors");
     private static final String NO_MATCH = "NO MATCH";
 
     private Map<String, Pattern> myTypePatterns;
@@ -29,25 +31,26 @@ public class SLogoNodeFactory {
     public AbstractExpressionNode createNode (String token,
                                               String currentLanguage,
                                               MapProperty<String, List<String>> commandsProperty) throws ParsingException {
-        if (getTypePattern("Constant").matcher(token).find()) {
+        if (getTypePattern("Constant").matcher(token).matches()) {
             return createConstantNode(token);
         }
-        else if (getTypePattern("Variable").matcher(token).find()) {
+        else if (getTypePattern("Variable").matcher(token).matches()) {
             return createVariableNode(token);
         }
-        else if (getTypePattern("Command").matcher(token).find()) {
+        else if (getTypePattern("Command").matcher(token).matches()) {
             return createCommandNode(token, currentLanguage, commandsProperty);
         }
-        else if (getTypePattern("ListStart").matcher(token).find()) {
+        else if (getTypePattern("ListStart").matcher(token).matches()) {
             return createListStart(token);
         }
-        else if (getTypePattern("ListEnd").matcher(token).find()) {
+        else if (getTypePattern("ListEnd").matcher(token).matches()) {
             return createListEnd(token);
         }
         else {
-            // TODO throw new Exception();
+            String errorMessage =
+                    String.format(myErrorResources.getString("NoPatternMatch"), token);
+            throw new ParsingException(errorMessage);
         }
-        return null;
     }
 
     private AbstractExpressionNode createConstantNode (String token) {
@@ -70,8 +73,9 @@ public class SLogoNodeFactory {
                 return (AbstractExpressionNode) nodeConstructor.newInstance(token);
             }
             catch (ReflectiveOperationException e) {
-                // TODO add message
-                throw new ParsingException();
+                String errorMessage =
+                        String.format(myErrorResources.getString("ReflectiveCommandError"), token);
+                throw new ParsingException(errorMessage);
             }
         }
         else {

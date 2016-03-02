@@ -14,11 +14,13 @@ public class ConsoleController {
 	private SLogoParser myParser;
 	private BasicSLogoInterpreter myInterpreter;
 	private IBasicModel myModel;
+	private UIView myView;
 	
-	public ConsoleController(IBasicModel model, UIView myView) {
+	public ConsoleController(IBasicModel model, UIView view) {
 		myParser = new SLogoParser();
 		myModel = model;
 		myInterpreter = new BasicSLogoInterpreter(model);
+		myView=view;
 	}
 
 	public void executeCommand(String command, String language) {
@@ -31,14 +33,14 @@ public class ConsoleController {
 		
 		//Show the error
 		catch(ParsingException e){
-			e.printStackTrace();
+			myView.showError(e.getMessage());
 		}
 		for (int i = 0; i < myNodes.size(); i++){
 			try{
 				myNodes.get(i).execute(myInterpreter);
 			}
 			catch(ParsingException e){
-				e.printStackTrace();
+				myView.showError(e.getMessage());
 			}
 		}
 	}

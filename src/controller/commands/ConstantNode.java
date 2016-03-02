@@ -40,8 +40,8 @@ public class ConstantNode extends AbstractExpressionNode {
 
     @Override
     protected List<AbstractExpressionNode> getChildren () throws ParsingException {
-        // TODO Add message
-        throw new ParsingException();
+        String errorMessage = String.format(getErrorMessage("CantGetChildren"), SyntaxType.CONSTANT);
+        throw new ParsingException(errorMessage);
     }
 
 }
