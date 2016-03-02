@@ -1,8 +1,9 @@
 package controller.commands;
 
-import java.util.List;
 import controller.parser.IBasicSLogoCommands;
 import controller.parser.ParsingException;
+
+import java.util.List;
 
 public class UserCommandNode extends SimpleProcedureNode {
 

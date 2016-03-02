@@ -1,14 +1,17 @@
 package view;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import controller.IListDataController;
 import controller.UserCommandController;
 import javafx.beans.property.MapProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import model.IBasicModel;
 import model.UserCommand;
 
@@ -27,6 +30,7 @@ public class UserCommandView extends BaseListView {
 	private IBasicModel myModel;
 	private TableView userCommandTable;
 	private IListDataController myController;
+	private Pane uiNode;
 
 	private ObservableList<UserCommand> commandOL;
 
@@ -43,18 +47,22 @@ public class UserCommandView extends BaseListView {
 		commandMapProperty = myModel.definedCommandsProperty();
 		myController = new UserCommandController(this, myModel);
 
+		Label paneTitle = new Label("User-Defined Commands");
+		paneTitle.setFont(new Font(TITLE_SIZE));
+
+		uiNode = new VBox();
 		userCommandTable = new TableView();
 		userCommandTable.setPrefSize(getWidth(), getHeight());
 
 		commandOL = FXCollections.observableArrayList();
 
 		TableColumn<UserCommand, String> variableName = new TableColumn<>("Command");
-
 		variableName.setCellValueFactory(new PropertyValueFactory<>("command"));
-
 		userCommandTable.getColumns().add(variableName);
 
-		this.setNode(userCommandTable);
+		uiNode.getChildren().addAll(paneTitle, userCommandTable);
+
+		this.setNode(uiNode);
 	}
 
 	@Override

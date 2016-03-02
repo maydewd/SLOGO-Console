@@ -6,9 +6,7 @@ import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import model.IBasicModel;
 import model.UserCommand;
-import model.Variable;
 import view.BaseListView;
-import view.UIView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +43,8 @@ public class UserCommandController implements IListDataController {
 
 	@Override
 	public void updateOLData() {
-		System.out.println("observed change");
 		for (String s : userCommandProperty.keySet()) {
-			UserCommand newCommand = new UserCommand(s, (List<String>) userCommandProperty.get(s));
+			UserCommand newCommand = new UserCommand(s, userCommandProperty.get(s));
 			userCommandOL.add(newCommand);
 		}
 
