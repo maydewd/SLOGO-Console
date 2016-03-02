@@ -24,7 +24,7 @@ public class BasicOptionsModel {
             { "English", "Chinese", "French", "German", "Italian", "Portuguese", "Russian",
               "Spanish" };
     private static final RGBColor[] INITIAL_COLORS =
-            { new RGBColor(0, 0, 0), new RGBColor(255, 255, 255), new RGBColor(255, 0, 0) };
+            { new RGBColor(255, 255, 255), new RGBColor(0, 0, 0), new RGBColor(255, 0, 0) };
     // TODO add initial images
     private static final String[] INITIAL_IMAGES = {"blackturtle.png"};
 

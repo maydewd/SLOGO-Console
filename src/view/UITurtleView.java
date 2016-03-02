@@ -22,6 +22,7 @@ import model.LineInfo;
  */
 public class UITurtleView extends UIView implements Observer{
 
+    private static final int HEADING_OFFSET = 90;
     public static final int DEFAULT_WIDTH = 400;
     public static final int DEFAULT_HEIGHT = 400;
 
@@ -116,7 +117,7 @@ public class UITurtleView extends UIView implements Observer{
             		bm.turtleImageOptionsProperty().get(bm.getActiveTurtleImageIndex().getValue()))));
             t.setX(scaleX(bm.getTurtleCoordinates().getX()));
             t.setY(scaleY(bm.getTurtleCoordinates().getY()));
-            t.setRotate(bm.getTurtleHeading());
+            t.setRotate(bm.getTurtleHeading() + HEADING_OFFSET);
             canvas.getChildren().add(t);
         }
     }

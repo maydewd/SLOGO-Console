@@ -1,5 +1,6 @@
 package view;
 
+import javafx.application.HostServices;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -32,7 +33,7 @@ public class UIManager {
     private Group group;
     private Scene uiSceneView;
 
-    public UIManager(Stage primaryStage, IBasicModel b){
+    public UIManager(Stage primaryStage, IBasicModel b, HostServices hostServices){
         // Init vars
         stage = primaryStage;
         group = new Group();
@@ -42,7 +43,7 @@ public class UIManager {
         // Create the views
         turtleView = new UITurtleView(b);
         consoleView = new UIConsoleView(this);
-        settingsMenu = new UISettingsView(b);
+        settingsMenu = new UISettingsView(b, hostServices);
 
         // Initialize Pane
         myMainPaneNamedDane = new VBox(DEFAULT_SPACING);

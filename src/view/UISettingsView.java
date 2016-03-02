@@ -3,6 +3,7 @@ package view;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -25,11 +26,13 @@ public class UISettingsView extends UIView{
     
     private Node uiNode;
     private IBasicModel bm;
+    private HostServices myHostServices;
 
-	public UISettingsView(IBasicModel b) {
+	public UISettingsView(IBasicModel b, HostServices hostServices) {
 	    bm = b;
 	    MenuBar settings = new MenuBar();
 	    uiNode = settings;
+	    myHostServices = hostServices;
 	    
 	    //Language Selector
 	    Menu languageSettings = new Menu("Language");
@@ -88,19 +91,7 @@ public class UISettingsView extends UIView{
 		Menu helpSettings = new Menu("Help");
 
 		MenuItem help = new MenuItem("Get Help");
-		help.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				try{java.awt.Desktop.getDesktop().browse(new URI(HELP_PAGE));}
-					catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (URISyntaxException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-	            }
-			});
+		help.setOnAction(e -> myHostServices.showDocument(HELP_PAGE));
 		
 		//Color Selectors
 		
