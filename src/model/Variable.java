@@ -33,4 +33,12 @@ public class Variable {
 	public void setValue(double newValue){
 		value.set(newValue);
 	}
+
+	public StringProperty nameProperty(){
+		return name;
+	}
+
+	public DoubleProperty valueProperty(){
+		return value;
+	}
 }

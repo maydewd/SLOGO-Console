@@ -1,11 +1,7 @@
 package view;
 
 
-import java.util.Observer;
-
-import java.util.HashSet;
-import java.util.Observable;
-import java.util.Observer;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,7 +11,6 @@ import javafx.scene.shape.Line;
 import model.IBasicModel;
 import model.LineInfo;
 import model.RGBColor;
-
 
 import java.util.HashSet;
 import java.util.Observable;

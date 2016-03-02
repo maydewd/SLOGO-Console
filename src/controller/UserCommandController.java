@@ -50,9 +50,5 @@ public class UserCommandController implements IListDataController {
 		}
 	}
 
-	@Override
-	public ObservableList getDataOL() {
-		return variableOL;
-	}
 
 }
