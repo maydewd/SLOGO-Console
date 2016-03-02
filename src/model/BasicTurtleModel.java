@@ -20,7 +20,7 @@ public class BasicTurtleModel extends Observable {
     }
 
     public void moveTurtleForward (double pixels) {
-        getMyTurtle().moveForward(pixels);
+        linesProperty().addAll(getMyTurtle().moveForward(pixels));
         setChanged();
         notifyObservers();
     }

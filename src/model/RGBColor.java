@@ -2,6 +2,8 @@ package model;
 
 public class RGBColor {
 
+    private final static String INVALID_RGB_VALUE = "";
+
     private int myRed;
     private int myGreen;
     private int myBlue;
@@ -47,9 +49,9 @@ public class RGBColor {
         }
         myBlue = blue;
     }
-    
+
     @Override
-    public String toString() {
+    public String toString () {
         String redHex = String.format("%2s", Integer.toHexString(getRed())).replace(" ", "0");
         String greenHex = String.format("%2s", Integer.toHexString(getGreen())).replace(" ", "0");
         String blueHex = String.format("%2s", Integer.toHexString(getBlue())).replace(" ", "0");

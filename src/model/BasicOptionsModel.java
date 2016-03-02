@@ -91,8 +91,7 @@ public class BasicOptionsModel {
 
     public void setActiveLanguageIndex (int languageIndex) {
         if (languageIndex >= languageOptionsProperty().size()) {
-            // TODO add message
-            throw new IllegalArgumentException();
+            throw new IndexOutOfBoundsException();
         }
         myActiveLanguageIndex.set(languageIndex);
     }

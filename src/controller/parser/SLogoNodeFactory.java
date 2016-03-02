@@ -16,6 +16,8 @@ public class SLogoNodeFactory {
 
     private static final String COMMAND_PACKAGE = "controller.commands.";
     private static final String LANGUAGE_PACKAGE = "resources.languages.";
+    private ResourceBundle myErrorResources =
+            ResourceBundle.getBundle("resources.languages.Errors");
     private static final String NO_MATCH = "NO MATCH";
 
     private Map<String, Pattern> myTypePatterns;
@@ -45,9 +47,10 @@ public class SLogoNodeFactory {
             return createListEnd(token);
         }
         else {
-            // TODO throw new Exception();
+            String errorMessage =
+                    String.format(myErrorResources.getString("NoPatternMatch"), token);
+            throw new ParsingException(errorMessage);
         }
-        return null;
     }
 
     private AbstractExpressionNode createConstantNode (String token) {
@@ -70,8 +73,9 @@ public class SLogoNodeFactory {
                 return (AbstractExpressionNode) nodeConstructor.newInstance(token);
             }
             catch (ReflectiveOperationException e) {
-                // TODO add message
-                throw new ParsingException();
+                String errorMessage =
+                        String.format(myErrorResources.getString("ReflectiveCommandError"), token);
+                throw new ParsingException(errorMessage);
             }
         }
         else {

@@ -2,7 +2,7 @@ package view;
 
 
 import java.util.Observer;
-
+import java.util.Set;
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
@@ -35,7 +35,8 @@ public class TurtleView extends UIView implements Observer {
     private Node uiNode;
     private Pane canvas;
     private IBasicModel bm;
-    private HashSet<LineInfo> displayedLines;
+    private Set<LineInfo> displayedLines = new HashSet<>();
+    private ImageView myTurtle;
 
     public TurtleView(IBasicModel c){
         width = DEFAULT_WIDTH;
@@ -111,20 +112,16 @@ public class TurtleView extends UIView implements Observer {
                 canvas.getChildren().add(line);
             }
         }
-        for (Node i : canvas.getChildren()) {
-            if (i instanceof ImageView) {
-                canvas.getChildren().remove(i);
-            }
-        }
+        canvas.getChildren().remove(myTurtle);
         if (bm.getTurtleVisibility()) {
-            ImageView t = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(
+            myTurtle = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(
                                                                                                   bm.turtleImageOptionsProperty()
                                                                                                           .get(bm.getActiveTurtleImageIndex()
                                                                                                                   .getValue()))));
-            t.setX(scaleX(bm.getTurtleCoordinates().getX()));
-            t.setY(scaleY(bm.getTurtleCoordinates().getY()));
-            t.setRotate(bm.getTurtleHeading() + HEADING_OFFSET);
-            canvas.getChildren().add(t);
+            myTurtle.setX(scaleX(bm.getTurtleCoordinates().getX()));
+            myTurtle.setY(scaleY(bm.getTurtleCoordinates().getY()));
+            myTurtle.setRotate(bm.getTurtleHeading() + HEADING_OFFSET);
+            canvas.getChildren().add(myTurtle);
         }
     }
 }
