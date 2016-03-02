@@ -1,6 +1,5 @@
 package controller.parser;
 
-import java.util.ArrayList;
 import java.util.List;
 import controller.commands.AbstractExpressionNode;
 import model.IBasicModel;
@@ -48,29 +47,29 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
     @Override
     public double faceTowards (double x, double y) {
         // TODO Auto-generated method stub
-    	Point oldCoords=getModelActions().getTurtleCoordinates();
-    	double oldHeading = getModelActions().getTurtleHeading();
-    	double diffX=x-oldCoords.getX();
-    	double diffY=y-oldCoords.getY();
-    	double degrees = Math.atan(diffY/diffX);
-    	if(diffY>0){
-    		degrees=180*degrees/(Math.PI);
-    	}
-    	else{
-    		degrees=180+180*degrees/(Math.PI);
-    	}
-    	getModelActions().setTurtleHeading(degrees);
+        Point oldCoords = getModelActions().getTurtleCoordinates();
+        double oldHeading = getModelActions().getTurtleHeading();
+        double diffX = x - oldCoords.getX();
+        double diffY = y - oldCoords.getY();
+        double degrees = Math.atan(diffY / diffX);
+        if (diffY > 0) {
+            degrees = 180 * degrees / (Math.PI);
+        }
+        else {
+            degrees = 180 + 180 * degrees / (Math.PI);
+        }
+        getModelActions().setTurtleHeading(degrees);
         return Math.abs(degrees - oldHeading);
     }
 
     @Override
     public double setXY (double x, double y) {
         // TODO Auto-generated method stub
-    	Point currentLoc = getModelActions().getTurtleCoordinates();
-    	double deltaX = Math.abs(currentLoc.getX() - x);
-    	double deltaY = Math.abs(currentLoc.getY() - y);
-    	double dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
-    	getModelActions().setTurtleCoordinates(new Point(x,y));
+        Point currentLoc = getModelActions().getTurtleCoordinates();
+        double deltaX = Math.abs(currentLoc.getX() - x);
+        double deltaY = Math.abs(currentLoc.getY() - y);
+        double dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+        getModelActions().setTurtleCoordinates(new Point(x, y));
         // TODO Auto-generated method stub
         return dist;
     }
@@ -78,7 +77,7 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
     @Override
     public double setPenDown () {
         // TODO Auto-generated method stub
-    	getModelActions().setPenDown(true);
+        getModelActions().setPenDown(true);
         return 1;
     }
 
@@ -86,33 +85,33 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
     public double setPenUp () {
         // TODO Auto-generated method stub
         getModelActions().setPenDown(false);
-    	return 0;
+        return 0;
     }
 
     @Override
     public double showTurtle () {
         // TODO Auto-generated method stub
-    	getModelActions().setTurtleVisibility(true);
+        getModelActions().setTurtleVisibility(true);
         return 1;
     }
 
     @Override
     public double hideTurtle () {
         // TODO Auto-generated method stub
-    	getModelActions().setTurtleVisibility(false);
-    	return 0;
+        getModelActions().setTurtleVisibility(false);
+        return 0;
     }
 
     @Override
     public double goHome () {
-    	return setXY(0,0);
+        return setXY(0, 0);
     }
 
     @Override
     public double clearScreen () {
         // TODO Auto-generated method stub
-    	getModelActions().clearLines();
-    	return goHome();
+        getModelActions().clearLines();
+        return goHome();
     }
 
     @Override
@@ -124,7 +123,7 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
     @Override
     public double getYCoord () {
         // TODO Auto-generated method stub
-    	 return getModelActions().getTurtleCoordinates().getY();
+        return getModelActions().getTurtleCoordinates().getY();
     }
 
     @Override
@@ -137,18 +136,18 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
     public double isPenDown () {
         // TODO Auto-generated method stub
         if (getModelActions().getPenDown())
-        	return 1;
+            return 1;
         else
-        	return 0;
+            return 0;
     }
 
     @Override
     public double isShowing () {
         // TODO Auto-generated method stub
-    	if (getModelActions().getTurtleVisibility())
-        	return 1;
+        if (getModelActions().getTurtleVisibility())
+            return 1;
         else
-        	return 0;
+            return 0;
     }
 
     @Override
@@ -160,25 +159,28 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
     @Override
     public double setVariable (String name, double value) {
         // TODO Auto-generated method stub
-    	getModelActions().variableMapProperty().put(name, value);
+        getModelActions().variableMapProperty().put(name, value);
         return value;
     }
 
     @Override
     public double makeFunction (String name,
-                                List<AbstractExpressionNode> params,
+                                List<String> params,
                                 AbstractExpressionNode body) {
-        // TODO Auto-generated method stub
-    	ArrayList<String> paramStrings = new ArrayList<String>();
-   
-    	for (int i=0; i< params.size(); i++) {
-    		paramStrings.add(params.get(i).getText());
-    	}
-    	
-    	getModelActions().definedCommandsProperty().put(name, paramStrings);
-    	getModelActions().userCommandsBodies().put(name, body);
-    	
+        getModelActions().definedCommandsProperty().put(name, params);
+        getModelActions().userCommandsBodies().put(name, body);
+
         return 1;
+    }
+
+    @Override
+    public List<String> getUserMethodParams (String name) {
+        return getModelActions().definedCommandsProperty().get(name);
+    }
+
+    @Override
+    public AbstractExpressionNode getUserMethodBody (String name) {
+        return getModelActions().userCommandsBodies().get(name);
     }
 
     private IBasicModel getModelActions () {

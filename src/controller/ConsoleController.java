@@ -6,21 +6,26 @@ import java.util.LinkedList;
 import controller.parser.BasicSLogoInterpreter;
 import controller.parser.ParsingException;
 import controller.parser.SLogoParser;
+import javafx.beans.property.MapProperty;
 import model.IBasicModel;
 import view.UIView;
 import controller.commands.AbstractExpressionNode;
 public class ConsoleController {
 	private SLogoParser myParser;
 	private BasicSLogoInterpreter myInterpreter;
-	public ConsoleController(IBasicModel myModel, UIView myView) {
+	private IBasicModel myModel;
+	
+	public ConsoleController(IBasicModel model, UIView myView) {
 		myParser = new SLogoParser();
-		myInterpreter = new BasicSLogoInterpreter(myModel);
+		myModel = model;
+		myInterpreter = new BasicSLogoInterpreter(model);
 	}
 
 	public void executeCommand(String command, String language) {
 		List<AbstractExpressionNode> myNodes= new LinkedList<AbstractExpressionNode>();
 		try{
-			myNodes= myParser.parse(command, language);
+		        MapProperty<String, List<String>> commandsProperty = myModel.definedCommandsProperty();
+			myNodes= myParser.parse(command, language, commandsProperty);
 		}
 		
 		//Show the error

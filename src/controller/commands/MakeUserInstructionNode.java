@@ -1,5 +1,7 @@
 package controller.commands;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import controller.parser.IBasicSLogoCommands;
 import controller.parser.ParsingException;
 
@@ -14,9 +16,15 @@ public class MakeUserInstructionNode extends ControlProcedureNode {
 
     @Override
     public void addParameter (AbstractExpressionNode node) throws ParsingException {
-        String error = String.format(getErrorMessage("InvalidParameter"),
-                                     getText(), SyntaxType.LISTSTART);
         if ((getChildren().size() == 1 || getChildren().size() == 2) && !isList(node)) {
+            String error = String.format(getErrorMessage("InvalidParameter"),
+                                         getText(), SyntaxType.LISTSTART);
+            throw new ParsingException(error);
+        }
+        else if (getChildren().size() == 1 &&
+                 !node.getChildren().stream().allMatch(e -> isVariable(e))) {
+            String error = String.format(getErrorMessage("InvalidListParameter"),
+                                         getText(), SyntaxType.VARIABLE);
             throw new ParsingException(error);
         }
         else {
@@ -26,8 +34,11 @@ public class MakeUserInstructionNode extends ControlProcedureNode {
 
     @Override
     public double execute (IBasicSLogoCommands commands) throws ParsingException {
-        double fork = getChildren().get(0).execute(commands);
-        return fork != 0 ? getChildren().get(1).execute(commands) : getChildren().get(2).execute(commands);
+        String name = getChildren().get(0).getText();
+        List<String> parameters = getChildren().get(1).getChildren().stream()
+                .map(node -> node.getText())
+                .collect(Collectors.toList());
+        return commands.makeFunction(name, parameters, getChildren().get(2));
     }
 
 }
