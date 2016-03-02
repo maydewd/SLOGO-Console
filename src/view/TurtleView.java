@@ -1,14 +1,17 @@
 package view;
 
 
-import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.text.TextAlignment;
 import model.IBasicModel;
 import model.LineInfo;
+import model.Point;
 import model.RGBColor;
 
 import java.util.HashSet;
@@ -19,29 +22,27 @@ import java.util.Set;
 /**
  * Created by Tim on 22/02/16.
  */
-public class TurtleView extends UIView implements Observer {
+public class TurtleView extends BaseUIView implements Observer {
 
     private static final int HEADING_OFFSET = 90;
     public static final int DEFAULT_WIDTH = 500;
-    public static final int DEFAULT_HEIGHT = 400;
+    public static final int DEFAULT_HEIGHT = 407;
 
-    private int width;
-    private int height;
-    private Node uiNode;
     private Pane canvas;
-    private IBasicModel bm;
     private Set<LineInfo> displayedLines = new HashSet<>();
     private ImageView myTurtle;
 
+    private Label turtleCoordinates;
+
     public TurtleView(IBasicModel c){
-        width = DEFAULT_WIDTH;
-        height = DEFAULT_HEIGHT;
-        bm = c;
-        canvas = new Pane();
+        super(DEFAULT_WIDTH, DEFAULT_HEIGHT, c);
+
+        canvas = new BorderPane();
         initializeCanvas();
-        canvas.setPrefSize(width, height);
-        uiNode = canvas;
-        bm.addCoreTurtleObserver(this);
+        canvas.setPrefSize(getWidth(), getHeight());
+        ((BorderPane) canvas).setTop(turtleCoordinates);
+        setNode(canvas);
+        getModel().addCoreTurtleObserver(this);
         updateView();
     }
 
@@ -53,12 +54,14 @@ public class TurtleView extends UIView implements Observer {
     }
 
     private void initializeCanvas () {
-        bm.getActiveBackgroundColorIndex().addListener(o -> changeBackgroundColor());
+        getModel().getActiveBackgroundColorIndex().addListener(o -> changeBackgroundColor());
+        turtleCoordinates = new Label("Hey");
+        turtleCoordinates.setTextAlignment(TextAlignment.CENTER);
     }
 
     private void changeBackgroundColor () {
-        int index = bm.getActiveBackgroundColorIndex().intValue();
-        String hexString = bm.colorOptionsProperty().get(index).toString();
+        int index = getModel().getActiveBackgroundColorIndex().intValue();
+        String hexString = getModel().colorOptionsProperty().get(index).toString();
         canvas.setStyle("-fx-background-color: #" + hexString + ";");
     }
 
@@ -67,30 +70,15 @@ public class TurtleView extends UIView implements Observer {
     }
 
     @Override
-    public int getWidth () {
-        return width;
-    }
-
-    @Override
-    public int getHeight () {
-        return height;
-    }
-
-    @Override
-    public Node getNode () {
-        return uiNode;
-    }
-
-    @Override
     public void update (Observable o, Object arg) {
         updateView();
     }
 
     private void updateView () {
-        if (bm.getLines().isEmpty()) {
+        if (getModel().getLines().isEmpty()) {
             canvas.getChildren().clear();
         }
-        for (LineInfo l : bm.getLines()) {
+        for (LineInfo l : getModel().getLines()) {
             if (!displayedLines.contains(l) && l.getVisibility()) {
                 Line line = new Line();
                 line.setStartX(scaleX(l.getStart().getX()));
@@ -98,7 +86,7 @@ public class TurtleView extends UIView implements Observer {
                 line.setEndX(scaleX(l.getEnd().getX()));
                 line.setEndY(scaleY(l.getEnd().getY()));
 
-                RGBColor currentColor = bm.colorOptionsProperty().get(l.getColor());
+                RGBColor currentColor = getModel().colorOptionsProperty().get(l.getColor());
                 line.setStroke(Color.rgb(currentColor.getRed(),
                                          currentColor.getGreen(),
                                          currentColor.getBlue()));
@@ -108,15 +96,25 @@ public class TurtleView extends UIView implements Observer {
             }
         }
         canvas.getChildren().remove(myTurtle);
-        if (bm.getTurtleVisibility()) {
+        if (getModel().getTurtleVisibility()) {
             myTurtle = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(
-                  bm.turtleImageOptionsProperty()
-                          .get(bm.getActiveTurtleImageIndex()
+                  getModel().turtleImageOptionsProperty()
+                          .get(getModel().getActiveTurtleImageIndex()
                                   .getValue()))));
-            myTurtle.setX(scaleX(bm.getTurtleCoordinates().getX()));
-            myTurtle.setY(scaleY(bm.getTurtleCoordinates().getY()));
-            myTurtle.setRotate(- bm.getTurtleHeading() + HEADING_OFFSET);
+            myTurtle.setX(scaleX(getModel().getTurtleCoordinates().getX()));
+            myTurtle.setY(scaleY(getModel().getTurtleCoordinates().getY()));
+            myTurtle.setRotate(- getModel().getTurtleHeading() + HEADING_OFFSET);
             canvas.getChildren().add(myTurtle);
         }
+
+        updateTurtleCoordinates();
+    }
+
+    private void updateTurtleCoordinates(){
+        Point turtlePos = getModel().getTurtleCoordinates();
+        String turtlePosString = "(" + turtlePos.getX() + ", " + turtlePos.getY() + ")";
+        System.out.println(turtlePosString);
+        this.turtleCoordinates.setText(turtlePosString);
+
     }
 }

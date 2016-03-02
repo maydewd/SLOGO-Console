@@ -19,20 +19,18 @@ public class VariableView extends BaseListView {
 
 
 	private TableView<Variable> tableView;
-	private IBasicModel myModel;
 	private VariableViewController myController;
 
 	private ObservableList<Variable> variableOL;
 
 
 	public VariableView(IBasicModel model){
-		super(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		myModel = model;
+		super(DEFAULT_WIDTH, DEFAULT_HEIGHT, model);
 		initialize();
 	}
 
 	private void initialize(){
-		myController = new VariableViewController(this, myModel);
+		myController = new VariableViewController(this, getModel());
 
 		tableView = new TableView();
 		tableView.setPrefSize(getWidth(), getHeight());

@@ -27,7 +27,6 @@ public class UserCommandView extends BaseListView {
 
 	private MapProperty<String, List<String>> commandMapProperty;
 
-	private IBasicModel myModel;
 	private TableView userCommandTable;
 	private IListDataController myController;
 	private Pane uiNode;
@@ -37,15 +36,14 @@ public class UserCommandView extends BaseListView {
 
 
 	public UserCommandView(IBasicModel model){
-		super(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		myModel = model;
+		super(DEFAULT_WIDTH, DEFAULT_HEIGHT, model);
 		initialize();
 	}
 
 
 	private void initialize(){
-		commandMapProperty = myModel.definedCommandsProperty();
-		myController = new UserCommandController(this, myModel);
+		commandMapProperty = getModel().definedCommandsProperty();
+		myController = new UserCommandController(this, getModel());
 
 		Label paneTitle = new Label("User-Defined Commands");
 		paneTitle.setFont(new Font(TITLE_SIZE));

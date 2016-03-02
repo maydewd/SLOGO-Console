@@ -12,58 +12,58 @@ import javafx.scene.shape.Circle;
 import model.IBasicModel;
 
 
-public class SettingsView extends UIView {
+public class SettingsView extends BaseUIView{
 	public static final int DEFAULT_WIDTH = 500;
     public static final int DEFAULT_HEIGHT = 25;
     public static final String HELP_PAGE = "https://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/commands.php";
-    
-    private Node uiNode;
-    private IBasicModel bm;
+
+	public static final int CIRCLE_SCALE = 50;
+	
     private HostServices myHostServices;
 
 	public SettingsView(IBasicModel b, HostServices hostServices) {
+		super(DEFAULT_WIDTH, DEFAULT_HEIGHT, b);
 
-	    bm = b;
 	    MenuBar settings = new MenuBar();
-	    uiNode = settings;
+	    setNode(settings);
 	    myHostServices = hostServices;
 	    
 	    //Language Selector
 	    Menu languageSettings = new Menu("Language");
-	    for(int i = 0; i < bm.languageOptionsProperty().getSize(); i++){
-	        MenuItem button = new MenuItem(bm.languageOptionsProperty().get(i));
+	    for(int i = 0; i < getModel().languageOptionsProperty().getSize(); i++){
+	        MenuItem button = new MenuItem(getModel().languageOptionsProperty().get(i));
 	        int index = i;
-	        button.setOnAction(e -> bm.setActiveLanguageIndex(index));
+	        button.setOnAction(e -> getModel().setActiveLanguageIndex(index));
 	        languageSettings.getItems().add(button);
 	    }
 	    
 	  //Pen Color Selector
             Menu penColorSettings = new Menu("Pen Color");
-            for(int i = 0; i < bm.colorOptionsProperty().getSize(); i++){
+            for(int i = 0; i < getModel().colorOptionsProperty().getSize(); i++){
                 CustomMenuItem button = new CustomMenuItem();
                 Circle fill = new Circle();
-                fill.setRadius(getWidth()/50);
-                fill.setFill(Color.rgb(bm.colorOptionsProperty().get(i).getRed(),
-                                       bm.colorOptionsProperty().get(i).getGreen(),
-                                       bm.colorOptionsProperty().get(i).getBlue()));
+                fill.setRadius(getWidth() / CIRCLE_SCALE);
+                fill.setFill(Color.rgb(getModel().colorOptionsProperty().get(i).getRed(),
+                                       getModel().colorOptionsProperty().get(i).getGreen(),
+                                       getModel().colorOptionsProperty().get(i).getBlue()));
                 button.setContent(fill);
                 int index = i;
-                button.setOnAction(e -> bm.setActivePenColorIndex(index));
+                button.setOnAction(e -> getModel().setActivePenColorIndex(index));
                 penColorSettings.getItems().add(button);
             }
             
           //Background Color Selector
             Menu backgroundColorSettings = new Menu("Background Color");
-            for(int i = 0; i < bm.colorOptionsProperty().getSize(); i++){
+            for(int i = 0; i < getModel().colorOptionsProperty().getSize(); i++){
                 CustomMenuItem button = new CustomMenuItem();
                 Circle fill = new Circle();
-                fill.setRadius(getWidth()/50);
-                fill.setFill(Color.rgb(bm.colorOptionsProperty().get(i).getRed(),
-                                       bm.colorOptionsProperty().get(i).getGreen(),
-                                       bm.colorOptionsProperty().get(i).getBlue()));
+                fill.setRadius(getWidth() / CIRCLE_SCALE);
+                fill.setFill(Color.rgb(getModel().colorOptionsProperty().get(i).getRed(),
+                                       getModel().colorOptionsProperty().get(i).getGreen(),
+                                       getModel().colorOptionsProperty().get(i).getBlue()));
                 button.setContent(fill);
                 int index = i;
-                button.setOnAction(e -> bm.setActiveBackgroundColorIndex(index));
+                button.setOnAction(e -> getModel().setActiveBackgroundColorIndex(index));
                 backgroundColorSettings.getItems().add(button);
             }
 	   
@@ -72,11 +72,11 @@ public class SettingsView extends UIView {
 		
 		//Turtle Menu
 		Menu turtleImageSettings = new Menu("Turtle Images");
-		for(int i = 0; i < bm.turtleImageOptionsProperty().getSize(); i++){
+		for(int i = 0; i < getModel().turtleImageOptionsProperty().getSize(); i++){
 	                MenuItem button = new MenuItem("");
-	                button.setGraphic(new ImageView(bm.turtleImageOptionsProperty().get(i)));
+	                button.setGraphic(new ImageView(getModel().turtleImageOptionsProperty().get(i)));
 	                int index = i;
-	                button.setOnAction(e -> bm.setActiveTurtleImageIndex(index));
+	                button.setOnAction(e -> getModel().setActiveTurtleImageIndex(index));
 	                turtleImageSettings.getItems().add(button);
 	        }
 		
@@ -94,21 +94,6 @@ public class SettingsView extends UIView {
 		settings.getMenus().addAll(languageSettings, penColorSettings, backgroundColorSettings, turtleImageSettings, helpSettings);
 
 		settings.setPrefSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-	}
-
-	@Override
-	public int getWidth() {
-		return DEFAULT_WIDTH;
-	}
-
-	@Override
-	public int getHeight() {
-		return DEFAULT_HEIGHT;
-	}
-
-	@Override
-	public Node getNode() {
-		return uiNode;
 	}
 
 }

@@ -2,7 +2,6 @@ package view;
 
 import controller.ConsoleController;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.Clipboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import model.IBasicModel;
@@ -21,20 +20,11 @@ public class ConsoleView extends BaseUIView {
 
 
 	public ConsoleView(IBasicModel model) {
-		super(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		super(DEFAULT_WIDTH, DEFAULT_HEIGHT, model);
 
 		uiPane = new Pane();
 		this.setNode(uiPane);
-		commandField = new TextArea(){
-			@Override
-			public void paste() {
-				Clipboard clipboard = Clipboard.getSystemClipboard();
-				if (clipboard.hasString()) {
-					replaceSelection(clipboard.getString().toUpperCase());
-				}
-			}
-		};
-
+		commandField = new TextArea();
 		commandField.setPrefSize(getWidth(), getHeight());
 
 		uiPane.setPrefSize(getWidth(), getHeight());
