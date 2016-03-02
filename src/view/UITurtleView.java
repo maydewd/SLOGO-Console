@@ -37,20 +37,32 @@ public class UITurtleView extends UIView implements Observer{
         height = DEFAULT_HEIGHT;
         bm = c;
         canvas = new Pane();
+        initializeCanvas();
         canvas.setPrefSize(width, height);
         uiNode = canvas;
-
+        bm.addCoreTurtleObserver(this);
+        updateView();
     }
    
     /*
      * Scales values to the turtleView Scale
      */
     private double scaleX(double d){
-    	return d;
+    	return d + getWidth()/2;
+    }
+    
+    private void initializeCanvas(){
+        bm.getActiveBackgroundColorIndex().addListener(o -> changeBackgroundColor());
+    }
+    
+    private void changeBackgroundColor(){
+        int index = bm.getActiveBackgroundColorIndex().intValue();
+        String hexString = bm.colorOptionsProperty().get(index).toString();
+        canvas.setStyle("-fx-background-color: #"+hexString+";");
     }
     
     private double scaleY(double y){
-    	return y;
+    	return y + getHeight()/2;
     }
     
     @Override
@@ -70,6 +82,10 @@ public class UITurtleView extends UIView implements Observer{
 
     @Override
     public void update(Observable o, Object arg) {
+        updateView();
+    }
+
+    private void updateView () {
         if(bm.getLines().isEmpty()){
             canvas.getChildren().clear();
         }
@@ -87,6 +103,7 @@ public class UITurtleView extends UIView implements Observer{
                                          
                                                                          
                 displayedLines.add(l);
+                canvas.getChildren().add(line);
             }
         }
         for(Node i: canvas.getChildren()){

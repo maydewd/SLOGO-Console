@@ -71,7 +71,7 @@ public class UISettingsView extends UIView{
             }
 	   
 	    
-		
+	
 		
 		//Turtle Menu
 		Menu turtleImageSettings = new Menu("Turtle Images");
