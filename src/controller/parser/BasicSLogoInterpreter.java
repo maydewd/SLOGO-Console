@@ -53,10 +53,10 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
         double diffY = y - oldCoords.getY();
         double degrees = Math.atan(diffY / diffX);
         if (diffY > 0) {
-            degrees = 180 * degrees / (Math.PI);
+            degrees =  180 * degrees / (Math.PI);
         }
         else {
-            degrees = 180 + 180 * degrees / (Math.PI);
+            degrees = 180 +  180 * degrees / (Math.PI);
         }
         getModelActions().setTurtleHeading(degrees);
         return Math.abs(degrees - oldHeading);
