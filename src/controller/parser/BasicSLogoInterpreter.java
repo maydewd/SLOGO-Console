@@ -51,12 +51,12 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
         double oldHeading = getModelActions().getTurtleHeading();
         double diffX = x - oldCoords.getX();
         double diffY = y - oldCoords.getY();
-        double degrees = Math.toDegrees(Math.atan(diffY / diffX));
-        if (diffY > 0) {
-            degrees =  180 * degrees / (Math.PI);
+        double degrees = Math.atan(diffY/diffX);
+        if (diffY>0) {
+            degrees=180*degrees/Math.PI;
         }
-        else {
-            degrees = 180 +  180 * degrees / (Math.PI);
+        else{
+        	degrees=180+180*degrees/Math.PI;
         }
         getModelActions().setTurtleHeading(degrees);
         return Math.abs(degrees - oldHeading);
