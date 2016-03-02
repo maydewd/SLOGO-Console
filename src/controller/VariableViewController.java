@@ -36,11 +36,8 @@ public class VariableViewController implements IListDataController{
 		variableOL = FXCollections.observableArrayList(variableList);
 
 		// Set up binding between this observableList and property
-		myModel.variableMapProperty().addListener(new MapChangeListener<String, Double>() {
-			@Override
-			public void onChanged(Change<? extends String, ? extends Double> change) {
-				updateOLData();
-			}
+		myModel.variableMapProperty().addListener((MapChangeListener<String, Double>) change -> {
+			updateOLData();
 		});
 	}
 

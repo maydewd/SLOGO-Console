@@ -2,9 +2,12 @@ package controller;
 
 import javafx.beans.property.MapProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import model.IBasicModel;
+import model.UserCommand;
 import model.Variable;
+import view.BaseListView;
 import view.UIView;
 
 import java.util.ArrayList;
@@ -16,38 +19,39 @@ import java.util.List;
 public class UserCommandController implements IListDataController {
 
 	private IBasicModel myModel;
-	private UIView userCommandView;
+	private BaseListView userCommandView;
 
-	private ObservableList<Variable> variableOL;
-	private MapProperty<String, Double> variableMapProperty;
-	private List<Variable> userCommandList;
+	private ObservableList<UserCommand> userCommandOL;
+	private MapProperty<String, List<String>> userCommandProperty;
+	private List<UserCommand> userCommandList;
 
-	public UserCommandController(UIView varView, IBasicModel model) {
+	public UserCommandController(BaseListView varView, IBasicModel model) {
 		this.userCommandView = varView;
 		this.myModel = model;
+		initDataIntoOL();
 	}
 
 	@Override
 	public void initDataIntoOL() {
-		variableMapProperty = myModel.variableMapProperty();
+		userCommandProperty = myModel.definedCommandsProperty();
 		userCommandList = new ArrayList<>();
-		variableOL = FXCollections.observableArrayList(userCommandList);
+		userCommandOL = FXCollections.observableArrayList(userCommandList);
 
 		// Set up binding between this observableList and property
-		variableMapProperty.addListener((observable, oldValue, newValue) -> {
+		myModel.definedCommandsProperty().addListener((MapChangeListener<String, List<String>>) change -> {
 			updateOLData();
 		});
 	}
 
 	@Override
 	public void updateOLData() {
-		for (String s : variableMapProperty.keySet()) {
-			for (Variable v : variableOL) {
-				if (v.getName().equals(s)) {
-					v.setValue(variableMapProperty.get(s));
-				}
-			}
+		System.out.println("observed change");
+		for (String s : userCommandProperty.keySet()) {
+			UserCommand newCommand = new UserCommand(s, (List<String>) userCommandProperty.get(s));
+			userCommandOL.add(newCommand);
 		}
+
+		userCommandView.setOLData(userCommandOL);
 	}
 
 

@@ -46,7 +46,7 @@ public class UIManager {
 
         // Create the views
         turtleView = new TurtleView(b);
-        consoleView = new ConsoleView(this, myModel);
+        consoleView = new ConsoleView(myModel);
         settingsMenu = new SettingsView(b, hostServices);
         variableView = new VariableView(myModel);
 

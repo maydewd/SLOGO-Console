@@ -1,23 +1,23 @@
 package view;
 
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import controller.IListDataController;
 import controller.UserCommandController;
 import javafx.beans.property.MapProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
 import model.IBasicModel;
 import model.UserCommand;
-import model.Variable;
 
 import java.util.List;
 
 /**
  * Created by Tim on 01/03/16.
  */
-public class UserCommandView extends BaseUIView {
+public class UserCommandView extends BaseListView {
 
 	public final static int DEFAULT_WIDTH = 200;
 	public final static int DEFAULT_HEIGHT = 200;
@@ -28,7 +28,8 @@ public class UserCommandView extends BaseUIView {
 	private TableView userCommandTable;
 	private IListDataController myController;
 
-	private ObservableList<Double> commandNameOL;
+	private ObservableList<UserCommand> commandOL;
+
 
 
 	public UserCommandView(IBasicModel model){
@@ -45,6 +46,8 @@ public class UserCommandView extends BaseUIView {
 		userCommandTable = new TableView();
 		userCommandTable.setPrefSize(getWidth(), getHeight());
 
+		commandOL = FXCollections.observableArrayList();
+
 		TableColumn<UserCommand, String> variableName = new TableColumn<>("Command");
 
 		variableName.setCellValueFactory(new PropertyValueFactory<>("command"));
@@ -52,5 +55,12 @@ public class UserCommandView extends BaseUIView {
 		userCommandTable.getColumns().add(variableName);
 
 		this.setNode(userCommandTable);
+	}
+
+	@Override
+	public void setOLData(ObservableList newList) {
+		commandOL.clear();
+		commandOL.addAll(newList);
+		userCommandTable.setItems(commandOL);
 	}
 }
