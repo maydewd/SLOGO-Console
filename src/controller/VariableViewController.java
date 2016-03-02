@@ -1,18 +1,12 @@
 package controller;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.property.MapProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import model.IBasicModel;
 import model.Variable;
 import view.BaseListView;
-import view.UIView;
 
 import java.util.ArrayList;
 import java.util.List;

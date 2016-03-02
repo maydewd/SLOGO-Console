@@ -1,7 +1,6 @@
 package view;
 
 import controller.VariableViewController;
-import javafx.beans.property.MapProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;

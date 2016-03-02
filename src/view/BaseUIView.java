@@ -1,6 +1,5 @@
 package view;
 
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
 /**
