@@ -1,13 +1,11 @@
 package view;
 
 import controller.VariableViewController;
-import javafx.beans.property.MapProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
 import model.IBasicModel;
 import model.Variable;
 
@@ -22,7 +20,6 @@ public class VariableView extends BaseListView {
 
 	private TableView<Variable> tableView;
 	private IBasicModel myModel;
-	private Pane uiNode;
 	private VariableViewController myController;
 
 	private ObservableList<Variable> variableOL;

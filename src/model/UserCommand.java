@@ -4,6 +4,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 
 import java.util.List;
 
@@ -15,9 +16,10 @@ public class UserCommand {
 	private StringProperty command;
 	private ListProperty<String> parameterList;
 
-	public UserCommand(){
-		command = new SimpleStringProperty();
+	public UserCommand(String s, List<String> list){
+		command = new SimpleStringProperty(s);
 		parameterList = new SimpleListProperty<>();
+		parameterList.set(FXCollections.observableList(list));
 	}
 
 	public String getCommand(){

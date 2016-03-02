@@ -1,18 +1,12 @@
 package controller;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.property.MapProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import model.IBasicModel;
 import model.Variable;
 import view.BaseListView;
-import view.UIView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +36,8 @@ public class VariableViewController implements IListDataController{
 		variableOL = FXCollections.observableArrayList(variableList);
 
 		// Set up binding between this observableList and property
-		myModel.variableMapProperty().addListener(new MapChangeListener<String, Double>() {
-			@Override
-			public void onChanged(Change<? extends String, ? extends Double> change) {
-				updateOLData();
-			}
+		myModel.variableMapProperty().addListener((MapChangeListener<String, Double>) change -> {
+			updateOLData();
 		});
 	}
 

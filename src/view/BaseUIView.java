@@ -1,12 +1,13 @@
 package view;
 
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
 /**
  * Created by Tim on 29/02/16.
  */
 public abstract class BaseUIView extends UIView {
+
+	public final static int TITLE_SIZE = 14;
 
 	private int width;
 	private int height;
