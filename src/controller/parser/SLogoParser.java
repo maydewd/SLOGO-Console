@@ -15,6 +15,8 @@ public class SLogoParser {
 
     private ResourceBundle mySyntaxResources =
             ResourceBundle.getBundle("resources.languages.Syntax");
+    private ResourceBundle myErrorResources =
+            ResourceBundle.getBundle("resources.languages.Errors");
     private Map<String, Pattern> mySyntaxPatterns;
 
     public SLogoParser () {
@@ -50,8 +52,8 @@ public class SLogoParser {
         AbstractExpressionNode node = getNodeFactory().createNode(tokens.poll(), currentLanguage, commandsProperty);
         while (!node.areParametersComplete()) {
             if (tokens.isEmpty()) {
-                // TODO add message that additional parameters are expected
-                throw new ParsingException();
+                String errorMessage = myErrorResources.getString("MoreTokensExpected");
+                throw new ParsingException(errorMessage);
             }
             node.addParameter(parseHelper(tokens, currentLanguage, commandsProperty));
         }
