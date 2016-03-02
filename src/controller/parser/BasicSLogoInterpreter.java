@@ -28,7 +28,7 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
     @Override
     public double rotateLeft (double degrees) {
         double oldHeading = getModelActions().getTurtleHeading();
-        getModelActions().setTurtleHeading(oldHeading - degrees);
+        getModelActions().setTurtleHeading(oldHeading + degrees);
         return degrees;
     }
 
@@ -40,7 +40,7 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
     @Override
     public double setHeading (double degrees) {
 
-        getModelActions().setTurtleHeading(-degrees);
+        getModelActions().setTurtleHeading(degrees);
         return degrees;
     }
 
