@@ -72,7 +72,7 @@ public class SLogoBasicModel implements IBasicModel {
     }
 
     @Override
-    public MapProperty<String, Double> variableMapProperty () {
+    public MapProperty<String, Double> variableMapProperty() {
         return getMyOptionsModel().variableMapProperty();
     }
 
@@ -87,7 +87,7 @@ public class SLogoBasicModel implements IBasicModel {
     }
 
     @Override
-    public ListProperty<String> commandHistoryProperty () {
+    public ListProperty<String> commandHistoryProperty() {
         return getMyOptionsModel().commandHistoryProperty();
     }
 

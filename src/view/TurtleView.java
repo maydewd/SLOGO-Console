@@ -1,29 +1,33 @@
 package view;
 
+
+import java.util.Observer;
+
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.scene.Node;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import model.IBasicModel;
 import model.LineInfo;
 import model.RGBColor;
 
 
+import java.util.HashSet;
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * Created by Tim on 22/02/16.
  */
-public class UITurtleView extends UIView implements Observer {
+public class TurtleView extends UIView implements Observer {
 
     private static final int HEADING_OFFSET = 90;
-    public static final int DEFAULT_WIDTH = 400;
+    public static final int DEFAULT_WIDTH = 500;
     public static final int DEFAULT_HEIGHT = 400;
 
     private int width;
@@ -33,7 +37,7 @@ public class UITurtleView extends UIView implements Observer {
     private IBasicModel bm;
     private HashSet<LineInfo> displayedLines;
 
-    public UITurtleView (IBasicModel c) {
+    public TurtleView(IBasicModel c){
         width = DEFAULT_WIDTH;
         height = DEFAULT_HEIGHT;
         bm = c;
