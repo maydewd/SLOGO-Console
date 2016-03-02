@@ -34,13 +34,13 @@ public interface IBasicModel {
 
     public ReadOnlyListProperty<LineInfo> getLines ();
 
-    public MapProperty<String, Double> variableMapProperty ();
+    public MapProperty<String, Double> variableMapProperty();
 
     public MapProperty<String, List<String>> definedCommandsProperty ();
 
     public Map<String, AbstractExpressionNode> userCommandsBodies ();
 
-    public ListProperty<String> commandHistoryProperty ();
+    public ListProperty<String> commandHistoryProperty();
 
     public ReadOnlyListProperty<String> languageOptionsProperty ();
 

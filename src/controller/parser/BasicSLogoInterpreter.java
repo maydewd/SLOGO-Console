@@ -39,9 +39,9 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
     @Override
     public double setHeading (double pixels) {
+
         getModelActions().setTurtleHeading(pixels);
         return pixels;
-
     }
 
     @Override
@@ -64,40 +64,34 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
     @Override
     public double setXY (double x, double y) {
-        // TODO Auto-generated method stub
         Point currentLoc = getModelActions().getTurtleCoordinates();
         double deltaX = Math.abs(currentLoc.getX() - x);
         double deltaY = Math.abs(currentLoc.getY() - y);
         double dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
         getModelActions().setTurtleCoordinates(new Point(x, y));
-        // TODO Auto-generated method stub
         return dist;
     }
 
     @Override
     public double setPenDown () {
-        // TODO Auto-generated method stub
         getModelActions().setPenDown(true);
         return 1;
     }
 
     @Override
     public double setPenUp () {
-        // TODO Auto-generated method stub
         getModelActions().setPenDown(false);
         return 0;
     }
 
     @Override
     public double showTurtle () {
-        // TODO Auto-generated method stub
         getModelActions().setTurtleVisibility(true);
         return 1;
     }
 
     @Override
     public double hideTurtle () {
-        // TODO Auto-generated method stub
         getModelActions().setTurtleVisibility(false);
         return 0;
     }
@@ -109,32 +103,27 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
     @Override
     public double clearScreen () {
-        // TODO Auto-generated method stub
         getModelActions().clearLines();
         return goHome();
     }
 
     @Override
     public double getXCoord () {
-        // TODO Auto-generated method stub
         return getModelActions().getTurtleCoordinates().getX();
     }
 
     @Override
     public double getYCoord () {
-        // TODO Auto-generated method stub
         return getModelActions().getTurtleCoordinates().getY();
     }
 
     @Override
     public double getHeading () {
-        // TODO Auto-generated method stub
         return getModelActions().getTurtleHeading();
     }
 
     @Override
     public double isPenDown () {
-        // TODO Auto-generated method stub
         if (getModelActions().getPenDown())
             return 1;
         else
@@ -143,7 +132,6 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
     @Override
     public double isShowing () {
-        // TODO Auto-generated method stub
         if (getModelActions().getTurtleVisibility())
             return 1;
         else
@@ -152,13 +140,11 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
     @Override
     public double getVariable (String name) {
-        // TODO Auto-generated method stub
         return getModelActions().variableMapProperty().get(name);
     }
 
     @Override
     public double setVariable (String name, double value) {
-        // TODO Auto-generated method stub
         getModelActions().variableMapProperty().put(name, value);
         return value;
     }

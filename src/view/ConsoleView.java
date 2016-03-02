@@ -1,41 +1,44 @@
 package view;
 
-import javafx.scene.Node;
+import controller.ConsoleController;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import model.IBasicModel;
 
 /**
  * Created by Tim on 22/02/16.
  */
-public class UIConsoleView extends UIView {
+public class ConsoleView extends BaseUIView {
 
-
-	public static final int DEFAULT_WIDTH = 400;
+	public static final int DEFAULT_WIDTH = 500;
 	public static final int DEFAULT_HEIGHT = 100;
 
-	private int width;
-	private int height;
-	private Node uiNode;
+	private Pane uiPane;
 	private TextArea commandField;
 	private UIManager uiManager;
+	private ConsoleController consoleController;
 
 
-	public UIConsoleView(UIManager manager) {
-		width = DEFAULT_WIDTH;
-		height = DEFAULT_HEIGHT;
+	public ConsoleView(UIManager manager, IBasicModel model) {
+		super(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
-		uiNode = new Pane();
+		uiPane = new Pane();
+		this.setNode(uiPane);
 		commandField = new TextArea();
+		commandField.setPrefSize(getWidth(), getHeight());
 		uiManager = manager;
 
-		uiNode.setStyle("-fx-background-color: red;");
-		((Pane) uiNode).setPrefSize(width, height);
-		((Pane) uiNode).getChildren().add(commandField);
+		uiPane.setPrefSize(getWidth(), getHeight());
+
+		uiPane.getChildren().add(commandField);
 		commandField.setOnKeyPressed(event -> {
 			if (event.getCode().equals(KeyCode.ENTER)) {
 				if(!event.isShiftDown()){
-					uiManager.debugPostNewCommand(commandField.getText());
+					consoleController.executeCommand(commandField.getText(),
+						model.languageOptionsProperty()
+								.get(model.getActiveLanguageIndex()
+								.get()));
 					commandField.clear();
 					commandField.setEditable(false);
 				} else {
@@ -50,20 +53,7 @@ public class UIConsoleView extends UIView {
 			commandField.setEditable(true);
 		});
 
-	}
+		consoleController = new ConsoleController(model, this);
 
-	@Override
-	public int getWidth() {
-		return width;
-	}
-
-	@Override
-	public int getHeight() {
-		return height;
-	}
-
-	@Override
-	public Node getNode() {
-		return uiNode;
 	}
 }

@@ -1,15 +1,15 @@
 package controller;
 
-import java.util.List;
-import java.util.LinkedList;
-
+import controller.commands.AbstractExpressionNode;
 import controller.parser.BasicSLogoInterpreter;
 import controller.parser.ParsingException;
 import controller.parser.SLogoParser;
 import javafx.beans.property.MapProperty;
 import model.IBasicModel;
 import view.UIView;
-import controller.commands.AbstractExpressionNode;
+
+import java.util.LinkedList;
+import java.util.List;
 public class ConsoleController {
 	private SLogoParser myParser;
 	private BasicSLogoInterpreter myInterpreter;
@@ -35,7 +35,7 @@ public class ConsoleController {
 		catch(ParsingException e){
 			myView.showError(e.getMessage());
 		}
-		for(int i=0;i<myNodes.size();i++){
+		for (int i = 0; i < myNodes.size(); i++){
 			try{
 				myNodes.get(i).execute(myInterpreter);
 			}

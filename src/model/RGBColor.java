@@ -47,4 +47,12 @@ public class RGBColor {
         }
         myBlue = blue;
     }
+    
+    @Override
+    public String toString() {
+        String redHex = String.format("%2s", Integer.toHexString(getRed())).replace(" ", "0");
+        String greenHex = String.format("%2s", Integer.toHexString(getGreen())).replace(" ", "0");
+        String blueHex = String.format("%2s", Integer.toHexString(getBlue())).replace(" ", "0");
+        return new StringBuilder().append(redHex).append(greenHex).append(blueHex).toString();
+    }
 }

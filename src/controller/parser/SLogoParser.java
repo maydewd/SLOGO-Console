@@ -1,15 +1,13 @@
 package controller.parser;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 import controller.commands.AbstractExpressionNode;
 import javafx.beans.property.MapProperty;
+
+import java.util.*;
+import java.util.regex.Pattern;
+
+import java.util.*;
+import java.util.regex.Pattern;
 
 
 public class SLogoParser {
@@ -17,6 +15,8 @@ public class SLogoParser {
 
     private ResourceBundle mySyntaxResources =
             ResourceBundle.getBundle("resources.languages.Syntax");
+    private ResourceBundle myErrorResources =
+            ResourceBundle.getBundle("resources.languages.Errors");
     private Map<String, Pattern> mySyntaxPatterns;
 
     public SLogoParser () {
@@ -52,8 +52,8 @@ public class SLogoParser {
         AbstractExpressionNode node = getNodeFactory().createNode(tokens.poll(), currentLanguage, commandsProperty);
         while (!node.areParametersComplete()) {
             if (tokens.isEmpty()) {
-                // TODO add message that additional parameters are expected
-                throw new ParsingException();
+                String errorMessage = myErrorResources.getString("MoreTokensExpected");
+                throw new ParsingException(errorMessage);
             }
             node.addParameter(parseHelper(tokens, currentLanguage, commandsProperty));
         }
