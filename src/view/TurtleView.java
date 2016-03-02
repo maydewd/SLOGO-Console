@@ -21,7 +21,7 @@ public class TurtleView extends UIView implements Observer {
 
 
     private static final int HEADING_OFFSET = 90;
-    public static final int DEFAULT_WIDTH = 400;
+    public static final int DEFAULT_WIDTH = 500;
     public static final int DEFAULT_HEIGHT = 400;
 
     private int width;

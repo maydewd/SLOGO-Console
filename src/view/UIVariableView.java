@@ -2,24 +2,14 @@ package view;
 
 import controller.VariableViewController;
 import javafx.beans.property.MapProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import model.IBasicModel;
 import model.Variable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Tim on 29/02/16.

@@ -57,4 +57,5 @@ public class VariableViewController implements IListDataController{
 	public ObservableList getDataOL() {
 		return variableOL;
 	}
+
 }

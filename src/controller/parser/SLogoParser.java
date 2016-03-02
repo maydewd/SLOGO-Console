@@ -6,6 +6,9 @@ import javafx.beans.property.MapProperty;
 import java.util.*;
 import java.util.regex.Pattern;
 
+import java.util.*;
+import java.util.regex.Pattern;
+
 
 public class SLogoParser {
     private SLogoNodeFactory myNodeFactory;
