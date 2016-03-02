@@ -29,7 +29,6 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
     public double rotateLeft (double degrees) {
         double oldHeading = getModelActions().getTurtleHeading();
         getModelActions().setTurtleHeading(oldHeading - degrees);
-        System.out.println(myModelActions.getTurtleHeading());
         return degrees;
     }
 

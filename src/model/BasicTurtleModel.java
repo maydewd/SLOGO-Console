@@ -16,7 +16,7 @@ public class BasicTurtleModel extends Observable {
     private IntegerProperty myBackgroundColorIndexProperty = new SimpleIntegerProperty(0);
 
     public BasicTurtleModel () {
-        setMyTurtle(new Turtle(0, 0));
+        setMyTurtle(new Turtle(1, 0));
     }
 
     public void moveTurtleForward (double pixels) {
