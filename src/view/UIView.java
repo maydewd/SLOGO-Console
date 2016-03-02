@@ -20,7 +20,7 @@ public abstract class UIView {
 	 */
 	abstract Node getNode();
 	
-	public void Error(String s){
+	public void showError(String s){
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Alert");
             alert.setHeaderText("Error");

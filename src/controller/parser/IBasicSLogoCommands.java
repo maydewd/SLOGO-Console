@@ -3,6 +3,7 @@ package controller.parser;
 import java.util.List;
 import controller.commands.AbstractExpressionNode;
 
+
 public interface IBasicSLogoCommands {
 
     public double moveForward (double pixels);
@@ -44,7 +45,11 @@ public interface IBasicSLogoCommands {
     public double getVariable (String name);
 
     public double setVariable (String name, double value);
-    
-    public double makeFunction (String name, List<AbstractExpressionNode> params, AbstractExpressionNode body);
+
+    public double makeFunction (String name, List<String> params, AbstractExpressionNode body);
+
+    public List<String> getUserMethodParams (String name);
+
+    public AbstractExpressionNode getUserMethodBody (String name);
 
 }

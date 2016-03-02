@@ -6,12 +6,14 @@ import java.net.URISyntaxException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import model.IBasicModel;
 import model.RGBColor;
@@ -41,14 +43,13 @@ public class UISettingsView extends UIView{
 	  //Pen Color Selector
             Menu penColorSettings = new Menu("Pen Color");
             for(int i = 0; i < bm.colorOptionsProperty().getSize(); i++){
-                MenuItem button = new MenuItem("");
-                Rectangle fill = new Rectangle();
-                fill.setScaleX(10);
-                fill.setScaleY(10);
+                CustomMenuItem button = new CustomMenuItem();
+                Circle fill = new Circle();
+                fill.setRadius(getWidth()/50);
                 fill.setFill(Color.rgb(bm.colorOptionsProperty().get(i).getRed(),
                                        bm.colorOptionsProperty().get(i).getGreen(),
                                        bm.colorOptionsProperty().get(i).getBlue()));
-                button.setGraphic(fill);
+                button.setContent(fill);
                 int index = i;
                 button.setOnAction(e -> bm.setActivePenColorIndex(index));
                 penColorSettings.getItems().add(button);
@@ -57,17 +58,18 @@ public class UISettingsView extends UIView{
           //Background Color Selector
             Menu backgroundColorSettings = new Menu("Background Color");
             for(int i = 0; i < bm.colorOptionsProperty().getSize(); i++){
-                MenuItem button = new MenuItem("");
-                Rectangle fill = new Rectangle();
+                CustomMenuItem button = new CustomMenuItem();
+                Circle fill = new Circle();
+                fill.setRadius(getWidth()/50);
                 fill.setFill(Color.rgb(bm.colorOptionsProperty().get(i).getRed(),
                                        bm.colorOptionsProperty().get(i).getGreen(),
                                        bm.colorOptionsProperty().get(i).getBlue()));
-                button.setGraphic(fill);
+                button.setContent(fill);
                 int index = i;
                 button.setOnAction(e -> bm.setActiveBackgroundColorIndex(index));
                 backgroundColorSettings.getItems().add(button);
             }
-	    
+	   
 	    
 		
 		
@@ -105,6 +107,7 @@ public class UISettingsView extends UIView{
 		
 		helpSettings.getItems().addAll(help);
 		settings.getMenus().addAll(languageSettings, penColorSettings, backgroundColorSettings, turtleImageSettings, helpSettings);
+
 		settings.setPrefSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 

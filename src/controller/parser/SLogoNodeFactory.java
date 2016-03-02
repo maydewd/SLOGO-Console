@@ -3,11 +3,13 @@ package controller.parser;
 import java.lang.reflect.Constructor;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import controller.commands.*;
+import javafx.beans.property.MapProperty;
 
 
 public class SLogoNodeFactory {
@@ -25,7 +27,8 @@ public class SLogoNodeFactory {
     }
 
     public AbstractExpressionNode createNode (String token,
-                                              String currentLanguage) throws ParsingException {
+                                              String currentLanguage,
+                                              MapProperty<String, List<String>> commandsProperty) throws ParsingException {
         if (getTypePattern("Constant").matcher(token).find()) {
             return createConstantNode(token);
         }
@@ -33,7 +36,7 @@ public class SLogoNodeFactory {
             return createVariableNode(token);
         }
         else if (getTypePattern("Command").matcher(token).find()) {
-            return createCommandNode(token, currentLanguage);
+            return createCommandNode(token, currentLanguage, commandsProperty);
         }
         else if (getTypePattern("ListStart").matcher(token).find()) {
             return createListStart(token);
@@ -56,7 +59,8 @@ public class SLogoNodeFactory {
     }
 
     private AbstractExpressionNode createCommandNode (String token,
-                                                      String currentLanguage) throws ParsingException {
+                                                      String currentLanguage,
+                                                      MapProperty<String, List<String>> commandsProperty) throws ParsingException {
         String functionName = getTranslatedName(token, currentLanguage);
         if (functionName != NO_MATCH) {
             try {
@@ -71,9 +75,10 @@ public class SLogoNodeFactory {
             }
         }
         else {
-            // return new UserDefinedCommand();
+            int numDefinedParameters =
+                    commandsProperty.containsKey(token) ? commandsProperty.get(token).size() : 0;
+            return new UserCommandNode(token, numDefinedParameters);
         }
-        return null;
     }
 
     private AbstractExpressionNode createListStart (String token) {

@@ -8,6 +8,7 @@ import java.util.Observer;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -94,7 +95,8 @@ public class UITurtleView extends UIView implements Observer{
             }
         }
         if(bm.getTurtleVisibility()){
-            ImageView t = new ImageView(bm.turtleImageOptionsProperty().get(bm.getActiveTurtleImageIndex().getValue()));
+            ImageView t = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(
+            		bm.turtleImageOptionsProperty().get(bm.getActiveTurtleImageIndex().getValue()))));
             t.setX(scaleX(bm.getTurtleCoordinates().getX()));
             t.setY(scaleY(bm.getTurtleCoordinates().getY()));
             t.setRotate(bm.getTurtleHeading());

@@ -9,6 +9,7 @@ import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import controller.commands.AbstractExpressionNode;
+import javafx.beans.property.MapProperty;
 
 
 public class SLogoParser {
@@ -32,25 +33,29 @@ public class SLogoParser {
         setPatternMap(patternMap);
     }
 
-    public List<AbstractExpressionNode> parse (String inputString, String currentLanguage) throws ParsingException {
+    public List<AbstractExpressionNode> parse (String inputString,
+                                               String currentLanguage,
+                                               MapProperty<String, List<String>> commandsProperty) throws ParsingException {
         String commentsRemoved = removeComments(inputString);
         Queue<String> tokens = getTokens(commentsRemoved);
         List<AbstractExpressionNode> allRoots = new LinkedList<AbstractExpressionNode>();
         while (!tokens.isEmpty()) {
-            AbstractExpressionNode root = parseHelper(tokens, currentLanguage);
+            AbstractExpressionNode root = parseHelper(tokens, currentLanguage, commandsProperty);
             allRoots.add(root);
         }
         return allRoots;
     }
 
-    private AbstractExpressionNode parseHelper (Queue<String> tokens, String currentLanguage) throws ParsingException {
-        AbstractExpressionNode node = getNodeFactory().createNode(tokens.poll(), currentLanguage);
+    private AbstractExpressionNode parseHelper (Queue<String> tokens,
+                                                String currentLanguage,
+                                                MapProperty<String, List<String>> commandsProperty) throws ParsingException {
+        AbstractExpressionNode node = getNodeFactory().createNode(tokens.poll(), currentLanguage, commandsProperty);
         while (!node.areParametersComplete()) {
             if (tokens.isEmpty()) {
                 // TODO add message that additional parameters are expected
                 throw new ParsingException();
             }
-            node.addParameter(parseHelper(tokens, currentLanguage));
+            node.addParameter(parseHelper(tokens, currentLanguage, commandsProperty));
         }
         return node;
     }
@@ -72,8 +77,8 @@ public class SLogoParser {
     private void setNodeFactory (SLogoNodeFactory nodeFactory) {
         myNodeFactory = nodeFactory;
     }
-    
-    private ResourceBundle getSyntaxResources() {
+
+    private ResourceBundle getSyntaxResources () {
         return mySyntaxResources;
     }
 
@@ -89,7 +94,7 @@ public class SLogoParser {
      * Testing
      */
     public static void main (String[] args) throws ParsingException {
-        SLogoParser test = new SLogoParser();
-        test.parse("Forward 50", "ENGLISH");
+        // SLogoParser test = new SLogoParser();
+        // test.parse("Forward 50", "ENGLISH");
     }
 }

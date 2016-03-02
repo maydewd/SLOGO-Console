@@ -6,24 +6,21 @@ import controller.parser.IBasicSLogoCommands;
 import controller.parser.ParsingException;
 
 
-public class EqualNode extends SimpleProcedureNode {
+public class NotEqualNode extends SimpleProcedureNode {
 
-    private static final int EQUAL_NUM_PARAMS = 2;
+    private static final int NEQUAL_NUM_PARAMS = 2;
 
-    public EqualNode (String text) {
-        super(text, EQUAL_NUM_PARAMS);
+    public NotEqualNode (String text) {
+        super(text, NEQUAL_NUM_PARAMS);
     }
 
-    /**
-     * Does not short circuit, i.e. all children will be executed
-     */
     @Override
     public double execute (IBasicSLogoCommands commands) throws ParsingException {
         Set<Double> values = new HashSet<>();
         for (AbstractExpressionNode child : getChildren()) {
             values.add(child.execute(commands));
         }
-        return values.size() == 1 ? 1 : 0;
+        return values.size() > 1 ? 1 : 0;
     }
 
 }

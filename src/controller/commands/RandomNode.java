@@ -15,6 +15,11 @@ public class RandomNode extends SimpleProcedureNode {
 
     @Override
     public double execute (IBasicSLogoCommands commands) throws ParsingException {
+        double upperBound = getChildren().get(0).execute(commands);
+        if (upperBound < 0) {
+            String error = String.format(getErrorMessage("InvalidParameterSign"), getText());
+            throw new ParsingException(error);
+        }
         return new Random().nextDouble() * getChildren().get(0).execute(commands);
     }
 

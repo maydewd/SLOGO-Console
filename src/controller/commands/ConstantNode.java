@@ -26,8 +26,8 @@ public class ConstantNode extends AbstractExpressionNode {
 
     @Override
     public void addParameter (AbstractExpressionNode node) throws ParsingException {
-        // TODO add message
-        throw new ParsingException();
+        String error = String.format(getErrorMessage("NoChildAllowed"), SyntaxType.CONSTANT);
+        throw new ParsingException(error);
     }
 
     public double getValue () {
