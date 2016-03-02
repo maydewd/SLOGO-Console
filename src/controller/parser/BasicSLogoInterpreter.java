@@ -28,7 +28,8 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
     @Override
     public double rotateLeft (double degrees) {
         double oldHeading = getModelActions().getTurtleHeading();
-        getModelActions().setTurtleHeading(oldHeading + degrees);
+        getModelActions().setTurtleHeading(oldHeading - degrees);
+        System.out.println(myModelActions.getTurtleHeading());
         return degrees;
     }
 
@@ -51,7 +52,7 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
         double oldHeading = getModelActions().getTurtleHeading();
         double diffX = x - oldCoords.getX();
         double diffY = y - oldCoords.getY();
-        double degrees = Math.atan(diffY / diffX);
+        double degrees = Math.toDegrees(Math.atan(diffY / diffX));
         if (diffY > 0) {
             degrees = 180 * degrees / (Math.PI);
         }
