@@ -68,7 +68,7 @@ public class TurtleView extends UIView implements Observer {
     }
 
     private double scaleY (double y) {
-        return y + getHeight() / 2;
+        return -y + getHeight() / 2;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class TurtleView extends UIView implements Observer {
                                                                                                                   .getValue()))));
             myTurtle.setX(scaleX(bm.getTurtleCoordinates().getX()));
             myTurtle.setY(scaleY(bm.getTurtleCoordinates().getY()));
-            myTurtle.setRotate(bm.getTurtleHeading() + HEADING_OFFSET);
+            myTurtle.setRotate(- bm.getTurtleHeading() + HEADING_OFFSET);
             canvas.getChildren().add(myTurtle);
         }
     }
