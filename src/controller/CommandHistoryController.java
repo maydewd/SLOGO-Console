@@ -33,11 +33,6 @@ public class CommandHistoryController implements IListDataController{
 	}
 
 	@Override
-	public ObservableList getDataOL() {
-		return commandHistoryProperty;
-	}
-
-	@Override
 	public void updateOLData() {
 
 	}

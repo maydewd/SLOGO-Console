@@ -1,5 +1,6 @@
 package view;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -9,9 +10,9 @@ import javafx.scene.control.Alert.AlertType;
  */
 public abstract class UIView {
 
-	abstract int getWidth();
+	public abstract int getWidth();
 
-	abstract int getHeight();
+	public abstract int getHeight();
 
 	/**
 	 * This method returns the Node that contains all of UI for this View
@@ -19,7 +20,7 @@ public abstract class UIView {
 	 * @return view Node
 	 */
 	abstract Node getNode();
-	
+
 	public void showError(String s){
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Alert");
@@ -27,4 +28,5 @@ public abstract class UIView {
             alert.setContentText(s);
             alert.showAndWait();
     }
+
 }

@@ -9,7 +9,5 @@ public interface IListDataController {
 
 	void initDataIntoOL();
 
-	ObservableList getDataOL();
-
 	void updateOLData();
 }

@@ -1,5 +1,6 @@
 package view;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
 /**
@@ -42,4 +43,5 @@ public abstract class BaseUIView extends UIView {
 	public Node getNode() {
 		return myNode;
 	}
+
 }

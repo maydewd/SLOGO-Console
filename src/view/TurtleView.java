@@ -1,11 +1,6 @@
 package view;
 
 
-import java.util.Observer;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Observable;
-import java.util.Observer;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,10 +11,10 @@ import model.IBasicModel;
 import model.LineInfo;
 import model.RGBColor;
 
-
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 /**
  * Created by Tim on 22/02/16.
@@ -115,9 +110,9 @@ public class TurtleView extends UIView implements Observer {
         canvas.getChildren().remove(myTurtle);
         if (bm.getTurtleVisibility()) {
             myTurtle = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(
-                                                                                                  bm.turtleImageOptionsProperty()
-                                                                                                          .get(bm.getActiveTurtleImageIndex()
-                                                                                                                  .getValue()))));
+                  bm.turtleImageOptionsProperty()
+                          .get(bm.getActiveTurtleImageIndex()
+                                  .getValue()))));
             myTurtle.setX(scaleX(bm.getTurtleCoordinates().getX()));
             myTurtle.setY(scaleY(bm.getTurtleCoordinates().getY()));
             myTurtle.setRotate(- bm.getTurtleHeading() + HEADING_OFFSET);
