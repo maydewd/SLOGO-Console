@@ -46,7 +46,6 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
     @Override
     public double faceTowards (double x, double y) {
-        // TODO Auto-generated method stub
         Point oldCoords = getModelActions().getTurtleCoordinates();
         double oldHeading = getModelActions().getTurtleHeading();
         double diffX = x - oldCoords.getX();
