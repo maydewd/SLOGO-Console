@@ -20,7 +20,7 @@ import model.LineInfo;
 /**
  * Created by Tim on 22/02/16.
  */
-public class UITurtleView implements UIView, Observer{
+public class UITurtleView extends UIView implements Observer{
 
     public static final int DEFAULT_WIDTH = 400;
     public static final int DEFAULT_HEIGHT = 400;
@@ -69,7 +69,7 @@ public class UITurtleView implements UIView, Observer{
     }
 
     @Override
-    public void update (Observable o, Object arg) {
+    public void update(Observable o, Object arg) {
         if(bm.getLines().isEmpty()){
             canvas.getChildren().clear();
         }

@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 /**
  * Created by Tim on 22/02/16.
  */
-public class UIConsoleView implements UIView {
+public class UIConsoleView extends UIView {
 
 
 	public static final int DEFAULT_WIDTH = 400;
