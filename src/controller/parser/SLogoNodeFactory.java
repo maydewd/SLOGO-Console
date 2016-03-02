@@ -31,19 +31,19 @@ public class SLogoNodeFactory {
     public AbstractExpressionNode createNode (String token,
                                               String currentLanguage,
                                               MapProperty<String, List<String>> commandsProperty) throws ParsingException {
-        if (getTypePattern("Constant").matcher(token).find()) {
+        if (getTypePattern("Constant").matcher(token).matches()) {
             return createConstantNode(token);
         }
-        else if (getTypePattern("Variable").matcher(token).find()) {
+        else if (getTypePattern("Variable").matcher(token).matches()) {
             return createVariableNode(token);
         }
-        else if (getTypePattern("Command").matcher(token).find()) {
+        else if (getTypePattern("Command").matcher(token).matches()) {
             return createCommandNode(token, currentLanguage, commandsProperty);
         }
-        else if (getTypePattern("ListStart").matcher(token).find()) {
+        else if (getTypePattern("ListStart").matcher(token).matches()) {
             return createListStart(token);
         }
-        else if (getTypePattern("ListEnd").matcher(token).find()) {
+        else if (getTypePattern("ListEnd").matcher(token).matches()) {
             return createListEnd(token);
         }
         else {
