@@ -4,11 +4,11 @@ import controller.parser.IBasicSLogoCommands;
 import controller.parser.ParsingException;
 
 
-public class TowardsNode extends SimpleProcedureNode {
+public class SetTowardsNode extends SimpleProcedureNode {
 
     private static final int TOWARDS_NUM_PARAMS = 2;
 
-    public TowardsNode (String text) {
+    public SetTowardsNode (String text) {
         super(text, TOWARDS_NUM_PARAMS);
     }
 
