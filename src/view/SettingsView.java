@@ -13,87 +13,32 @@ import model.IBasicModel;
 
 
 public class SettingsView extends UIView {
-	public static final int DEFAULT_WIDTH = 500;
+    public static final int DEFAULT_WIDTH = 500;
     public static final int DEFAULT_HEIGHT = 25;
-    public static final String HELP_PAGE = "https://www.cs.duke.edu/courses/compsci308/spring16/assign/03_slogo/commands.php";
+    
     
     private Node uiNode;
-    private IBasicModel bm;
-    private HostServices myHostServices;
+    private IBasicModel basicModel;
 
 	public SettingsView(IBasicModel b, HostServices hostServices) {
 
-	    bm = b;
+	    basicModel = b;
 	    MenuBar settings = new MenuBar();
 	    uiNode = settings;
-	    myHostServices = hostServices;
 	    
-	    //Language Selector
-	    Menu languageSettings = new Menu("Language");
-	    for(int i = 0; i < bm.languageOptionsProperty().getSize(); i++){
-	        MenuItem button = new MenuItem(bm.languageOptionsProperty().get(i));
-	        int index = i;
-	        button.setOnAction(e -> bm.setActiveLanguageIndex(index));
-	        languageSettings.getItems().add(button);
-	    }
-	    
-	  //Pen Color Selector
-            Menu penColorSettings = new Menu("Pen Color");
-            for(int i = 0; i < bm.colorOptionsProperty().getSize(); i++){
-                CustomMenuItem button = new CustomMenuItem();
-                Circle fill = new Circle();
-                fill.setRadius(getWidth()/50);
-                fill.setFill(Color.rgb(bm.colorOptionsProperty().get(i).getRed(),
-                                       bm.colorOptionsProperty().get(i).getGreen(),
-                                       bm.colorOptionsProperty().get(i).getBlue()));
-                button.setContent(fill);
-                int index = i;
-                button.setOnAction(e -> bm.setActivePenColorIndex(index));
-                penColorSettings.getItems().add(button);
-            }
-            
-          //Background Color Selector
-            Menu backgroundColorSettings = new Menu("Background Color");
-            for(int i = 0; i < bm.colorOptionsProperty().getSize(); i++){
-                CustomMenuItem button = new CustomMenuItem();
-                Circle fill = new Circle();
-                fill.setRadius(getWidth()/50);
-                fill.setFill(Color.rgb(bm.colorOptionsProperty().get(i).getRed(),
-                                       bm.colorOptionsProperty().get(i).getGreen(),
-                                       bm.colorOptionsProperty().get(i).getBlue()));
-                button.setContent(fill);
-                int index = i;
-                button.setOnAction(e -> bm.setActiveBackgroundColorIndex(index));
-                backgroundColorSettings.getItems().add(button);
-            }
-	   
-	    
-	
+	    Selector lSelector = new LanguageSelector(basicModel);
+	    Selector pColorSelector = new PenColorSelector(basicModel);
+	    Selector bColorSelector = new BackgroundColorSelector(basicModel);
+	    Selector tSelector = new TurtleSelector(basicModel);
+	    Selector hSelector = new HelpSelector(hostServices);
 		
-		//Turtle Menu
-		Menu turtleImageSettings = new Menu("Turtle Images");
-		for(int i = 0; i < bm.turtleImageOptionsProperty().getSize(); i++){
-	                MenuItem button = new MenuItem("");
-	                button.setGraphic(new ImageView(bm.turtleImageOptionsProperty().get(i)));
-	                int index = i;
-	                button.setOnAction(e -> bm.setActiveTurtleImageIndex(index));
-	                turtleImageSettings.getItems().add(button);
-	        }
-		
+	    settings.getMenus().addAll(lSelector.getMenu(), 
+		                       pColorSelector.getMenu(), 
+		                       bColorSelector.getMenu(), 
+		                       tSelector.getMenu(), 
+		                       hSelector.getMenu());
 
-		//Help Button
-		Menu helpSettings = new Menu("Help");
-
-		MenuItem help = new MenuItem("Get Help");
-		help.setOnAction(e -> myHostServices.showDocument(HELP_PAGE));
-		
-		//Color Selectors
-		
-		
-		helpSettings.getItems().addAll(help);
-		settings.getMenus().addAll(languageSettings, penColorSettings, backgroundColorSettings, turtleImageSettings, helpSettings);
-
-		settings.setPrefSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	    settings.setPrefSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 
 	@Override
