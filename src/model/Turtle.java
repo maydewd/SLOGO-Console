@@ -57,7 +57,7 @@ public class Turtle {
     	Point newLoc = new Point(newX, newY);
     	
     	
-    	ArrayList<LineInfo> myLines = new ArrayList<LineInfo>();
+    	ArrayList<LineInfo> myLines = new ArrayList<>();
     	myLines.add(new LineInfo(myLocation, newLoc, isPenDown, myPenColorIndexProperty.get()));
     	
         setLocation(newLoc);

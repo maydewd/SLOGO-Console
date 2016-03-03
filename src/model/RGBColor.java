@@ -1,8 +1,8 @@
 package model;
 
 public class RGBColor {
-
-    private final static String INVALID_RGB_VALUE = "";
+	
+	private static final int MAX_SATURATION = 255;
 
     private int myRed;
     private int myGreen;
@@ -19,7 +19,7 @@ public class RGBColor {
     }
 
     private void setRed (int red) {
-        if (red > 255 || red < 0) {
+        if (red > MAX_SATURATION || red < 0) {
             // TODO add message
             throw new IllegalArgumentException();
         }
@@ -31,7 +31,7 @@ public class RGBColor {
     }
 
     private void setGreen (int green) {
-        if (green > 255 || green < 0) {
+        if (green > MAX_SATURATION || green < 0) {
             // TODO add message
             throw new IllegalArgumentException();
         }
@@ -43,7 +43,7 @@ public class RGBColor {
     }
 
     private void setBlue (int blue) {
-        if (blue > 255 || blue < 0) {
+        if (blue > MAX_SATURATION || blue < 0) {
             // TODO add message
             throw new IllegalArgumentException();
         }
