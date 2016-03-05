@@ -26,7 +26,7 @@ public abstract class UIListView extends BaseUIView {
 
     private ObservableList<String> myObservableList;
     public UIListView (IBasicModel model, String title, ObservableList<String> listToWatch) {
-        super(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        super(DEFAULT_WIDTH, DEFAULT_HEIGHT, model);
         this.TITLE_STRING = title;
         this.myObservableList = listToWatch;
 

@@ -1,25 +1,16 @@
 package view;
 
-import controller.IListDataController;
-import controller.UserCommandController;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.property.MapProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TitledPane;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import model.IBasicModel;
-import model.UserCommand;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -36,7 +27,7 @@ public class UserCommandView extends BaseUIView {
     private IBasicModel myModel;
 
     public UserCommandView (IBasicModel model) {
-        super(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        super(DEFAULT_WIDTH, DEFAULT_HEIGHT, model);
         myModel = model;
         initialize();
     }

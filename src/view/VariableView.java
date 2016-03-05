@@ -24,7 +24,7 @@ public class VariableView extends BaseUIView {
     private IBasicModel myModel;
 
     public VariableView (IBasicModel model) {
-        super(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        super(DEFAULT_WIDTH, DEFAULT_HEIGHT, model);
         myModel = model;
         initialize();
     }
