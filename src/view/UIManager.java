@@ -3,6 +3,8 @@ package view;
 import javafx.application.HostServices;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
+import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -28,7 +30,7 @@ public class UIManager {
     private VariableView variableView;
 
     private Pane myMainPaneNamedDane;
-    private Pane sidePane;
+    private Accordion sidePane;
     private Pane paneContainer;
 
     private Stage stage;
@@ -50,7 +52,7 @@ public class UIManager {
         settingsMenu = new SettingsView(b, hostServices);
         variableView = new VariableView(myModel);
 
-        commandHistoryView = new CommandHistoryView(myModel, "Command History", myModel.commandHistoryProperty());
+        commandHistoryView = new CommandHistoryView(myModel);
         userCommandListView = new UserCommandView(myModel);
 
         // Initialize Pane
@@ -60,10 +62,11 @@ public class UIManager {
 		                                         turtleView.getNode(),
 		                                         consoleView.getNode());
 
-        sidePane = new VBox(DEFAULT_SPACING);
-        sidePane.getChildren().addAll(  variableView.getNode(),
-                                        commandHistoryView.getNode(),
-                                        userCommandListView.getNode());
+        sidePane = new Accordion();
+        sidePane.getPanes().addAll(  new TitledPane("Variables", variableView.getNode()),
+                                     new TitledPane("Command History", commandHistoryView.getNode()),
+                                        new TitledPane("User Commands", userCommandListView.getNode()));
+        sidePane.setExpandedPane(sidePane.getPanes().get(0));
         paneContainer.getChildren().addAll(myMainPaneNamedDane, sidePane);
 
         group.getChildren().add(paneContainer);

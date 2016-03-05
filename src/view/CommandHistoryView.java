@@ -1,6 +1,5 @@
 package view;
 
-import javafx.collections.ObservableList;
 import model.IBasicModel;
 
 /**
@@ -8,7 +7,7 @@ import model.IBasicModel;
  */
 public class CommandHistoryView extends UIListView {
 
-	public CommandHistoryView(IBasicModel model, String title, ObservableList listToWatch) {
-		super(model, title, listToWatch);
+	public CommandHistoryView(IBasicModel model) {
+		super(model, model.commandHistoryProperty());
 	}
 }
