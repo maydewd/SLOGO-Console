@@ -27,6 +27,10 @@ public class TurtleView extends BaseUIView implements Observer {
     private static final int HEADING_OFFSET = 90;
     public static final int DEFAULT_WIDTH = 500;
     public static final int DEFAULT_HEIGHT = 407;
+    
+    public static final int TURTLE_HEIGHT = 25;
+    public static final int TURTLE_WIDTH = 25;
+    
 
     private Pane canvas;
     private Set<LineInfo> displayedLines = new HashSet<>();
@@ -51,6 +55,14 @@ public class TurtleView extends BaseUIView implements Observer {
      */
     private double scaleX (double d) {
         return d + getWidth() / 2;
+    }
+    
+    private double scaleTurtleX(double d){
+        return d - myTurtle.getFitWidth()/2;
+    }
+
+    private double scaleTurtleY(double d){
+        return d + myTurtle.getFitHeight()/2;
     }
 
     private void initializeCanvas () {
@@ -101,8 +113,11 @@ public class TurtleView extends BaseUIView implements Observer {
                   getModel().turtleImageOptionsProperty()
                           .get(getModel().getActiveTurtleImageIndex()
                                   .getValue()))));
-            myTurtle.setX(scaleX(getModel().getTurtleCoordinates().getX()));
-            myTurtle.setY(scaleY(getModel().getTurtleCoordinates().getY()));
+
+            myTurtle.setFitHeight(TURTLE_HEIGHT);
+            myTurtle.setFitWidth(TURTLE_WIDTH);
+            myTurtle.setX(scaleX(scaleTurtleX(getModel().getTurtleCoordinates().getX())));
+            myTurtle.setY(scaleY(scaleTurtleY(getModel().getTurtleCoordinates().getY())));
             myTurtle.setRotate(- getModel().getTurtleHeading() + HEADING_OFFSET);
             canvas.getChildren().add(myTurtle);
         }

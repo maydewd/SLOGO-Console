@@ -2,10 +2,6 @@ package controller.parser;
 
 import controller.commands.AbstractExpressionNode;
 import javafx.beans.property.MapProperty;
-
-import java.util.*;
-import java.util.regex.Pattern;
-
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -27,7 +23,7 @@ public class SLogoParser {
     private void initializePatternMap () {
         Map<String, Pattern> patternMap = new LinkedHashMap<String, Pattern>();
         for (String key : getSyntaxResources().keySet()) {
-            patternMap.put(key, Pattern.compile(getSyntaxResources().getString(key),
+            patternMap.put(key, Pattern.compile(getSyntaxResources().getString(key).trim(),
                                                 Pattern.CASE_INSENSITIVE));
         }
         setPatternMap(patternMap);
@@ -36,8 +32,7 @@ public class SLogoParser {
     public List<AbstractExpressionNode> parse (String inputString,
                                                String currentLanguage,
                                                MapProperty<String, List<String>> commandsProperty) throws ParsingException {
-        String commentsRemoved = removeComments(inputString);
-        Queue<String> tokens = getTokens(commentsRemoved);
+        Queue<String> tokens = getValidTokens(inputString);
         List<AbstractExpressionNode> allRoots = new LinkedList<AbstractExpressionNode>();
         while (!tokens.isEmpty()) {
             AbstractExpressionNode root = parseHelper(tokens, currentLanguage, commandsProperty);
@@ -49,7 +44,8 @@ public class SLogoParser {
     private AbstractExpressionNode parseHelper (Queue<String> tokens,
                                                 String currentLanguage,
                                                 MapProperty<String, List<String>> commandsProperty) throws ParsingException {
-        AbstractExpressionNode node = getNodeFactory().createNode(tokens.poll(), currentLanguage, commandsProperty);
+        AbstractExpressionNode node =
+                getNodeFactory().createNode(tokens.poll(), currentLanguage, commandsProperty);
         while (!node.areParametersComplete()) {
             if (tokens.isEmpty()) {
                 String errorMessage = myErrorResources.getString("MoreTokensExpected");
@@ -60,14 +56,16 @@ public class SLogoParser {
         return node;
     }
 
-    private Queue<String> getTokens (String inputString) {
-        return new LinkedList<String>(Arrays.asList(inputString.split("\\s+")));
-    }
-
-    private String removeComments (String inputString) {
+    private Queue<String> getValidTokens (String inputString) {
+        Queue<String> validTokens = new LinkedList<>();
         Pattern commentPattern = getSyntaxPatterns().get("Comment");
-        String commentsRemoved = commentPattern.matcher(inputString).replaceAll("");
-        return commentsRemoved;
+        String[] lines = inputString.split("\\r?\\n");
+        for (String line : lines) {
+            if (line.trim().length() > 0 && !commentPattern.matcher(line).matches()) {
+                validTokens.addAll(Arrays.asList(line.split("\\s+")));
+            }
+        }
+        return validTokens;
     }
 
     private SLogoNodeFactory getNodeFactory () {
