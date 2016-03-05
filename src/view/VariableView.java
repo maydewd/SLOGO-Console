@@ -1,64 +1,67 @@
 package view;
 
-import controller.VariableViewController;
+import java.util.Map.Entry;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import model.IBasicModel;
-import model.Variable;
+
 
 /**
  * Created by Tim on 29/02/16.
  */
 public class VariableView extends BaseListView {
 
-	public static final int DEFAULT_HEIGHT = 100;
-	public static final int DEFAULT_WIDTH = 200;
+    public static final int DEFAULT_HEIGHT = 100;
+    public static final int DEFAULT_WIDTH = 200;
 
+    private TableView<Entry<String, Double>> tableView;
+    private IBasicModel myModel;
 
-	private TableView<Variable> tableView;
-	private IBasicModel myModel;
-	private VariableViewController myController;
+    public VariableView (IBasicModel model) {
+        super(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        myModel = model;
+        initialize();
+    }
 
-	private ObservableList<Variable> variableOL;
+    private void initialize () {
+        ObservableList<Entry<String, Double>> items =
+                FXCollections.observableArrayList(myModel.variableMapProperty().entrySet());
+        // can't use lambda here since addListener uses overloading.
+        myModel.variableMapProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated (Observable observable) {
+                items.clear();
+                items.addAll(myModel.variableMapProperty().entrySet());
+            }
+        });
 
+        tableView = new TableView<Entry<String, Double>>(items);
+        tableView.setPrefSize(getWidth(), getHeight());
 
-	public VariableView(IBasicModel model){
-		super(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		myModel = model;
-		initialize();
-	}
+        TableColumn<Entry<String, Double>, String> variableName = new TableColumn<>("Name");
+        variableName
+                .setCellValueFactory(entry -> new SimpleStringProperty(entry.getValue().getKey()));
 
-	private void initialize(){
-		myController = new VariableViewController(this, myModel);
+        TableColumn<Entry<String, Double>, Double> variableValue = new TableColumn<>("Value");
+        variableValue.setCellValueFactory(entry -> new SimpleObjectProperty<Double>(entry.getValue()
+                .getValue()));
 
-		tableView = new TableView();
-		tableView.setPrefSize(getWidth(), getHeight());
+        tableView.getColumns().add(variableName);
+        tableView.getColumns().add(variableValue);
 
-		variableOL = FXCollections.observableArrayList();
+        this.setNode(tableView);
+    }
 
-		TableColumn<Variable, String> variableName = new TableColumn<>("Name");
-		TableColumn<Variable, Double> variableValue = new TableColumn<>("Value");
+    @Override
+    public void setOLData (ObservableList newList) {
+        // TODO needs to be removed in hierarchy (leaving for timothy)
 
-		variableName.setCellValueFactory(new PropertyValueFactory<>("name"));
-		variableValue.setCellValueFactory(new PropertyValueFactory<>("value"));
-
-		tableView.getColumns().addAll(variableName, variableValue);
-		tableView.setItems(variableOL);
-
-
-		this.setNode(tableView);
-	}
-
-	@Override
-	public void setOLData(ObservableList newList){
-		variableOL.clear();
-		variableOL.addAll(newList);
-		tableView.setItems(variableOL);
-	}
-
-
+    }
 
 }
