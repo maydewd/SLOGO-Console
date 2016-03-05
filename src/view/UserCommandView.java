@@ -5,11 +5,8 @@ import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import model.IBasicModel;
 import java.util.List;
 import java.util.Map.Entry;
@@ -19,15 +16,15 @@ import java.util.Map.Entry;
  * Created by Tim on 01/03/16.
  */
 public class UserCommandView extends BaseUIView {
+    
+    public static final int DEFAULT_HEIGHT = 200;
+    public static final int DEFAULT_WIDTH = 200;
 
-    public final static int DEFAULT_WIDTH = 200;
-    public final static int DEFAULT_HEIGHT = 200;
-
-    private TableView<Entry<String, List<String>>> tableView;
+    private TableView<Entry<String, List<String>>> tableView = new TableView<Entry<String, List<String>>>();
     private IBasicModel myModel;
 
     public UserCommandView (IBasicModel model) {
-        super(DEFAULT_WIDTH, DEFAULT_HEIGHT, model);
+        super(DEFAULT_HEIGHT, DEFAULT_WIDTH, model);
         myModel = model;
         initialize();
     }
@@ -37,10 +34,7 @@ public class UserCommandView extends BaseUIView {
                 FXCollections.observableArrayList(myModel.definedCommandsProperty().entrySet());
         myModel.definedCommandsProperty().addListener(createInvalidationListener(items));
 
-        Label paneTitle = new Label("User-Defined Commands");
-        paneTitle.setFont(new Font(TITLE_SIZE));
-
-        tableView = new TableView<Entry<String, List<String>>>(items);
+        tableView.setItems(items);
         tableView.setPrefSize(getWidth(), getHeight());
 
         TableColumn<Entry<String, List<String>>, String> command = new TableColumn<>("Name");
@@ -53,8 +47,8 @@ public class UserCommandView extends BaseUIView {
 
         tableView.getColumns().add(command);
         tableView.getColumns().add(parameters);
-
-        setNode(new Pane(tableView));
+        
+        setNode(tableView);
     }
 
     private InvalidationListener createInvalidationListener (ObservableList<Entry<String, List<String>>> items) {
@@ -66,5 +60,6 @@ public class UserCommandView extends BaseUIView {
             }
         };
     }
+
 
 }

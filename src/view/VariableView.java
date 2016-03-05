@@ -16,15 +16,15 @@ import model.IBasicModel;
  * Created by Tim on 29/02/16.
  */
 public class VariableView extends BaseUIView {
-
-    public static final int DEFAULT_HEIGHT = 100;
+    
+    public static final int DEFAULT_HEIGHT = 200;
     public static final int DEFAULT_WIDTH = 200;
 
-    private TableView<Entry<String, Double>> tableView;
+    private TableView<Entry<String, Double>> tableView = new TableView<Entry<String, Double>>();
     private IBasicModel myModel;
 
     public VariableView (IBasicModel model) {
-        super(DEFAULT_WIDTH, DEFAULT_HEIGHT, model);
+        super(DEFAULT_HEIGHT, DEFAULT_WIDTH, model);
         myModel = model;
         initialize();
     }
@@ -35,7 +35,7 @@ public class VariableView extends BaseUIView {
         // can't use lambda here since addListener uses overloading.
         myModel.variableMapProperty().addListener(createInvalidationListener(items));
 
-        tableView = new TableView<Entry<String, Double>>(items);
+        tableView.setItems(items);
         tableView.setPrefSize(getWidth(), getHeight());
 
         TableColumn<Entry<String, Double>, String> varName = new TableColumn<>("Name");
@@ -47,7 +47,7 @@ public class VariableView extends BaseUIView {
 
         tableView.getColumns().add(varName);
         tableView.getColumns().add(varValue);
-
+        
         setNode(tableView);
     }
 
