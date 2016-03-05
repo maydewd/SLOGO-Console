@@ -128,7 +128,7 @@ public class TurtleView extends BaseUIView implements Observer {
     private void updateTurtleCoordinates(){
         Point turtlePos = getModel().getTurtleCoordinates();
         String turtlePosString = "(" + turtlePos.getX() + ", " + turtlePos.getY() + ")";
-        System.out.println(turtlePosString);
+//        System.out.println(turtlePosString);
         this.turtleCoordinates.setText(turtlePosString);
 
     }
