@@ -1,15 +1,12 @@
 package view;
 
-import controller.CommandHistoryController;
 import controller.IListDataController;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.util.Callback;
 import model.IBasicModel;
 
 
@@ -28,12 +25,8 @@ public abstract class UIListView extends BaseUIView {
     private ListView<String> listView;
 
     private ObservableList<String> myObservableList;
-    private IBasicModel myModel;
-    private IListDataController controller;
-
     public UIListView (IBasicModel model, String title, ObservableList<String> listToWatch) {
         super(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        myModel = model;
         this.TITLE_STRING = title;
         this.myObservableList = listToWatch;
 
@@ -46,7 +39,6 @@ public abstract class UIListView extends BaseUIView {
         listLabel.setFont(new Font(TITLE_SIZE));
         listView = new ListView<>();
         listView.setPrefSize(getWidth(), getHeight());
-        // controller = new CommandHistoryController(this, myModel);
         listView.setItems(myObservableList);
         uiPane.getChildren().addAll(listLabel, listView);
         setNode(uiPane);
