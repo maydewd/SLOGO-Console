@@ -1,20 +1,19 @@
 package controller;
 
 import javafx.beans.property.ListProperty;
-import javafx.collections.ObservableList;
 import model.IBasicModel;
-import view.UIView;
+import view.BaseUIView;
 
 /**
  * Created by Tim on 01/03/16.
  */
 public class CommandHistoryController implements IListDataController{
 
-	private UIView myView;
+	private BaseUIView myView;
 	private IBasicModel myModel;
 	ListProperty<String> commandHistoryProperty;
 
-	public CommandHistoryController(UIView view, IBasicModel model){
+	public CommandHistoryController(BaseUIView view, IBasicModel model){
 		myView = view;
 		myModel = model;
 

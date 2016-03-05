@@ -12,25 +12,24 @@ import javafx.scene.shape.Circle;
 import model.IBasicModel;
 
 
-public class SettingsView extends UIView {
-    public static final int DEFAULT_WIDTH = 500;
+public class SettingsView extends BaseUIView{
+	public static final int DEFAULT_WIDTH = 500;
     public static final int DEFAULT_HEIGHT = 25;
-    
-    
-    private Node uiNode;
-    private IBasicModel basicModel;
+	
+    private HostServices myHostServices;
 
 	public SettingsView(IBasicModel b, HostServices hostServices) {
+		super(DEFAULT_WIDTH, DEFAULT_HEIGHT, b);
+		this.myHostServices = hostServices;
 
-	    basicModel = b;
 	    MenuBar settings = new MenuBar();
-	    uiNode = settings;
+	    setNode(settings);
 	    
-	    Selector lSelector = new LanguageSelector(basicModel);
-	    Selector pColorSelector = new PenColorSelector(basicModel);
-	    Selector bColorSelector = new BackgroundColorSelector(basicModel);
-	    Selector tSelector = new TurtleSelector(basicModel);
-	    Selector hSelector = new HelpSelector(hostServices);
+	    Selector lSelector = new LanguageSelector(getModel());
+	    Selector pColorSelector = new PenColorSelector(getModel());
+	    Selector bColorSelector = new BackgroundColorSelector(getModel());
+	    Selector tSelector = new TurtleSelector(getModel());
+	    Selector hSelector = new HelpSelector(myHostServices);
 		
 	    settings.getMenus().addAll(lSelector.getMenu(), 
 		                       pColorSelector.getMenu(), 
@@ -39,21 +38,6 @@ public class SettingsView extends UIView {
 		                       hSelector.getMenu());
 
 	    settings.setPrefSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-	}
-
-	@Override
-	public int getWidth() {
-		return DEFAULT_WIDTH;
-	}
-
-	@Override
-	public int getHeight() {
-		return DEFAULT_HEIGHT;
-	}
-
-	@Override
-	public Node getNode() {
-		return uiNode;
 	}
 
 }

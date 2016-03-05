@@ -28,12 +28,9 @@ public abstract class UIListView extends BaseUIView {
     private ListView<String> listView;
 
     private ObservableList<String> myObservableList;
-    private IBasicModel myModel;
-    private IListDataController controller;
 
     public UIListView (IBasicModel model, String title, ObservableList<String> listToWatch) {
-        super(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        myModel = model;
+        super(DEFAULT_WIDTH, DEFAULT_HEIGHT, model);
         this.TITLE_STRING = title;
         this.myObservableList = listToWatch;
 
@@ -46,7 +43,6 @@ public abstract class UIListView extends BaseUIView {
         listLabel.setFont(new Font(TITLE_SIZE));
         listView = new ListView<>();
         listView.setPrefSize(getWidth(), getHeight());
-        // controller = new CommandHistoryController(this, myModel);
         listView.setItems(myObservableList);
         uiPane.getChildren().addAll(listLabel, listView);
         setNode(uiPane);

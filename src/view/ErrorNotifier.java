@@ -5,7 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 
-public class ErrorNotifier extends UIView {
+public class ErrorNotifier {
 
 	public ErrorNotifier() {
 	}
@@ -44,21 +44,6 @@ public class ErrorNotifier extends UIView {
 		alert.setHeaderText("Error");
 		alert.setContentText("There is an issue with your use of that turtle.");
 		alert.showAndWait();
-	}
-
-	@Override
-	public int getWidth() {
-		return 0;
-	}
-
-	@Override
-	public int getHeight() {
-		return 0;
-	}
-
-	@Override
-	public Node getNode() {
-		return null;
 	}
 
 }

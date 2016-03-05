@@ -6,7 +6,7 @@ import controller.parser.ParsingException;
 import controller.parser.SLogoParser;
 import javafx.beans.property.MapProperty;
 import model.IBasicModel;
-import view.UIView;
+import view.BaseUIView;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,13 +14,13 @@ public class ConsoleController {
 	private SLogoParser myParser;
 	private BasicSLogoInterpreter myInterpreter;
 	private IBasicModel myModel;
-	private UIView myView;
+	private BaseUIView myView;
 	
-	public ConsoleController(IBasicModel model, UIView view) {
+	public ConsoleController(IBasicModel model, BaseUIView view) {
 		myParser = new SLogoParser();
 		myModel = model;
 		myInterpreter = new BasicSLogoInterpreter(model);
-		myView=view;
+		myView = view;
 	}
 
 	public void executeCommand(String command, String language) {
