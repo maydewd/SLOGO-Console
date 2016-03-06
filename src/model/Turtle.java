@@ -6,7 +6,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 
-public class Turtle {
+public class Turtle implements TurtleInfo{
 
     private double myHeading = 0;
     private Point myLocation = new Point(0, 0);
@@ -95,6 +95,16 @@ public class Turtle {
 
     public void setMyImageIndex (int imageIndex) {
         myImageIndexProperty.set(imageIndex);
+    }
+
+    @Override
+    public int getPenColorIndex () {
+        return getPenColorIndexProperty().getValue();
+    }
+
+    @Override
+    public int getImageIndex () {
+        return getImageIndexProperty().getValue();
     }
 
 }
