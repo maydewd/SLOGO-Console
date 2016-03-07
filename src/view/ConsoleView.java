@@ -6,6 +6,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import model.IBasicModel;
 
+import java.io.Console;
+
 /**
  * Created by Tim on 22/02/16.
  */
@@ -33,10 +35,8 @@ public class ConsoleView extends BaseUIView {
 		commandField.setOnKeyPressed(event -> {
 			if (event.getCode().equals(KeyCode.ENTER)) {
 				if(!event.isShiftDown()){
-					consoleController.executeCommand(commandField.getText(),
-						model.languageOptionsProperty()
-								.get(model.getActiveLanguageIndex()
-								.get()));
+					consoleController.executeCommand(commandField.getText()
+					);
 					commandField.clear();
 					commandField.setEditable(false);
 				} else {
@@ -51,7 +51,8 @@ public class ConsoleView extends BaseUIView {
 			commandField.setEditable(true);
 		});
 
-		consoleController = new ConsoleController(model, this);
-
+		// Initialize Controller singleton
+		ConsoleController.initController(model, this);
+		consoleController = ConsoleController.getController();
 	}
 }
