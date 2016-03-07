@@ -17,11 +17,11 @@ public interface IAdvancedModel extends IBasicModel {
 
     List<Double> getLineThicknesses ();
 
-    void setSelectedLineThickness ();
+    void setSelectedLineThickness (int i);
 
     List<Entry<Double, Double>> getLineTypes ();
 
-    void setSelectedLineType ();
+    void setSelectedLineType (int i);
 
     void drawStamp ();
 

@@ -53,11 +53,6 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
         return null;
     }
 
-    @Override
-    public void setSelectedLineThickness () {
-        // TODO Auto-generated method stub
-        
-    }
 
     @Override
     public List<Entry<Double, Double>> getLineTypes () {
@@ -65,11 +60,6 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
         return null;
     }
 
-    @Override
-    public void setSelectedLineType () {
-        // TODO Auto-generated method stub
-        
-    }
 
     @Override
     public void drawStamp () {
@@ -87,6 +77,18 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
     public int getActiveTurtleID () {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    public void setSelectedLineThickness (int i) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setSelectedLineType (int i) {
+        // TODO Auto-generated method stub
+        
     }
 
 

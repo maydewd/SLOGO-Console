@@ -9,6 +9,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import model.IAdvancedModel;
 import model.IBasicModel;
 
 
@@ -18,7 +19,7 @@ public class SettingsView extends BaseUIView{
 	
     private HostServices myHostServices;
 
-	public SettingsView(IBasicModel b, HostServices hostServices) {
+	public SettingsView(IAdvancedModel b, HostServices hostServices) {
 		super(DEFAULT_WIDTH, DEFAULT_HEIGHT, b);
 		this.myHostServices = hostServices;
 

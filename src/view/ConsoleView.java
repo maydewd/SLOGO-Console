@@ -4,6 +4,7 @@ import controller.ConsoleController;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import model.IAdvancedModel;
 import model.IBasicModel;
 
 import java.io.Console;
@@ -21,7 +22,7 @@ public class ConsoleView extends BaseUIView {
 	private ConsoleController consoleController;
 
 
-	public ConsoleView(IBasicModel model) {
+	public ConsoleView(IAdvancedModel model) {
 		super(DEFAULT_WIDTH, DEFAULT_HEIGHT, model);
 
 		uiPane = new Pane();

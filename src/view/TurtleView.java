@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.TextAlignment;
+import model.IAdvancedModel;
 import model.IBasicModel;
 import model.LineInfo;
 import model.Point;
@@ -40,7 +41,7 @@ public class TurtleView extends BaseUIView implements Observer {
 
     private Label turtleCoordinates;
 
-    public TurtleView(IBasicModel c){
+    public TurtleView(IAdvancedModel c){
         super(DEFAULT_WIDTH, DEFAULT_HEIGHT, c);
 
         canvas = new BorderPane();

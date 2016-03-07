@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.IAdvancedModel;
 import model.IBasicModel;
 
 /**
@@ -36,9 +37,9 @@ public class UIManager {
     private Stage stage;
     private Group group;
     private Scene uiSceneView;
-	private IBasicModel myModel;
+	private IAdvancedModel myModel;
 
-    public UIManager(Stage primaryStage, IBasicModel b, HostServices hostServices){
+    public UIManager(Stage primaryStage, IAdvancedModel b, HostServices hostServices){
         // Init vars
         stage = primaryStage;
         group = new Group();
@@ -73,6 +74,10 @@ public class UIManager {
 
         setupInput();
         stage.show();
+    }
+    
+    public Stage getStage(){
+        return stage;
     }
 
 

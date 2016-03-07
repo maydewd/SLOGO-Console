@@ -2,6 +2,7 @@ package view;
 
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import model.IAdvancedModel;
 import model.IBasicModel;
 
 /**
@@ -14,9 +15,9 @@ public abstract class BaseUIView {
 	private int width;
 	private int height;
 	private Node myNode;
-	private IBasicModel model;
+	private IAdvancedModel model;
 
-	public BaseUIView(int width, int height, IBasicModel model){
+	public BaseUIView(int width, int height, IAdvancedModel model){
 		this.setWidth(width);
 		this.setHeight(height);
 		this.model = model;
@@ -54,7 +55,7 @@ public abstract class BaseUIView {
 		alert.showAndWait();
 	}
 
-	public IBasicModel getModel(){
+	public IAdvancedModel getModel(){
 		return model;
 	}
 
