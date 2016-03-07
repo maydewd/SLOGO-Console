@@ -13,4 +13,6 @@ public interface TurtleInfo {
     int getPenColorIndex ();
     
     int getImageIndex ();
+    
+    int getID ();
 }

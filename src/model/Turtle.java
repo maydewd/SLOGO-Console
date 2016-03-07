@@ -14,10 +14,16 @@ public class Turtle implements TurtleInfo{
     private IntegerProperty myPenColorIndexProperty = new SimpleIntegerProperty(0);
     private boolean isVisible = true;
     private IntegerProperty myImageIndexProperty = new SimpleIntegerProperty(0);
+    private int myID;
 
     public Turtle (int penColorIndex, int imageIndex) {
+        this(penColorIndex, imageIndex, 1);
+    }
+    
+    public Turtle (int penColorIndex, int imageIndex, int ID) {
         setMyPenColorIndex(penColorIndex);
         setMyImageIndex(imageIndex);
+        setID(ID);
     }
 
     public Turtle (double heading,
@@ -105,6 +111,15 @@ public class Turtle implements TurtleInfo{
     @Override
     public int getImageIndex () {
         return getImageIndexProperty().getValue();
+    }
+
+    @Override
+    public int getID () {
+        return myID;
+    }
+    
+    private void setID (int ID) {
+        myID = ID;
     }
 
 }
