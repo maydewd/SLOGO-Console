@@ -6,7 +6,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 
-public class Turtle {
+public class Turtle implements TurtleInfo{
 
     private double myHeading = 0;
     private Point myLocation = new Point(0, 0);
@@ -14,10 +14,16 @@ public class Turtle {
     private IntegerProperty myPenColorIndexProperty = new SimpleIntegerProperty(0);
     private boolean isVisible = true;
     private IntegerProperty myImageIndexProperty = new SimpleIntegerProperty(0);
+    private int myID;
 
     public Turtle (int penColorIndex, int imageIndex) {
+        this(penColorIndex, imageIndex, 1);
+    }
+    
+    public Turtle (int penColorIndex, int imageIndex, int ID) {
         setMyPenColorIndex(penColorIndex);
         setMyImageIndex(imageIndex);
+        setID(ID);
     }
 
     public Turtle (double heading,
@@ -95,6 +101,25 @@ public class Turtle {
 
     public void setMyImageIndex (int imageIndex) {
         myImageIndexProperty.set(imageIndex);
+    }
+
+    @Override
+    public int getPenColorIndex () {
+        return getPenColorIndexProperty().getValue();
+    }
+
+    @Override
+    public int getImageIndex () {
+        return getImageIndexProperty().getValue();
+    }
+
+    @Override
+    public int getID () {
+        return myID;
+    }
+    
+    private void setID (int ID) {
+        myID = ID;
     }
 
 }

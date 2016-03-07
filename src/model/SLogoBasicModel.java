@@ -12,8 +12,8 @@ import javafx.beans.property.ReadOnlyListProperty;
 
 public class SLogoBasicModel implements IBasicModel {
 
-    BasicTurtleModel myTurtleModel = new BasicTurtleModel();
-    BasicOptionsModel myOptionsModel = new BasicOptionsModel();
+    private BasicTurtleModel myTurtleModel = new BasicTurtleModel();
+    private BasicOptionsModel myOptionsModel = new BasicOptionsModel();
 
     @Override
     public void moveTurtleForward (double pixels) {
@@ -72,7 +72,7 @@ public class SLogoBasicModel implements IBasicModel {
     }
 
     @Override
-    public MapProperty<String, Double> variableMapProperty() {
+    public MapProperty<String, Double> variableMapProperty () {
         return getMyOptionsModel().variableMapProperty();
     }
 
@@ -87,7 +87,7 @@ public class SLogoBasicModel implements IBasicModel {
     }
 
     @Override
-    public ListProperty<String> commandHistoryProperty() {
+    public ListProperty<String> commandHistoryProperty () {
         return getMyOptionsModel().commandHistoryProperty();
     }
 
@@ -167,8 +167,16 @@ public class SLogoBasicModel implements IBasicModel {
         return myTurtleModel;
     }
 
+    protected void setMyTurtleModel (BasicTurtleModel turtleModel) {
+        myTurtleModel = turtleModel;
+    }
+
     private BasicOptionsModel getMyOptionsModel () {
         return myOptionsModel;
+    }
+
+    protected void setBasicOptionsModel (BasicOptionsModel optionsModel) {
+        myOptionsModel = optionsModel;
     }
 
 }

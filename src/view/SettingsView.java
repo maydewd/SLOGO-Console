@@ -26,13 +26,13 @@ public class SettingsView extends BaseUIView{
 	    setNode(settings);
 	    
 	    Selector lSelector = new LanguageSelector(getModel());
-	    Selector pColorSelector = new PenColorSelector(getModel());
+	    Selector pSelector = new PenSelector(getModel());
 	    Selector bColorSelector = new BackgroundColorSelector(getModel());
 	    Selector tSelector = new TurtleSelector(getModel());
 	    Selector hSelector = new HelpSelector(myHostServices);
 		
 	    settings.getMenus().addAll(lSelector.getMenu(), 
-		                       pColorSelector.getMenu(), 
+		                       pSelector.getMenu(), 
 		                       bColorSelector.getMenu(), 
 		                       tSelector.getMenu(), 
 		                       hSelector.getMenu());

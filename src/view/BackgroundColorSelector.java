@@ -7,8 +7,6 @@ import javafx.scene.shape.Circle;
 import model.IBasicModel;
 
 public class BackgroundColorSelector extends ColorSelector {
-
-    private int RADIUS = 20;
     private Menu backgroundSettings;
     
     public BackgroundColorSelector (IBasicModel basicModel) {
