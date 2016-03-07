@@ -2,13 +2,14 @@ package view;
 
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Menu;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import model.IBasicModel;
 
-public class PenColorSelector extends Selector{
+public class PenColorSelector extends ColorSelector{
 
-    private int RADIUS = 20;
     private Menu penColorSettings;
     
     public PenColorSelector (IBasicModel basicModel) {
@@ -18,26 +19,15 @@ public class PenColorSelector extends Selector{
         }
     }
 
-    
-    
-    public void makeButton(int index, IBasicModel basicModel){
-        CustomMenuItem button = new CustomMenuItem();
-        Circle fill = new Circle();
-        fill.setRadius(RADIUS);
-        fill.setFill(Color.rgb(basicModel.colorOptionsProperty().get(index).getRed(),
-                               basicModel.colorOptionsProperty().get(index).getGreen(),
-                               basicModel.colorOptionsProperty().get(index).getBlue()));
-        button.setContent(fill);
-        int i = index;
-        button.setOnAction(e -> basicModel.setActivePenColorIndex(i));
-        getMenu().getItems().add(button);
-    }
-
-
-
     @Override
     public Menu getMenu () {
         return penColorSettings;
+    }
+
+    @Override
+    public void addButton (CustomMenuItem button, int i, IBasicModel basicModel) {
+        button.setOnAction(e -> basicModel.setActivePenColorIndex(i));
+        getMenu().getItems().add(button);
     }
 
     
