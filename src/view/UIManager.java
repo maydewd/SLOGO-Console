@@ -11,7 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.IAdvancedModel;
-import model.IBasicModel;
 
 /**
  * Created by Tim on 22/02/16.
@@ -27,7 +26,6 @@ public class UIManager {
     private CommandHistoryView commandHistoryView;
     private UserCommandView userCommandListView;
     private SettingsView settingsMenu;
-    private ErrorNotifier errorNotifier;
     private VariableView variableView;
 
     private Pane myMainPaneNamedDane;

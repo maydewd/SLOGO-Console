@@ -2,15 +2,13 @@ package view;
 
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Menu;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import model.IBasicModel;
 
 public class BackgroundColorSelector extends ColorSelector {
-    private Menu backgroundSettings;
+    private Menu myBackgroundSettings;
     
     public BackgroundColorSelector (IBasicModel basicModel) {
-        backgroundSettings = new Menu("Background Color");
+        myBackgroundSettings = new Menu("Background Color");
         for(int i = 0; i < basicModel.colorOptionsProperty().getSize(); i++){
             makeButton(i, basicModel);
         }
@@ -18,7 +16,7 @@ public class BackgroundColorSelector extends ColorSelector {
 
     @Override
     public Menu getMenu () {
-        return backgroundSettings;
+        return myBackgroundSettings;
     }
 
     @Override

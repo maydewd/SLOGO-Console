@@ -1,6 +1,7 @@
 package app;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.stage.Stage;
 
 /**
@@ -17,5 +18,9 @@ public class Main extends Application {
 		SLogoEngine engine = new SLogoEngine();
 
 		engine.start(primaryStage, getHostServices());
+	}
+	
+	public HostServices getHost(){
+	    return getHostServices();
 	}
 }

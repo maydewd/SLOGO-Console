@@ -15,7 +15,7 @@ import view.UIManager;
 public class SLogoEngine {
 
     private UIManager uiManager;
-
+   
     public void start (Stage stage, HostServices hostServices) {
         IAdvancedModel basicModel = new SLogoAdvancedModel();
         // TODO pass this model to UIManager

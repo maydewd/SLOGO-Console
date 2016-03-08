@@ -2,7 +2,10 @@ package view;
 
 import java.io.File;
 import app.Main;
+import app.SLogoEngine;
 import controller.IParserController;
+import controller.ParserController;
+import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
@@ -11,11 +14,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class FileSelector extends Selector {
-    private Menu fileSelector;
+    private Menu myFileSelector;
 
-    public FileSelector (IParserController parse) {
-        fileSelector = new Menu("File");
+    public FileSelector (HostServices hostServices) {
+        myFileSelector = new Menu("File");
         MenuItem save = new MenuItem("Save");
+        IParserController parse = new ParserController();
         save.setOnAction(
                          new EventHandler<ActionEvent>() {
                              @Override
@@ -43,15 +47,16 @@ public class FileSelector extends Selector {
                          }
         );
         
-        MenuItem newButton = new MenuItem("new");
-        newButton.setOnAction(e -> Main.main(null));
+        MenuItem newButton = new MenuItem("New");
+        SLogoEngine newGame = new SLogoEngine();
+        newButton.setOnAction(e -> newGame.start(new Stage(), hostServices));
         
-        fileSelector.getItems().addAll(newButton, open, save);
+        myFileSelector.getItems().addAll(newButton, open, save);
     }
 
     @Override
     public Menu getMenu () {
-        return fileSelector;
+        return myFileSelector;
     }
 
 }

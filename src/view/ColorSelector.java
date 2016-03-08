@@ -1,7 +1,5 @@
 package view;
 
-import javafx.application.HostServices;
-import javafx.scene.control.Button;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -10,7 +8,7 @@ import javafx.scene.text.Text;
 import model.IBasicModel;
 
 public abstract class ColorSelector extends Selector {
-    private int RADIUS = 20;
+    private final int RADIUS = 20;
     
     public void makeButton(int index, IBasicModel basicModel){
         CustomMenuItem button = new CustomMenuItem();
