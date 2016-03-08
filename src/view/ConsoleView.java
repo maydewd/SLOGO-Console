@@ -7,6 +7,8 @@ import javafx.scene.layout.Pane;
 import model.IAdvancedModel;
 
 
+import java.io.Console;
+
 /**
  * Created by Tim on 22/02/16.
  */

@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import javafx.beans.property.ReadOnlyListProperty;
 
 
+
 public interface IAdvancedModel extends IBasicModel {
 
     Collection<? extends TurtleInfo> getAllTurtleInfo ();
@@ -25,6 +26,7 @@ public interface IAdvancedModel extends IBasicModel {
     void setSelectedLineType (int i);
     
     public ReadOnlyListProperty<StampInfo> getStamps ();
+
 
     void drawStamp ();
 

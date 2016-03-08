@@ -3,9 +3,7 @@ package model;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
-import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyListProperty;
-import javafx.beans.property.SimpleMapProperty;
 
 public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedModel {
     private AdvancedTurtleModel myTurtleModel = new AdvancedTurtleModel();
@@ -16,11 +14,11 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 
     }
 
-    private AdvancedTurtleModel getMyTurtleModel () {
+    public AdvancedTurtleModel getMyTurtleModel () {
         return myTurtleModel;
     }
 
-    private AdvancedOptionsModel getMyOptionsModel () {
+    public AdvancedOptionsModel getMyOptionsModel () {
         return myOptionsModel;
     }
 
@@ -53,7 +51,6 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
         // TODO Auto-generated method stub
         return null;
     }
-
 
     @Override
     public List<Entry<Double, Double>> getLineTypes () {
@@ -96,6 +93,16 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
     public ReadOnlyListProperty<StampInfo> getStamps () {
         // TODO Auto-generated method stub
         return null;
+    }
+    
+    public void setSelectedLineThickness () {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void setSelectedLineType () {
+        // TODO Auto-generated method stub
+        
     }
 
 
