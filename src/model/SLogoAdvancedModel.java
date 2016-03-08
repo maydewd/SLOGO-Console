@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
 import javafx.beans.property.MapProperty;
+import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleMapProperty;
 
 public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedModel {
@@ -89,6 +90,12 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
     public void setSelectedLineType (int i) {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public ReadOnlyListProperty<StampInfo> getStamps () {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 
