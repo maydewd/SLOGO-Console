@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.IBasicModel;
+import model.IAdvancedModel;
 
 /**
  * Created by Tim on 22/02/16.
@@ -26,7 +26,6 @@ public class UIManager {
     private CommandHistoryView commandHistoryView;
     private UserCommandView userCommandListView;
     private SettingsView settingsMenu;
-    private ErrorNotifier errorNotifier;
     private VariableView variableView;
 
     private Pane myMainPaneNamedDane;
@@ -36,9 +35,9 @@ public class UIManager {
     private Stage stage;
     private Group group;
     private Scene uiSceneView;
-	private IBasicModel myModel;
+	private IAdvancedModel myModel;
 
-    public UIManager(Stage primaryStage, IBasicModel b, HostServices hostServices){
+    public UIManager(Stage primaryStage, IAdvancedModel b, HostServices hostServices){
         // Init vars
         stage = primaryStage;
         group = new Group();
@@ -73,6 +72,10 @@ public class UIManager {
 
         setupInput();
         stage.show();
+    }
+    
+    public Stage getStage(){
+        return stage;
     }
 
 

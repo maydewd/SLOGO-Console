@@ -2,7 +2,7 @@ package view;
 
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import model.IBasicModel;
+import model.IAdvancedModel;
 
 /**
  * Created by Tim on 29/02/16.
@@ -11,35 +11,35 @@ public abstract class BaseUIView {
 
 	public final static int TITLE_SIZE = 14;
 
-	private int width;
-	private int height;
+	private int myWidth;
+	private int myHeight;
 	private Node myNode;
-	private IBasicModel model;
+	private IAdvancedModel myModel;
 
-	public BaseUIView(int width, int height, IBasicModel model){
-		this.setWidth(width);
-		this.setHeight(height);
-		this.model = model;
+	public BaseUIView(int width, int height, IAdvancedModel model){
+		setWidth(width);
+		setHeight(height);
+		myModel = model;
 	}
 
 	protected void setWidth(int width){
-		this.width = width;
+		myWidth = width;
 	}
 
 	public int getWidth() {
-		return width;
+		return myWidth;
 	}
 
 	protected void setHeight(int height){
-		this.height = height;
+		myHeight = height;
 	}
 
 	public int getHeight() {
-		return height;
+		return myHeight;
 	}
 
 	protected void setNode(Node n){
-		this.myNode = n;
+		myNode = n;
 	}
 
 	public Node getNode() {
@@ -54,8 +54,8 @@ public abstract class BaseUIView {
 		alert.showAndWait();
 	}
 
-	public IBasicModel getModel(){
-		return model;
+	public IAdvancedModel getModel(){
+		return myModel;
 	}
 
 }

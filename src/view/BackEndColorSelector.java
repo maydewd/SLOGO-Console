@@ -4,10 +4,10 @@ import javafx.scene.control.Menu;
 import model.IBasicModel;
 
 public abstract class BackEndColorSelector extends Selector {
-    private Menu backEndSettings;
+    private Menu myBackEndSettings;
     
     public BackEndColorSelector (IBasicModel basicModel) {
-        backEndSettings = new Menu("Pen Color");
+        myBackEndSettings = new Menu("Pen Color");
         for(int i = 0; i < basicModel.colorOptionsProperty().getSize(); i++){
             makeButton(i, basicModel);
         }
@@ -17,7 +17,7 @@ public abstract class BackEndColorSelector extends Selector {
 
     @Override
     public Menu getMenu (){
-        return backEndSettings;
+        return myBackEndSettings;
     }
 
 }

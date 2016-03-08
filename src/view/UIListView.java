@@ -3,7 +3,7 @@ package view;
 import controller.ConsoleController;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
-import model.IBasicModel;
+import model.IAdvancedModel;
 
 
 /**
@@ -18,7 +18,8 @@ public abstract class UIListView extends BaseUIView {
 
     private ObservableList<String> myObservableList;
 
-    public UIListView (IBasicModel model, ObservableList<String> listToWatch) {
+
+    public UIListView (IAdvancedModel model, ObservableList<String> listToWatch) {
         super(DEFAULT_WIDTH, DEFAULT_HEIGHT, model);
         this.myObservableList = listToWatch;
 
