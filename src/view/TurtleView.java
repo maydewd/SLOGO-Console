@@ -1,23 +1,28 @@
 package view;
 
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.TextAlignment;
-import model.IBasicModel;
+import model.IAdvancedModel;
 import model.LineInfo;
 import model.Point;
 import model.RGBColor;
-
-import java.util.HashSet;
+import model.StampInfo;
+import model.TurtleInfo;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Set;
+import java.util.Optional;
 
 /**
  * Created by Tim on 22/02/16.
@@ -32,20 +37,21 @@ public class TurtleView extends BaseUIView implements Observer {
     public static final int TURTLE_WIDTH = 25;
     
 
-    private Pane canvas;
-    private Set<LineInfo> displayedLines = new HashSet<>();
-    private ImageView myTurtle;
+    private Pane myCanvas;
+    private Map<LineInfo, Line> myDisplayedLines = new HashMap<>();
+    private Map<StampInfo, ImageView> myDisplayedStamps = new HashMap<>();
+    private Map<TurtleInfo, ImageView> myDisplayedTurtles = new HashMap<>();
 
-    private Label turtleCoordinates;
+    private Label myTurtleCoordinates;
 
-    public TurtleView(IBasicModel c){
+    public TurtleView(IAdvancedModel c){
         super(DEFAULT_WIDTH, DEFAULT_HEIGHT, c);
 
-        canvas = new BorderPane();
+        myCanvas = new BorderPane();
         initializeCanvas();
-        canvas.setPrefSize(getWidth(), getHeight());
-        ((BorderPane) canvas).setTop(turtleCoordinates);
-        setNode(canvas);
+        myCanvas.setPrefSize(getWidth(), getHeight());
+        ((BorderPane) myCanvas).setTop(myTurtleCoordinates);
+        setNode(myCanvas);
         getModel().addCoreTurtleObserver(this);
         updateView();
     }
@@ -57,24 +63,24 @@ public class TurtleView extends BaseUIView implements Observer {
         return d + getWidth() / 2;
     }
     
-    private double scaleTurtleX(double d){
-        return d - myTurtle.getFitWidth()/2;
+    private double scaleTurtleX(double d, ImageView turtle){
+        return d - turtle.getFitWidth()/2;
     }
 
-    private double scaleTurtleY(double d){
-        return d + myTurtle.getFitHeight()/2;
+    private double scaleTurtleY(double d, ImageView turtle){
+        return d + turtle.getFitHeight()/2;
     }
 
     private void initializeCanvas () {
         getModel().getActiveBackgroundColorIndex().addListener(o -> changeBackgroundColor());
-        turtleCoordinates = new Label("Hey");
-        turtleCoordinates.setTextAlignment(TextAlignment.CENTER);
+        myTurtleCoordinates = new Label("Hey");
+        myTurtleCoordinates.setTextAlignment(TextAlignment.CENTER);
     }
 
     private void changeBackgroundColor () {
         int index = getModel().getActiveBackgroundColorIndex().intValue();
         String hexString = getModel().colorOptionsProperty().get(index).toString();
-        canvas.setStyle("-fx-background-color: #" + hexString + ";");
+        myCanvas.setStyle("-fx-background-color: #" + hexString + ";");
     }
 
     private double scaleY (double y) {
@@ -87,49 +93,106 @@ public class TurtleView extends BaseUIView implements Observer {
     }
 
     private void updateView () {
-        if (getModel().getLines().isEmpty()) {
-            canvas.getChildren().clear();
+        if(getModel().getLines().isEmpty()){
+            clearLines();
         }
-        for (LineInfo l : getModel().getLines()) {
-            if (!displayedLines.contains(l) && l.getVisibility()) {
-                Line line = new Line();
-                line.setStartX(scaleX(l.getStart().getX()));
-                line.setStartY(scaleY(l.getStart().getY()));
-                line.setEndX(scaleX(l.getEnd().getX()));
-                line.setEndY(scaleY(l.getEnd().getY()));
-
-                RGBColor currentColor = getModel().colorOptionsProperty().get(l.getColor());
-                line.setStroke(Color.rgb(currentColor.getRed(),
-                                         currentColor.getGreen(),
-                                         currentColor.getBlue()));
-
-                displayedLines.add(l);
-                canvas.getChildren().add(line);
+        else{
+            for (LineInfo l : getModel().getLines()) {
+                if (!myDisplayedLines.keySet().contains(l) && l.getVisibility()) {
+                   makeLine(l);
+                }
             }
         }
-        canvas.getChildren().remove(myTurtle);
-        if (getModel().getTurtleVisibility()) {
-            myTurtle = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(
-                  getModel().turtleImageOptionsProperty()
-                          .get(getModel().getActiveTurtleImageIndex()
-                                  .getValue()))));
-
-            myTurtle.setFitHeight(TURTLE_HEIGHT);
-            myTurtle.setFitWidth(TURTLE_WIDTH);
-            myTurtle.setX(scaleX(scaleTurtleX(getModel().getTurtleCoordinates().getX())));
-            myTurtle.setY(scaleY(scaleTurtleY(getModel().getTurtleCoordinates().getY())));
-            myTurtle.setRotate(- getModel().getTurtleHeading() + HEADING_OFFSET);
-            canvas.getChildren().add(myTurtle);
+        if(getModel().getLines().isEmpty()){
+            clearStamps();
         }
-
-        updateTurtleCoordinates();
+        else{
+            for(StampInfo s: getModel().getStamps()){
+                if (!myDisplayedStamps.keySet().contains(s) && s.getVisibility() ){
+                    makeStamp(s);
+                }
+            }
+        }
+        for(TurtleInfo turtle: getModel().getAllTurtleInfo()){
+            if(myDisplayedTurtles.keySet().contains(turtle)){
+                myCanvas.getChildren().remove(myDisplayedTurtles.get(turtle));
+            }
+            makeTurtle(turtle);
+        }
+    }
+    
+    private void clearStamps () {
+        myCanvas.getChildren().removeAll(myDisplayedStamps.values());
+        myDisplayedStamps.clear();
     }
 
-    private void updateTurtleCoordinates(){
-        Point turtlePos = getModel().getTurtleCoordinates();
-        String turtlePosString = "(" + turtlePos.getX() + ", " + turtlePos.getY() + ")";
-//        System.out.println(turtlePosString);
-        this.turtleCoordinates.setText(turtlePosString);
+    private void clearLines () {
+        myCanvas.getChildren().removeAll(myDisplayedLines.values());
+        myDisplayedLines.clear();
+    }
 
+    private void makeStamp (StampInfo s) {
+        ImageView stamp = new ImageView();
+        stamp.setX(scaleX(getModel().getTurtleCoordinates().getX()));
+        stamp.setY(scaleY(getModel().getTurtleCoordinates().getY()));
+        myDisplayedStamps.put(s, stamp);
+        myCanvas.getChildren().add(stamp);
+    }
+
+    private void makeLine(LineInfo l){
+        Line line = new Line();
+        line.setStartX(scaleX(l.getStart().getX()));
+        line.setStartY(scaleY(l.getStart().getY()));
+        line.setEndX(scaleX(l.getEnd().getX()));
+        line.setEndY(scaleY(l.getEnd().getY()));
+
+        RGBColor currentColor = getModel().colorOptionsProperty().get(l.getColor());
+        line.setStroke(Color.rgb(currentColor.getRed(),
+                                 currentColor.getGreen(),
+                                 currentColor.getBlue()));
+
+        myDisplayedLines.put(l, line);
+        myCanvas.getChildren().add(line);
+    }
+    
+    private void makeTurtle(TurtleInfo turtle){
+        ImageView myTurtle = new ImageView(new Image(getClass().getClassLoader()
+                                           .getResourceAsStream(
+                                           getModel().turtleImageOptionsProperty()
+                                           .get(getModel().getActiveTurtleImageIndex()
+                                           .getValue()))));
+        myTurtle.setFitHeight(TURTLE_HEIGHT);
+        myTurtle.setFitWidth(TURTLE_WIDTH);
+        myTurtle.setX(scaleX(scaleTurtleX(getModel().getTurtleCoordinates().getX(), myTurtle)));
+        myTurtle.setY(scaleY(scaleTurtleY(getModel().getTurtleCoordinates().getY(), myTurtle)));
+        myTurtle.setRotate(- getModel().getTurtleHeading() + HEADING_OFFSET);
+        myTurtle.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> showInfo(turtle));
+        myDisplayedTurtles.put(turtle, myTurtle);
+        myCanvas.getChildren().add(myTurtle);
+    }
+
+//    private void updateTurtleCoordinates(){
+//        Point turtlePos = getModel().getTurtleCoordinates();
+//        String turtlePosString = "(" + turtlePos.getX() + ", " + turtlePos.getY() + ")";
+////        System.out.println(turtlePosString);
+//        this.turtleCoordinates.setText(turtlePosString);
+//
+//    }
+    
+    private void showInfo(TurtleInfo turtle){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Turtle Info");
+        alert.setHeaderText("Do you want to Select this Turtle?");
+        Point turtlePos = getModel().getTurtleCoordinates();
+        alert.setContentText("Turtle X: " + turtlePos.getX() + "\n" + 
+                             "Turtle Y: " + turtlePos.getY() + "\n" + 
+                             "Pen is Down: " + getModel().getPenDown() + "\n" +
+                              "Heading: "+ getModel().getTurtleHeading());
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            getModel().addSelectedTurtles(turtle.getID());
+        }
+   
+                 
     }
 }

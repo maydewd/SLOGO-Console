@@ -3,8 +3,13 @@ package model;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
+<<<<<<< HEAD
 import javafx.beans.property.MapProperty;
+import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleMapProperty;
+=======
+import javafx.beans.property.ReadOnlyListProperty;
+>>>>>>> FrontEndExtentionPartOne
 
 public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedModel {
     private AdvancedTurtleModel myTurtleModel = new AdvancedTurtleModel();
@@ -15,11 +20,11 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 
     }
 
-    private AdvancedTurtleModel getMyTurtleModel () {
+    public AdvancedTurtleModel getMyTurtleModel () {
         return myTurtleModel;
     }
 
-    private AdvancedOptionsModel getMyOptionsModel () {
+    public AdvancedOptionsModel getMyOptionsModel () {
         return myOptionsModel;
     }
 
@@ -53,11 +58,6 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
         return null;
     }
 
-    @Override
-    public void setSelectedLineThickness () {
-        // TODO Auto-generated method stub
-        
-    }
 
     @Override
     public List<Entry<Double, Double>> getLineTypes () {
@@ -65,11 +65,6 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
         return null;
     }
 
-    @Override
-    public void setSelectedLineType () {
-        // TODO Auto-generated method stub
-        
-    }
 
     @Override
     public void drawStamp () {
@@ -83,10 +78,53 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
         
     }
 
-    @Override
     public int getActiveTurtleID () {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+<<<<<<< HEAD
+=======
+    public int getActiveTurtleID () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+>>>>>>> FrontEndExtentionPartOne
+    public void setSelectedLineThickness (int i) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+<<<<<<< HEAD
+
+=======
+>>>>>>> FrontEndExtentionPartOne
+    public void setSelectedLineType (int i) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public ReadOnlyListProperty<StampInfo> getStamps () {
+        // TODO Auto-generated method stub
+        return null;
+<<<<<<< HEAD
+=======
+    }
+    
+    public void setSelectedLineThickness () {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void setSelectedLineType () {
+        // TODO Auto-generated method stub
+        
+>>>>>>> FrontEndExtentionPartOne
     }
 
 

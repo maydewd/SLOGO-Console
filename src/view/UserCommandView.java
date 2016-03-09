@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import model.IAdvancedModel;
 import model.IBasicModel;
 import java.util.List;
 import java.util.Map.Entry;
@@ -23,7 +24,7 @@ public class UserCommandView extends BaseUIView {
     private TableView<Entry<String, List<String>>> tableView = new TableView<Entry<String, List<String>>>();
     private IBasicModel myModel;
 
-    public UserCommandView (IBasicModel model) {
+    public UserCommandView (IAdvancedModel model) {
         super(DEFAULT_HEIGHT, DEFAULT_WIDTH, model);
         myModel = model;
         initialize();

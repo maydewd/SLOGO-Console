@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import model.IAdvancedModel;
 import model.IBasicModel;
 
 
@@ -23,7 +24,7 @@ public class VariableView extends BaseUIView {
     private TableView<Entry<String, Double>> tableView = new TableView<Entry<String, Double>>();
     private IBasicModel myModel;
 
-    public VariableView (IBasicModel model) {
+    public VariableView (IAdvancedModel model) {
         super(DEFAULT_HEIGHT, DEFAULT_WIDTH, model);
         myModel = model;
         initialize();

@@ -16,7 +16,7 @@ public class TurtleSelector extends Selector {
     }
 
     public void makeButton (int index, IBasicModel basicModel) {
-        MenuItem button = new MenuItem("");
+        MenuItem button = new MenuItem(String.valueOf(index));
         button.setGraphic(new ImageView(basicModel.turtleImageOptionsProperty().get(index)));
         int i = index;
         button.setOnAction(e -> basicModel.setActiveTurtleImageIndex(i));
