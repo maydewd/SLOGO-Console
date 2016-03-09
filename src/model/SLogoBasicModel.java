@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Observer;
@@ -178,5 +179,11 @@ public class SLogoBasicModel implements IBasicModel {
     protected void setBasicOptionsModel (BasicOptionsModel optionsModel) {
         myOptionsModel = optionsModel;
     }
+
+	@Override
+	public Collection<? extends TurtleInfo> getAllTurtleInfo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

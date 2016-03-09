@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Observer;
@@ -66,4 +67,5 @@ public interface IBasicModel {
 
     public void addCoreTurtleObserver (Observer observer);
 
+    public Collection<? extends TurtleInfo> getAllTurtleInfo ();
 }

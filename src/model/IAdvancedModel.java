@@ -7,8 +7,6 @@ import java.util.Map.Entry;
 
 public interface IAdvancedModel extends IBasicModel {
 
-    Collection<? extends TurtleInfo> getAllTurtleInfo ();
-
     void addSelectedTurtles (int IDnumber);
 
     void clearSelectedTurtles ();

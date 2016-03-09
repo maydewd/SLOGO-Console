@@ -93,6 +93,8 @@ public class BasicTurtleModel extends Observable {
 
     public IntegerProperty backgroundColorIndexProperty () {
         return myBackgroundColorIndexProperty;
+        
     }
-
+    
+    
 }
