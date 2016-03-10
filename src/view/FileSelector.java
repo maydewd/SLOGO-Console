@@ -11,17 +11,15 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-<<<<<<< HEAD
-=======
 import model.IAdvancedModel;
->>>>>>> plg
+
 import model.IBasicModel;
 
 public class FileSelector extends Selector {
     private Menu myFileSelector;
     private IParserController myParser;
 
-    public FileSelector (HostServices hostServices, IBasicModel model, BaseUIView parent) {
+    public FileSelector (HostServices hostServices, IAdvancedModel model, BaseUIView parent) {
         myFileSelector = new Menu("File");
         myParser = new ParserController(model, parent);
         myFileSelector.getItems().addAll(makeNew(model, hostServices), makeOpen(model), makeSave(model));

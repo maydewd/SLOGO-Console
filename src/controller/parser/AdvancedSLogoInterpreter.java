@@ -1,5 +1,7 @@
 package controller.parser;
 
+import java.util.List;
+
 import model.IAdvancedModel;
 import model.RGBColor;
 
@@ -72,8 +74,6 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 		return pixels;
 	}
 
-<<<<<<< HEAD
-=======
 	@Override
 	public double getCurrentActiveID() {
 		return getModelActions().getActiveTurtle().getID();
@@ -93,5 +93,4 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 	}
 
 
->>>>>>> plg
 }

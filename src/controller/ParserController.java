@@ -10,24 +10,19 @@ import controller.configurations.XMLParser;
 import controller.configurations.XMLReader;
 import controller.configurations.XMLWriter;
 import javafx.collections.ObservableList;
-<<<<<<< HEAD
-import model.IBasicModel;
 import model.Turtle;
 import view.BaseUIView;
-=======
 import model.IAdvancedModel;
-import model.IBasicModel;
-import model.Turtle;
-import model.TurtleInfo;
->>>>>>> plg
+
+
 
 public class ParserController implements IParserController {
 
-	private IBasicModel myModel;
+	private IAdvancedModel myModel;
 	private XMLParser myParser;
 	private BaseUIView errorHandler;
 	
-	public ParserController(IBasicModel model, BaseUIView view) {
+	public ParserController(IAdvancedModel model, BaseUIView view) {
 		myModel = model;
 		errorHandler = view;
 	}

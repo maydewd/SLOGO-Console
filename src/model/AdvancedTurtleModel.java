@@ -1,23 +1,15 @@
 package model;
 
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
 
 public class AdvancedTurtleModel extends BasicTurtleModel {
 
 	private ListProperty<StampInfo> myStamps = new SimpleListProperty<>(FXCollections.observableArrayList());
-<<<<<<< HEAD
-	
-    public AdvancedTurtleModel () {
-    	super();
-    }
-
-	public void setSelectedLineThickness(int i) {
-		getActiveTurtle().setLineThickness(i);
-		
-=======
 	private MapProperty<Integer, TurtleInfo> myTurtles = new SimpleMapProperty<>(FXCollections.observableHashMap());
 	private MapProperty<Integer, TurtleInfo> mySelectedTurtles = new SimpleMapProperty<>(FXCollections.observableHashMap());
 
@@ -28,7 +20,6 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
 	public void setSelectedLineThickness(int i) {
 		getActiveTurtle().setLineThickness(i);
 
->>>>>>> plg
 	}
 
 	public void setSelectedLineType(int i) {
@@ -42,8 +33,6 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
 	public void drawStamp() {
 		myStamps.add(new StampInfo(getActiveTurtle().getLocation()));	
 	}
-<<<<<<< HEAD
-=======
 
 	public MapProperty<Integer, TurtleInfo> selectedTurtlesProperty() {
 		return mySelectedTurtles;
@@ -56,6 +45,6 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
 	public TurtleInfo getTurtle (int id) {
 		return myTurtles.get(id);
 	}
->>>>>>> plg
+
 
 }

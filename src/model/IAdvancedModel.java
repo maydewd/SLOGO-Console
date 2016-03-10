@@ -29,9 +29,6 @@ public interface IAdvancedModel extends IBasicModel {
 
     int getActiveTurtleID ();
 
-<<<<<<< HEAD
-}
-=======
 	Collection<TurtleInfo> getAllTurtleInfo();
 	
 	TurtleInfo getTurtle (int id);
@@ -40,4 +37,4 @@ public interface IAdvancedModel extends IBasicModel {
     
 
 }
->>>>>>> plg
+

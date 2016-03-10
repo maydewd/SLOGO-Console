@@ -1,5 +1,7 @@
 package controller.parser;
 
+import java.util.List;
+
 public interface IAdvancedSLogoCommands extends IBasicSLogoCommands {
 	
 	public double setBackground (int index);
@@ -19,14 +21,11 @@ public interface IAdvancedSLogoCommands extends IBasicSLogoCommands {
 	public double stamp ();
 	
 	public double clearStamps ();
-<<<<<<< HEAD
-=======
-	
+
 	public double getCurrentActiveID ();
 	
 	public double getTurtleCount ();
 	
 	public double tell (List<Integer> ids);
-	
->>>>>>> plg
+
 }

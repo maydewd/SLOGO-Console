@@ -66,11 +66,6 @@ public interface IBasicModel {
     public void setActiveTurtleImageIndex (int turtleImageIndex);
 
     public void addCoreTurtleObserver (Observer observer);
-<<<<<<< HEAD
-
-    public Collection<TurtleInfo> getAllTurtleInfo ();
-=======
->>>>>>> plg
     
     public Turtle getActiveTurtle ();
 }
