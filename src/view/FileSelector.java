@@ -1,7 +1,6 @@
 package view;
 
 import java.io.File;
-import app.Main;
 import app.SLogoEngine;
 import controller.IParserController;
 import controller.ParserController;
@@ -16,11 +15,21 @@ import model.IBasicModel;
 
 public class FileSelector extends Selector {
     private Menu myFileSelector;
+    private IParserController myParser;
 
-    public FileSelector (HostServices hostServices, IBasicModel model) {
+    public FileSelector (HostServices hostServices, IBasicModel model, BaseUIView parent) {
         myFileSelector = new Menu("File");
+        myParser = new ParserController(model, parent);
+        myFileSelector.getItems().addAll(makeNew(model, hostServices), makeOpen(model), makeSave(model));
+    }
+
+    public Menu getMenu (){
+        return myFileSelector;
+    }
+    
+    public MenuItem makeSave(IBasicModel model){
         MenuItem save = new MenuItem("Save");
-        IParserController parse = new ParserController(model);
+         
         save.setOnAction(
                          new EventHandler<ActionEvent>() {
                              @Override
@@ -28,12 +37,16 @@ public class FileSelector extends Selector {
                                  FileChooser fileChooser = new FileChooser();
                                  File file = fileChooser.showSaveDialog(new Stage());
                                  if (file != null) {
-                                    parse.saveWorkspace(file); 
+                                    myParser.saveWorkspace(file); 
                                  }
-                         }
+                             }
                          }
         );
-        
+        return save;
+    }
+    
+    
+    public MenuItem makeOpen(IBasicModel model){
         MenuItem open = new MenuItem("Load");
         open.setOnAction(
                          new EventHandler<ActionEvent>() {
@@ -42,22 +55,18 @@ public class FileSelector extends Selector {
                                  FileChooser fileChooser = new FileChooser();
                                  File file = fileChooser.showOpenDialog(new Stage());
                                  if (file != null) {
-                                    parse.loadWorkspace(file);
+                                    myParser.loadWorkspace(file);
                                  }
                              }
                          }
         );
-        
+        return open;
+    }
+    
+    public MenuItem makeNew(IBasicModel model, HostServices hostServices){
         MenuItem newButton = new MenuItem("New");
         SLogoEngine newGame = new SLogoEngine();
         newButton.setOnAction(e -> newGame.start(new Stage(), hostServices));
-        
-        myFileSelector.getItems().addAll(newButton, open, save);
+        return newButton;
     }
-
-    @Override
-    public Menu getMenu () {
-        return myFileSelector;
-    }
-
 }

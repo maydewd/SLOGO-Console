@@ -6,15 +6,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import model.IAdvancedModel;
 
-
-import java.io.Console;
-
 /**
  * Created by Tim on 22/02/16.
  */
 public class ConsoleView extends BaseUIView {
 
-	public static final int DEFAULT_WIDTH = 500;
+	public static final int DEFAULT_WIDTH = 550;
 	public static final int DEFAULT_HEIGHT = 100;
 
 	private Pane uiPane;
