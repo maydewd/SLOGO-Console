@@ -1,7 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.Observable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
