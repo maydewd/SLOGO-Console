@@ -1,7 +1,11 @@
 package controller.parser;
 
+import java.util.List;
+
+import controller.commands.AbstractExpressionNode;
 import model.IAdvancedModel;
 import model.RGBColor;
+import model.Turtle;
 
 public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements IAdvancedSLogoCommands {
 
@@ -70,6 +74,44 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 	public double setPenSize(int pixels) {
 		getModelActions().getActiveTurtle().setLineThickness(pixels);
 		return pixels;
+	}
+
+	@Override
+	public double getCurrentActiveID() {
+		return getModelActions().getActiveTurtle().getID();
+	}
+
+	@Override
+	public double getTurtleCount() {
+		return getModelActions().getAllTurtleInfo().size();
+	}
+
+	@Override
+	public double tell (List<Integer> ids) {
+		for (int id: ids) {
+			getModelActions().addSelectedTurtles(id);
+		}
+		return ids.get(ids.size()-1);
+	}
+
+	@Override
+	public double ask(List<Integer> ids, List<AbstractExpressionNode> commands) {
+		// TODO Auto-generated method stub
+		/* for (int i=0; i < ids.size(); i++) {
+			Turtle t = getModelActions().getTurtle(ids.get(i));
+			for (AbstractExpressionNode command: commands) {
+				command.exe
+			}
+		}
+		*/
+		
+		return 0;
+	}
+	
+	@Override
+	public double askWith() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -3,6 +3,8 @@ package model;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
+
+import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyListProperty;
 
 public interface IAdvancedModel extends IBasicModel {
@@ -29,4 +31,7 @@ public interface IAdvancedModel extends IBasicModel {
 
     int getActiveTurtleID ();
 
+    Collection<TurtleInfo> getAllTurtleInfo ();
+    
+    TurtleInfo getTurtle (int id);
 }

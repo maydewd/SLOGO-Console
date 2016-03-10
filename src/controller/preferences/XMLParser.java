@@ -1,4 +1,4 @@
-package controller.configurations;
+package controller.preferences;
 
 public interface XMLParser {
 	

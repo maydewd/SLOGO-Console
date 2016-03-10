@@ -4,19 +4,19 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import controller.configurations.XMLParser;
-import controller.configurations.XMLReader;
-import controller.configurations.XMLWriter;
+import controller.preferences.XMLParser;
+import controller.preferences.XMLReader;
+import controller.preferences.XMLWriter;
 import javafx.collections.ObservableList;
-import model.IBasicModel;
+import model.IAdvancedModel;
 import model.Turtle;
 
 public class ParserController implements IParserController {
 
-	private IBasicModel myModel;
+	private IAdvancedModel myModel;
 	private XMLParser myParser;
 	
-	public ParserController(IBasicModel model) {
+	public ParserController(IAdvancedModel model) {
 		myModel = model;
 	}
 	

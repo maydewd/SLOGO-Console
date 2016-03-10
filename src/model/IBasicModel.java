@@ -67,7 +67,5 @@ public interface IBasicModel {
 
     public void addCoreTurtleObserver (Observer observer);
 
-    public Collection<TurtleInfo> getAllTurtleInfo ();
-    
     public Turtle getActiveTurtle ();
 }

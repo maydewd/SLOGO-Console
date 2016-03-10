@@ -1,5 +1,9 @@
 package controller.parser;
 
+import java.util.List;
+
+import controller.commands.AbstractExpressionNode;
+
 public interface IAdvancedSLogoCommands extends IBasicSLogoCommands {
 	
 	public double setBackground (int index);
@@ -19,4 +23,14 @@ public interface IAdvancedSLogoCommands extends IBasicSLogoCommands {
 	public double stamp ();
 	
 	public double clearStamps ();
+	
+	public double getCurrentActiveID ();
+	
+	public double getTurtleCount ();
+	
+	public double tell (List<Integer> ids);
+	
+	public double ask (List<Integer> ids, List<AbstractExpressionNode> commands);
+	
+	public double askWith ();
 }
