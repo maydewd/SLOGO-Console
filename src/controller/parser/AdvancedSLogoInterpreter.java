@@ -72,4 +72,26 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 		return pixels;
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public double getCurrentActiveID() {
+		return getModelActions().getActiveTurtle().getID();
+	}
+
+	@Override
+	public double getTurtleCount() {
+		return getModelActions().getAllTurtleInfo().size();
+	}
+
+	@Override
+	public double tell (List<Integer> ids) {
+		for (int id: ids) {
+			getModelActions().addSelectedTurtles(id);
+		}
+		return ids.get(ids.size()-1);
+	}
+
+
+>>>>>>> plg
 }
