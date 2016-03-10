@@ -11,6 +11,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class XMLReader implements XMLParser {
 	private File myFile;
 	private Map<String, Object> myInfo;
@@ -43,16 +46,14 @@ public class XMLReader implements XMLParser {
 
 				if (turtleViewInfo.getNodeType() == Node.ELEMENT_NODE) {
 					Element turtleViewInfoElement = (Element) turtleViewInfo;
-					String[] info = {"background-color", "turtle-count", "language"};
-					for (String infoPiece : info) {
-						extractInfo(infoPiece, turtleViewInfoElement);
-					}
-					ArrayList<String> images = new ArrayList<>();
+					extractInfo("background-color", turtleViewInfoElement);
+					extractInfo("turtle-count", turtleViewInfoElement);
+					ObservableList<String> images = FXCollections.observableArrayList();
 					Node imageList = turtleViewInfoElement.getElementsByTagName("image-list").item(0);
 					if (imageList.getNodeType() == Node.ELEMENT_NODE) {
 						Element imageListElement = (Element) imageList;
 						for (int i = 0; i < imageList.getChildNodes().getLength(); i++) {
-							images.add(imageListElement.getElementsByTagName(String.valueOf(i)).item(0).getTextContent());
+							images.add(imageListElement.getElementsByTagName("img" + String.valueOf(i)).item(0).getTextContent());
 						}
 					}
 					myInfo.put("image-list", images);

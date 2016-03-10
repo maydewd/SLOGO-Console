@@ -23,7 +23,7 @@ public class SettingsView extends BaseUIView{
 	    Selector bColorSelector = new BackgroundColorSelector(getModel());
 	    Selector tSelector = new TurtleSelector(getModel());
 	    Selector hSelector = new HelpSelector(myHostServices); 
-	    Selector fSelector = new FileSelector(myHostServices);
+	    Selector fSelector = new FileSelector(myHostServices, this.getModel());;
 		
 	    settings.getMenus().addAll(fSelector.getMenu(),
 	                               lSelector.getMenu(), 

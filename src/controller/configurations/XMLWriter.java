@@ -17,6 +17,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.collections.ObservableList;
 import model.TurtleInfo;
 
 
@@ -79,11 +81,12 @@ public class XMLWriter implements XMLParser {
 
 		// turtle view information
 		Element bcolor = addElement(turtleView, "background-color");
-		addText(bcolor, myInfo.get("background-color").toString());
+		int bcolorInd = ((IntegerProperty) myInfo.get("background-color")).getValue();
+		addText(bcolor, String.valueOf(bcolorInd));
 		Element imglist = addElement(turtleView, "image-list");
-		ArrayList<String> images = (ArrayList<String>) myInfo.get("image-list");
+		ObservableList<String> images = (ObservableList<String>) myInfo.get("image-list");
 		for (int i=0; i < images.size(); i++ ){
-			Element image = addElement(imglist, String.valueOf(i));
+			Element image = addElement(imglist, "img" + String.valueOf(i));
 			addText(image, images.get(i));
 		}
 		Element numTurtles = addElement(turtleView, "turtle-count");
@@ -95,7 +98,8 @@ public class XMLWriter implements XMLParser {
 
 		// settings information
 		Element language = addElement(settings, "language");
-		addText(language, myInfo.get("language").toString());
+		int langInd = ((IntegerProperty) myInfo.get("language")).getValue();
+		addText(language, String.valueOf(langInd));
 		
 	}
 

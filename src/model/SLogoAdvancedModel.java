@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
@@ -11,7 +12,7 @@ import javafx.beans.property.ReadOnlyListProperty;
 public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedModel {
     private AdvancedTurtleModel myTurtleModel = new AdvancedTurtleModel();
     private AdvancedOptionsModel myOptionsModel = new AdvancedOptionsModel();
-
+    
     public SLogoAdvancedModel () {
         setMyTurtleModel(myTurtleModel);
 
@@ -23,12 +24,6 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 
     public AdvancedOptionsModel getMyOptionsModel () {
         return myOptionsModel;
-    }
-
-    @Override
-    public Collection<? extends TurtleInfo> getAllTurtleInfo () {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override
@@ -51,62 +46,53 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 
     @Override
     public List<Double> getLineThicknesses () {
-        // TODO Auto-generated method stub
-        return null;
+        ArrayList<Double> thicknesses = new ArrayList<>();
+        for (LineInfo line: myTurtleModel.getReadOnlyLines()) {
+        	thicknesses.add(line.getThickness());
+        }
+        return thicknesses;
     }
 
 
     @Override
     public List<Entry<Double, Double>> getLineTypes () {
-        // TODO Auto-generated method stub
-        return null;
+    	ArrayList<Entry<Double, Double>> lineTypes = new ArrayList<>();
+        for (LineInfo line: myTurtleModel.getReadOnlyLines()) {
+        	lineTypes.add(line.getType());
+        }
+        return lineTypes;
     }
 
 
     @Override
     public void drawStamp () {
-        // TODO Auto-generated method stub
+        getMyTurtleModel().drawStamp();
         
     }
 
     @Override
     public void clearStamps () {
-        // TODO Auto-generated method stub
-        
+        getMyTurtleModel().stampsProperty().clear();
     }
 
     @Override
     public int getActiveTurtleID () {
-        // TODO Auto-generated method stub
-        return 0;
+        return getMyTurtleModel().getActiveTurtle().getID();
     }
 
     @Override
     public void setSelectedLineThickness (int i) {
-        // TODO Auto-generated method stub
-        
+        getMyTurtleModel().setSelectedLineThickness(i);
     }
 
     @Override
     public void setSelectedLineType (int i) {
-        // TODO Auto-generated method stub
-        
+        getMyTurtleModel().setSelectedLineType(i);     
     }
 
     @Override
     public ReadOnlyListProperty<StampInfo> getStamps () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
-    public void setSelectedLineThickness () {
-        // TODO Auto-generated method stub
-        
-    }
-
-    public void setSelectedLineType () {
-        // TODO Auto-generated method stub
-        
+        return getMyTurtleModel().stampsProperty();
     }
 
 

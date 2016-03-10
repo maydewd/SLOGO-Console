@@ -108,7 +108,7 @@ public class TurtleView extends BaseUIView implements Observer {
         }
         else{
             for(StampInfo s: getModel().getStamps()){
-                if (!myDisplayedStamps.keySet().contains(s) && s.getVisibility() ){
+                if (!myDisplayedStamps.keySet().contains(s)) { //&& s.getVisibility() ){
                     makeStamp(s);
                 }
             }

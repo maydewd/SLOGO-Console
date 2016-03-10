@@ -180,10 +180,9 @@ public class SLogoBasicModel implements IBasicModel {
         myOptionsModel = optionsModel;
     }
 
-	@Override
-	public Collection<? extends TurtleInfo> getAllTurtleInfo() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Collection<TurtleInfo> getAllTurtleInfo () {
+        return myTurtleModel.getMyTurtlesProperty();
+    }
 
 }

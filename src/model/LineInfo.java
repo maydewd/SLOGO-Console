@@ -1,11 +1,17 @@
 package model;
 
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Map;
+import java.util.Map.Entry;
+
 public class LineInfo {
 
     private Point myStart;
     private Point myEnd;
     private boolean myVisibility;
     private int myColor;
+    private int myThickness;
+    private Entry<Double, Double> myType;
     
     public LineInfo (Point start, Point end, boolean visible, int color) {
         setStart(start);
@@ -13,8 +19,14 @@ public class LineInfo {
         setVisibility(visible);
         setColor(color);
     }
+    
+    public LineInfo (Point start, Point end, boolean visible, int color, int thickness, int gap, int dash) {
+    	this(start, end, visible, color);
+    	setThickness(thickness);
+    	setType(gap, dash);
+    }
 
-    public Point getStart () {
+	public Point getStart () {
         return myStart;
     }
 
@@ -44,6 +56,23 @@ public class LineInfo {
 
     private void setColor (int color) {
         myColor = color;
+    }
+    
+    private void setThickness (int thickness) {
+    	myThickness = thickness;
+    }
+    
+    public double getThickness () {
+    	return myThickness;
+    }
+    
+    public void setType(int gap, int dash) {
+    	SimpleEntry<Double, Double> e = new SimpleEntry(gap, dash);
+  		
+  	}
+
+    public Entry<Double, Double> getType() {
+    	return myType;
     }
 
 }
