@@ -3,7 +3,6 @@ package view;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -11,7 +10,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.text.TextAlignment;
 import model.IAdvancedModel;
 import model.LineInfo;
 import model.Point;
@@ -42,7 +40,7 @@ public class TurtleView extends BaseUIView implements Observer {
     private Map<StampInfo, ImageView> myDisplayedStamps = new HashMap<>();
     private Map<TurtleInfo, ImageView> myDisplayedTurtles = new HashMap<>();
 
-    private Label myTurtleCoordinates;
+   //private Label myTurtleCoordinates;
 
     public TurtleView(IAdvancedModel c){
         super(DEFAULT_WIDTH, DEFAULT_HEIGHT, c);
@@ -50,7 +48,7 @@ public class TurtleView extends BaseUIView implements Observer {
         myCanvas = new BorderPane();
         initializeCanvas();
         myCanvas.setPrefSize(getWidth(), getHeight());
-        ((BorderPane) myCanvas).setTop(myTurtleCoordinates);
+      // ((BorderPane) myCanvas).setTop(myTurtleCoordinates);
         setNode(myCanvas);
         getModel().addCoreTurtleObserver(this);
         updateView();
@@ -63,6 +61,10 @@ public class TurtleView extends BaseUIView implements Observer {
         return d + getWidth() / 2;
     }
     
+    private double scaleY (double y) {
+        return -y + getHeight() / 2;
+    }
+
     private double scaleTurtleX(double d, ImageView turtle){
         return d - turtle.getFitWidth()/2;
     }
@@ -70,21 +72,17 @@ public class TurtleView extends BaseUIView implements Observer {
     private double scaleTurtleY(double d, ImageView turtle){
         return d + turtle.getFitHeight()/2;
     }
+    
+    
 
     private void initializeCanvas () {
         getModel().getActiveBackgroundColorIndex().addListener(o -> changeBackgroundColor());
-        myTurtleCoordinates = new Label("Hey");
-        myTurtleCoordinates.setTextAlignment(TextAlignment.CENTER);
     }
 
     private void changeBackgroundColor () {
         int index = getModel().getActiveBackgroundColorIndex().intValue();
         String hexString = getModel().colorOptionsProperty().get(index).toString();
         myCanvas.setStyle("-fx-background-color: #" + hexString + ";");
-    }
-
-    private double scaleY (double y) {
-        return -y + getHeight() / 2;
     }
 
     @Override

@@ -1,9 +1,6 @@
 package controller.configurations;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -19,7 +16,6 @@ import org.w3c.dom.Element;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.collections.ObservableList;
-import model.TurtleInfo;
 
 
 public class XMLWriter implements XMLParser {
@@ -42,17 +38,12 @@ public class XMLWriter implements XMLParser {
 		root.appendChild(doc.createTextNode(text));
 	}
 
-	private void setUpDoc() {
+	private void setUpDoc() throws ParserConfigurationException {
 		DocumentBuilderFactory dbFactory =
 				DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
-		try {
 			dBuilder = dbFactory.newDocumentBuilder();
 			doc = dBuilder.newDocument();
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	private void writeDoc() {
@@ -104,7 +95,7 @@ public class XMLWriter implements XMLParser {
 	}
 
 	@Override
-	public void parse() {
+	public void parse() throws ParserConfigurationException {
 		setUpDoc();
 		generateDoc();
 		writeDoc();
