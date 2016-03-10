@@ -168,7 +168,7 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
         return getModelActions().userCommandsBodies().get(name);
     }
 
-    private IBasicModel getModelActions () {
+    public IBasicModel getModelActions () {
         return myModelActions;
     }
 

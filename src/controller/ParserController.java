@@ -10,7 +10,6 @@ import controller.configurations.XMLWriter;
 import javafx.collections.ObservableList;
 import model.IBasicModel;
 import model.Turtle;
-import view.BaseUIView;
 
 public class ParserController implements IParserController {
 
@@ -32,10 +31,6 @@ public class ParserController implements IParserController {
     	HashMap<String, Object> prefs = new HashMap<String, Object>();
 		myParser = new XMLReader(file, prefs);
 		myParser.parse();
-		System.out.println(prefs.get("background-color"));
-		System.out.println(prefs.get("turtle-count"));
-		System.out.println(prefs.get("image-list").toString());
-		System.out.println(prefs.get("language"));
 		myModel.setActiveBackgroundColorIndex(Integer.valueOf((String) (prefs.get("background-color"))));
 		myModel.turtleImageOptionsProperty().set((ObservableList<String>) (prefs.get("image-list")));
 		for (int i=1; i <= Integer.valueOf((String) (prefs.get("turtle-count"))); i++) {

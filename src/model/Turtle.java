@@ -147,6 +147,10 @@ public class Turtle implements TurtleInfo{
 	public void setLineThickness(int i) {
 		myLineThickness = i;
 	}
+	
+	public int getLineThickness() {
+		return myLineThickness;
+	}
     
 
 }

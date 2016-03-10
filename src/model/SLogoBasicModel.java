@@ -185,4 +185,9 @@ public class SLogoBasicModel implements IBasicModel {
         return myTurtleModel.getMyTurtlesProperty();
     }
 
+	@Override
+	public Turtle getActiveTurtle() {
+		return myTurtleModel.getActiveTurtle();
+	}
+
 }
