@@ -1,4 +1,4 @@
-package controller.preferences;
+package controller.configurations;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import org.w3c.dom.Element;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.collections.ObservableList;
-
+import model.TurtleInfo;
 
 
 public class XMLWriter implements XMLParser {

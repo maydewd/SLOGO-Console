@@ -180,6 +180,11 @@ public class SLogoBasicModel implements IBasicModel {
         myOptionsModel = optionsModel;
     }
 
+    @Override
+    public Collection<TurtleInfo> getAllTurtleInfo () {
+        return myTurtleModel.getMyTurtlesProperty();
+    }
+
 	@Override
 	public Turtle getActiveTurtle() {
 		return myTurtleModel.getActiveTurtle();

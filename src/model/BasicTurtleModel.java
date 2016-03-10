@@ -14,11 +14,13 @@ import javafx.collections.FXCollections;
 public class BasicTurtleModel extends Observable {
 
     private Turtle myTurtle;
+    private ListProperty<TurtleInfo> myTurtles = new SimpleListProperty<>(FXCollections.observableArrayList());
     private ListProperty<LineInfo> myLines = new SimpleListProperty<>(FXCollections.observableArrayList());
     private IntegerProperty myBackgroundColorIndexProperty = new SimpleIntegerProperty(0);
 
     public BasicTurtleModel () {
-        setMyTurtle(new Turtle(1,0));
+        myTurtles.add(new Turtle(1,0));
+    	setMyTurtle((Turtle) myTurtles.get(0));
     }
 
     public void moveTurtleForward (double pixels) {
@@ -95,6 +97,9 @@ public class BasicTurtleModel extends Observable {
 
     public IntegerProperty backgroundColorIndexProperty () {
         return myBackgroundColorIndexProperty;
+    }
+    public ListProperty<TurtleInfo> getMyTurtlesProperty() {
+    	return myTurtles;
     }
     
     public Turtle getActiveTurtle () {

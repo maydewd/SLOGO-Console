@@ -12,6 +12,11 @@ import javafx.beans.property.ReadOnlyListProperty;
 public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedModel {
     private AdvancedTurtleModel myTurtleModel = new AdvancedTurtleModel();
     private AdvancedOptionsModel myOptionsModel = new AdvancedOptionsModel();
+    
+    public SLogoAdvancedModel () {
+        setMyTurtleModel(myTurtleModel);
+
+    }
 
     public AdvancedTurtleModel getMyTurtleModel () {
         return myTurtleModel;
@@ -23,30 +28,20 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 
     @Override
     public void addSelectedTurtles (int IDnumber) {
-        if (getMyTurtleModel().allTurtlesProperty().containsKey(IDnumber)) {
-        	getMyTurtleModel().selectedTurtlesProperty().put(IDnumber, getMyTurtleModel().getTurtle(IDnumber));
-        }
-        else {
-        	Turtle t = new Turtle(IDnumber);
-        	getMyTurtleModel().allTurtlesProperty().put(IDnumber, t);
-        	getMyTurtleModel().selectedTurtlesProperty().put(IDnumber, t);
-        }
+        // TODO Auto-generated method stub
         
     }
 
     @Override
     public void clearSelectedTurtles () {
-       getMyTurtleModel().selectedTurtlesProperty().clear();
+        // TODO Auto-generated method stub
         
     }
 
     @Override
     public Collection<Integer> getSelectedTurtleIDs () {
-    	ArrayList<Integer> ids = new ArrayList<>();
-    	for (Integer id: getMyTurtleModel().selectedTurtlesProperty().keySet()) {
-        	ids.add(id);
-        } 
-    	return ids;
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
@@ -99,17 +94,6 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
     public ReadOnlyListProperty<StampInfo> getStamps () {
         return getMyTurtleModel().stampsProperty();
     }
-
-
-	@Override
-	public Collection<TurtleInfo> getAllTurtleInfo() {
-		return getMyTurtleModel().allTurtlesProperty().values();
-	}
-
-	@Override
-	public TurtleInfo getTurtle(int id) {
-		return getMyTurtleModel().getTurtle(id);
-	}
 
 
 }

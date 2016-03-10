@@ -1,4 +1,4 @@
-package controller.preferences;
+package controller.configurations;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;

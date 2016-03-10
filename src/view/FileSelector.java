@@ -1,6 +1,7 @@
 package view;
 
 import java.io.File;
+import app.Main;
 import app.SLogoEngine;
 import controller.IParserController;
 import controller.ParserController;
@@ -11,12 +12,12 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.IAdvancedModel;
+import model.IBasicModel;
 
 public class FileSelector extends Selector {
     private Menu myFileSelector;
 
-    public FileSelector (HostServices hostServices, IAdvancedModel model) {
+    public FileSelector (HostServices hostServices, IBasicModel model) {
         myFileSelector = new Menu("File");
         MenuItem save = new MenuItem("Save");
         IParserController parse = new ParserController(model);
