@@ -12,6 +12,7 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.IAdvancedModel;
+import model.IBasicModel;
 
 public class FileSelector extends Selector {
     private Menu myFileSelector;

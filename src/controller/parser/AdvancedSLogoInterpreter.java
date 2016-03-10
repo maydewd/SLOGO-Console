@@ -5,7 +5,6 @@ import java.util.List;
 import controller.commands.AbstractExpressionNode;
 import model.IAdvancedModel;
 import model.RGBColor;
-import model.Turtle;
 
 public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements IAdvancedSLogoCommands {
 
@@ -94,24 +93,5 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 		return ids.get(ids.size()-1);
 	}
 
-	@Override
-	public double ask(List<Integer> ids, List<AbstractExpressionNode> commands) {
-		// TODO Auto-generated method stub
-		/* for (int i=0; i < ids.size(); i++) {
-			Turtle t = getModelActions().getTurtle(ids.get(i));
-			for (AbstractExpressionNode command: commands) {
-				command.exe
-			}
-		}
-		*/
-		
-		return 0;
-	}
-	
-	@Override
-	public double askWith() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

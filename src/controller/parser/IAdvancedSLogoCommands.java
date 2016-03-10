@@ -30,7 +30,4 @@ public interface IAdvancedSLogoCommands extends IBasicSLogoCommands {
 	
 	public double tell (List<Integer> ids);
 	
-	public double ask (List<Integer> ids, List<AbstractExpressionNode> commands);
-	
-	public double askWith ();
 }

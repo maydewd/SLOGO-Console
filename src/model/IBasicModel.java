@@ -66,6 +66,6 @@ public interface IBasicModel {
     public void setActiveTurtleImageIndex (int turtleImageIndex);
 
     public void addCoreTurtleObserver (Observer observer);
-
+    
     public Turtle getActiveTurtle ();
 }

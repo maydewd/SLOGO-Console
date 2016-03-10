@@ -9,7 +9,9 @@ import controller.preferences.XMLReader;
 import controller.preferences.XMLWriter;
 import javafx.collections.ObservableList;
 import model.IAdvancedModel;
+import model.IBasicModel;
 import model.Turtle;
+import model.TurtleInfo;
 
 public class ParserController implements IParserController {
 
@@ -34,7 +36,7 @@ public class ParserController implements IParserController {
 		myModel.setActiveBackgroundColorIndex(Integer.valueOf((String) (prefs.get("background-color"))));
 		myModel.turtleImageOptionsProperty().set((ObservableList<String>) (prefs.get("image-list")));
 		for (int i=1; i <= Integer.valueOf((String) (prefs.get("turtle-count"))); i++) {
-			myModel.getAllTurtleInfo().add(new Turtle(i));
+			myModel.getMyTurtleModel().allTurtlesProperty().put(i, new Turtle(i));
 		}
 		myModel.setActiveLanguageIndex(Integer.valueOf((String) (prefs.get("language"))));	
 
