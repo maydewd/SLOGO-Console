@@ -1,6 +1,8 @@
 package controller.configurations;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -15,6 +17,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
@@ -42,8 +45,8 @@ public class XMLWriter implements XMLParser {
 		DocumentBuilderFactory dbFactory =
 				DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
-			dBuilder = dbFactory.newDocumentBuilder();
-			doc = dBuilder.newDocument();
+		dBuilder = dbFactory.newDocumentBuilder();
+		doc = dBuilder.newDocument();
 	}
 
 	private void writeDoc() {
@@ -61,37 +64,31 @@ public class XMLWriter implements XMLParser {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void generateDoc() {
 		// root element
 		Element workspace = doc.createElement("workspace");
 		doc.appendChild(workspace);
 
-		//  turtle view element
-		Element turtleView = addElement(workspace, "turtle-view");
-
-		// turtle view information
-		Element bcolor = addElement(turtleView, "background-color");
-		int bcolorInd = ((IntegerProperty) myInfo.get("background-color")).getValue();
-		addText(bcolor, String.valueOf(bcolorInd));
-		Element imglist = addElement(turtleView, "image-list");
-		ObservableList<String> images = (ObservableList<String>) myInfo.get("image-list");
-		for (int i=0; i < images.size(); i++ ){
-			Element image = addElement(imglist, "img" + String.valueOf(i));
-			addText(image, images.get(i));
+		// non list preferences
+		String[] preferencesArray = {"background-color", "turtle-count", "language"};
+		for (String preference: preferencesArray) {
+			Element preferenceElement = addElement(workspace, preference);
+			int preferenceValue = ((IntegerProperty) myInfo.get(preference)).getValue();
+			addText(preferenceElement, String.valueOf(preferenceValue));
 		}
-		Element numTurtles = addElement(turtleView, "turtle-count");
-		addText(numTurtles, myInfo.get("turtle-count").toString());
 
+		// list preferences
+		String[] listableOptions = {"image-list", "palette"};
+		for (String setting: listableOptions) {
+			Element optionsList = addElement(workspace, setting);
+			ObservableList<String> options = (ObservableList<String>) myInfo.get(setting);
+			for (int i=0; i < options.size(); i++ ){
+				Element option = addElement(optionsList, "item" + String.valueOf(i));
+				addText(option, options.get(i));
+			}
+		}
 
-		// settings element
-		Element settings = addElement(workspace, "settings");
-
-		// settings information
-		Element language = addElement(settings, "language");
-		int langInd = ((IntegerProperty) myInfo.get("language")).getValue();
-		addText(language, String.valueOf(langInd));
-		
 	}
 
 	@Override

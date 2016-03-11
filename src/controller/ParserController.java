@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
@@ -9,10 +10,13 @@ import org.xml.sax.SAXException;
 import controller.configurations.XMLParser;
 import controller.configurations.XMLReader;
 import controller.configurations.XMLWriter;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.paint.Color;
 import model.Turtle;
 import view.BaseUIView;
 import model.IAdvancedModel;
+import model.RGBColor;
 
 
 
@@ -49,7 +53,13 @@ public class ParserController implements IParserController {
             errorHandler.showError(e.getMessage());
         }
 		myModel.setActiveBackgroundColorIndex(Integer.valueOf((String) (prefs.get("background-color"))));
-		myModel.turtleImageOptionsProperty().set((ObservableList<String>) (prefs.get("image-list")));
+		myModel.turtleImageOptionsProperty().set((ObservableList<String>) (prefs.get("image-list"))); 
+		ObservableList<RGBColor> colors = FXCollections.observableArrayList();
+		for(String color: (ObservableList<String>) prefs.get("palette")) {
+			Color c = Color.valueOf(color);
+			colors.add(new RGBColor((int) c.getRed(), (int) c.getGreen(), (int) c.getBlue()));
+		}
+		myModel.colorOptionsProperty().set(colors);
 		for (int i=1; i <= Integer.valueOf((String) (prefs.get("turtle-count"))); i++) {
 			myModel.getMyTurtleModel().allTurtlesProperty().put(i, new Turtle(i));
 		}
@@ -63,6 +73,10 @@ public class ParserController implements IParserController {
 		prefs.put("image-list", myModel.turtleImageOptionsProperty().get());
 		prefs.put("turtle-count", myModel.getAllTurtleInfo().size());
 		prefs.put("language", myModel.getActiveLanguageIndex());
+		prefs.put("palette", FXCollections.observableArrayList(new ArrayList<String>()));
+		for (RGBColor c: myModel.colorOptionsProperty().get()) {
+			((ObservableList<String>) prefs.get("palette")).add(c.getColorName());
+		}
 		return prefs;
 	}
 

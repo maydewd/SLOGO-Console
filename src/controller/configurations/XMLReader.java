@@ -2,6 +2,7 @@ package controller.configurations;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -30,42 +31,36 @@ public class XMLReader implements XMLParser {
 
 	@Override
 	public void parse() throws ParserConfigurationException, SAXException, IOException {
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document document = builder.parse(myFile);
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document document = builder.parse(myFile);
 
-			document.getDocumentElement().normalize();
-			NodeList workspaceNode = document.getElementsByTagName("workspace");
-			Node workspace = workspaceNode.item(0);
+		document.getDocumentElement().normalize();
+		NodeList workspaceNode = document.getElementsByTagName("workspace");
+		Node workspace = workspaceNode.item(0);
 
-			if (workspace.getNodeType() == Node.ELEMENT_NODE) {
-				Element workspaceElement = (Element) workspace;
-				NodeList turtleViewInfoNode = workspaceElement.getElementsByTagName("turtle-view");
-				Node turtleViewInfo = turtleViewInfoNode.item(0);
-
-				if (turtleViewInfo.getNodeType() == Node.ELEMENT_NODE) {
-					Element turtleViewInfoElement = (Element) turtleViewInfo;
-					extractInfo("background-color", turtleViewInfoElement);
-					extractInfo("turtle-count", turtleViewInfoElement);
-					ObservableList<String> images = FXCollections.observableArrayList();
-					Node imageList = turtleViewInfoElement.getElementsByTagName("image-list").item(0);
-					if (imageList.getNodeType() == Node.ELEMENT_NODE) {
-						Element imageListElement = (Element) imageList;
-						for (int i = 0; i < imageList.getChildNodes().getLength(); i++) {
-							images.add(imageListElement.getElementsByTagName("img" + String.valueOf(i)).item(0).getTextContent());
-						}
+		if (workspace.getNodeType() == Node.ELEMENT_NODE) {
+			Element workspaceElement = (Element) workspace;
+			
+			String[] preferencesArray = {"background-color", "turtle-count", "language"};
+			for (String preference: preferencesArray) {
+				extractInfo(preference, workspaceElement);
+			}
+			
+			String[] listableOptions = {"image-list", "palette"};
+			for (String setting: listableOptions) {
+				ObservableList<String> items = FXCollections.observableArrayList();
+				Node settingList = workspaceElement.getElementsByTagName(setting).item(0);
+				if (settingList.getNodeType() == Node.ELEMENT_NODE) {
+					Element settingListElement = (Element) settingList;
+					for (int i = 0; i < settingList.getChildNodes().getLength(); i++) {
+						items.add(settingListElement.getElementsByTagName("item" + String.valueOf(i)).item(0).getTextContent());
 					}
-					myInfo.put("image-list", images);
-				}
-				
-				NodeList settingsNode = workspaceElement.getElementsByTagName("settings");
-				Node settings = settingsNode.item(0);
-				
-				if (settings.getNodeType() == Node.ELEMENT_NODE) {
-					Element settingsElement = (Element) settings;
-					extractInfo("language", settingsElement);
+					myInfo.put(setting, items);
 				}
 			}
+		}
 	}
-
 }
+
+
