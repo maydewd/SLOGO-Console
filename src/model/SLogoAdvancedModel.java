@@ -43,15 +43,11 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 	public void clearSelectedTurtles () {
 		getMyTurtleModel().selectedTurtlesProperty().clear();
 	}
-
+	
 	@Override
-	public Collection<Integer> getSelectedTurtleIDs () {
-		ArrayList<Integer> ids = new ArrayList<>();
-		for (Integer id: getMyTurtleModel().selectedTurtlesProperty().keySet()) {
-			ids.add(id);
-		} 
-		return ids;
-	}
+	    public List<Integer> getSelectedTurtleIDs () {
+	        return new ArrayList<Integer>(getMyTurtleModel().selectedTurtlesProperty().keySet());
+	    }
 
 	@Override
 	public List<Double> getLineThicknesses () {
@@ -112,6 +108,13 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 	public TurtleInfo getTurtle(int id) {
 		return getMyTurtleModel().allTurtlesProperty().get(id);
 	}
+
+    @Override
+    public List<Integer> getAllTurtleIDs () {
+        return new ArrayList<Integer>(getMyTurtleModel().allTurtlesProperty().keySet());
+    }
+
+    
 
 
 }

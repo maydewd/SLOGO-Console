@@ -10,8 +10,10 @@ public interface IAdvancedModel extends IBasicModel {
     void addSelectedTurtles (int IDnumber);
 
     void clearSelectedTurtles ();
+    
+    List<Integer> getAllTurtleIDs ();
 
-    Collection<Integer> getSelectedTurtleIDs ();
+    List<Integer> getSelectedTurtleIDs ();
 
     List<Double> getLineThicknesses ();
     

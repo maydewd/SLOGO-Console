@@ -1,7 +1,8 @@
 package controller.parser;
 
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.TreeMap;
 import model.IAdvancedModel;
 import model.RGBColor;
 
@@ -95,7 +96,8 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
     @Override
     public List<Integer> getSelectedTurtles () {
         // TODO Auto-generated method stub
-        return null;
+        // new TreeMap().ke
+        return new ArrayList<Integer>(getModelActions().getSelectedTurtleIDs());
     }
 
     @Override
