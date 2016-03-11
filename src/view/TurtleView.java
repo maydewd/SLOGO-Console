@@ -183,10 +183,12 @@ public class TurtleView extends BaseUIView implements Observer {
         alert.setTitle("Turtle Info");
         alert.setHeaderText("Do you want to Select this Turtle?");
         Point turtlePos = turtle.getLocation();
-        alert.setContentText("Turtle X: " + turtlePos.getX() + "\n" + 
+        alert.setContentText("ID: " + turtle.getID() + "\n" +
+                             "Turtle X: " + turtlePos.getX() + "\n" + 
                              "Turtle Y: " + turtlePos.getY() + "\n" + 
                              "Pen is Down: " + getModel().getPenDown() + "\n" +
-                              "Heading: "+ getModel().getTurtleHeading());
+                              "Heading: "+ turtle.getHeading() + "\n" +
+                              "Selected: " + getModel().getSelectedTurtleIDs().contains(turtle.getID()));
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
             getModel().addSelectedTurtle(turtle.getID());
