@@ -143,11 +143,14 @@ public class TurtleView extends BaseUIView implements Observer {
         line.setStartY(scaleY(l.getStart().getY()));
         line.setEndX(scaleX(l.getEnd().getX()));
         line.setEndY(scaleY(l.getEnd().getY()));
-
+       
         RGBColor currentColor = getModel().colorOptionsProperty().get(l.getColor());
         line.setStroke(Color.rgb(currentColor.getRed(),
                                  currentColor.getGreen(),
                                  currentColor.getBlue()));
+        line.setStrokeWidth(l.getThickness());
+        line.getStrokeDashArray().addAll(l.getTypeIndex().getPixelsOn(), l.getTypeIndex().getPixelsOff());
+
 
         myDisplayedLines.put(l, line);
         myCanvas.getChildren().add(line);
@@ -168,14 +171,7 @@ public class TurtleView extends BaseUIView implements Observer {
         myCanvas.getChildren().add(myTurtle);
     }
 
-//    private void updateTurtleCoordinates(){
-//        Point turtlePos = getModel().getTurtleCoordinates();
-//        String turtlePosString = "(" + turtlePos.getX() + ", " + turtlePos.getY() + ")";
-////        System.out.println(turtlePosString);
-//        this.turtleCoordinates.setText(turtlePosString);
-//
-//    }
-    
+
     private void showInfo(TurtleInfo turtle){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Turtle Info");
