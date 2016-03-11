@@ -10,27 +10,26 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class Turtle implements TurtleInfo {
 
     private static final int DEFAULT_ID = 1;
-    private static final int DEFAULT_PEN_COLOR_INDEX = 1;
+    private static final int DEFAULT_PEN_INDEX = 1;
     private static final int DEFAULT_IMAGE_INDEX = 0;
 
     private double myHeading = 0;
     private Point myLocation = new Point(0, 0);
     private boolean isPenDown = true;
-    private IntegerProperty myPenColorIndexProperty =
-            new SimpleIntegerProperty(DEFAULT_PEN_COLOR_INDEX);
+    private IntegerProperty myPenColorIndexProperty = new SimpleIntegerProperty(DEFAULT_PEN_INDEX);
     private boolean isVisible = true;
     private IntegerProperty myImageIndexProperty = new SimpleIntegerProperty(DEFAULT_IMAGE_INDEX);
     private int myID;
     private boolean isSelected = true;
     private double myLineThickness;
-    private Entry<Double, Double> myLineType;
+    private int myLineTypeIndex;
 
     public Turtle () {
         this(DEFAULT_ID);
     }
 
     public Turtle (int ID) {
-        this(DEFAULT_PEN_COLOR_INDEX, DEFAULT_IMAGE_INDEX, ID);
+        this(DEFAULT_PEN_INDEX, DEFAULT_IMAGE_INDEX, ID);
     }
 
     public Turtle (int penColorIndex, int imageIndex) {
@@ -145,12 +144,12 @@ public class Turtle implements TurtleInfo {
         isSelected = select;
     }
 
-    public void setLineType (Entry<Double, Double> typeValue) {
-        myLineType = typeValue;
+    public void setLineType (int index) {
+        myLineTypeIndex = index;
     }
 
-    public Entry<Double, Double> getLineType () {
-        return myLineType;
+    public int getLineType () {
+        return myLineTypeIndex;
     }
 
     public void setLineThickness (double i) {

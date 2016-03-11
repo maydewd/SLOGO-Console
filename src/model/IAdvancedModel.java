@@ -15,11 +15,11 @@ public interface IAdvancedModel extends IBasicModel {
 
     List<Integer> getSelectedTurtleIDs ();
 
-    List<Double> getLineThicknesses ();
+    List<LineThickness> getLineThicknesses ();
     
     void setLineThickness (int i);
 
-    List<Entry<Double, Double>> getLineTypeValues ();
+    List<LineType> getLineTypeValues ();
 
     void setLineType (int i);
     

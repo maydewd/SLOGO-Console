@@ -15,7 +15,7 @@ public class LineThicknessSelector extends Selector{
     }
 
     private void makeButton (int i, IAdvancedModel model) {
-        MenuItem button = new MenuItem(String.valueOf(model.getLineThicknesses().get(i)));
+        MenuItem button = new MenuItem(model.getLineThicknesses().get(i).getMyName());
         button.setOnAction(e -> model.setLineThickness(i));
         getMenu().getItems().add(button);
     }

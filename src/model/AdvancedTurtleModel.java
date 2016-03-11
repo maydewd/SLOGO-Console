@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Map.Entry;
+import java.util.function.Consumer;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyListProperty;
@@ -25,14 +26,7 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
         selectTurtle(STARTING_INDEX);
     }
 
-    public void setSelectedLineThickness (int i) {
-        getActiveTurtle().setLineThickness(i);
-
-    }
-
-    public void setSelectedLineType (Entry<Double, Double> e) {
-        getActiveTurtle().setLineType(e);
-    }
+    
 
     public ReadOnlyListProperty<StampInfo> stampsProperty () {
         return myStamps;
@@ -68,17 +62,25 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
 
     @Override
     public void setPenColor (int index) {
-        for (Turtle turtle : allTurtlesProperty().values()) {
-            turtle.setMyPenColorIndex(index);
-        }
+        forAllTurtles(turtle -> turtle.setMyPenColorIndex(index));
     }
 
     @Override
     public void setImageIndex (int index) {
-        for (Turtle turtle : allTurtlesProperty().values()) {
-            turtle.setMyImageIndex(index);
-        }
+        forAllTurtles(turtle -> turtle.setMyImageIndex(index));
         changeAndNotify();
+    }
+    
+    public void setLineThickness (double thickness) {
+        forAllTurtles(turtle -> turtle.setLineThickness(thickness));
+    }
+    
+    public void setSelectedLineType (int index) {
+        forAllTurtles(turtle -> turtle.setLineType(index));
+    }
+    
+    private void forAllTurtles(Consumer<? super Turtle> action) {
+        allTurtlesProperty().values().forEach(action);
     }
 
 }

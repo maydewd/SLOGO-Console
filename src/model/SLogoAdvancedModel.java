@@ -42,12 +42,12 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 	    }
 
 	@Override
-	public List<Double> getLineThicknesses () {
+	public List<LineThickness> getLineThicknesses () {
 		return getMyOptionsModel().lineThicknessOptionsProperty().get();
 	}
 
 	@Override
-	public List<Entry<Double, Double>> getLineTypeValues () {
+	public List<LineType> getLineTypeValues () {
 		return getMyOptionsModel().lineTypeOptionsProperty().get();
 	}
 
@@ -69,12 +69,12 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 
 	@Override
 	public void setLineThickness (int i) {
-		getMyTurtleModel().setSelectedLineThickness(i);
+		getMyTurtleModel().setLineThickness(i);
 	}
 
 	@Override
 	public void setLineType (int i) {
-		getMyTurtleModel().setSelectedLineType(getMyOptionsModel().lineTypeOptionsProperty().get(i));     
+		getMyTurtleModel().setSelectedLineType(i);     
 	}
 
 	@Override
