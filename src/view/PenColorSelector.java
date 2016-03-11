@@ -6,19 +6,12 @@ import model.IBasicModel;
 
 public class PenColorSelector extends ColorSelector{
 
-    private Menu myPenColorSettings;
     
     public PenColorSelector (IBasicModel basicModel) {
-        myPenColorSettings = new Menu("Pen Color");
-        for(int i = 0; i < basicModel.colorOptionsProperty().getSize(); i++){
-            makeButton(i, basicModel);
-        }
+        super(basicModel);
+        getMenu().setText("Pen Color");
     }
 
-    @Override
-    public Menu getMenu () {
-        return myPenColorSettings;
-    }
 
     @Override
     public void addButton (CustomMenuItem button, int i, IBasicModel basicModel) {

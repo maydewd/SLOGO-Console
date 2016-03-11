@@ -3,10 +3,10 @@ package view;
 import javafx.scene.control.Menu;
 import model.IAdvancedModel;
 
-public class PenSelector extends Selector{
+public class PenSettings extends Selector{
     private Menu myPenSettings;
 
-    public PenSelector (IAdvancedModel iModel) {
+    public PenSettings (IAdvancedModel iModel) {
         myPenSettings = new Menu("Pen Settings");
         Selector penColor = new PenColorSelector(iModel);
         Selector lineThickness = new LineThicknessSelector(iModel);

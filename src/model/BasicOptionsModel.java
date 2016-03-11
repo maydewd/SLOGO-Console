@@ -16,6 +16,7 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 
 
 public class BasicOptionsModel {
@@ -25,7 +26,6 @@ public class BasicOptionsModel {
               "Spanish" };
     private static final RGBColor[] INITIAL_COLORS =
             { new RGBColor(255, 255, 255), new RGBColor(0, 0, 0), new RGBColor(255, 0, 0) };
-    // TODO add initial images
     private static final String[] INITIAL_IMAGES = {"blackturtle.png", "whiteturtle.png"};
 
     private MapProperty<String, Double> myVariableMap = new SimpleMapProperty<String, Double>(FXCollections.observableHashMap());
@@ -34,7 +34,7 @@ public class BasicOptionsModel {
     private Map<String, AbstractExpressionNode> myUserCommandsBodies =
             new HashMap<String, AbstractExpressionNode>();
     private ListProperty<String> myCommandHistoryProperty = new SimpleListProperty<String>(FXCollections.observableArrayList());
-    private ListProperty<RGBColor> myColorOptionsProperty = new SimpleListProperty<RGBColor>(FXCollections.observableArrayList());
+    private MapProperty<Integer, RGBColor> myColorOptionsProperty = new SimpleMapProperty<Integer, RGBColor>(FXCollections.observableHashMap());
     private ListProperty<String> myImageOptionsProperty = new SimpleListProperty<String>(FXCollections.observableArrayList());
     private ReadOnlyListProperty<String> myLanguageOptionsProperty;
     private IntegerProperty myActiveLanguageIndex = new SimpleIntegerProperty(0);
@@ -56,8 +56,9 @@ public class BasicOptionsModel {
     }
 
     private void initializeColors () {
-    	ObservableList<RGBColor> colors = FXCollections.observableArrayList(Arrays.asList(INITIAL_COLORS));
-        colorOptionsProperty().setValue(colors);
+        for (int i = 0; i < INITIAL_COLORS.length; i++) {
+            colorOptionsProperty().put(i, INITIAL_COLORS[i]);
+        }
     }
 
     private void initializeTurtleImages () {
@@ -96,7 +97,7 @@ public class BasicOptionsModel {
         myActiveLanguageIndex.set(languageIndex);
     }
 
-    public ListProperty<RGBColor> colorOptionsProperty () {
+    public MapProperty<Integer, RGBColor> colorOptionsProperty () {
         return myColorOptionsProperty;
     }
 

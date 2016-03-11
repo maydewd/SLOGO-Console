@@ -109,7 +109,7 @@ public class SLogoBasicModel implements IBasicModel {
     }
 
     @Override
-    public ListProperty<RGBColor> colorOptionsProperty () {
+    public MapProperty<Integer, RGBColor> colorOptionsProperty () {
         return getMyOptionsModel().colorOptionsProperty();
     }
 
@@ -121,7 +121,7 @@ public class SLogoBasicModel implements IBasicModel {
     @Override
     public void setActiveBackgroundColorIndex (int backgroundColorIndex) {
         // TODO add message
-        if (backgroundColorIndex >= getMyOptionsModel().colorOptionsProperty().size()) {
+        if (!getMyOptionsModel().colorOptionsProperty().containsKey(backgroundColorIndex)) {
             throw new IllegalArgumentException();
         }
         getMyTurtleModel().backgroundColorIndexProperty().set(backgroundColorIndex);
@@ -135,7 +135,7 @@ public class SLogoBasicModel implements IBasicModel {
     @Override
     public void setPenColorIndex (int penColorIndex) {
         // TODO Add message
-        if (penColorIndex >= getMyOptionsModel().colorOptionsProperty().size()) {
+        if (!getMyOptionsModel().colorOptionsProperty().containsKey(penColorIndex)) {
             throw new IllegalArgumentException();
         }
         getMyTurtleModel().setPenColor(penColorIndex);

@@ -5,18 +5,10 @@ import javafx.scene.control.Menu;
 import model.IBasicModel;
 
 public class BackgroundColorSelector extends ColorSelector {
-    private Menu myBackgroundSettings;
     
     public BackgroundColorSelector (IBasicModel basicModel) {
-        myBackgroundSettings = new Menu("Background Color");
-        for(int i = 0; i < basicModel.colorOptionsProperty().getSize(); i++){
-            makeButton(i, basicModel);
-        }
-    }
-
-    @Override
-    public Menu getMenu () {
-        return myBackgroundSettings;
+        super(basicModel);
+        getMenu().setText("Background Color");
     }
 
     @Override

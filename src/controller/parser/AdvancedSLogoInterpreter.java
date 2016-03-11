@@ -58,7 +58,7 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 
 	@Override
 	public double setPalette(int index, int r, int g, int b) {
-		getModelActions().colorOptionsProperty().set(index, new RGBColor(r,g,b));
+		getModelActions().colorOptionsProperty().put(index, new RGBColor(r,g,b));
 		return index;
 	}
 

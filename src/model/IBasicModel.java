@@ -49,7 +49,7 @@ public interface IBasicModel {
     
     public void setActiveLanguageIndex (int languageIndex);
 
-    public ListProperty<RGBColor> colorOptionsProperty ();
+    public MapProperty<Integer, RGBColor> colorOptionsProperty ();
 
     public ReadOnlyIntegerProperty getActiveBackgroundColorIndex ();
 
