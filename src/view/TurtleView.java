@@ -163,7 +163,7 @@ public class TurtleView extends BaseUIView implements Observer {
         myTurtle.setFitWidth(TURTLE_WIDTH);
         myTurtle.setX(scaleX(scaleTurtleX(turtle.getLocation().getX(), myTurtle)));
         myTurtle.setY(scaleY(scaleTurtleY(turtle.getLocation().getY(), myTurtle)));
-        myTurtle.setRotate(- getModel().getTurtleHeading() + HEADING_OFFSET);
+        myTurtle.setRotate(- turtle.getHeading() + HEADING_OFFSET);
         myTurtle.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> showInfo(turtle));
         myDisplayedTurtles.put(turtle, myTurtle);
         myCanvas.getChildren().add(myTurtle);
