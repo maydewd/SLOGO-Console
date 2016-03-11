@@ -12,6 +12,7 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 	
 	public AdvancedSLogoInterpreter(IAdvancedModel advancedModel) {
 		super(advancedModel);
+		setModelActions(advancedModel);
 	}
 
 	@Override
@@ -41,9 +42,7 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 		}
 	}
 	
-	public IAdvancedModel getModelActions () {
-		return myModelActions;
-	}
+	
 
 	@Override
 	public double setPenColor(int index) {
@@ -87,29 +86,34 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 
 	@Override
 	public double tellAll (List<Integer> ids) {
-		for (int id: ids) {
-			getModelActions().addSelectedTurtles(id);
-		}
-		return ids.get(ids.size()-1);
+	        getModelActions().clearSelectedTurtles();
+	        ids.forEach(id -> getModelActions().addSelectedTurtle(id));
+		return ids.size() != 0 ? ids.get(ids.size()-1) : 0;
 	}
 
     @Override
     public List<Integer> getSelectedTurtles () {
-        // TODO Auto-generated method stub
-        // new TreeMap().ke
-        return new ArrayList<Integer>(getModelActions().getSelectedTurtleIDs());
+        return getModelActions().getSelectedTurtleIDs();
     }
 
     @Override
     public List<Integer> getAllTurtles () {
-        // TODO Auto-generated method stub
-        return null;
+        return getModelActions().getAllTurtleIDs();
     }
 
     @Override
     public double tell (Integer id) {
-        // TODO Auto-generated method stub
-        return 0;
+        getModelActions().clearSelectedTurtles();
+        getModelActions().addSelectedTurtle(id);
+        return id;
+    }
+    
+    private IAdvancedModel getModelActions () {
+        return myModelActions;
+    }
+    
+    private void setModelActions (IAdvancedModel advancedModel) {
+        myModelActions = advancedModel;
     }
 
 

@@ -11,59 +11,61 @@ import javafx.collections.FXCollections;
 
 
 public class BasicTurtleModel extends Observable {
+    
+    
+    private static final int DEFAULT_PEN_COLOR = 1;
+    private static final int DEFAULT_IMAGE_INDEX = 0;
 
     private Turtle myTurtle;
-    private ListProperty<TurtleInfo> myTurtles = new SimpleListProperty<>(FXCollections.observableArrayList());
     private ListProperty<LineInfo> myLines = new SimpleListProperty<>(FXCollections.observableArrayList());
     private IntegerProperty myBackgroundColorIndexProperty = new SimpleIntegerProperty(0);
 
     public BasicTurtleModel () {
-        myTurtles.add(new Turtle(1,0));
-    	setMyTurtle((Turtle) myTurtles.get(0));
+        myTurtle = new Turtle(DEFAULT_PEN_COLOR, DEFAULT_IMAGE_INDEX);
     }
 
     public void moveTurtleForward (double pixels) {
-        linesProperty().addAll(getMyTurtle().moveForward(pixels));
+        linesProperty().addAll(getActiveTurtle().moveForward(pixels));
         setChanged();
         notifyObservers();
     }
 
     public void setTurtleCoordinates (Point newPoint) {
-        getMyTurtle().setLocation(newPoint);
+        getActiveTurtle().setLocation(newPoint);
         setChanged();
         notifyObservers();
     }
 
     public Point getTurtleCoordinates () {
-        return getMyTurtle().getLocation();
+        return getActiveTurtle().getLocation();
     }
 
     public double getTurtleHeading () {
-        return getMyTurtle().getHeading();
+        return getActiveTurtle().getHeading();
     }
 
     public void setTurtleHeading (double heading) {
-        getMyTurtle().setHeading(heading);
+        getActiveTurtle().setHeading(heading);
         setChanged();
         notifyObservers();
     }
 
     public void setPenDown (boolean penDown) {
-        getMyTurtle().setPenDown(penDown);
+        getActiveTurtle().setPenDown(penDown);
     }
 
     public boolean getPenDown () {
-        return getMyTurtle().isPenDown();
+        return getActiveTurtle().isPenDown();
     }
 
     public void setTurtleVisibility (boolean isVisible) {
-        getMyTurtle().setVisible(isVisible);
+        getActiveTurtle().setVisible(isVisible);
         setChanged();
         notifyObservers();
     }
 
     public boolean getTurtleVisibility () {
-        return getMyTurtle().isVisible();
+        return getActiveTurtle().isVisible();
     }
 
     public void clearLines () {
@@ -75,18 +77,18 @@ public class BasicTurtleModel extends Observable {
     }
 
     public IntegerProperty getActivePenColorIndex () {
-        return getMyTurtle().getPenColorIndexProperty();
+        return getActiveTurtle().getPenColorIndexProperty();
     }
 
     public IntegerProperty getActiveTurtleImageIndex () {
-        return getMyTurtle().getImageIndexProperty();
+        return getActiveTurtle().getImageIndexProperty();
     }
 
-    private Turtle getMyTurtle () {
+    protected Turtle getActiveTurtle () {
         return myTurtle;
     }
 
-    private void setMyTurtle (Turtle myTurtle) {
+    protected void setActiveTurtle (Turtle myTurtle) {
         this.myTurtle = myTurtle;
     }
 
@@ -97,11 +99,5 @@ public class BasicTurtleModel extends Observable {
     public IntegerProperty backgroundColorIndexProperty () {
         return myBackgroundColorIndexProperty;
     }
-    public ListProperty<TurtleInfo> getMyTurtlesProperty() {
-    	return myTurtles;
-    }
     
-    public Turtle getActiveTurtle () {
-    	return myTurtle;
-    }
 }

@@ -177,7 +177,7 @@ public class SLogoBasicModel implements IBasicModel {
         return myOptionsModel;
     }
 
-    protected void setBasicOptionsModel (BasicOptionsModel optionsModel) {
+    protected void setMyOptionsModel (BasicOptionsModel optionsModel) {
         myOptionsModel = optionsModel;
     }
 

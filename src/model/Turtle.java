@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Turtle implements TurtleInfo{
 
-	private static final int DEFAULT_PEN_COLOR_INDEX = 0;
+	private static final int DEFAULT_PEN_COLOR_INDEX = 1;
 	private static final int DEFAULT_IMAGE_INDEX = 0;
 	
     private double myHeading = 0;

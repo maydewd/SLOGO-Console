@@ -7,7 +7,7 @@ import javafx.beans.property.ReadOnlyListProperty;
 
 public interface IAdvancedModel extends IBasicModel {
 
-    void addSelectedTurtles (int IDnumber);
+    void addSelectedTurtle (int IDnumber);
 
     void clearSelectedTurtles ();
     
@@ -31,11 +31,9 @@ public interface IAdvancedModel extends IBasicModel {
 
     int getActiveTurtleID ();
 
-	Collection<TurtleInfo> getAllTurtleInfo();
+	Collection<? extends TurtleInfo> getAllTurtleInfo();
 	
 	TurtleInfo getTurtle (int id);
-
-	AdvancedTurtleModel getMyTurtleModel();
     
 
 }

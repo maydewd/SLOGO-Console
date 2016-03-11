@@ -11,32 +11,24 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 
 	private AdvancedTurtleModel myTurtleModel = new AdvancedTurtleModel();
 	private AdvancedOptionsModel myOptionsModel = new AdvancedOptionsModel();
-
+	
 	public SLogoAdvancedModel () {
-		TurtleInfo t = myTurtleModel.getActiveTurtle();
-		myTurtleModel.allTurtlesProperty().put(t.getID(), t);
-
+	    setMyTurtleModel(myTurtleModel);
+	    setMyOptionsModel(myOptionsModel);
 	}
 
-	public AdvancedTurtleModel getMyTurtleModel () {
+
+	private AdvancedTurtleModel getMyTurtleModel () {
 		return myTurtleModel;
 	}
 
-	public AdvancedOptionsModel getMyOptionsModel () {
+	private AdvancedOptionsModel getMyOptionsModel () {
 		return myOptionsModel;
 	}
 
 	@Override
-	public void addSelectedTurtles (int IDnumber) {
-		if (getMyTurtleModel().allTurtlesProperty().containsKey(IDnumber)) {
-			getMyTurtleModel().selectedTurtlesProperty().put(IDnumber, getMyTurtleModel().getTurtle(IDnumber));
-		}
-		else {
-			Turtle t = new Turtle(IDnumber);
-			getMyTurtleModel().allTurtlesProperty().put(IDnumber, t);
-			getMyTurtleModel().selectedTurtlesProperty().put(IDnumber, t);
-		}
-
+	public void addSelectedTurtle (int IDnumber) {
+		getMyTurtleModel().selectTurtle(IDnumber);
 	}
 
 	@Override
@@ -46,7 +38,7 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 	
 	@Override
 	    public List<Integer> getSelectedTurtleIDs () {
-	        return new ArrayList<Integer>(getMyTurtleModel().selectedTurtlesProperty().keySet());
+	        return new ArrayList<Integer>(getMyTurtleModel().selectedTurtlesProperty());
 	    }
 
 	@Override
@@ -100,7 +92,7 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 	}
 
 	@Override
-	public Collection<TurtleInfo> getAllTurtleInfo() {
+	public Collection<? extends TurtleInfo> getAllTurtleInfo() {
 		return getMyTurtleModel().allTurtlesProperty().values();
 	}
 
@@ -113,6 +105,7 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
     public List<Integer> getAllTurtleIDs () {
         return new ArrayList<Integer>(getMyTurtleModel().allTurtlesProperty().keySet());
     }
+
 
     
 

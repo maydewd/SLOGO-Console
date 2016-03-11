@@ -161,8 +161,8 @@ public class TurtleView extends BaseUIView implements Observer {
                                            .getValue()))));
         myTurtle.setFitHeight(TURTLE_HEIGHT);
         myTurtle.setFitWidth(TURTLE_WIDTH);
-        myTurtle.setX(scaleX(scaleTurtleX(getModel().getTurtleCoordinates().getX(), myTurtle)));
-        myTurtle.setY(scaleY(scaleTurtleY(getModel().getTurtleCoordinates().getY(), myTurtle)));
+        myTurtle.setX(scaleX(scaleTurtleX(turtle.getLocation().getX(), myTurtle)));
+        myTurtle.setY(scaleY(scaleTurtleY(turtle.getLocation().getY(), myTurtle)));
         myTurtle.setRotate(- getModel().getTurtleHeading() + HEADING_OFFSET);
         myTurtle.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> showInfo(turtle));
         myDisplayedTurtles.put(turtle, myTurtle);
@@ -181,14 +181,14 @@ public class TurtleView extends BaseUIView implements Observer {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Turtle Info");
         alert.setHeaderText("Do you want to Select this Turtle?");
-        Point turtlePos = getModel().getTurtleCoordinates();
+        Point turtlePos = turtle.getLocation();
         alert.setContentText("Turtle X: " + turtlePos.getX() + "\n" + 
                              "Turtle Y: " + turtlePos.getY() + "\n" + 
                              "Pen is Down: " + getModel().getPenDown() + "\n" +
                               "Heading: "+ getModel().getTurtleHeading());
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
-            getModel().addSelectedTurtles(turtle.getID());
+            getModel().addSelectedTurtle(turtle.getID());
         }
    
                  

@@ -51,7 +51,7 @@ public class ParserController implements IParserController {
 		myModel.setActiveBackgroundColorIndex(Integer.valueOf((String) (prefs.get("background-color"))));
 		myModel.turtleImageOptionsProperty().set((ObservableList<String>) (prefs.get("image-list")));
 		for (int i=1; i <= Integer.valueOf((String) (prefs.get("turtle-count"))); i++) {
-			myModel.getMyTurtleModel().allTurtlesProperty().put(i, new Turtle(i));
+		        myModel.addSelectedTurtle(i);
 		}
 		myModel.setActiveLanguageIndex(Integer.valueOf((String) (prefs.get("language"))));	
 
