@@ -1,8 +1,11 @@
 package controller.parser;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface IAdvancedSLogoCommands extends IBasicSLogoCommands {
+    
+        public List<Integer> getSelectedTurtles ();
 	
 	public double setBackground (int index);
 	

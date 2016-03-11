@@ -1,7 +1,7 @@
 package controller.commands;
 
 import java.util.List;
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
@@ -15,7 +15,7 @@ public class ConstantNode extends AbstractExpressionNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) {
+    public double execute (IAdvancedSLogoCommands commands) {
         return getValue();
     }
 

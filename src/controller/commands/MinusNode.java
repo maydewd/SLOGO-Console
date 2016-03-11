@@ -1,6 +1,6 @@
 package controller.commands;
 
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
@@ -13,7 +13,7 @@ public class MinusNode extends SimpleProcedureNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
         return -getChildren().get(0).execute(commands);
     }
 

@@ -1,6 +1,6 @@
 package controller.commands;
 
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
@@ -31,7 +31,7 @@ public class ForNode extends ControlProcedureNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
         AbstractExpressionNode firstList = getChildren().get(0);
         String countVariable = firstList.getChildren().get(0).getText();
         double start = firstList.getChildren().get(1).execute(commands);

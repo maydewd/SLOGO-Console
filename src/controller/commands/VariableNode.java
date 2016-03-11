@@ -1,7 +1,7 @@
 package controller.commands;
 
 import java.util.List;
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
@@ -12,7 +12,7 @@ public class VariableNode extends AbstractExpressionNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) {
+    public double execute (IAdvancedSLogoCommands commands) {
         return commands.getVariable(getText());
     }
 

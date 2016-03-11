@@ -1,6 +1,6 @@
 package controller.commands;
 
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
@@ -24,7 +24,7 @@ public class MakeVariableNode extends ControlProcedureNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
         String varName = getChildren().get(0).getText();
         return commands.setVariable(varName, getChildren().get(1).execute(commands));
     }
