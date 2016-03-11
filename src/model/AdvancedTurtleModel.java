@@ -1,7 +1,10 @@
 package model;
 
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.function.Consumer;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyListProperty;
@@ -74,6 +77,11 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
         changeAndNotify();
     }
 
+    @Override
+    public void setPenDown (boolean penDown) {
+        forSelectedTurtles(turtle -> turtle.setPenDown(penDown));
+    }
+
     public void setLineThickness (double thickness) {
         setThickness(thickness);
         forAllTurtles(turtle -> turtle.setLineThickness(thickness));
@@ -86,6 +94,14 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
 
     private void forAllTurtles (Consumer<? super Turtle> action) {
         allTurtlesProperty().values().forEach(action);
+    }
+
+    private void forSelectedTurtles (Consumer<? super Turtle> action) {
+        List<Turtle> selectedTurtles = allTurtlesProperty().entrySet().stream()
+                                       .filter(entry -> selectedTurtlesProperty().contains(entry.getKey()))
+                                       .map(entry -> entry.getValue())
+                                       .collect(Collectors.toList());
+        selectedTurtles.forEach(action);
     }
 
     private LineType getLineType () {
