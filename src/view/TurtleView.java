@@ -130,9 +130,15 @@ public class TurtleView extends BaseUIView implements Observer {
     }
 
     private void makeStamp (StampInfo s) {
-        ImageView stamp = new ImageView();
-        stamp.setX(scaleX(getModel().getTurtleCoordinates().getX()));
-        stamp.setY(scaleY(getModel().getTurtleCoordinates().getY()));
+        ImageView stamp = new ImageView(new Image(getClass().getClassLoader()
+                                                  .getResourceAsStream(
+                                                  getModel().turtleImageOptionsProperty()
+                                                  .get(s.getImageIndex()))));
+        stamp.setFitHeight(TURTLE_HEIGHT);
+        stamp.setFitWidth(TURTLE_WIDTH);
+        stamp.setX(scaleX(scaleTurtleX(s.getLocation().getX(), stamp)));
+        stamp.setY(scaleY(scaleTurtleY(s.getLocation().getY(), stamp)));
+        stamp.setRotate(- s.getRotation() + HEADING_OFFSET);
         myDisplayedStamps.put(s, stamp);
         myCanvas.getChildren().add(stamp);
     }

@@ -34,7 +34,7 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
 
     public void drawStamp () {
         myStamps.add(new StampInfo(getActiveTurtle().getLocation(),
-                                   getActiveTurtleImageIndex().getValue()));
+                                   getActiveTurtleImageIndex().getValue(), getActiveTurtle().getHeading()));
         changeAndNotify();
     }
 
