@@ -17,7 +17,9 @@ public interface IAdvancedModel extends IBasicModel {
 
     List<LineThickness> getLineThicknesses ();
     
-    void setLineThickness (int i);
+    void setLineThickness (int index);
+    
+    void setLineThickness (double thickness);
 
     List<LineType> getLineTypeValues ();
 
