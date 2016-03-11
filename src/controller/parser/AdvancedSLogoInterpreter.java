@@ -70,7 +70,7 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 	}
 
 	@Override
-	public double setPenSize(int pixels) {
+	public double setPenSize(double pixels) {
 		getModelActions().getActiveTurtle().setLineThickness(pixels);
 		return pixels;
 	}

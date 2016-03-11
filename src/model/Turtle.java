@@ -19,7 +19,7 @@ public class Turtle implements TurtleInfo{
     private IntegerProperty myImageIndexProperty = new SimpleIntegerProperty(DEFAULT_IMAGE_INDEX);
     private int myID;
     private boolean isSelected = true;
-    private int myLineThickness;
+    private double myLineThickness;
     private int myLineType;
 
     public Turtle(int ID) {
@@ -144,11 +144,11 @@ public class Turtle implements TurtleInfo{
     	myLineType = i;
     }
 
-	public void setLineThickness(int i) {
+	public void setLineThickness(double i) {
 		myLineThickness = i;
 	}
 	
-	public int getLineThickness() {
+	public double getLineThickness() {
 		return myLineThickness;
 	}
     

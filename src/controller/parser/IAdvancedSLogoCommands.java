@@ -13,7 +13,7 @@ public interface IAdvancedSLogoCommands extends IBasicSLogoCommands {
 	
 	public double setPenColor (int index);
 	
-	public double setPenSize (int pixels);
+	public double setPenSize (double pixels);
 	
 	public double setShape (int index);
 	
