@@ -1,29 +1,18 @@
 package model;
 
-public class LineThickness {
-    
-    private String myName;
+public enum LineThickness {
+                           SMALL(0.5d),
+                           MEDIUM(1.0d),
+                           LARGE(3.0d);
+
     private double myThickness;
 
-    public LineThickness (String name, double thickness) {
-        setMyName(name);
-        setMyThickness(thickness);
-    }
-
-    public String getMyName () {
-        return myName;
-    }
-
-    private void setMyName (String myName) {
-        this.myName = myName;
+    LineThickness (double thickness) {
+        myThickness = thickness;
     }
 
     public double getMyThickness () {
         return myThickness;
-    }
-
-    private void setMyThickness (double myThickness) {
-        this.myThickness = myThickness;
     }
 
 }

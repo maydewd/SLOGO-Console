@@ -79,8 +79,10 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
     }
 
     @Override
-    public void setLineType (int i) {
-        getMyTurtleModel().setSelectedLineType(i);
+    public void setLineType (int index) {
+        LineType lineType =
+                getMyOptionsModel().lineTypeOptionsProperty().get(index);
+        getMyTurtleModel().setSelectedLineType(lineType);
     }
 
     @Override

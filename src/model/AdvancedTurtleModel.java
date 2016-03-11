@@ -20,13 +20,13 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
             new SimpleMapProperty<>(FXCollections.observableHashMap());
     private ListProperty<Integer> mySelectedTurtleIndexes =
             new SimpleListProperty<>(FXCollections.observableArrayList());
+    private double myThickness = Turtle.DEFAULT_LINE_THICKNESS;
+    private LineType myLineType = Turtle.DEFAULT_LINE_TYPE;
 
     public AdvancedTurtleModel () {
         super();
         selectTurtle(STARTING_INDEX);
     }
-
-    
 
     public ReadOnlyListProperty<StampInfo> stampsProperty () {
         return myStamps;
@@ -52,12 +52,15 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
 
     public void selectTurtle (int index) {
         if (!allTurtlesProperty().containsKey(index)) {
-            allTurtlesProperty().put(index, new Turtle(getActivePenColorIndex().getValue(),
-                                                       getActiveTurtleImageIndex().getValue(),
-                                                       index));
+            Turtle turtle =
+                    new Turtle(index, getActivePenColorIndex().getValue(),
+                               getActiveTurtleImageIndex().getValue(), getThickness(),
+                               getLineType());
+            allTurtlesProperty().put(index, turtle);
         }
         selectedTurtlesProperty().add(index);
         setActiveTurtle(allTurtlesProperty().get(index));
+        changeAndNotify();
     }
 
     @Override
@@ -70,17 +73,35 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
         forAllTurtles(turtle -> turtle.setMyImageIndex(index));
         changeAndNotify();
     }
-    
+
     public void setLineThickness (double thickness) {
+        setThickness(thickness);
         forAllTurtles(turtle -> turtle.setLineThickness(thickness));
     }
-    
-    public void setSelectedLineType (int index) {
-        forAllTurtles(turtle -> turtle.setLineType(index));
+
+    public void setSelectedLineType (LineType lineType) {
+        setLineType(myLineType);
+        forAllTurtles(turtle -> turtle.setLineType(lineType));
     }
-    
-    private void forAllTurtles(Consumer<? super Turtle> action) {
+
+    private void forAllTurtles (Consumer<? super Turtle> action) {
         allTurtlesProperty().values().forEach(action);
+    }
+
+    private LineType getLineType () {
+        return myLineType;
+    }
+
+    private void setLineType (LineType myLineType) {
+        this.myLineType = myLineType;
+    }
+
+    private double getThickness () {
+        return myThickness;
+    }
+
+    private void setThickness (double myThickness) {
+        this.myThickness = myThickness;
     }
 
 }

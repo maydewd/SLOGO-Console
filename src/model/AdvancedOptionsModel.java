@@ -8,9 +8,9 @@ import javafx.collections.FXCollections;
 
 public class AdvancedOptionsModel extends BasicOptionsModel {
 	
-	private static final List<LineThickness> INITIAL_LINE_THICKNESSES = Arrays.asList(new LineThickness("Small", 0.5),
-	                                                                                  new LineThickness("Medium", 1.0),
-	                                                                                  new LineThickness("Large", 2.0));
+	private static final List<LineThickness> INITIAL_LINE_THICKNESSES = Arrays.asList(LineThickness.SMALL,
+	                                                                                  LineThickness.MEDIUM,
+	                                                                                  LineThickness.LARGE);
 	private static final List<LineType> INITIAL_LINE_TYPES = Arrays.asList(LineType.SOLID,
 	                                                                       LineType.DASHED,
 	                                                                       LineType.DOTTED);

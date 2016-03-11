@@ -12,6 +12,8 @@ public class Turtle implements TurtleInfo {
     private static final int DEFAULT_ID = 1;
     private static final int DEFAULT_PEN_INDEX = 1;
     private static final int DEFAULT_IMAGE_INDEX = 0;
+    public static final double DEFAULT_LINE_THICKNESS = 1.0d;
+    public static final LineType DEFAULT_LINE_TYPE = LineType.SOLID;
 
     private double myHeading = 0;
     private Point myLocation = new Point(0, 0);
@@ -22,24 +24,22 @@ public class Turtle implements TurtleInfo {
     private int myID;
     private boolean isSelected = true;
     private double myLineThickness;
-    private int myLineTypeIndex;
+    private LineType myLineType;
 
     public Turtle () {
         this(DEFAULT_ID);
     }
 
     public Turtle (int ID) {
-        this(DEFAULT_PEN_INDEX, DEFAULT_IMAGE_INDEX, ID);
+        this(ID, DEFAULT_PEN_INDEX, DEFAULT_IMAGE_INDEX, DEFAULT_LINE_THICKNESS, DEFAULT_LINE_TYPE);
     }
 
-    public Turtle (int penColorIndex, int imageIndex) {
-        this(penColorIndex, imageIndex, 1);
-    }
-
-    public Turtle (int penColorIndex, int imageIndex, int ID) {
+    public Turtle (int ID, int penColorIndex, int imageIndex, double thickness, LineType lineType) {
         setMyPenColorIndex(penColorIndex);
         setMyImageIndex(imageIndex);
         setID(ID);
+        setLineThickness(thickness);
+        setLineType(lineType);
     }
 
     public Turtle (double heading,
@@ -78,7 +78,7 @@ public class Turtle implements TurtleInfo {
         Point newLoc = new Point(newX, newY);
 
         ArrayList<LineInfo> myLines = new ArrayList<>();
-        myLines.add(new LineInfo(myLocation, newLoc, isPenDown, myPenColorIndexProperty.get()));
+        myLines.add(new LineInfo(myLocation, newLoc, isPenDown, myPenColorIndexProperty.get(), getLineThickness(), getLineType()));
 
         setLocation(newLoc);
 
@@ -144,16 +144,16 @@ public class Turtle implements TurtleInfo {
         isSelected = select;
     }
 
-    public void setLineType (int index) {
-        myLineTypeIndex = index;
+    public void setLineType (LineType lineType) {
+        myLineType = lineType;
     }
 
-    public int getLineType () {
-        return myLineTypeIndex;
+    public LineType getLineType () {
+        return myLineType;
     }
 
-    public void setLineThickness (double i) {
-        myLineThickness = i;
+    public void setLineThickness (double thickness) {
+        myLineThickness = thickness;
     }
 
     public double getLineThickness () {
