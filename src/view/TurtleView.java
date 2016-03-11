@@ -2,6 +2,7 @@ package view;
 
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -179,7 +180,7 @@ public class TurtleView extends BaseUIView implements Observer {
 
 
     private void showInfo(TurtleInfo turtle){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Turtle Info");
         alert.setHeaderText("Do you want to Select this Turtle?");
         Point turtlePos = turtle.getLocation();
@@ -192,8 +193,6 @@ public class TurtleView extends BaseUIView implements Observer {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
             getModel().addSelectedTurtle(turtle.getID());
-        }
-   
-                 
+        }        
     }
 }
