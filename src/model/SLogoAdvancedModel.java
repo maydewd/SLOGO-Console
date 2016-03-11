@@ -18,10 +18,12 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 
 	}
 
+	@Override
 	public AdvancedTurtleModel getMyTurtleModel () {
 		return myTurtleModel;
 	}
 
+	@Override
 	public AdvancedOptionsModel getMyOptionsModel () {
 		return myOptionsModel;
 	}
@@ -55,22 +57,13 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 
 	@Override
 	public List<Double> getLineThicknesses () {
-		ArrayList<Double> thicknesses = new ArrayList<>();
-		for (LineInfo line: myTurtleModel.getReadOnlyLines()) {
-			thicknesses.add(line.getThickness());
-		}
-		return thicknesses;
+		return getMyOptionsModel().lineThicknessOptionsProperty().get();
 	}
 
 	@Override
-	public List<Entry<Double, Double>> getLineTypes () {
-		ArrayList<Entry<Double, Double>> lineTypes = new ArrayList<>();
-		for (LineInfo line: myTurtleModel.getReadOnlyLines()) {
-			lineTypes.add(line.getType());
-		}
-		return lineTypes;
+	public List<Entry<Double, Double>> getLineTypeValues () {
+		return getMyOptionsModel().lineTypeOptionsProperty().get();
 	}
-
 
 	@Override
 	public void drawStamp () {
@@ -95,7 +88,7 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 
 	@Override
 	public void setSelectedLineType (int i) {
-		getMyTurtleModel().setSelectedLineType(i);     
+		getMyTurtleModel().setSelectedLineType(getMyOptionsModel().lineTypeOptionsProperty().get(i));     
 	}
 
 	@Override

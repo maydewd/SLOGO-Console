@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Map.Entry;
+
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyListProperty;
@@ -22,8 +24,8 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
 
 	}
 
-	public void setSelectedLineType(int i) {
-		getActiveTurtle().setLineThickness(i);
+	public void setSelectedLineType(Entry<Double, Double> e) {
+		getActiveTurtle().setLineType(e);
 	}
 
 	public ReadOnlyListProperty<StampInfo> stampsProperty() {

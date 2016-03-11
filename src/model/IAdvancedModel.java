@@ -17,7 +17,7 @@ public interface IAdvancedModel extends IBasicModel {
     
     void setSelectedLineThickness (int i);
 
-    List<Entry<Double, Double>> getLineTypes ();
+    List<Entry<Double, Double>> getLineTypeValues ();
 
     void setSelectedLineType (int i);
     
@@ -34,6 +34,10 @@ public interface IAdvancedModel extends IBasicModel {
 	TurtleInfo getTurtle (int id);
 
 	AdvancedTurtleModel getMyTurtleModel();
+
+	AdvancedOptionsModel getMyOptionsModel();
+	
+	
     
 
 }

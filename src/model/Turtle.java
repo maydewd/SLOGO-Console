@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -20,7 +22,7 @@ public class Turtle implements TurtleInfo{
     private int myID;
     private boolean isSelected = true;
     private int myLineThickness;
-    private int myLineType;
+    private Entry<Double, Double> myLineType;
 
     public Turtle(int ID) {
     	this(DEFAULT_PEN_COLOR_INDEX, DEFAULT_IMAGE_INDEX, ID);
@@ -140,8 +142,12 @@ public class Turtle implements TurtleInfo{
     	isSelected = select;
     }
     
-    public void setLineType (int i) {
-    	myLineType = i;
+    public void setLineType (Entry<Double, Double> typeValue) {
+    	myLineType = typeValue;
+    }
+    
+    public Entry<Double, Double> getLineType () {
+    	return myLineType;
     }
 
 	public void setLineThickness(int i) {
