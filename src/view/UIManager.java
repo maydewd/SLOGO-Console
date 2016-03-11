@@ -4,6 +4,8 @@ import javafx.application.HostServices;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
@@ -11,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.IAdvancedModel;
+import model.IAdvancedModelManager;
 
 /**
  * Created by Tim on 22/02/16.
@@ -21,68 +24,77 @@ public class UIManager {
     public static final double DEFAULT_X_SIZE = 400;
     public static final double DEFAULT_Y_SIZE = 400;
 
-    private TurtleView turtleView;
-    private ConsoleView consoleView;
-    private CommandHistoryView commandHistoryView;
-    private UserCommandView userCommandListView;
-    private SettingsView settingsMenu;
-    private VariableView variableView;
+    private Stage myStage;
+    private Group myGroup;
+    private Scene mySceneView;
+    private IAdvancedModel myModel;
+    private IAdvancedModelManager myManager;
+    private HostServices myHostServices;
 
-    private Pane myMainPaneNamedDane;
-    private Accordion sidePane;
-    private Pane paneContainer;
-
-    private Stage stage;
-    private Group group;
-    private Scene uiSceneView;
-	private IAdvancedModel myModel;
-
-    public UIManager(Stage primaryStage, IAdvancedModel b, HostServices hostServices){
+    public UIManager(Stage primaryStage, IAdvancedModelManager model, HostServices hostServices){
         // Init vars
-        stage = primaryStage;
-        group = new Group();
-        uiSceneView = new Scene(group);
-        stage.setScene(uiSceneView);
-	    myModel = b;
+        myStage = primaryStage;
+        myGroup = new Group();
+        mySceneView = new Scene(myGroup);
+        myStage.setScene(mySceneView);
+        myManager = model;
+        myModel = model;
+        myHostServices = hostServices;
+        
+        TabPane tabs = new TabPane();
+        Tab main = new Tab("WorkSpace 1");
+        Tab plus = new Tab("new Tab");
+        tabs.getTabs().addAll(main, plus);
+        main.setContent(buildSubView());
+        plus.setOnSelectionChanged(e -> makeNewView());
 
-        // Create the views
-        turtleView = new TurtleView(b);
-        consoleView = new ConsoleView(myModel);
-        settingsMenu = new SettingsView(b, hostServices);
-        variableView = new VariableView(myModel);
-
-        commandHistoryView = new CommandHistoryView(myModel);
-        userCommandListView = new UserCommandView(myModel);
-
-        // Initialize Pane
-        paneContainer = new HBox(0);
-        myMainPaneNamedDane = new VBox(DEFAULT_SPACING);
-        myMainPaneNamedDane.getChildren().addAll(settingsMenu.getNode(),
-		                                         turtleView.getNode(),
-		                                         consoleView.getNode());
-
-        sidePane = new Accordion();
-        sidePane.getPanes().addAll(  new TitledPane("Variables", variableView.getNode()),
-                                     new TitledPane("Command History", commandHistoryView.getNode()),
-                                        new TitledPane("User Commands", userCommandListView.getNode()));
-        sidePane.setExpandedPane(sidePane.getPanes().get(0));
-        paneContainer.getChildren().addAll(myMainPaneNamedDane, sidePane);
-
-        group.getChildren().add(paneContainer);
-
+        myGroup.getChildren().add(tabs);
         setupInput();
-        stage.show();
+        myStage.show();
     }
     
-    public Stage getStage(){
-        return stage;
+    
+    public Object makeNewView () {
+        buildSubView();
+        return null;
     }
 
+
+    private Pane buildSubView(){
+        // Create the views
+        BaseUIView myTurtleView = new TurtleView(myModel);
+        BaseUIView myConsoleView = new ConsoleView(myModel);
+        BaseUIView mySettingsMenu = new SettingsView(myModel, myHostServices);
+        BaseUIView myVariableView = new VariableView(myModel);
+        BaseUIView myCommandHistoryView = new CommandHistoryView(myModel);
+        BaseUIView myUserCommandListView = new UserCommandView(myModel);
+
+        // Initialize Pane
+        HBox myPaneContainer = new HBox(0);
+        VBox myMainPane = new VBox(DEFAULT_SPACING);
+        myMainPane.getChildren().addAll(mySettingsMenu.getNode(),
+                                                         myTurtleView.getNode(),
+                                                         myConsoleView.getNode());
+
+        Accordion mySidePane = new Accordion();
+        mySidePane.getPanes().addAll(  new TitledPane("Variables", myVariableView.getNode()),
+                                     new TitledPane("Command History", myCommandHistoryView.getNode()),
+                                        new TitledPane("User Commands", myUserCommandListView.getNode()));
+        mySidePane.setExpandedPane(mySidePane.getPanes().get(0));
+        myPaneContainer.getChildren().addAll(myMainPane, mySidePane);
+        
+        return myPaneContainer;
+    }
+    
+    
+    public Stage getStage(){
+        return myStage;
+    }
 
     private void setupInput(){
 //      Quit the program if you press ESCAPE
 //      Helpful for debugging.
-        this.stage.getScene().setOnKeyPressed(event -> {
+        this.myStage.getScene().setOnKeyPressed(event -> {
                 if(event.getCode().equals(KeyCode.ESCAPE)){
                     System.exit(0);
                 }
