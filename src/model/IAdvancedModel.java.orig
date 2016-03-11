@@ -34,11 +34,16 @@ public interface IAdvancedModel extends IBasicModel {
 	Collection<? extends TurtleInfo> getAllTurtleInfo();
 	
 	TurtleInfo getTurtle (int id);
-    
+<<<<<<< HEAD
+=======
+
+	AdvancedTurtleModel getMyTurtleModel();
 
 	AdvancedOptionsModel getMyOptionsModel();
 	
 	
+>>>>>>> master
+    
 
 }
 

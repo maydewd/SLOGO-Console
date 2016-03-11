@@ -9,14 +9,15 @@ public class LineTypeSelector extends Selector {
 
     public LineTypeSelector (IAdvancedModel model) {
         myTypeSelector = new Menu("Line Type");
-        for(int i = 0; i < model.getLineTypes().size(); i++){
+        for(int i = 0; i < model.getLineTypeValues().size(); i++){
             makeButton(i, model);
         }
     }
 
     private void makeButton (int i, IAdvancedModel model) {
-        MenuItem button = new MenuItem(String.valueOf(model.getLineTypes().get(i)));
+        MenuItem button = new MenuItem(model.getMyOptionsModel().getLineTypeMap().get(i));
         button.setOnAction(e -> model.setSelectedLineType(i));
+        getMenu().getItems().add(button);
     }
 
     @Override

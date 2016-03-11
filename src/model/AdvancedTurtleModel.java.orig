@@ -31,9 +31,15 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
 
     }
 
+<<<<<<< HEAD
+    public void setSelectedLineType (int i) {
+        getActiveTurtle().setLineThickness(i);
+    }
+=======
 	public void setSelectedLineType(Entry<Double, Double> e) {
 		getActiveTurtle().setLineType(e);
-    }
+	}
+>>>>>>> master
 
     public ReadOnlyListProperty<StampInfo> stampsProperty () {
         return myStamps;

@@ -21,8 +21,13 @@ public class Turtle implements TurtleInfo{
     private IntegerProperty myImageIndexProperty = new SimpleIntegerProperty(DEFAULT_IMAGE_INDEX);
     private int myID;
     private boolean isSelected = true;
+<<<<<<< HEAD
     private double myLineThickness;
+    private int myLineType;
+=======
+    private int myLineThickness;
     private Entry<Double, Double> myLineType;
+>>>>>>> master
 
     public Turtle(int ID) {
     	this(DEFAULT_PEN_COLOR_INDEX, DEFAULT_IMAGE_INDEX, ID);

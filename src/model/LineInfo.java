@@ -20,10 +20,10 @@ public class LineInfo {
         setColor(color);
     }
     
-    public LineInfo (Point start, Point end, boolean visible, int color, int thickness, int gap, int dash) {
+    public LineInfo (Point start, Point end, boolean visible, int color, int thickness, Entry<Double, Double> typeValue) {
     	this(start, end, visible, color);
     	setThickness(thickness);
-    	setType(gap, dash);
+    	setType(typeValue);
     }
 
 	public Point getStart () {
@@ -66,8 +66,8 @@ public class LineInfo {
     	return myThickness;
     }
     
-    public void setType(int gap, int dash) {
-    	SimpleEntry<Double, Double> e = new SimpleEntry(gap, dash);
+    public void setType(Entry<Double, Double> typeValue) {
+    	myType = typeValue;
   		
   	}
 

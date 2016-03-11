@@ -26,7 +26,7 @@ public class BasicOptionsModel {
     private static final RGBColor[] INITIAL_COLORS =
             { new RGBColor(255, 255, 255), new RGBColor(0, 0, 0), new RGBColor(255, 0, 0) };
     // TODO add initial images
-    private static final String[] INITIAL_IMAGES = {"blackturtle.png"};
+    private static final String[] INITIAL_IMAGES = {"blackturtle.png", "whiteturtle.png"};
 
     private MapProperty<String, Double> myVariableMap = new SimpleMapProperty<String, Double>(FXCollections.observableHashMap());
     private MapProperty<String, List<String>> myDefinedCommands =
