@@ -6,6 +6,8 @@ import java.util.List;
 public interface IAdvancedSLogoCommands extends IBasicSLogoCommands {
     
         public List<Integer> getSelectedTurtles ();
+        
+        public List<Integer> getAllTurtles ();
 	
 	public double setBackground (int index);
 	
@@ -29,6 +31,8 @@ public interface IAdvancedSLogoCommands extends IBasicSLogoCommands {
 	
 	public double getTurtleCount ();
 	
-	public double tell (List<Integer> ids);
+	public double tell (Integer id);
+	
+	public double tellAll (List<Integer> ids);
 
 }

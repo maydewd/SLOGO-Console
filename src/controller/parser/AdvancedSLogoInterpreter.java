@@ -85,12 +85,30 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 	}
 
 	@Override
-	public double tell (List<Integer> ids) {
+	public double tellAll (List<Integer> ids) {
 		for (int id: ids) {
 			getModelActions().addSelectedTurtles(id);
 		}
 		return ids.get(ids.size()-1);
 	}
+
+    @Override
+    public List<Integer> getSelectedTurtles () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<Integer> getAllTurtles () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public double tell (Integer id) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
 
 }
