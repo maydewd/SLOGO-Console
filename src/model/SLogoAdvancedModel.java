@@ -11,57 +11,43 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 
 	private AdvancedTurtleModel myTurtleModel = new AdvancedTurtleModel();
 	private AdvancedOptionsModel myOptionsModel = new AdvancedOptionsModel();
-
+	
 	public SLogoAdvancedModel () {
-		TurtleInfo t = myTurtleModel.getActiveTurtle();
-		myTurtleModel.allTurtlesProperty().put(t.getID(), t);
-
+	    setMyTurtleModel(myTurtleModel);
+	    setMyOptionsModel(myOptionsModel);
 	}
 
-	@Override
-	public AdvancedTurtleModel getMyTurtleModel () {
+
+	private AdvancedTurtleModel getMyTurtleModel () {
 		return myTurtleModel;
 	}
 
-	@Override
 	public AdvancedOptionsModel getMyOptionsModel () {
 		return myOptionsModel;
 	}
 
 	@Override
-	public void addSelectedTurtles (int IDnumber) {
-		if (getMyTurtleModel().allTurtlesProperty().containsKey(IDnumber)) {
-			getMyTurtleModel().selectedTurtlesProperty().put(IDnumber, getMyTurtleModel().getTurtle(IDnumber));
-		}
-		else {
-			Turtle t = new Turtle(IDnumber);
-			getMyTurtleModel().allTurtlesProperty().put(IDnumber, t);
-			getMyTurtleModel().selectedTurtlesProperty().put(IDnumber, t);
-		}
-
+	public void addSelectedTurtle (int IDnumber) {
+		getMyTurtleModel().selectTurtle(IDnumber);
 	}
 
 	@Override
 	public void clearSelectedTurtles () {
 		getMyTurtleModel().selectedTurtlesProperty().clear();
 	}
+	
+	@Override
+	    public List<Integer> getSelectedTurtleIDs () {
+	        return new ArrayList<Integer>(getMyTurtleModel().selectedTurtlesProperty());
+	    }
 
 	@Override
-	public Collection<Integer> getSelectedTurtleIDs () {
-		ArrayList<Integer> ids = new ArrayList<>();
-		for (Integer id: getMyTurtleModel().selectedTurtlesProperty().keySet()) {
-			ids.add(id);
-		} 
-		return ids;
-	}
-
-	@Override
-	public List<Double> getLineThicknesses () {
+	public List<LineThickness> getLineThicknesses () {
 		return getMyOptionsModel().lineThicknessOptionsProperty().get();
 	}
 
 	@Override
-	public List<Entry<Double, Double>> getLineTypeValues () {
+	public List<LineType> getLineTypeValues () {
 		return getMyOptionsModel().lineTypeOptionsProperty().get();
 	}
 
@@ -82,13 +68,13 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 	}
 
 	@Override
-	public void setSelectedLineThickness (int i) {
-		getMyTurtleModel().setSelectedLineThickness(i);
+	public void setLineThickness (int i) {
+		getMyTurtleModel().setLineThickness(i);
 	}
 
 	@Override
-	public void setSelectedLineType (int i) {
-		getMyTurtleModel().setSelectedLineType(getMyOptionsModel().lineTypeOptionsProperty().get(i));     
+	public void setLineType (int i) {
+		getMyTurtleModel().setSelectedLineType(i);     
 	}
 
 	@Override
@@ -97,7 +83,7 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 	}
 
 	@Override
-	public Collection<TurtleInfo> getAllTurtleInfo() {
+	public Collection<? extends TurtleInfo> getAllTurtleInfo() {
 		return getMyTurtleModel().allTurtlesProperty().values();
 	}
 
@@ -105,6 +91,16 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 	public TurtleInfo getTurtle(int id) {
 		return getMyTurtleModel().allTurtlesProperty().get(id);
 	}
+
+    @Override
+    public List<Integer> getAllTurtleIDs () {
+        return new ArrayList<Integer>(getMyTurtleModel().allTurtlesProperty().keySet());
+    }
+    
+    
+
+
+    
 
 
 }

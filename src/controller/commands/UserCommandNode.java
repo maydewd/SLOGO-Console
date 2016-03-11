@@ -1,6 +1,6 @@
 package controller.commands;
 
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class UserCommandNode extends SimpleProcedureNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
         if (commands.getUserMethodBody(getText()) == null) {
             String errorMessage = String.format(getErrorMessage("NoFunctionExists"), getText());
             throw new ParsingException(errorMessage);

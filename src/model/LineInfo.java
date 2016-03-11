@@ -5,25 +5,28 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class LineInfo {
+    
+    private static final double DEFAULT_THICKNESS = 1.0d;
+    private static final LineType DEFAULT_TYPE = LineType.SOLID;
 
     private Point myStart;
     private Point myEnd;
     private boolean myVisibility;
     private int myColor;
-    private int myThickness;
-    private Entry<Double, Double> myType;
+    private double myThickness;
+    private LineType myType;
     
     public LineInfo (Point start, Point end, boolean visible, int color) {
+        this(start, end, visible, color, DEFAULT_THICKNESS, DEFAULT_TYPE);
+    }
+    
+    public LineInfo (Point start, Point end, boolean visible, int color, double thickness, LineType lineType) {
         setStart(start);
         setEnd(end);
         setVisibility(visible);
         setColor(color);
-    }
-    
-    public LineInfo (Point start, Point end, boolean visible, int color, int thickness, Entry<Double, Double> typeValue) {
-    	this(start, end, visible, color);
     	setThickness(thickness);
-    	setType(typeValue);
+    	setType(lineType);
     }
 
 	public Point getStart () {
@@ -58,7 +61,7 @@ public class LineInfo {
         myColor = color;
     }
     
-    private void setThickness (int thickness) {
+    private void setThickness (double thickness) {
     	myThickness = thickness;
     }
     
@@ -66,12 +69,12 @@ public class LineInfo {
     	return myThickness;
     }
     
-    public void setType(Entry<Double, Double> typeValue) {
-    	myType = typeValue;
+    private void setType (LineType lineType) {
+    	myType = lineType;
   		
   	}
 
-    public Entry<Double, Double> getType() {
+    public LineType getTypeIndex () {
     	return myType;
     }
 

@@ -1,7 +1,7 @@
 package model;
 
 import java.util.Map.Entry;
-
+import java.util.function.Consumer;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyListProperty;
@@ -9,44 +9,78 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.collections.FXCollections;
 
+
 public class AdvancedTurtleModel extends BasicTurtleModel {
 
-	private ListProperty<StampInfo> myStamps = new SimpleListProperty<>(FXCollections.observableArrayList());
-	private MapProperty<Integer, TurtleInfo> myTurtles = new SimpleMapProperty<>(FXCollections.observableHashMap());
-	private MapProperty<Integer, TurtleInfo> mySelectedTurtles = new SimpleMapProperty<>(FXCollections.observableHashMap());
+    private static final int STARTING_INDEX = 1;
 
-	public AdvancedTurtleModel () {
-		super();
-	}
+    private ListProperty<StampInfo> myStamps =
+            new SimpleListProperty<>(FXCollections.observableArrayList());
+    private MapProperty<Integer, Turtle> myTurtles =
+            new SimpleMapProperty<>(FXCollections.observableHashMap());
+    private ListProperty<Integer> mySelectedTurtleIndexes =
+            new SimpleListProperty<>(FXCollections.observableArrayList());
 
-	public void setSelectedLineThickness(int i) {
-		getActiveTurtle().setLineThickness(i);
+    public AdvancedTurtleModel () {
+        super();
+        selectTurtle(STARTING_INDEX);
+    }
 
-	}
+    
 
-	public void setSelectedLineType(Entry<Double, Double> e) {
-		getActiveTurtle().setLineType(e);
-	}
+    public ReadOnlyListProperty<StampInfo> stampsProperty () {
+        return myStamps;
+    }
 
-	public ReadOnlyListProperty<StampInfo> stampsProperty() {
-		return myStamps;
-	}
+    public void drawStamp () {
+        myStamps.add(new StampInfo(getActiveTurtle().getLocation(),
+                                   getActiveTurtleImageIndex().getValue()));
+        changeAndNotify();
+    }
 
-	public void drawStamp() {
-		myStamps.add(new StampInfo(getActiveTurtle().getLocation()));	
-	}
+    public ReadOnlyListProperty<Integer> selectedTurtlesProperty () {
+        return mySelectedTurtleIndexes;
+    }
 
-	public MapProperty<Integer, TurtleInfo> selectedTurtlesProperty() {
-		return mySelectedTurtles;
-	}
+    public MapProperty<Integer, Turtle> allTurtlesProperty () {
+        return myTurtles;
+    }
 
-	public MapProperty<Integer, TurtleInfo> allTurtlesProperty() {
-		return myTurtles;
-	}
+    public TurtleInfo getTurtle (int id) {
+        return myTurtles.get(id);
+    }
 
-	public TurtleInfo getTurtle (int id) {
-		return myTurtles.get(id);
-	}
+    public void selectTurtle (int index) {
+        if (!allTurtlesProperty().containsKey(index)) {
+            allTurtlesProperty().put(index, new Turtle(getActivePenColorIndex().getValue(),
+                                                       getActiveTurtleImageIndex().getValue(),
+                                                       index));
+        }
+        selectedTurtlesProperty().add(index);
+        setActiveTurtle(allTurtlesProperty().get(index));
+    }
 
+    @Override
+    public void setPenColor (int index) {
+        forAllTurtles(turtle -> turtle.setMyPenColorIndex(index));
+    }
+
+    @Override
+    public void setImageIndex (int index) {
+        forAllTurtles(turtle -> turtle.setMyImageIndex(index));
+        changeAndNotify();
+    }
+    
+    public void setLineThickness (double thickness) {
+        forAllTurtles(turtle -> turtle.setLineThickness(thickness));
+    }
+    
+    public void setSelectedLineType (int index) {
+        forAllTurtles(turtle -> turtle.setLineType(index));
+    }
+    
+    private void forAllTurtles(Consumer<? super Turtle> action) {
+        allTurtlesProperty().values().forEach(action);
+    }
 
 }

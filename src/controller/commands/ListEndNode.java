@@ -1,7 +1,7 @@
 package controller.commands;
 
 import java.util.List;
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
@@ -12,7 +12,7 @@ public class ListEndNode extends AbstractExpressionNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
         String error = String.format(getErrorMessage("CantExecute"), SyntaxType.LISTEND);
         throw new ParsingException(error);
     }

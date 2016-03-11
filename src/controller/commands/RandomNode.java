@@ -1,7 +1,7 @@
 package controller.commands;
 
 import java.util.Random;
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
@@ -14,7 +14,7 @@ public class RandomNode extends SimpleProcedureNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
         double upperBound = getChildren().get(0).execute(commands);
         if (upperBound < 0) {
             String error = String.format(getErrorMessage("InvalidParameterSign"), getText());

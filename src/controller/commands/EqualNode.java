@@ -2,7 +2,7 @@ package controller.commands;
 
 import java.util.HashSet;
 import java.util.Set;
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
@@ -18,7 +18,7 @@ public class EqualNode extends SimpleProcedureNode {
      * Does not short circuit, i.e. all children will be executed
      */
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
         Set<Double> values = new HashSet<>();
         for (AbstractExpressionNode child : getChildren()) {
             values.add(child.execute(commands));

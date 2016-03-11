@@ -1,6 +1,6 @@
 package controller.commands;
 
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
@@ -16,7 +16,7 @@ public class OrNode extends SimpleProcedureNode {
      * Does not short circuit, i.e. all children will be executed
      */
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
         boolean allNonZero = false;
         for (AbstractExpressionNode child : getChildren()) {
             allNonZero |= child.execute(commands) != 0;

@@ -2,7 +2,7 @@ package controller.commands;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
@@ -33,7 +33,7 @@ public class MakeUserInstructionNode extends ControlProcedureNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
         String name = getChildren().get(0).getText();
         List<String> parameters = getChildren().get(1).getChildren().stream()
                 .map(node -> node.getText())
