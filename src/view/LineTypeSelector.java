@@ -16,7 +16,7 @@ public class LineTypeSelector extends Selector {
 
     private void makeButton (int i, IAdvancedModel model) {
         MenuItem button = new MenuItem(model.getMyOptionsModel().getLineTypeMap().get(i));
-        button.setOnAction(e -> model.setSelectedLineType(i));
+        button.setOnAction(e -> model.setLineType(i));
         getMenu().getItems().add(button);
     }
 

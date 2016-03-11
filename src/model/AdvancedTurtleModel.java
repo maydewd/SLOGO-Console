@@ -1,7 +1,6 @@
 package model;
 
 import java.util.Map.Entry;
-
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyListProperty;
@@ -31,8 +30,8 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
 
     }
 
-	public void setSelectedLineType(Entry<Double, Double> e) {
-		getActiveTurtle().setLineType(e);
+    public void setSelectedLineType (Entry<Double, Double> e) {
+        getActiveTurtle().setLineType(e);
     }
 
     public ReadOnlyListProperty<StampInfo> stampsProperty () {
@@ -42,6 +41,7 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
     public void drawStamp () {
         myStamps.add(new StampInfo(getActiveTurtle().getLocation(),
                                    getActiveTurtleImageIndex().getValue()));
+        changeAndNotify();
     }
 
     public ReadOnlyListProperty<Integer> selectedTurtlesProperty () {
@@ -58,10 +58,27 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
 
     public void selectTurtle (int index) {
         if (!allTurtlesProperty().containsKey(index)) {
-            allTurtlesProperty().put(index, new Turtle(index));
+            allTurtlesProperty().put(index, new Turtle(getActivePenColorIndex().getValue(),
+                                                       getActiveTurtleImageIndex().getValue(),
+                                                       index));
         }
         selectedTurtlesProperty().add(index);
         setActiveTurtle(allTurtlesProperty().get(index));
+    }
+
+    @Override
+    public void setPenColor (int index) {
+        for (Turtle turtle : allTurtlesProperty().values()) {
+            turtle.setMyPenColorIndex(index);
+        }
+    }
+
+    @Override
+    public void setImageIndex (int index) {
+        for (Turtle turtle : allTurtlesProperty().values()) {
+            turtle.setMyImageIndex(index);
+        }
+        changeAndNotify();
     }
 
 }

@@ -5,25 +5,28 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class LineInfo {
+    
+    private static final double DEFAULT_THICKNESS = 1.0d;
+    private static final int DEFAULT_TYPE_INDEX = 0;
 
     private Point myStart;
     private Point myEnd;
     private boolean myVisibility;
     private int myColor;
-    private int myThickness;
-    private Entry<Double, Double> myType;
+    private double myThickness;
+    private int myTypeIndex;
     
     public LineInfo (Point start, Point end, boolean visible, int color) {
+        this(start, end, visible, color, DEFAULT_THICKNESS, DEFAULT_TYPE_INDEX);
+    }
+    
+    public LineInfo (Point start, Point end, boolean visible, int color, double thickness, int typeValue) {
         setStart(start);
         setEnd(end);
         setVisibility(visible);
         setColor(color);
-    }
-    
-    public LineInfo (Point start, Point end, boolean visible, int color, int thickness, Entry<Double, Double> typeValue) {
-    	this(start, end, visible, color);
     	setThickness(thickness);
-    	setType(typeValue);
+    	setTypeIndex(typeValue);
     }
 
 	public Point getStart () {
@@ -58,7 +61,7 @@ public class LineInfo {
         myColor = color;
     }
     
-    private void setThickness (int thickness) {
+    private void setThickness (double thickness) {
     	myThickness = thickness;
     }
     
@@ -66,13 +69,13 @@ public class LineInfo {
     	return myThickness;
     }
     
-    public void setType(Entry<Double, Double> typeValue) {
-    	myType = typeValue;
+    public void setTypeIndex (int typeValue) {
+    	myTypeIndex = typeValue;
   		
   	}
 
-    public Entry<Double, Double> getType() {
-    	return myType;
+    public int getTypeIndex () {
+    	return myTypeIndex;
     }
 
 }

@@ -157,8 +157,7 @@ public class TurtleView extends BaseUIView implements Observer {
         ImageView myTurtle = new ImageView(new Image(getClass().getClassLoader()
                                            .getResourceAsStream(
                                            getModel().turtleImageOptionsProperty()
-                                           .get(getModel().getActiveTurtleImageIndex()
-                                           .getValue()))));
+                                           .get(turtle.getImageIndex()))));
         myTurtle.setFitHeight(TURTLE_HEIGHT);
         myTurtle.setFitWidth(TURTLE_WIDTH);
         myTurtle.setX(scaleX(scaleTurtleX(turtle.getLocation().getX(), myTurtle)));

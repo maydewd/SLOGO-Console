@@ -13,27 +13,24 @@ import javafx.collections.FXCollections;
 public class BasicTurtleModel extends Observable {
     
     
-    private static final int DEFAULT_PEN_COLOR = 1;
-    private static final int DEFAULT_IMAGE_INDEX = 0;
+    
 
     private Turtle myTurtle;
     private ListProperty<LineInfo> myLines = new SimpleListProperty<>(FXCollections.observableArrayList());
     private IntegerProperty myBackgroundColorIndexProperty = new SimpleIntegerProperty(0);
 
     public BasicTurtleModel () {
-        myTurtle = new Turtle(DEFAULT_PEN_COLOR, DEFAULT_IMAGE_INDEX);
+        myTurtle = new Turtle();
     }
 
     public void moveTurtleForward (double pixels) {
         linesProperty().addAll(getActiveTurtle().moveForward(pixels));
-        setChanged();
-        notifyObservers();
+        changeAndNotify();
     }
 
     public void setTurtleCoordinates (Point newPoint) {
         getActiveTurtle().setLocation(newPoint);
-        setChanged();
-        notifyObservers();
+        changeAndNotify();
     }
 
     public Point getTurtleCoordinates () {
@@ -46,8 +43,7 @@ public class BasicTurtleModel extends Observable {
 
     public void setTurtleHeading (double heading) {
         getActiveTurtle().setHeading(heading);
-        setChanged();
-        notifyObservers();
+        changeAndNotify();
     }
 
     public void setPenDown (boolean penDown) {
@@ -60,8 +56,7 @@ public class BasicTurtleModel extends Observable {
 
     public void setTurtleVisibility (boolean isVisible) {
         getActiveTurtle().setVisible(isVisible);
-        setChanged();
-        notifyObservers();
+        changeAndNotify();
     }
 
     public boolean getTurtleVisibility () {
@@ -79,9 +74,17 @@ public class BasicTurtleModel extends Observable {
     public IntegerProperty getActivePenColorIndex () {
         return getActiveTurtle().getPenColorIndexProperty();
     }
+    
+    public void setPenColor (int index) {
+        getActiveTurtle().getPenColorIndexProperty().set(index);
+    }
 
     public IntegerProperty getActiveTurtleImageIndex () {
         return getActiveTurtle().getImageIndexProperty();
+    }
+    
+    public void setImageIndex (int index) {
+        getActiveTurtle().getImageIndexProperty().set(index);
     }
 
     protected Turtle getActiveTurtle () {
@@ -98,6 +101,11 @@ public class BasicTurtleModel extends Observable {
 
     public IntegerProperty backgroundColorIndexProperty () {
         return myBackgroundColorIndexProperty;
+    }
+    
+    protected void changeAndNotify () {
+        setChanged();
+        notifyObservers();
     }
     
 }

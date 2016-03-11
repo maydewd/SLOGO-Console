@@ -22,7 +22,7 @@ public class PenColorSelector extends ColorSelector{
 
     @Override
     public void addButton (CustomMenuItem button, int i, IBasicModel basicModel) {
-        button.setOnAction(e -> basicModel.setActivePenColorIndex(i));
+        button.setOnAction(e -> basicModel.setPenColorIndex(i));
         getMenu().getItems().add(button);
     }
 

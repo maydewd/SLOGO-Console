@@ -17,12 +17,12 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 
 	@Override
 	public double getPenColor() {
-		return getModelActions().getActivePenColorIndex().get();
+		return getModelActions().getPenColorIndex().get();
 	}
 
 	@Override
 	public double getShape() {
-		return getModelActions().getActiveTurtleImageIndex().get();
+		return getModelActions().getTurtleImageIndex().get();
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 
 	@Override
 	public double setShape(int index) {
-		getModelActions().setActiveTurtleImageIndex(index);
+		getModelActions().setTurtleImageIndex(index);
 		return index;
 	}
 
