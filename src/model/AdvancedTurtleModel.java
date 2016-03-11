@@ -80,7 +80,7 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
     }
 
     public void setSelectedLineType (LineType lineType) {
-        setLineType(myLineType);
+        setLineType(lineType);
         forAllTurtles(turtle -> turtle.setLineType(lineType));
     }
 
