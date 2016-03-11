@@ -1,7 +1,6 @@
 package view;
 
 import java.io.File;
-import app.SLogoEngine;
 import controller.IParserController;
 import controller.ParserController;
 import javafx.application.HostServices;
@@ -17,12 +16,14 @@ import model.IBasicModel;
 
 public class FileSelector extends Selector {
     private Menu myFileSelector;
+    private UIManagerTabInterface myManager;
     private IParserController myParser;
 
-    public FileSelector (HostServices hostServices, IAdvancedModel model, BaseUIView parent) {
+    public FileSelector (HostServices hostServices, IAdvancedModel model, BaseUIView parent, UIManagerTabInterface uiManager) {
         myFileSelector = new Menu("File");
-        myParser = new ParserController(model, parent);
         myFileSelector.getItems().addAll(makeNew(model, hostServices), makeOpen(model), makeSave(model));
+        myManager = uiManager;
+        myParser= new ParserController(model, parent);
     }
 
     public Menu getMenu (){
@@ -31,7 +32,7 @@ public class FileSelector extends Selector {
     
     public MenuItem makeSave(IBasicModel model){
         MenuItem save = new MenuItem("Save");
-         
+        
         save.setOnAction(
                          new EventHandler<ActionEvent>() {
                              @Override
@@ -39,7 +40,7 @@ public class FileSelector extends Selector {
                                  FileChooser fileChooser = new FileChooser();
                                  File file = fileChooser.showSaveDialog(new Stage());
                                  if (file != null) {
-                                    myParser.saveWorkspace(file); 
+                                    myParser.saveWorkspace(file);
                                  }
                              }
                          }
@@ -57,7 +58,7 @@ public class FileSelector extends Selector {
                                  FileChooser fileChooser = new FileChooser();
                                  File file = fileChooser.showOpenDialog(new Stage());
                                  if (file != null) {
-                                    myParser.loadWorkspace(file);
+                                    myManager.addTab(file);
                                  }
                              }
                          }
@@ -67,8 +68,7 @@ public class FileSelector extends Selector {
     
     public MenuItem makeNew(IBasicModel model, HostServices hostServices){
         MenuItem newButton = new MenuItem("New");
-        SLogoEngine newGame = new SLogoEngine();
-        newButton.setOnAction(e -> newGame.start(new Stage(), hostServices));
+        newButton.setOnAction(e -> myManager.addTab());
         return newButton;
     }
 }
