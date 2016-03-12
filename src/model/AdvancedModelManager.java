@@ -189,11 +189,6 @@ public class AdvancedModelManager implements IAdvancedModelManager {
     }
 
     @Override
-    public AdvancedOptionsModel getMyOptionsModel () {
-        return myActiveModel.getMyOptionsModel();
-    }
-
-    @Override
     public void clearLines () {
         myActiveModel.clearLines();
     }

@@ -11,22 +11,19 @@ import controller.ConsoleController;
 import controller.commands.AbstractExpressionNode;
 import controller.parser.ParsingException;
 import javafx.beans.property.MapProperty;
-import model.BasicOptionsModel;
 import model.IAdvancedModel;
 
 
 public class FileManager {
-    private Map<String, AbstractExpressionNode> myCommands;
-    private MapProperty<String, List<String>> myCommandBodies;
+    private Map<String, AbstractExpressionNode> myCommandBodies;
+    private MapProperty<String, List<String>> myCommandDefinitions;
     private MapProperty<String, Double> myVariables;
-    private BasicOptionsModel myOptionsModel;
     private ConsoleController controller;
 
     public FileManager (IAdvancedModel myModel) {
-        myOptionsModel = myModel.getMyOptionsModel();
-        myCommands = myOptionsModel.userCommandsBodies();
-        myCommandBodies = myOptionsModel.definedCommandsProperty();
-        myVariables = myOptionsModel.variableMapProperty();
+        myCommandBodies = myModel.userCommandsBodies();
+        myCommandDefinitions = myModel.definedCommandsProperty();
+        myVariables = myModel.variableMapProperty();
         controller = ConsoleController.getController();
 
     }
@@ -51,7 +48,7 @@ public class FileManager {
     }
 
     public void saveCommands (PrintWriter myPrint) {
-        for (String s : myCommands.keySet()) {
+        for (String s : myCommandBodies.keySet()) {
             StringBuilder newString = new StringBuilder();
             newString.append("to ");
             newString.append(s);
@@ -59,13 +56,13 @@ public class FileManager {
             newString.append("[");
             newString.append(" ");
             List<String> myStrings = new ArrayList<String>();
-            myStrings = myCommandBodies.get(s);
+            myStrings = myCommandDefinitions.get(s);
             for (int j = 0; j < myStrings.size(); j++) {
                 newString.append(myStrings.get(j));
                 newString.append(" ");
             }
             newString.append("] ");
-            newString.append(myCommands.get(s).toString());
+            newString.append(myCommandBodies.get(s).toString());
             myPrint.write(newString.toString());
             myPrint.println();
             myPrint.flush();

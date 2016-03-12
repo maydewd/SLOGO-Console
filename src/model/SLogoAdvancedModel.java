@@ -64,8 +64,7 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
         return myTurtleModel;
     }
 
-    @Override
-    public AdvancedOptionsModel getMyOptionsModel () {
+    private AdvancedOptionsModel getMyOptionsModel () {
         return myOptionsModel;
     }
 
