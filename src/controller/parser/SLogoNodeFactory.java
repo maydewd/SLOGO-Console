@@ -46,12 +46,20 @@ public class SLogoNodeFactory {
         else if (getTypePattern("ListEnd").matcher(token).matches()) {
             return createListEnd(token);
         }
+        else if (getTypePattern("GroupStart").matcher(token).matches()) {
+            return createGroupStart(token);
+        }
+        else if (getTypePattern("GroupEnd").matcher(token).matches()) {
+            return createGroupEnd(token);
+        }
         else {
             String errorMessage =
                     String.format(myErrorResources.getString("NoPatternMatch"), token);
             throw new ParsingException(errorMessage);
         }
     }
+
+    
 
     private AbstractExpressionNode createConstantNode (String token) {
         return new ConstantNode(token);
@@ -91,6 +99,14 @@ public class SLogoNodeFactory {
 
     private AbstractExpressionNode createListEnd (String token) {
         return new ListEndNode(token);
+    }
+    
+    private AbstractExpressionNode createGroupStart (String token) {
+        return new GroupNode(token);
+    }
+    
+    private AbstractExpressionNode createGroupEnd (String token) {
+        return new GroupEndNode(token);
     }
 
     private String getTranslatedName (String token, String currentLocale) {

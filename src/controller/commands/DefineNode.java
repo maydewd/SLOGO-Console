@@ -8,10 +8,10 @@ import controller.parser.ParsingException;
 
 public class DefineNode extends ControlProcedureNode {
 
-    private static final int IF_NUM_PARAMS = 2;
+    private static final int DEF_NUM_PARAMS = 2;
 
     public DefineNode (String text) {
-        super(text, IF_NUM_PARAMS);
+        super(text, DEF_NUM_PARAMS);
     }
 
     @Override

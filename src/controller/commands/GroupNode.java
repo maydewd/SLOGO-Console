@@ -6,23 +6,22 @@ import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
-public class ListNode extends AbstractExpressionNode {
+public class GroupNode extends AbstractExpressionNode {
 
     private List<AbstractExpressionNode> myChildren = new LinkedList<AbstractExpressionNode>();
 
     private boolean isClosed;
 
-    public ListNode (String token) {
-        super(token, SyntaxType.LISTSTART);
+    public GroupNode (String token) {
+        super(token, SyntaxType.GROUPSTART);
     }
 
     @Override
     public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
-        double lastValue = 0;
-        for (AbstractExpressionNode childNode : getChildren()) {
-            lastValue = childNode.execute(commands);
+        for (AbstractExpressionNode childNode : getChildren().subList(1, getChildren().size())) {
+            getChildren().get(0).addParameter(childNode);
         }
-        return lastValue;
+        return getChildren().get(0).execute(commands);
     }
 
     @Override
@@ -32,7 +31,7 @@ public class ListNode extends AbstractExpressionNode {
 
     @Override
     public void addParameter (AbstractExpressionNode node) throws ParsingException {
-        if (node.getType() == SyntaxType.LISTEND) {
+        if (node.getType() == SyntaxType.GROUPEND) {
             setClosed(true);
         }
         else {
@@ -56,7 +55,7 @@ public class ListNode extends AbstractExpressionNode {
     public String toString() {
         StringBuilder parameters = new StringBuilder();
         getChildren().forEach(node -> parameters.append(node.toString()));
-        return getText() + " " + parameters + "] ";
+        return getText() + " " + parameters + ") ";
     }
 
 }

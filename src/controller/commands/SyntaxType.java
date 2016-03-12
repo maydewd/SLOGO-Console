@@ -6,6 +6,8 @@ public enum SyntaxType {
                         VARIABLE,
                         COMMAND,
                         LISTSTART,
-                        LISTEND
+                        LISTEND,
+                        GROUPSTART,
+                        GROUPEND
 
 }
