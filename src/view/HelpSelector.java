@@ -14,7 +14,7 @@ public class HelpSelector extends Selector {
         MenuItem help = new MenuItem("Initial Commands");
         help.setOnAction(e -> hostServices.showDocument(HELP_PAGE_1));
         MenuItem help2 = new MenuItem("Advanced Commands");
-        help.setOnAction(e -> hostServices.showDocument(HELP_PAGE_2));
+        help2.setOnAction(e -> hostServices.showDocument(HELP_PAGE_2));
         myHelpSelector.getItems().addAll(help, help2);
     }
     
