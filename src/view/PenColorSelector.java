@@ -1,7 +1,6 @@
 package view;
 
 import javafx.scene.control.CustomMenuItem;
-import javafx.scene.control.Menu;
 import model.IBasicModel;
 
 public class PenColorSelector extends ColorSelector{

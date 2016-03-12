@@ -1,9 +1,5 @@
 package model;
 
-import java.util.AbstractMap.SimpleEntry;
-import java.util.Map;
-import java.util.Map.Entry;
-
 public class LineInfo {
     
     private static final double DEFAULT_THICKNESS = 1.0d;
