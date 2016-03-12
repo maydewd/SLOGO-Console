@@ -1,5 +1,6 @@
 package view;
 
+import java.io.File;
 import javafx.application.HostServices;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -18,7 +19,7 @@ import model.IAdvancedModelManager;
 /**
  * Created by Tim on 22/02/16.
  */
-public class UIManager {
+public class UIManager implements UIManagerTabInterface{
 
     public static final double DEFAULT_SPACING = 10;
     public static final double DEFAULT_X_SIZE = 400;
@@ -30,6 +31,9 @@ public class UIManager {
     private IAdvancedModel myModel;
     private IAdvancedModelManager myManager;
     private HostServices myHostServices;
+    private TabPane myTabs;
+    
+    private int counter = 1;
 
     public UIManager(Stage primaryStage, IAdvancedModelManager model, HostServices hostServices){
         // Init vars
@@ -41,30 +45,23 @@ public class UIManager {
         myModel = model;
         myHostServices = hostServices;
         
-        TabPane tabs = new TabPane();
-        Tab main = new Tab("WorkSpace 1");
-        Tab plus = new Tab("new Tab");
-        tabs.getTabs().addAll(main, plus);
+        myTabs = new TabPane();
+        Tab main = new Tab("WorkSpace " + counter);
+        main.setOnSelectionChanged(e -> myManager.switchToWorkspace(0));
+        counter++;
+        myTabs.getTabs().addAll(main);
         main.setContent(buildSubView());
-        plus.setOnSelectionChanged(e -> makeNewView());
 
-        myGroup.getChildren().add(tabs);
+        myGroup.getChildren().add(myTabs);
         setupInput();
         myStage.show();
     }
-    
-    
-    public Object makeNewView () {
-        buildSubView();
-        return null;
-    }
-
 
     private Pane buildSubView(){
         // Create the views
         BaseUIView myTurtleView = new TurtleView(myModel);
         BaseUIView myConsoleView = new ConsoleView(myModel);
-        BaseUIView mySettingsMenu = new SettingsView(myModel, myHostServices);
+        BaseUIView mySettingsMenu = new SettingsView(myModel, myHostServices, this);
         BaseUIView myVariableView = new VariableView(myModel);
         BaseUIView myCommandHistoryView = new CommandHistoryView(myModel);
         BaseUIView myUserCommandListView = new UserCommandView(myModel);
@@ -99,5 +96,27 @@ public class UIManager {
                     System.exit(0);
                 }
         });
+    }
+
+
+    @Override
+    public void addTab (File settings) {
+        myManager.loadNewWorkspace(settings);
+        Tab tab = new Tab("Workspace " + counter);
+        int index = counter - 1;
+        counter++;
+        tab.setContent(buildSubView());
+        tab.setOnSelectionChanged(e -> myManager.switchToWorkspace(index));
+    }
+
+
+    @Override
+    public void addTab () {
+        myManager.createNewWorkspace();
+        Tab tab = new Tab("Workspace " + counter);
+        int index = counter - 1;
+        counter++;
+        tab.setContent(buildSubView());
+        tab.setOnSelectionChanged(e -> myManager.switchToWorkspace(index));
     }
 }
