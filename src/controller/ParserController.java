@@ -38,24 +38,6 @@ public class ParserController implements IParserController {
         }
     }
 
-    @Override
-    public void loadWorkspace (File file) {
-    	HashMap<String, Object> prefs = new HashMap<String, Object>();
-		myParser = new XMLReader(file, prefs);
-		try {
-            myParser.parse();
-        }
-        catch (ParserConfigurationException | SAXException | IOException e) {
-            errorHandler.showError(e.getMessage());
-        }
-		myModel.setActiveBackgroundColorIndex(Integer.valueOf((String) (prefs.get("background-color"))));
-		myModel.turtleImageOptionsProperty().set((ObservableList<String>) (prefs.get("image-list")));
-		for (int i=1; i <= Integer.valueOf((String) (prefs.get("turtle-count"))); i++) {
-		        myModel.addSelectedTurtle(i);
-		}
-		myModel.setActiveLanguageIndex(Integer.valueOf((String) (prefs.get("language"))));	
-
-    }
     
     public Map<String, Object> getPreferences() {
 		HashMap<String, Object> prefs = new HashMap<String, Object>();

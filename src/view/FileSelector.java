@@ -18,12 +18,49 @@ public class FileSelector extends Selector {
     private Menu myFileSelector;
     private UIManagerTabInterface myManager;
     private IParserController myParser;
+  //  private FileManager myVarMeth;
 
     public FileSelector (HostServices hostServices, IAdvancedModel model, BaseUIView parent, UIManagerTabInterface uiManager) {
         myFileSelector = new Menu("File");
-        myFileSelector.getItems().addAll(makeNew(model, hostServices), makeOpen(model), makeSave(model));
+        myFileSelector.getItems().addAll(makeNew(model, hostServices), makeOpen(model), makeSave(model), makeExport(model) );
+                                         //, makeImport());
         myManager = uiManager;
         myParser= new ParserController(model, parent);
+   //     myVarMeth = new FileManager(model);
+    }
+
+    private MenuItem makeExport (IAdvancedModel model) {
+        MenuItem export = new MenuItem("Export Methods and Variables");
+        export.setOnAction(
+                         new EventHandler<ActionEvent>() {
+                             @Override
+                             public void handle(final ActionEvent e) {
+                                 FileChooser fileChooser = new FileChooser();
+                                 File file = fileChooser.showSaveDialog(new Stage());
+                                 if (file != null) {
+                                  //  myVarMeth.save(file);
+                                 }
+                             }
+                         }
+        );
+        return export;
+    }
+    
+    private MenuItem makeImport (IAdvancedModel model) {
+        MenuItem export = new MenuItem("Export Methods and Variables");
+        export.setOnAction(
+                         new EventHandler<ActionEvent>() {
+                             @Override
+                             public void handle(final ActionEvent e) {
+                                 FileChooser fileChooser = new FileChooser();
+                                 File file = fileChooser.showOpenDialog(new Stage());
+                                 if (file != null) {
+                                    //myVarMeth.load(file);
+                                 }
+                             }
+                         }
+        );
+        return export;
     }
 
     public Menu getMenu (){
