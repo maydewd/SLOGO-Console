@@ -31,12 +31,12 @@ public class FileManager {
         }
         public void save(File myFile) throws FileNotFoundException, ParsingException{
                 PrintWriter myPrint=new PrintWriter(myFile);
-                StringBuilder newString=new StringBuilder();
-                saveVariables(myPrint, newString);
-                saveCommands(myPrint, newString);
+                saveVariables(myPrint);
+                saveCommands(myPrint);
         }
-        public void saveVariables(PrintWriter myPrint, StringBuilder newString){
+        public void saveVariables(PrintWriter myPrint){
         	for(String s: myVariables.keySet()){
+        		StringBuilder newString=new StringBuilder();
         		newString.append("set ");
         		newString.append(s);
         		newString.append(myVariables.get(s));
@@ -45,8 +45,9 @@ public class FileManager {
         		myPrint.flush();
         	}
         }
-        public void saveCommands(PrintWriter myPrint, StringBuilder newString){
+        public void saveCommands(PrintWriter myPrint){
                 for(String s:myCommands.keySet()){
+                	StringBuilder newString=new StringBuilder();
                         newString.append("to ");
                         newString.append(s);
                         newString.append(" ");
