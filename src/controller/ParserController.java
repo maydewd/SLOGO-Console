@@ -52,7 +52,7 @@ public class ParserController implements IParserController {
 		prefs.put("language", myModel.getActiveLanguageIndex().get());
 		prefs.put("palette", FXCollections.observableArrayList(new ArrayList<String>()));
 		for (RGBColor c: myModel.colorOptionsProperty().get().values()) {
-			((ObservableList<String>) prefs.get("palette")).add(c.getColorName());
+			((ObservableList<String>) prefs.get("palette")).add(c.toString());
 		}
 		return prefs;
 	}
