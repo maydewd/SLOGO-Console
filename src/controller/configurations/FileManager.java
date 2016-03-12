@@ -27,7 +27,7 @@ public class FileManager {
                 controller=ConsoleController.getController();
                 
         }
-        public File save(File myFile) throws FileNotFoundException, ParsingException{
+        public void save(File myFile) throws FileNotFoundException, ParsingException{
                 PrintWriter myPrint=new PrintWriter(myFile);
                 StringBuilder newString=new StringBuilder();
                 for(String s:myCommands.keySet()){
@@ -46,15 +46,17 @@ public class FileManager {
                     newString.append(myCommands.get(s).toString());
                     myPrint.write(newString.toString());
                     myPrint.println();
+                    myPrint.flush();
             }
-            return myFile;
+            myPrint.close();
     }
     public void load(File f) throws FileNotFoundException{
             Scanner myScanner=new Scanner(f);
-            while(myScanner.nextLine()!=null){
+            while(myScanner.hasNextLine()){
                     String command=myScanner.nextLine();
                     controller.executeCommand(command);
             }
+            myScanner.close();
             
     }
 
