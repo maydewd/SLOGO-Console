@@ -18,9 +18,6 @@ public class GroupNode extends AbstractExpressionNode {
 
     @Override
     public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
-        for (AbstractExpressionNode childNode : getChildren().subList(1, getChildren().size())) {
-            getChildren().get(0).addParameter(childNode);
-        }
         return getChildren().get(0).execute(commands);
     }
 
@@ -33,6 +30,9 @@ public class GroupNode extends AbstractExpressionNode {
     public void addParameter (AbstractExpressionNode node) throws ParsingException {
         if (node.getType() == SyntaxType.GROUPEND) {
             setClosed(true);
+        }
+        else if (getChildren().size() >= 1){
+            getChildren().get(0).addParameter(node);
         }
         else {
             getChildren().add(node);
