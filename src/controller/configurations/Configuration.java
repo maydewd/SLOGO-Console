@@ -9,15 +9,26 @@ public class Configuration {
     private List<String> imageList;
     private String turtleCount;
     private String languageIndex;
+    private List<String> paletteList;
     
-    public Configuration (String backgroundIndex, List<String> imageFiles, String turtleCount, String languageIndex) {
+    public Configuration (String backgroundIndex, List<String> imageFiles, String turtleCount, String languageIndex, List<String> palette) {
         setBackgroundIndex(backgroundIndex);
         setImageList(imageFiles);
         setTurtleCount(turtleCount);
         setLanguageIndex(languageIndex);
+        setPaletteList(palette);
     }
 
-    public String getBackgroundIndex () {
+    private void setPaletteList(List<String> palette) {
+		this.paletteList = palette;
+		
+	}
+    
+    public List<String> getPaletteList () {
+    	return paletteList;
+    }
+
+	public String getBackgroundIndex () {
         return backgroundIndex;
     }
 

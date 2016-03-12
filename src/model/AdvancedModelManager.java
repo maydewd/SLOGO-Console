@@ -244,4 +244,9 @@ public class AdvancedModelManager implements IAdvancedModelManager {
         return myActiveModel.getActiveTurtle();
     }
 
+	@Override
+	public void addTurtle(int id) {
+		myActiveModel.addTurtle(id);	
+	}
+
 }

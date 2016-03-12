@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.paint.Color;
+
 public class RGBColor {
 	
 	private static final int MAX_SATURATION = 255;
@@ -57,4 +59,10 @@ public class RGBColor {
         String blueHex = String.format("%2s", Integer.toHexString(getBlue())).replace(" ", "0");
         return new StringBuilder().append(redHex).append(greenHex).append(blueHex).toString();
     }
+    
+    public String getColorName() {
+    	Color c = Color.rgb(myRed, myGreen, myBlue);
+    	return c.toString();
+    }
+    
 }

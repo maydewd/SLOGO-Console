@@ -39,6 +39,8 @@ public interface IAdvancedModel extends IBasicModel {
     
 
 	AdvancedOptionsModel getMyOptionsModel();
+
+	void addTurtle(int id);
 	
 	
 
