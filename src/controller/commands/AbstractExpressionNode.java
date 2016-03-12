@@ -51,5 +51,10 @@ public abstract class AbstractExpressionNode {
     }
     
     protected abstract List<AbstractExpressionNode> getChildren() throws ParsingException;
+    
+    @Override
+    public String toString() {
+        return getText() + " ";
+    }
 
 }

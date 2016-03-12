@@ -40,5 +40,12 @@ public abstract class SimpleProcedureNode extends AbstractExpressionNode {
     private void setNumberParameters (int numberParameters) {
         myNumberParameters = numberParameters;
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder parameters = new StringBuilder();
+        getChildren().forEach(node -> parameters.append(node.toString()));
+        return getText() + " " + parameters;
+    }
 
 }
