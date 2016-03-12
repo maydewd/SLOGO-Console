@@ -17,19 +17,35 @@ import model.IAdvancedModel;
 
 public class FileManager {
         private Map<String, AbstractExpressionNode> myCommands;
-        private MapProperty<String, List<String>> myVariables;
+        private MapProperty<String, List<String>> myCommandBodies;
+        private MapProperty<String, Double> myVariables;
         private BasicOptionsModel myOptionsModel;
         private ConsoleController controller;
         public FileManager(IAdvancedModel myModel) {
                 myOptionsModel=myModel.getMyOptionsModel();
                 myCommands=myOptionsModel.userCommandsBodies();
-                myVariables=myOptionsModel.definedCommandsProperty();
+                myCommandBodies=myOptionsModel.definedCommandsProperty();
+                myVariables=myOptionsModel.variableMapProperty();
                 controller=ConsoleController.getController();
                 
         }
         public void save(File myFile) throws FileNotFoundException, ParsingException{
                 PrintWriter myPrint=new PrintWriter(myFile);
                 StringBuilder newString=new StringBuilder();
+                saveVariables(myPrint, newString);
+                saveCommands(myPrint, newString);
+        }
+        public void saveVariables(PrintWriter myPrint, StringBuilder newString){
+        	for(String s: myVariables.keySet()){
+        		newString.append("set ");
+        		newString.append(s);
+        		newString.append(myVariables.get(s));
+        		myPrint.write(newString.toString());
+        		myPrint.println();
+        		myPrint.flush();
+        	}
+        }
+        public void saveCommands(PrintWriter myPrint, StringBuilder newString){
                 for(String s:myCommands.keySet()){
                         newString.append("to ");
                         newString.append(s);
@@ -37,7 +53,7 @@ public class FileManager {
                         newString.append("[");
                         newString.append(" ");
                         List<String> myStrings=new ArrayList<String>();
-                        myStrings=myVariables.get(s);
+                        myStrings=myCommandBodies.get(s);
                         for(int j=0;j<myStrings.size();j++){
                             newString.append(myStrings.get(j));
                             newString.append(" ");
