@@ -29,9 +29,9 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
     	ObservableMap<Integer, RGBColor> newPalette = FXCollections.observableHashMap();
     	
     	for (int i=0; i < hexColors.size(); i++) {
-    		int red = Integer.parseInt(hexColors.get(i).substring(2,4),16);
-    		int green = Integer.parseInt(hexColors.get(i).substring(4,6),16);
-    		int blue = Integer.parseInt(hexColors.get(i).substring(6,8),16);
+    		int red = Integer.parseInt(hexColors.get(i).substring(0,2),16);
+    		int green = Integer.parseInt(hexColors.get(i).substring(2,4),16);
+    		int blue = Integer.parseInt(hexColors.get(i).substring(4,6),16);
     		RGBColor rgbC = new RGBColor(red, green, blue);
     		newPalette.put(i, rgbC);
     	}

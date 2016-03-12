@@ -1,9 +1,7 @@
 package model;
 
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.function.Consumer;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
