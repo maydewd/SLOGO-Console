@@ -2,6 +2,7 @@ package controller.parser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 import model.IAdvancedModel;
 import model.RGBColor;
@@ -120,6 +121,17 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
     
     private void setModelActions (IAdvancedModel advancedModel) {
         myModelActions = advancedModel;
+    }
+
+    @Override
+    public Map<String, Double> getAllVariables () {
+        return getModelActions().variableMapProperty().get();
+    }
+    
+    @Override
+    public void setAllVariables (Map<String, Double> allVars) {
+        getModelActions().variableMapProperty().clear();
+        getModelActions().variableMapProperty().putAll(allVars);
     }
     
     

@@ -2,6 +2,7 @@ package controller.parser;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public interface IAdvancedSLogoCommands extends IBasicSLogoCommands {
     
@@ -36,5 +37,9 @@ public interface IAdvancedSLogoCommands extends IBasicSLogoCommands {
 	public double tellAll (List<Integer> ids);
 
     double defineCommand (String name, List<String> params);
+    
+    Map<String, Double> getAllVariables();
+    
+    void setAllVariables (Map<String, Double> allVars);
 
 }

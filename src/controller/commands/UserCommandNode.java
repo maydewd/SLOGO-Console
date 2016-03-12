@@ -2,7 +2,9 @@ package controller.commands;
 
 import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class UserCommandNode extends SimpleProcedureNode {
@@ -13,6 +15,7 @@ public class UserCommandNode extends SimpleProcedureNode {
 
     @Override
     public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
+        Map<String, Double> oldScope = new HashMap<>(commands.getAllVariables());
         if (commands.getUserMethodBody(getText()) == null) {
             String errorMessage = String.format(getErrorMessage("NoFunctionExists"), getText());
             throw new ParsingException(errorMessage);
@@ -21,7 +24,9 @@ public class UserCommandNode extends SimpleProcedureNode {
         for (int i = 0; i < parameters.size(); i++) {
             commands.setVariable(parameters.get(i), getChildren().get(i).execute(commands));
         }
-        return commands.getUserMethodBody(getText()).execute(commands);
+        double retValue = commands.getUserMethodBody(getText()).execute(commands);
+        commands.setAllVariables(oldScope);
+        return retValue;
     }
 
 }
