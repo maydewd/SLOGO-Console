@@ -1,0 +1,5 @@
+set :fifty 50
+set :negone -1
+to square [ ] [ fd :size rt 90 ] 
+to triangle [ :size ] [ fd :size rt 120 ] 
+to house [ ] [ set :size 100 square fd :size rt 60 triangle 80 fd :size ]
