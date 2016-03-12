@@ -1,4 +1,4 @@
-# slogo API Changes
+# slogo
 Duke CompSci 308 Cell Society Project
 
 Names:
