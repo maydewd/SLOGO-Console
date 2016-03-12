@@ -108,6 +108,12 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
         return id;
     }
     
+    @Override
+    public double defineCommand (String name, List<String> params) {
+        getModelActions().definedCommandsProperty().put(name, params);
+        return 1;
+    }
+    
     private IAdvancedModel getModelActions () {
         return myModelActions;
     }
@@ -115,6 +121,8 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
     private void setModelActions (IAdvancedModel advancedModel) {
         myModelActions = advancedModel;
     }
+    
+    
 
 
 }

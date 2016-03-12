@@ -35,4 +35,6 @@ public interface IAdvancedSLogoCommands extends IBasicSLogoCommands {
 	
 	public double tellAll (List<Integer> ids);
 
+    double defineCommand (String name, List<String> params);
+
 }

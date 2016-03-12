@@ -114,8 +114,13 @@ public class SLogoNodeFactory {
             String regex = newBundle.getString(key);
             newPatterns.put(key, Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
         }
+        addDefine(newPatterns);
         setCommandPatterns(newPatterns);
         setCurrentLanguage(newLanguage);
+    }
+
+    private void addDefine (Map<String, Pattern> newPatterns) {
+        newPatterns.put("Define", Pattern.compile("define", Pattern.CASE_INSENSITIVE));
     }
 
     private Pattern getTypePattern (String key) {
