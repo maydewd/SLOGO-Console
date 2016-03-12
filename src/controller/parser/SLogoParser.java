@@ -62,7 +62,7 @@ public class SLogoParser {
         String[] lines = inputString.split("\\r?\\n");
         for (String line : lines) {
             if (line.trim().length() > 0 && !commentPattern.matcher(line).matches()) {
-                validTokens.addAll(Arrays.asList(line.split("\\s+")));
+                validTokens.addAll(Arrays.asList(line.trim().split("\\s+")));
             }
         }
         return validTokens;
