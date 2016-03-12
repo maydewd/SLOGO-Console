@@ -1,14 +1,17 @@
 package model;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Observer;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 import controller.commands.AbstractExpressionNode;
+import controller.configurations.Configuration;
+import controller.configurations.XMLReader;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
 import javafx.beans.property.ReadOnlyIntegerProperty;
@@ -16,44 +19,45 @@ import javafx.beans.property.ReadOnlyListProperty;
 
 
 public class AdvancedModelManager implements IAdvancedModelManager {
-    
-    private static final String DEFAULT_CONFIG_FILE = "default.xml";
+
+    private static final String DEFAULT_CONFIG_FILE = "resources/default.xml";
 
     private File defaultConfigFile;
     private IAdvancedModel myActiveModel;
     private List<IAdvancedModel> myModels = new ArrayList<>();
 
     public AdvancedModelManager () {
-        try {
-            defaultConfigFile = new File(getClass().getClassLoader().getResource(DEFAULT_CONFIG_FILE).toURI());
-        }
-        catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+        defaultConfigFile =
+                new File(getClass().getClassLoader().getResource(DEFAULT_CONFIG_FILE).getFile());
     }
 
     @Override
     public void createNewWorkspace () {
-        // TODO Auto-generated method stub
-
+        loadNewWorkspace(defaultConfigFile);
     }
 
     @Override
     public void loadNewWorkspace (File xmlConfigFile) {
-        // TODO Auto-generated method stub
-
+        XMLReader reader = new XMLReader();
+        try {
+            Configuration config = reader.parse(xmlConfigFile);
+        }
+        catch (ParserConfigurationException | SAXException | IOException e) {
+            throw new RuntimeException(e);
+        }
+        IAdvancedModel newModel = new SLogoAdvancedModel();
+        myModels.add(newModel);
+        myActiveModel = newModel;
     }
 
     @Override
     public void switchToWorkspace (int index) {
-        // TODO Auto-generated method stub
-
+        myActiveModel = myModels.get(index);
     }
 
     @Override
     public void closeWorkspace (int index) {
-        // TODO Auto-generated method stub
-
+        myModels.remove(index);
     }
 
     public void addSelectedTurtle (int IDnumber) {
