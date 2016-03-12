@@ -60,9 +60,5 @@ public class RGBColor {
         return new StringBuilder().append(redHex).append(greenHex).append(blueHex).toString();
     }
     
-    public String getColorName() {
-    	Color c = Color.rgb(myRed, myGreen, myBlue);
-    	return c.toString();
-    }
     
 }

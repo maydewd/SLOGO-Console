@@ -2,15 +2,11 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import controller.configurations.Configuration;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
-import javafx.scene.paint.Color;
 
 
 public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedModel {
@@ -33,8 +29,10 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
     	ObservableMap<Integer, RGBColor> newPalette = FXCollections.observableHashMap();
     	
     	for (int i=0; i < hexColors.size(); i++) {
-    		Color c = Color.valueOf(hexColors.get(i));
-    		RGBColor rgbC = new RGBColor((int) c.getRed()*255, (int) c.getGreen()*255, (int) c.getBlue()*255);
+    		int red = Integer.parseInt(hexColors.get(i).substring(2,4),16);
+    		int green = Integer.parseInt(hexColors.get(i).substring(4,6),16);
+    		int blue = Integer.parseInt(hexColors.get(i).substring(6,8),16);
+    		RGBColor rgbC = new RGBColor(red, green, blue);
     		newPalette.put(i, rgbC);
     	}
     	
