@@ -139,7 +139,12 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
     @Override
     public double getVariable (String name) {
-        return getModelActions().variableMapProperty().get(name);
+        if (getModelActions().variableMapProperty().containsKey(name)) {
+            return getModelActions().variableMapProperty().get(name);
+        }
+        else {
+            return 0;
+        }
     }
 
     @Override

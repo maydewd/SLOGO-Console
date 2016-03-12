@@ -51,5 +51,12 @@ public class ListNode extends AbstractExpressionNode {
     public void setClosed (boolean closed) {
         isClosed = closed;
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder parameters = new StringBuilder();
+        getChildren().forEach(node -> parameters.append(node.toString()));
+        return getText() + " " + parameters + "] ";
+    }
 
 }

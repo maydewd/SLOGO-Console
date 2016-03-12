@@ -34,6 +34,11 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
     public ReadOnlyListProperty<StampInfo> stampsProperty () {
         return myStamps;
     }
+    
+    public void clearStamps () {
+        stampsProperty().clear();
+        changeAndNotify();
+    }
 
     public void drawStamp () {
         myStamps.add(new StampInfo(getActiveTurtle().getLocation(),
@@ -61,7 +66,9 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
                                getLineType());
             allTurtlesProperty().put(index, turtle);
         }
-        selectedTurtlesProperty().add(index);
+        if (!selectedTurtlesProperty().contains(index)) {
+            selectedTurtlesProperty().add(index);
+        }
         setActiveTurtle(allTurtlesProperty().get(index));
         changeAndNotify();
     }

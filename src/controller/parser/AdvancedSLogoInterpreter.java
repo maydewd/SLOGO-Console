@@ -46,7 +46,7 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 
 	@Override
 	public double setPenColor(int index) {
-		getModelActions().setActiveLanguageIndex(index);
+		getModelActions().setPenColorIndex(index);
 		return index;
 	}
 

@@ -44,6 +44,12 @@ public class BasicOptionsModel {
     public BasicOptionsModel () {
         initialize();
     }
+    
+    public BasicOptionsModel (List<String> imageFiles) {
+        initializeLanguageOptions();
+        initializeColors();
+        initializeTurtleImages(imageFiles);
+    }
 
     private void initialize () {
         initializeLanguageOptions();
@@ -66,6 +72,10 @@ public class BasicOptionsModel {
     private void initializeTurtleImages () {
     	ObservableList<String> imgs = FXCollections.observableArrayList(Arrays.asList(INITIAL_IMAGES));
         turtleImageOptionsProperty().addAll(imgs);
+    }
+    
+    private void initializeTurtleImages (List<String> imageFiles) {
+        turtleImageOptionsProperty().addAll(imageFiles);
     }
 
     public MapProperty<String, Double> variableMapProperty () {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
+import controller.configurations.Configuration;
 import javafx.beans.property.ReadOnlyListProperty;
 
 
@@ -12,9 +13,32 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
     private AdvancedTurtleModel myTurtleModel = new AdvancedTurtleModel();
     private AdvancedOptionsModel myOptionsModel = new AdvancedOptionsModel();
 
-    public SLogoAdvancedModel () {
+    public SLogoAdvancedModel (Configuration config) {
         setMyTurtleModel(myTurtleModel);
         setMyOptionsModel(myOptionsModel);
+        initializeBackground(config);
+        initializeImageList(config);
+        initializeTurtleCount(config);
+        initializeLanguage(config);
+    }
+
+    private void initializeLanguage (Configuration config) {
+        setActiveLanguageIndex(Integer.parseInt(config.getLanguageIndex()));
+    }
+
+    private void initializeTurtleCount (Configuration config) {
+        for (int i = 0; i < Integer.parseInt(config.getTurtleCount()); i++) {
+            getMyTurtleModel().selectTurtle(i + 1);
+        }
+    }
+
+    private void initializeImageList (Configuration config) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    private void initializeBackground (Configuration config) {
+        setActiveBackgroundColorIndex(Integer.parseInt(config.getBackgroundIndex()));
     }
 
     private AdvancedTurtleModel getMyTurtleModel () {
@@ -58,7 +82,7 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 
     @Override
     public void clearStamps () {
-        getMyTurtleModel().stampsProperty().clear();
+        getMyTurtleModel().clearStamps();
     }
 
     @Override

@@ -11,7 +11,7 @@ public class SettingsView extends BaseUIView{
 	
     private HostServices myHostServices;
 
-	public SettingsView(IAdvancedModel b, HostServices hostServices) {
+	public SettingsView(IAdvancedModel b, HostServices hostServices, UIManagerTabInterface uiManager) {
 	    super(DEFAULT_WIDTH, DEFAULT_HEIGHT, b);
 	    myHostServices = hostServices;
 
@@ -23,7 +23,7 @@ public class SettingsView extends BaseUIView{
 	    Selector bColorSelector = new BackgroundColorSelector(getModel());
 	    Selector tSelector = new TurtleSelector(getModel());
 	    Selector hSelector = new HelpSelector(myHostServices); 
-	    Selector fSelector = new FileSelector(myHostServices, getModel(), this);;
+	    Selector fSelector = new FileSelector(myHostServices, getModel(), this, uiManager);;
 		
 	    settings.getMenus().addAll(fSelector.getMenu(),
 	                               lSelector.getMenu(), 
