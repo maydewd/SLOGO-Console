@@ -29,7 +29,7 @@ public class XMLReader {
 		Node workspace = getWorkspaceNode(file);
 
 		HashMap<String, Object> configurations = new HashMap<>();
-		String[] preferences = {"background-color", "turtle-count", "language"};
+		String[] preferences = {"background-color", "turtle-count", "language", "initial-library"};
 		String[] listPreferences = {"image-list", "palette"};
 		
 		if (workspace.getNodeType() == Node.ELEMENT_NODE) {
@@ -59,7 +59,8 @@ public class XMLReader {
 				(List<String>) configurations.get("image-list"), 
 				(String) configurations.get("turtle-count"), 
 				(String) configurations.get("language"),
-				(List<String>) configurations.get("palette"));
+				(List<String>) configurations.get("palette"),
+				(String) configurations.get("initial-library"));
 	}
 
 	private List<String> extractListInfo (String setting, Element element) {

@@ -1,9 +1,12 @@
 package model;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import controller.configurations.Configuration;
+import controller.configurations.FileManager;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
@@ -11,10 +14,11 @@ import javafx.collections.ObservableMap;
 
 public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedModel {
 
+	private final static String RESOURCES_FILE_PATH = "resources/";
     private AdvancedTurtleModel myTurtleModel = new AdvancedTurtleModel();
     private AdvancedOptionsModel myOptionsModel = new AdvancedOptionsModel();
 
-    public SLogoAdvancedModel (Configuration config) {
+    public SLogoAdvancedModel (Configuration config) throws FileNotFoundException {
         setMyTurtleModel(myTurtleModel);
         setMyOptionsModel(myOptionsModel);
         initializeBackground(config);
@@ -22,6 +26,7 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
         initializeTurtleCount(config);
         initializeLanguage(config);
         initializePalette(config);
+        initializeCommandLibrary(config);
     }
 
     private void initializePalette(Configuration config) {
@@ -40,6 +45,12 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 		
 	}
 
+    private void initializeCommandLibrary(Configuration config) throws FileNotFoundException {
+    	File f = new File(RESOURCES_FILE_PATH + config.getCommandLibrary());
+    	FileManager fm = new FileManager(this);
+    	fm.load(f);
+    }
+    
 	private void initializeLanguage (Configuration config) {
         setActiveLanguageIndex(Integer.parseInt(config.getLanguageIndex()));
     }

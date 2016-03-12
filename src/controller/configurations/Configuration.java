@@ -10,16 +10,27 @@ public class Configuration {
     private String turtleCount;
     private String languageIndex;
     private List<String> paletteList;
+    private String commandLibFileName; 
     
-    public Configuration (String backgroundIndex, List<String> imageFiles, String turtleCount, String languageIndex, List<String> palette) {
+    public Configuration (String backgroundIndex, List<String> imageFiles, String turtleCount, String languageIndex, List<String> palette, String commandLibraryFile) {
         setBackgroundIndex(backgroundIndex);
         setImageList(imageFiles);
         setTurtleCount(turtleCount);
         setLanguageIndex(languageIndex);
         setPaletteList(palette);
+        setCommandLibrary(commandLibraryFile);
     }
 
-    private void setPaletteList(List<String> palette) {
+    private void setCommandLibrary (String commandLibrary) {
+		this.commandLibFileName = commandLibrary;
+		
+	}
+    
+    public String getCommandLibrary() {
+    	return commandLibFileName;
+    }
+
+	private void setPaletteList (List<String> palette) {
 		this.paletteList = palette;
 		
 	}
