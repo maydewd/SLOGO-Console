@@ -82,7 +82,7 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 
     @Override
     public void clearStamps () {
-        getMyTurtleModel().stampsProperty().clear();
+        getMyTurtleModel().clearStamps();
     }
 
     @Override
