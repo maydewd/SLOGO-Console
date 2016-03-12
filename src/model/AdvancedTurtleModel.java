@@ -61,7 +61,9 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
                                getLineType());
             allTurtlesProperty().put(index, turtle);
         }
-        selectedTurtlesProperty().add(index);
+        if (!selectedTurtlesProperty().contains(index)) {
+            selectedTurtlesProperty().add(index);
+        }
         setActiveTurtle(allTurtlesProperty().get(index));
         changeAndNotify();
     }

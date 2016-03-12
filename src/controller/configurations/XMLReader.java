@@ -37,7 +37,7 @@ public class XMLReader {
 				if (turtleViewInfo.getNodeType() == Node.ELEMENT_NODE) {
 					Element turtleViewInfoElement = (Element) turtleViewInfo;
 					backgroundIndex = extractInfo("background-color", turtleViewInfoElement);
-					extractInfo("turtle-count", turtleViewInfoElement);
+					turtleCount = extractInfo("turtle-count", turtleViewInfoElement);
 					addImages(imageFiles, turtleViewInfoElement);
 				}
 				
@@ -45,7 +45,7 @@ public class XMLReader {
 				Node settings = settingsNode.item(0);
 				if (settings.getNodeType() == Node.ELEMENT_NODE) {
 					Element settingsElement = (Element) settings;
-					extractInfo("language", settingsElement);
+					languageIndex = extractInfo("language", settingsElement);
 				}
 			}
 			return new Configuration(backgroundIndex, imageFiles, turtleCount, languageIndex);

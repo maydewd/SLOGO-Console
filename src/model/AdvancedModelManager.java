@@ -11,6 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 import controller.commands.AbstractExpressionNode;
 import controller.configurations.Configuration;
+import controller.configurations.ConfigurationException;
 import controller.configurations.XMLReader;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.MapProperty;
@@ -34,21 +35,27 @@ public class AdvancedModelManager implements IAdvancedModelManager {
 
     @Override
     public void createNewWorkspace () {
-        loadNewWorkspace(defaultConfigFile);
+        try {
+            loadNewWorkspace(defaultConfigFile);
+        }
+        catch (ConfigurationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public void loadNewWorkspace (File xmlConfigFile) {
+    public void loadNewWorkspace (File xmlConfigFile) throws ConfigurationException {
         XMLReader reader = new XMLReader();
+        Configuration config;
         try {
-            Configuration config = reader.parse(xmlConfigFile);
+            config = reader.parse(xmlConfigFile);
+            IAdvancedModel newModel = new SLogoAdvancedModel(config);
+            myModels.add(newModel);
+            myActiveModel = newModel;
         }
         catch (ParserConfigurationException | SAXException | IOException e) {
-            throw new RuntimeException(e);
+            throw new ConfigurationException(e);
         }
-        IAdvancedModel newModel = new SLogoAdvancedModel();
-        myModels.add(newModel);
-        myActiveModel = newModel;
     }
 
     @Override

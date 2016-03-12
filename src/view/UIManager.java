@@ -1,6 +1,7 @@
 package view;
 
 import java.io.File;
+import controller.configurations.ConfigurationException;
 import javafx.application.HostServices;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -101,7 +102,12 @@ public class UIManager implements UIManagerTabInterface{
 
     @Override
     public void addTab (File settings) {
-        myManager.loadNewWorkspace(settings);
+        try {
+            myManager.loadNewWorkspace(settings);
+        }
+        catch (ConfigurationException e) {
+            
+        }
         Tab tab = new Tab("Workspace " + counter);
         int index = counter - 1;
         counter++;
