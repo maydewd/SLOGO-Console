@@ -7,19 +7,23 @@ import javafx.beans.property.ReadOnlyListProperty;
 
 public interface IAdvancedModel extends IBasicModel {
 
-    void addSelectedTurtles (int IDnumber);
+    void addSelectedTurtle (int IDnumber);
 
     void clearSelectedTurtles ();
-
-    Collection<Integer> getSelectedTurtleIDs ();
-
-    List<Double> getLineThicknesses ();
     
-    void setSelectedLineThickness (int i);
+    List<Integer> getAllTurtleIDs ();
 
-    List<Entry<Double, Double>> getLineTypeValues ();
+    List<Integer> getSelectedTurtleIDs ();
 
-    void setSelectedLineType (int i);
+    List<LineThickness> getLineThicknesses ();
+    
+    void setLineThickness (int index);
+    
+    void setLineThickness (double thickness);
+
+    List<LineType> getLineTypeValues ();
+
+    void setLineType (int i);
     
     ReadOnlyListProperty<StampInfo> getStamps ();
 
@@ -29,16 +33,14 @@ public interface IAdvancedModel extends IBasicModel {
 
     int getActiveTurtleID ();
 
-	Collection<TurtleInfo> getAllTurtleInfo();
+	Collection<? extends TurtleInfo> getAllTurtleInfo();
 	
 	TurtleInfo getTurtle (int id);
-
-	AdvancedTurtleModel getMyTurtleModel();
+    
 
 	AdvancedOptionsModel getMyOptionsModel();
 	
 	
-    
 
 }
 

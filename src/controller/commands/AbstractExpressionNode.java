@@ -2,7 +2,7 @@ package controller.commands;
 
 import java.util.List;
 import java.util.ResourceBundle;
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
@@ -20,7 +20,7 @@ public abstract class AbstractExpressionNode {
         setType(type);
     }
 
-    public abstract double execute (IBasicSLogoCommands commands) throws ParsingException;
+    public abstract double execute (IAdvancedSLogoCommands commands) throws ParsingException;
 
     public abstract boolean areParametersComplete ();
 

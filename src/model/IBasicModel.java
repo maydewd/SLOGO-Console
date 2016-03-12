@@ -49,21 +49,21 @@ public interface IBasicModel {
     
     public void setActiveLanguageIndex (int languageIndex);
 
-    public ListProperty<RGBColor> colorOptionsProperty ();
+    public MapProperty<Integer, RGBColor> colorOptionsProperty ();
 
     public ReadOnlyIntegerProperty getActiveBackgroundColorIndex ();
 
     public void setActiveBackgroundColorIndex (int backgroundColorIndex);
 
-    public ReadOnlyIntegerProperty getActivePenColorIndex ();
+    public ReadOnlyIntegerProperty getPenColorIndex ();
 
-    public void setActivePenColorIndex (int penColorIndex);
+    public void setPenColorIndex (int penColorIndex);
 
     public ListProperty<String> turtleImageOptionsProperty ();
 
-    public ReadOnlyIntegerProperty getActiveTurtleImageIndex ();
+    public ReadOnlyIntegerProperty getTurtleImageIndex ();
 
-    public void setActiveTurtleImageIndex (int turtleImageIndex);
+    public void setTurtleImageIndex (int turtleImageIndex);
 
     public void addCoreTurtleObserver (Observer observer);
     

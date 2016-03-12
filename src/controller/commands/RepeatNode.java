@@ -1,6 +1,6 @@
 package controller.commands;
 
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
@@ -25,7 +25,7 @@ public class RepeatNode extends ControlProcedureNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
         double limit = getChildren().get(0).execute(commands);
         double lastValue = 0;
         for (double i = 1; i <= limit; i++) {

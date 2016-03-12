@@ -1,10 +1,10 @@
 package controller.commands;
 
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
-public class SetTowardsNode extends SimpleProcedureNode {
+public class SetTowardsNode extends TurtleCommandNode {
 
     private static final int TOWARDS_NUM_PARAMS = 2;
 
@@ -13,7 +13,7 @@ public class SetTowardsNode extends SimpleProcedureNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double executeSingle (IAdvancedSLogoCommands commands) throws ParsingException {
         double leftValue = getChildren().get(0).execute(commands);
         double rightValue = getChildren().get(1).execute(commands);
         return commands.faceTowards(leftValue, rightValue);

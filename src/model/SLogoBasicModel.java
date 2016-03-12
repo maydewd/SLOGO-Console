@@ -109,7 +109,7 @@ public class SLogoBasicModel implements IBasicModel {
     }
 
     @Override
-    public ListProperty<RGBColor> colorOptionsProperty () {
+    public MapProperty<Integer, RGBColor> colorOptionsProperty () {
         return getMyOptionsModel().colorOptionsProperty();
     }
 
@@ -121,24 +121,24 @@ public class SLogoBasicModel implements IBasicModel {
     @Override
     public void setActiveBackgroundColorIndex (int backgroundColorIndex) {
         // TODO add message
-        if (backgroundColorIndex >= getMyOptionsModel().colorOptionsProperty().size()) {
+        if (!getMyOptionsModel().colorOptionsProperty().containsKey(backgroundColorIndex)) {
             throw new IllegalArgumentException();
         }
         getMyTurtleModel().backgroundColorIndexProperty().set(backgroundColorIndex);
     }
 
     @Override
-    public ReadOnlyIntegerProperty getActivePenColorIndex () {
+    public ReadOnlyIntegerProperty getPenColorIndex () {
         return getMyTurtleModel().getActivePenColorIndex();
     }
 
     @Override
-    public void setActivePenColorIndex (int penColorIndex) {
+    public void setPenColorIndex (int penColorIndex) {
         // TODO Add message
-        if (penColorIndex >= getMyOptionsModel().colorOptionsProperty().size()) {
+        if (!getMyOptionsModel().colorOptionsProperty().containsKey(penColorIndex)) {
             throw new IllegalArgumentException();
         }
-        getMyTurtleModel().getActivePenColorIndex().set(penColorIndex);
+        getMyTurtleModel().setPenColor(penColorIndex);
     }
 
     @Override
@@ -147,17 +147,17 @@ public class SLogoBasicModel implements IBasicModel {
     }
 
     @Override
-    public ReadOnlyIntegerProperty getActiveTurtleImageIndex () {
+    public ReadOnlyIntegerProperty getTurtleImageIndex () {
         return getMyTurtleModel().getActiveTurtleImageIndex();
     }
 
     @Override
-    public void setActiveTurtleImageIndex (int turtleImageIndex) {
+    public void setTurtleImageIndex (int turtleImageIndex) {
         // TODO add message
         if (turtleImageIndex >= getMyOptionsModel().turtleImageOptionsProperty().size()) {
             throw new IllegalArgumentException();
         }
-        getMyTurtleModel().getActiveTurtleImageIndex().set(turtleImageIndex);
+        getMyTurtleModel().setImageIndex(turtleImageIndex);
     }
 
     @Override
@@ -177,7 +177,7 @@ public class SLogoBasicModel implements IBasicModel {
         return myOptionsModel;
     }
 
-    protected void setBasicOptionsModel (BasicOptionsModel optionsModel) {
+    protected void setMyOptionsModel (BasicOptionsModel optionsModel) {
         myOptionsModel = optionsModel;
     }
 

@@ -1,10 +1,12 @@
 package controller;
 
 import controller.commands.AbstractExpressionNode;
+import controller.parser.AdvancedSLogoInterpreter;
 import controller.parser.BasicSLogoInterpreter;
 import controller.parser.ParsingException;
 import controller.parser.SLogoParser;
 import javafx.beans.property.MapProperty;
+import model.IAdvancedModel;
 import model.IBasicModel;
 import view.BaseUIView;
 
@@ -16,16 +18,16 @@ import java.util.List;
  */
 public class ConsoleController {
 	private SLogoParser myParser;
-	private BasicSLogoInterpreter myInterpreter;
+	private AdvancedSLogoInterpreter myInterpreter;
 	private IBasicModel myModel;
 	private BaseUIView myView;
 
 	private static ConsoleController controller = null;
 	
-	private ConsoleController(IBasicModel model, BaseUIView view) {
+	private ConsoleController(IAdvancedModel model, BaseUIView view) {
 		myParser = new SLogoParser();
 		myModel = model;
-		myInterpreter = new BasicSLogoInterpreter(model);
+		myInterpreter = new AdvancedSLogoInterpreter(model);
 		myView = view;
 	}
 
@@ -34,7 +36,7 @@ public class ConsoleController {
 	 * @param model
 	 * @param view
 	 */
-	public static void initController(IBasicModel model, BaseUIView view){
+	public static void initController(IAdvancedModel model, BaseUIView view){
 		if(controller == null){
 			controller = new ConsoleController(model, view);
 		}

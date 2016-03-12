@@ -2,7 +2,7 @@ package controller.commands;
 
 import java.util.LinkedList;
 import java.util.List;
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
@@ -17,7 +17,7 @@ public class ListNode extends AbstractExpressionNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
         double lastValue = 0;
         for (AbstractExpressionNode childNode : getChildren()) {
             lastValue = childNode.execute(commands);

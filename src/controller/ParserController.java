@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
+import javafx.collections.ObservableMap;
+
 import controller.configurations.XMLParser;
 import controller.configurations.XMLReader;
 import controller.configurations.XMLWriter;
@@ -54,14 +56,15 @@ public class ParserController implements IParserController {
         }
 		myModel.setActiveBackgroundColorIndex(Integer.valueOf((String) (prefs.get("background-color"))));
 		myModel.turtleImageOptionsProperty().set((ObservableList<String>) (prefs.get("image-list"))); 
-		ObservableList<RGBColor> colors = FXCollections.observableArrayList();
-		for(String color: (ObservableList<String>) prefs.get("palette")) {
+		ObservableMap<Integer, RGBColor> colors = FXCollections.observableHashMap();
+		for(int i=0; i< ((ObservableList<String>) prefs.get("palette")).size(); i++) {
+			String color = ((ObservableList<String>) prefs.get("palette")).get(i);
 			Color c = Color.valueOf(color);
-			colors.add(new RGBColor((int) c.getRed(), (int) c.getGreen(), (int) c.getBlue()));
+			colors.put(i, new RGBColor((int) c.getRed(), (int) c.getGreen(), (int) c.getBlue()));
 		}
 		myModel.colorOptionsProperty().set(colors);
 		for (int i=1; i <= Integer.valueOf((String) (prefs.get("turtle-count"))); i++) {
-			myModel.getMyTurtleModel().allTurtlesProperty().put(i, new Turtle(i));
+		        myModel.addSelectedTurtle(i);
 		}
 		myModel.setActiveLanguageIndex(Integer.valueOf((String) (prefs.get("language"))));	
 
@@ -74,7 +77,7 @@ public class ParserController implements IParserController {
 		prefs.put("turtle-count", myModel.getAllTurtleInfo().size());
 		prefs.put("language", myModel.getActiveLanguageIndex());
 		prefs.put("palette", FXCollections.observableArrayList(new ArrayList<String>()));
-		for (RGBColor c: myModel.colorOptionsProperty().get()) {
+		for (RGBColor c: myModel.colorOptionsProperty().get().values()) {
 			((ObservableList<String>) prefs.get("palette")).add(c.getColorName());
 		}
 		return prefs;

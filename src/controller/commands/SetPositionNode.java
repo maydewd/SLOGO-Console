@@ -1,9 +1,9 @@
 package controller.commands;
 
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
-public class SetPositionNode extends SimpleProcedureNode {
+public class SetPositionNode extends TurtleCommandNode {
 
     private static final int SETXY_NUM_PARAMS = 2;
     
@@ -12,7 +12,7 @@ public class SetPositionNode extends SimpleProcedureNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double executeSingle (IAdvancedSLogoCommands commands) throws ParsingException {
         double x = getChildren().get(0).execute(commands);
         double y = getChildren().get(1).execute(commands);
         return commands.setXY(x, y);

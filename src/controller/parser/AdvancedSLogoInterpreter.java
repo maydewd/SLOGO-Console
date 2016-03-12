@@ -1,7 +1,8 @@
 package controller.parser;
 
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.TreeMap;
 import model.IAdvancedModel;
 import model.RGBColor;
 
@@ -11,16 +12,17 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 	
 	public AdvancedSLogoInterpreter(IAdvancedModel advancedModel) {
 		super(advancedModel);
+		setModelActions(advancedModel);
 	}
 
 	@Override
 	public double getPenColor() {
-		return getModelActions().getActivePenColorIndex().get();
+		return getModelActions().getPenColorIndex().get();
 	}
 
 	@Override
 	public double getShape() {
-		return getModelActions().getActiveTurtleImageIndex().get();
+		return getModelActions().getTurtleImageIndex().get();
 	}
 
 	@Override
@@ -40,9 +42,7 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 		}
 	}
 	
-	public IAdvancedModel getModelActions () {
-		return myModelActions;
-	}
+	
 
 	@Override
 	public double setPenColor(int index) {
@@ -52,13 +52,13 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 
 	@Override
 	public double setShape(int index) {
-		getModelActions().setActiveTurtleImageIndex(index);
+		getModelActions().setTurtleImageIndex(index);
 		return index;
 	}
 
 	@Override
 	public double setPalette(int index, int r, int g, int b) {
-		getModelActions().colorOptionsProperty().set(index, new RGBColor(r,g,b));
+		getModelActions().colorOptionsProperty().put(index, new RGBColor(r,g,b));
 		return index;
 	}
 
@@ -69,7 +69,7 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 	}
 
 	@Override
-	public double setPenSize(int pixels) {
+	public double setPenSize(double pixels) {
 		getModelActions().getActiveTurtle().setLineThickness(pixels);
 		return pixels;
 	}
@@ -85,12 +85,36 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter implements I
 	}
 
 	@Override
-	public double tell (List<Integer> ids) {
-		for (int id: ids) {
-			getModelActions().addSelectedTurtles(id);
-		}
-		return ids.get(ids.size()-1);
+	public double tellAll (List<Integer> ids) {
+	        getModelActions().clearSelectedTurtles();
+	        ids.forEach(id -> getModelActions().addSelectedTurtle(id));
+		return ids.size() != 0 ? ids.get(ids.size()-1) : 0;
 	}
+
+    @Override
+    public List<Integer> getSelectedTurtles () {
+        return getModelActions().getSelectedTurtleIDs();
+    }
+
+    @Override
+    public List<Integer> getAllTurtles () {
+        return getModelActions().getAllTurtleIDs();
+    }
+
+    @Override
+    public double tell (Integer id) {
+        getModelActions().clearSelectedTurtles();
+        getModelActions().addSelectedTurtle(id);
+        return id;
+    }
+    
+    private IAdvancedModel getModelActions () {
+        return myModelActions;
+    }
+    
+    private void setModelActions (IAdvancedModel advancedModel) {
+        myModelActions = advancedModel;
+    }
 
 
 }

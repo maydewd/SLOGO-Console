@@ -3,39 +3,43 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 
-public class Turtle implements TurtleInfo{
+public class Turtle implements TurtleInfo {
 
-	private static final int DEFAULT_PEN_COLOR_INDEX = 0;
-	private static final int DEFAULT_IMAGE_INDEX = 0;
-	
+    private static final int DEFAULT_ID = 1;
+    private static final int DEFAULT_PEN_INDEX = 1;
+    private static final int DEFAULT_IMAGE_INDEX = 0;
+    public static final double DEFAULT_LINE_THICKNESS = 1.0d;
+    public static final LineType DEFAULT_LINE_TYPE = LineType.SOLID;
+
     private double myHeading = 0;
     private Point myLocation = new Point(0, 0);
     private boolean isPenDown = true;
-    private IntegerProperty myPenColorIndexProperty = new SimpleIntegerProperty(DEFAULT_PEN_COLOR_INDEX);
+    private IntegerProperty myPenColorIndexProperty = new SimpleIntegerProperty(DEFAULT_PEN_INDEX);
     private boolean isVisible = true;
     private IntegerProperty myImageIndexProperty = new SimpleIntegerProperty(DEFAULT_IMAGE_INDEX);
     private int myID;
     private boolean isSelected = true;
-    private int myLineThickness;
-    private Entry<Double, Double> myLineType;
+    private double myLineThickness;
+    private LineType myLineType;
 
-    public Turtle(int ID) {
-    	this(DEFAULT_PEN_COLOR_INDEX, DEFAULT_IMAGE_INDEX, ID);
+    public Turtle () {
+        this(DEFAULT_ID);
     }
-    
-    public Turtle (int penColorIndex, int imageIndex) {
-        this(penColorIndex, imageIndex, 1);
+
+    public Turtle (int ID) {
+        this(ID, DEFAULT_PEN_INDEX, DEFAULT_IMAGE_INDEX, DEFAULT_LINE_THICKNESS, DEFAULT_LINE_TYPE);
     }
-    
-    public Turtle (int penColorIndex, int imageIndex, int ID) {
+
+    public Turtle (int ID, int penColorIndex, int imageIndex, double thickness, LineType lineType) {
         setMyPenColorIndex(penColorIndex);
         setMyImageIndex(imageIndex);
         setID(ID);
+        setLineThickness(thickness);
+        setLineType(lineType);
     }
 
     public Turtle (double heading,
@@ -64,7 +68,6 @@ public class Turtle implements TurtleInfo{
         return myLocation;
     }
 
-
     public void setLocation (Point location) {
         myLocation = location;
     }
@@ -72,14 +75,13 @@ public class Turtle implements TurtleInfo{
     public List<LineInfo> moveForward (double pixels) {
         double newX = myLocation.getX() + Math.cos(Math.toRadians(myHeading)) * pixels;
         double newY = myLocation.getY() + Math.sin(Math.toRadians(myHeading)) * pixels;
-    	Point newLoc = new Point(newX, newY);
-    	
-    	
-    	ArrayList<LineInfo> myLines = new ArrayList<>();
-    	myLines.add(new LineInfo(myLocation, newLoc, isPenDown, myPenColorIndexProperty.get()));
-    	
+        Point newLoc = new Point(newX, newY);
+
+        ArrayList<LineInfo> myLines = new ArrayList<>();
+        myLines.add(new LineInfo(myLocation, newLoc, isPenDown, myPenColorIndexProperty.get(), getLineThickness(), getLineType()));
+
         setLocation(newLoc);
-        
+
         return myLines;
     }
 
@@ -129,34 +131,33 @@ public class Turtle implements TurtleInfo{
     public int getID () {
         return myID;
     }
-    
+
     private void setID (int ID) {
         myID = ID;
     }
-    
+
     public boolean getSelected () {
-    	return isSelected;
-    }
-    
-    public void setSelected (boolean select) {
-    	isSelected = select;
-    }
-    
-    public void setLineType (Entry<Double, Double> typeValue) {
-    	myLineType = typeValue;
-    }
-    
-    public Entry<Double, Double> getLineType () {
-    	return myLineType;
+        return isSelected;
     }
 
-	public void setLineThickness(int i) {
-		myLineThickness = i;
-	}
-	
-	public int getLineThickness() {
-		return myLineThickness;
-	}
-    
+    public void setSelected (boolean select) {
+        isSelected = select;
+    }
+
+    public void setLineType (LineType lineType) {
+        myLineType = lineType;
+    }
+
+    public LineType getLineType () {
+        return myLineType;
+    }
+
+    public void setLineThickness (double thickness) {
+        myLineThickness = thickness;
+    }
+
+    public double getLineThickness () {
+        return myLineThickness;
+    }
 
 }

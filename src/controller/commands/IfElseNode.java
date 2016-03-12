@@ -1,6 +1,6 @@
 package controller.commands;
 
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
@@ -25,7 +25,7 @@ public class IfElseNode extends ControlProcedureNode {
     }
 
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
         double fork = getChildren().get(0).execute(commands);
         return fork != 0 ? getChildren().get(1).execute(commands) : getChildren().get(2).execute(commands);
     }

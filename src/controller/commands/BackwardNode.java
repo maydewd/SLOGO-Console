@@ -1,9 +1,9 @@
 package controller.commands;
 
-import controller.parser.IBasicSLogoCommands;
+import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
-public class BackwardNode extends SimpleProcedureNode {
+public class BackwardNode extends TurtleCommandNode {
     
     private static final int BACK_NUM_PARAMS = 1;
 
@@ -13,7 +13,7 @@ public class BackwardNode extends SimpleProcedureNode {
 
 
     @Override
-    public double execute (IBasicSLogoCommands commands) throws ParsingException {
+    public double executeSingle (IAdvancedSLogoCommands commands) throws ParsingException {
         double pixelValue = getChildren().get(0).execute(commands);
         return commands.moveBack(pixelValue);
     }
