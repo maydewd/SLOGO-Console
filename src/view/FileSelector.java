@@ -1,8 +1,11 @@
 package view;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import controller.IParserController;
 import controller.ParserController;
+import controller.configurations.FileManager;
+import controller.parser.ParsingException;
 import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,15 +21,16 @@ public class FileSelector extends Selector {
     private Menu myFileSelector;
     private UIManagerTabInterface myManager;
     private IParserController myParser;
-  //  private FileManager myVarMeth;
+    private FileManager myVarMeth;
+    private BaseUIView errors;
 
     public FileSelector (HostServices hostServices, IAdvancedModel model, BaseUIView parent, UIManagerTabInterface uiManager) {
         myFileSelector = new Menu("File");
-        myFileSelector.getItems().addAll(makeNew(model, hostServices), makeOpen(model), makeSave(model), makeExport(model) );
-                                         //, makeImport());
+        myFileSelector.getItems().addAll(makeNew(model, hostServices), makeOpen(model), makeSave(model), makeExport(model), makeImport(model));
         myManager = uiManager;
-        myParser= new ParserController(model, parent);
-   //     myVarMeth = new FileManager(model);
+        errors = parent;
+        myParser= new ParserController(model, errors);
+        myVarMeth = new FileManager(model);
     }
 
     private MenuItem makeExport (IAdvancedModel model) {
@@ -38,7 +42,12 @@ public class FileSelector extends Selector {
                                  FileChooser fileChooser = new FileChooser();
                                  File file = fileChooser.showSaveDialog(new Stage());
                                  if (file != null) {
-                                  //  myVarMeth.save(file);
+                                    try {
+                                        myVarMeth.save(file);
+                                    }
+                                    catch (FileNotFoundException | ParsingException e1) {
+                                        errors.showError(e1.toString());
+                                    }
                                  }
                              }
                          }
@@ -47,7 +56,7 @@ public class FileSelector extends Selector {
     }
     
     private MenuItem makeImport (IAdvancedModel model) {
-        MenuItem export = new MenuItem("Export Methods and Variables");
+        MenuItem export = new MenuItem("Import Methods and Variables");
         export.setOnAction(
                          new EventHandler<ActionEvent>() {
                              @Override
@@ -55,7 +64,12 @@ public class FileSelector extends Selector {
                                  FileChooser fileChooser = new FileChooser();
                                  File file = fileChooser.showOpenDialog(new Stage());
                                  if (file != null) {
-                                    //myVarMeth.load(file);
+                                    try {
+                                        myVarMeth.load(file);
+                                    }
+                                    catch (FileNotFoundException e1) {
+                                       errors.showError(e1.toString());
+                                    }
                                  }
                              }
                          }
@@ -68,7 +82,7 @@ public class FileSelector extends Selector {
     }
     
     public MenuItem makeSave(IBasicModel model){
-        MenuItem save = new MenuItem("Save");
+        MenuItem save = new MenuItem("Save Workspace Preferences");
         
         save.setOnAction(
                          new EventHandler<ActionEvent>() {
@@ -87,7 +101,7 @@ public class FileSelector extends Selector {
     
     
     public MenuItem makeOpen(IBasicModel model){
-        MenuItem open = new MenuItem("Load");
+        MenuItem open = new MenuItem("Load Workspace From XML");
         open.setOnAction(
                          new EventHandler<ActionEvent>() {
                              @Override
@@ -104,7 +118,7 @@ public class FileSelector extends Selector {
     }
     
     public MenuItem makeNew(IBasicModel model, HostServices hostServices){
-        MenuItem newButton = new MenuItem("New");
+        MenuItem newButton = new MenuItem("New Workspace");
         newButton.setOnAction(e -> myManager.addTab());
         return newButton;
     }
