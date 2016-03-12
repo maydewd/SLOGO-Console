@@ -39,6 +39,7 @@ public class FileManager {
         		StringBuilder newString=new StringBuilder();
         		newString.append("set ");
         		newString.append(s);
+        		newString.append(" ");
         		newString.append(myVariables.get(s));
         		myPrint.write(newString.toString());
         		myPrint.println();
@@ -59,7 +60,7 @@ public class FileManager {
                             newString.append(myStrings.get(j));
                             newString.append(" ");
                     }
-                    newString.append("]");
+                    newString.append("] ");
                     newString.append(myCommands.get(s).toString());
                     myPrint.write(newString.toString());
                     myPrint.println();
