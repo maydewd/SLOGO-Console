@@ -60,7 +60,7 @@ public class ParserController implements IParserController {
 		for(int i=0; i< ((ObservableList<String>) prefs.get("palette")).size(); i++) {
 			String color = ((ObservableList<String>) prefs.get("palette")).get(i);
 			Color c = Color.valueOf(color);
-			colors.put(i, new RGBColor((int) c.getRed(), (int) c.getGreen(), (int) c.getBlue()));
+			colors.put(i, new RGBColor((int) c.getRed()*255, (int) c.getGreen()*255, (int) c.getBlue()*255));
 		}
 		myModel.colorOptionsProperty().set(colors);
 		for (int i=1; i <= Integer.valueOf((String) (prefs.get("turtle-count"))); i++) {
@@ -72,10 +72,10 @@ public class ParserController implements IParserController {
     
     public Map<String, Object> getPreferences() {
 		HashMap<String, Object> prefs = new HashMap<String, Object>();
-		prefs.put("background-color", myModel.getActiveBackgroundColorIndex());
+		prefs.put("background-color", myModel.getActiveBackgroundColorIndex().get());
 		prefs.put("image-list", myModel.turtleImageOptionsProperty().get());
 		prefs.put("turtle-count", myModel.getAllTurtleInfo().size());
-		prefs.put("language", myModel.getActiveLanguageIndex());
+		prefs.put("language", myModel.getActiveLanguageIndex().get());
 		prefs.put("palette", FXCollections.observableArrayList(new ArrayList<String>()));
 		for (RGBColor c: myModel.colorOptionsProperty().get().values()) {
 			((ObservableList<String>) prefs.get("palette")).add(c.getColorName());

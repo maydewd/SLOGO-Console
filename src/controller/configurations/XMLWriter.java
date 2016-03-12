@@ -74,7 +74,7 @@ public class XMLWriter implements XMLParser {
 		String[] preferencesArray = {"background-color", "turtle-count", "language"};
 		for (String preference: preferencesArray) {
 			Element preferenceElement = addElement(workspace, preference);
-			int preferenceValue = ((IntegerProperty) myInfo.get(preference)).getValue();
+			int preferenceValue = (Integer) myInfo.get(preference);
 			addText(preferenceElement, String.valueOf(preferenceValue));
 		}
 
