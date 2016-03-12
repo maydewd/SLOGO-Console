@@ -102,7 +102,7 @@ public class TurtleView extends BaseUIView implements Observer {
                 }
             }
         }
-        if(getModel().getLines().isEmpty()){
+        if(getModel().getStamps().isEmpty()){
             clearStamps();
         }
         else{
