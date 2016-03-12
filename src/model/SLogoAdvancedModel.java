@@ -2,10 +2,15 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import controller.configurations.Configuration;
 import javafx.beans.property.ReadOnlyListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
+import javafx.scene.paint.Color;
 
 
 public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedModel {
@@ -20,20 +25,35 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
         initializeImageList(config);
         initializeTurtleCount(config);
         initializeLanguage(config);
+        initializePalette(config);
     }
 
-    private void initializeLanguage (Configuration config) {
+    private void initializePalette(Configuration config) {
+    	List<String> hexColors = config.getPaletteList();
+    	ObservableMap<Integer, RGBColor> newPalette = FXCollections.observableHashMap();
+    	
+    	for (int i=0; i < hexColors.size(); i++) {
+    		Color c = Color.valueOf(hexColors.get(i));
+    		RGBColor rgbC = new RGBColor((int) c.getRed()*255, (int) c.getGreen()*255, (int) c.getBlue()*255);
+    		newPalette.put(i, rgbC);
+    	}
+    	
+    	getMyOptionsModel().colorOptionsProperty().set(newPalette);
+		
+	}
+
+	private void initializeLanguage (Configuration config) {
         setActiveLanguageIndex(Integer.parseInt(config.getLanguageIndex()));
     }
 
     private void initializeTurtleCount (Configuration config) {
-        for (int i = 0; i < Integer.parseInt(config.getTurtleCount()); i++) {
-            getMyTurtleModel().selectTurtle(i + 1);
+        for (int i = 1; i <= Integer.parseInt(config.getTurtleCount()); i++) {
+        	addTurtle(i);
         }
     }
 
     private void initializeImageList (Configuration config) {
-        // TODO Auto-generated method stub
+        getMyOptionsModel().turtleImageOptionsProperty().set(FXCollections.observableArrayList(config.getImageList()));
         
     }
 
@@ -128,5 +148,12 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
     public List<Integer> getAllTurtleIDs () {
         return new ArrayList<Integer>(getMyTurtleModel().allTurtlesProperty().keySet());
     }
+
+	@Override
+	public void addTurtle(int id) {
+		if (!getMyTurtleModel().allTurtlesProperty().containsKey(id))
+			getMyTurtleModel().allTurtlesProperty().put(id, new Turtle(id));
+		
+	}
 
 }
