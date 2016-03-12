@@ -31,7 +31,7 @@ public class GroupNode extends AbstractExpressionNode {
         if (node.getType() == SyntaxType.GROUPEND) {
             setClosed(true);
         }
-        else if (getChildren().size() >= 1){
+        else if (getChildren().size() >= 1) {
             getChildren().get(0).addParameter(node);
         }
         else {
@@ -39,6 +39,7 @@ public class GroupNode extends AbstractExpressionNode {
         }
     }
 
+    @Override
     protected List<AbstractExpressionNode> getChildren () {
         return myChildren;
     }
@@ -50,9 +51,9 @@ public class GroupNode extends AbstractExpressionNode {
     private void setClosed (boolean closed) {
         isClosed = closed;
     }
-    
+
     @Override
-    public String toString() {
+    public String toString () {
         StringBuilder parameters = new StringBuilder();
         getChildren().forEach(node -> parameters.append(node.toString()));
         return getText() + " " + parameters + ") ";

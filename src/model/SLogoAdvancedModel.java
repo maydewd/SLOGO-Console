@@ -1,12 +1,9 @@
 package model;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import controller.configurations.Configuration;
-import controller.configurations.FileManager;
 import javafx.beans.property.ReadOnlyListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
@@ -27,36 +24,36 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
         initializePalette(config);
     }
 
-    private void initializePalette(Configuration config) {
-    	List<String> hexColors = config.getPaletteList();
-    	ObservableMap<Integer, RGBColor> newPalette = FXCollections.observableHashMap();
-    	
-    	for (int i=0; i < hexColors.size(); i++) {
-    		int red = Integer.parseInt(hexColors.get(i).substring(0,2),16);
-    		int green = Integer.parseInt(hexColors.get(i).substring(2,4),16);
-    		int blue = Integer.parseInt(hexColors.get(i).substring(4,6),16);
-    		RGBColor rgbC = new RGBColor(red, green, blue);
-    		newPalette.put(i, rgbC);
-    	}
-    	
-    	getMyOptionsModel().colorOptionsProperty().set(newPalette);
-		
-	}
+    private void initializePalette (Configuration config) {
+        List<String> hexColors = config.getPaletteList();
+        ObservableMap<Integer, RGBColor> newPalette = FXCollections.observableHashMap();
 
-    
-	private void initializeLanguage (Configuration config) {
+        for (int i = 0; i < hexColors.size(); i++) {
+            int red = Integer.parseInt(hexColors.get(i).substring(0, 2), 16);
+            int green = Integer.parseInt(hexColors.get(i).substring(2, 4), 16);
+            int blue = Integer.parseInt(hexColors.get(i).substring(4, 6), 16);
+            RGBColor rgbC = new RGBColor(red, green, blue);
+            newPalette.put(i, rgbC);
+        }
+
+        getMyOptionsModel().colorOptionsProperty().set(newPalette);
+
+    }
+
+    private void initializeLanguage (Configuration config) {
         setActiveLanguageIndex(Integer.parseInt(config.getLanguageIndex()));
     }
 
     private void initializeTurtleCount (Configuration config) {
         for (int i = 1; i <= Integer.parseInt(config.getTurtleCount()); i++) {
-        	addTurtle(i);
+            addTurtle(i);
         }
     }
 
     private void initializeImageList (Configuration config) {
-        getMyOptionsModel().turtleImageOptionsProperty().set(FXCollections.observableArrayList(config.getImageList()));
-        
+        getMyOptionsModel().turtleImageOptionsProperty()
+                .set(FXCollections.observableArrayList(config.getImageList()));
+
     }
 
     private void initializeBackground (Configuration config) {
@@ -67,6 +64,7 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
         return myTurtleModel;
     }
 
+    @Override
     public AdvancedOptionsModel getMyOptionsModel () {
         return myOptionsModel;
     }
@@ -151,11 +149,12 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
         return new ArrayList<Integer>(getMyTurtleModel().allTurtlesProperty().keySet());
     }
 
-	@Override
-	public void addTurtle(int id) {
-		if (!getMyTurtleModel().allTurtlesProperty().containsKey(id))
-			getMyTurtleModel().allTurtlesProperty().put(id, new Turtle(id));
-		
-	}
+    @Override
+    public void addTurtle (int id) {
+        if (!getMyTurtleModel().allTurtlesProperty().containsKey(id)) {
+            getMyTurtleModel().allTurtlesProperty().put(id, new Turtle(id));
+        }
+
+    }
 
 }

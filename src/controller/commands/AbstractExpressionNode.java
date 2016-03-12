@@ -49,11 +49,11 @@ public abstract class AbstractExpressionNode {
     private void setType (SyntaxType type) {
         myType = type;
     }
-    
-    protected abstract List<AbstractExpressionNode> getChildren() throws ParsingException;
-    
+
+    protected abstract List<AbstractExpressionNode> getChildren () throws ParsingException;
+
     @Override
-    public String toString() {
+    public String toString () {
         return getText() + " ";
     }
 

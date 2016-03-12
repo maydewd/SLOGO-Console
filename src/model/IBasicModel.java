@@ -34,18 +34,18 @@ public interface IBasicModel {
 
     public ReadOnlyListProperty<LineInfo> getLines ();
 
-    public MapProperty<String, Double> variableMapProperty();
+    public MapProperty<String, Double> variableMapProperty ();
 
     public MapProperty<String, List<String>> definedCommandsProperty ();
 
     public Map<String, AbstractExpressionNode> userCommandsBodies ();
 
-    public ListProperty<String> commandHistoryProperty();
+    public ListProperty<String> commandHistoryProperty ();
 
     public ReadOnlyListProperty<String> languageOptionsProperty ();
 
     public ReadOnlyIntegerProperty getActiveLanguageIndex ();
-    
+
     public void setActiveLanguageIndex (int languageIndex);
 
     public MapProperty<Integer, RGBColor> colorOptionsProperty ();
@@ -65,6 +65,6 @@ public interface IBasicModel {
     public void setTurtleImageIndex (int turtleImageIndex);
 
     public void addCoreTurtleObserver (Observer observer);
-    
+
     public Turtle getActiveTurtle ();
 }

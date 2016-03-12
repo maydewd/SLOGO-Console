@@ -14,7 +14,7 @@ public class ArcTangentNode extends SimpleProcedureNode {
 
     @Override
     public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
-        return Math.atan(getChildren().get(0).execute(commands))*180/Math.PI;
+        return Math.atan(getChildren().get(0).execute(commands)) * 180 / Math.PI;
     }
 
 }

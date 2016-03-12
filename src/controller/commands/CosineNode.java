@@ -14,7 +14,7 @@ public class CosineNode extends SimpleProcedureNode {
 
     @Override
     public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
-        return Math.cos(getChildren().get(0).execute(commands)*Math.PI/180);
+        return Math.cos(getChildren().get(0).execute(commands) * Math.PI / 180);
     }
 
 }

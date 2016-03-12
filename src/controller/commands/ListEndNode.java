@@ -33,7 +33,5 @@ public class ListEndNode extends AbstractExpressionNode {
         String error = String.format(getErrorMessage("CantGetChildren"), SyntaxType.LISTEND);
         throw new ParsingException(error);
     }
-    
-    
 
 }

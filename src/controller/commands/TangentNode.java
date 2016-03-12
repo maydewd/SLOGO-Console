@@ -14,7 +14,7 @@ public class TangentNode extends SimpleProcedureNode {
 
     @Override
     public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
-        return Math.tan(getChildren().get(0).execute(commands)*Math.PI/180);
+        return Math.tan(getChildren().get(0).execute(commands) * Math.PI / 180);
     }
 
 }

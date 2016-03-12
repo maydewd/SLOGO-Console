@@ -5,7 +5,7 @@ package controller;
  */
 public interface IListDataController {
 
-	void initDataIntoOL();
+    void initDataIntoOL ();
 
-	void updateOLData();
+    void updateOLData ();
 }

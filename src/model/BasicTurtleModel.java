@@ -1,6 +1,5 @@
 package model;
 
-
 import java.util.Observable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -11,12 +10,10 @@ import javafx.collections.FXCollections;
 
 
 public class BasicTurtleModel extends Observable {
-    
-    
-    
 
     private Turtle myTurtle;
-    private ListProperty<LineInfo> myLines = new SimpleListProperty<>(FXCollections.observableArrayList());
+    private ListProperty<LineInfo> myLines =
+            new SimpleListProperty<>(FXCollections.observableArrayList());
     private IntegerProperty myBackgroundColorIndexProperty = new SimpleIntegerProperty(0);
 
     public BasicTurtleModel () {
@@ -74,7 +71,7 @@ public class BasicTurtleModel extends Observable {
     public IntegerProperty getActivePenColorIndex () {
         return getActiveTurtle().getPenColorIndexProperty();
     }
-    
+
     public void setPenColor (int index) {
         getActiveTurtle().getPenColorIndexProperty().set(index);
     }
@@ -82,7 +79,7 @@ public class BasicTurtleModel extends Observable {
     public IntegerProperty getActiveTurtleImageIndex () {
         return getActiveTurtle().getImageIndexProperty();
     }
-    
+
     public void setImageIndex (int index) {
         getActiveTurtle().getImageIndexProperty().set(index);
     }
@@ -102,10 +99,10 @@ public class BasicTurtleModel extends Observable {
     public IntegerProperty backgroundColorIndexProperty () {
         return myBackgroundColorIndexProperty;
     }
-    
+
     protected void changeAndNotify () {
         setChanged();
         notifyObservers();
     }
-    
+
 }

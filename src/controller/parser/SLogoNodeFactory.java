@@ -8,7 +8,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
-import controller.commands.*;
+import controller.commands.AbstractExpressionNode;
+import controller.commands.ConstantNode;
+import controller.commands.GroupEndNode;
+import controller.commands.GroupNode;
+import controller.commands.ListEndNode;
+import controller.commands.ListNode;
+import controller.commands.UserCommandNode;
+import controller.commands.VariableNode;
 import javafx.beans.property.MapProperty;
 
 
@@ -59,8 +66,6 @@ public class SLogoNodeFactory {
         }
     }
 
-    
-
     private AbstractExpressionNode createConstantNode (String token) {
         return new ConstantNode(token);
     }
@@ -100,11 +105,11 @@ public class SLogoNodeFactory {
     private AbstractExpressionNode createListEnd (String token) {
         return new ListEndNode(token);
     }
-    
+
     private AbstractExpressionNode createGroupStart (String token) {
         return new GroupNode(token);
     }
-    
+
     private AbstractExpressionNode createGroupEnd (String token) {
         return new GroupEndNode(token);
     }

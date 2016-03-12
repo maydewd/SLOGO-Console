@@ -2,9 +2,7 @@ package controller.commands;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import controller.parser.IAdvancedSLogoCommands;
-import controller.parser.IBasicSLogoCommands;
 import controller.parser.ParsingException;
 
 

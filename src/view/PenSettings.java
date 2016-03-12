@@ -3,7 +3,8 @@ package view;
 import javafx.scene.control.Menu;
 import model.IAdvancedModel;
 
-public class PenSettings extends Selector{
+
+public class PenSettings extends Selector {
     private Menu myPenSettings;
 
     public PenSettings (IAdvancedModel iModel) {
@@ -12,7 +13,8 @@ public class PenSettings extends Selector{
         Selector lineThickness = new LineThicknessSelector(iModel);
         Selector lineType = new LineTypeSelector(iModel);
         Selector penDown = new PenDownSelector(iModel);
-        myPenSettings.getItems().addAll(penColor.getMenu(), lineThickness.getMenu(), lineType.getMenu(), penDown.getMenu());
+        myPenSettings.getItems().addAll(penColor.getMenu(), lineThickness.getMenu(),
+                                        lineType.getMenu(), penDown.getMenu());
     }
 
     @Override

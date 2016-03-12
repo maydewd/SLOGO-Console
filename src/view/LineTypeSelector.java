@@ -4,12 +4,13 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import model.IAdvancedModel;
 
+
 public class LineTypeSelector extends Selector {
     private Menu myTypeSelector;
 
     public LineTypeSelector (IAdvancedModel model) {
         myTypeSelector = new Menu("Line Type");
-        for(int i = 0; i < model.getLineTypeValues().size(); i++){
+        for (int i = 0; i < model.getLineTypeValues().size(); i++) {
             makeButton(i, model);
         }
     }
@@ -22,7 +23,7 @@ public class LineTypeSelector extends Selector {
 
     @Override
     public Menu getMenu () {
-       return myTypeSelector;
+        return myTypeSelector;
     }
 
 }

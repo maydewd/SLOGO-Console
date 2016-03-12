@@ -40,6 +40,7 @@ public class ListNode extends AbstractExpressionNode {
         }
     }
 
+    @Override
     protected List<AbstractExpressionNode> getChildren () {
         return myChildren;
     }
@@ -51,9 +52,9 @@ public class ListNode extends AbstractExpressionNode {
     private void setClosed (boolean closed) {
         isClosed = closed;
     }
-    
+
     @Override
-    public String toString() {
+    public String toString () {
         StringBuilder parameters = new StringBuilder();
         getChildren().forEach(node -> parameters.append(node.toString()));
         return getText() + " " + parameters + "] ";

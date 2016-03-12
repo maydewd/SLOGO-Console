@@ -3,14 +3,14 @@ package controller.commands;
 import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
+
 public class SetPaletteNode extends SimpleProcedureNode {
-    
+
     private static final int SETP_NUM_PARAMS = 4;
 
     public SetPaletteNode (String text) {
         super(text, SETP_NUM_PARAMS);
     }
-
 
     @Override
     public double execute (IAdvancedSLogoCommands commands) throws ParsingException {

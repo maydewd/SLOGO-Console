@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import controller.commands.AbstractExpressionNode;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -26,24 +25,27 @@ public class BasicOptionsModel {
     private static final RGBColor[] INITIAL_COLORS =
             { new RGBColor(255, 255, 255), new RGBColor(0, 0, 0), new RGBColor(255, 0, 0) };
     // TODO add initial images
-    private static final String[] INITIAL_IMAGES = {"blackturtle.png"};
+    private static final String[] INITIAL_IMAGES = { "blackturtle.png" };
 
-
-    private MapProperty<String, Double> myVariableMap = new SimpleMapProperty<String, Double>(FXCollections.observableHashMap());
+    private MapProperty<String, Double> myVariableMap =
+            new SimpleMapProperty<String, Double>(FXCollections.observableHashMap());
     private MapProperty<String, List<String>> myDefinedCommands =
             new SimpleMapProperty<String, List<String>>(FXCollections.observableHashMap());
     private Map<String, AbstractExpressionNode> myUserCommandsBodies =
             new HashMap<String, AbstractExpressionNode>();
-    private ListProperty<String> myCommandHistoryProperty = new SimpleListProperty<String>(FXCollections.observableArrayList());
-    private MapProperty<Integer, RGBColor> myColorOptionsProperty = new SimpleMapProperty<Integer, RGBColor>(FXCollections.observableHashMap());
-    private ListProperty<String> myImageOptionsProperty = new SimpleListProperty<String>(FXCollections.observableArrayList());
+    private ListProperty<String> myCommandHistoryProperty =
+            new SimpleListProperty<String>(FXCollections.observableArrayList());
+    private MapProperty<Integer, RGBColor> myColorOptionsProperty =
+            new SimpleMapProperty<Integer, RGBColor>(FXCollections.observableHashMap());
+    private ListProperty<String> myImageOptionsProperty =
+            new SimpleListProperty<String>(FXCollections.observableArrayList());
     private ReadOnlyListProperty<String> myLanguageOptionsProperty;
     private IntegerProperty myActiveLanguageIndex = new SimpleIntegerProperty(0);
 
     public BasicOptionsModel () {
         initialize();
     }
-    
+
     public BasicOptionsModel (List<String> imageFiles) {
         initializeLanguageOptions();
         initializeColors();
@@ -57,7 +59,8 @@ public class BasicOptionsModel {
     }
 
     private void initializeLanguageOptions () {
-    	ObservableList<String> langs = FXCollections.observableArrayList(Arrays.asList(LANGUAGE_OPTIONS));
+        ObservableList<String> langs =
+                FXCollections.observableArrayList(Arrays.asList(LANGUAGE_OPTIONS));
         ListProperty<String> languageOptions = new SimpleListProperty<String>(langs);
         myLanguageOptionsProperty = languageOptions;
     }
@@ -69,10 +72,11 @@ public class BasicOptionsModel {
     }
 
     private void initializeTurtleImages () {
-    	ObservableList<String> imgs = FXCollections.observableArrayList(Arrays.asList(INITIAL_IMAGES));
+        ObservableList<String> imgs =
+                FXCollections.observableArrayList(Arrays.asList(INITIAL_IMAGES));
         turtleImageOptionsProperty().addAll(imgs);
     }
-    
+
     private void initializeTurtleImages (List<String> imageFiles) {
         turtleImageOptionsProperty().addAll(imageFiles);
     }

@@ -6,51 +6,51 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import model.IAdvancedModel;
 
+
 /**
  * Created by Tim on 22/02/16.
  */
 public class ConsoleView extends BaseUIView {
 
-	public static final int DEFAULT_WIDTH = 550;
-	public static final int DEFAULT_HEIGHT = 100;
+    public static final int DEFAULT_WIDTH = 550;
+    public static final int DEFAULT_HEIGHT = 100;
 
-	private Pane uiPane;
-	private TextArea commandField;
-	private ConsoleController consoleController;
+    private Pane uiPane;
+    private TextArea commandField;
+    private ConsoleController consoleController;
 
+    public ConsoleView (IAdvancedModel model) {
+        super(DEFAULT_WIDTH, DEFAULT_HEIGHT, model);
 
-	public ConsoleView(IAdvancedModel model) {
-		super(DEFAULT_WIDTH, DEFAULT_HEIGHT, model);
+        uiPane = new Pane();
+        setNode(uiPane);
+        commandField = new TextArea();
+        commandField.setPrefSize(getWidth(), getHeight());
 
-		uiPane = new Pane();
-		this.setNode(uiPane);
-		commandField = new TextArea();
-		commandField.setPrefSize(getWidth(), getHeight());
+        uiPane.setPrefSize(getWidth(), getHeight());
 
-		uiPane.setPrefSize(getWidth(), getHeight());
+        uiPane.getChildren().add(commandField);
+        commandField.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                if (!event.isShiftDown()) {
+                    consoleController.executeCommand(commandField.getText());
+                    commandField.clear();
+                    commandField.setEditable(false);
+                }
+                else {
+                    // Shift + Enter for multiline commands
+                    commandField.appendText("\n");
+                }
+            }
+        });
 
-		uiPane.getChildren().add(commandField);
-		commandField.setOnKeyPressed(event -> {
-			if (event.getCode().equals(KeyCode.ENTER)) {
-				if(!event.isShiftDown()){
-					consoleController.executeCommand(commandField.getText()
-					);
-					commandField.clear();
-					commandField.setEditable(false);
-				} else {
-					// Shift + Enter for multiline commands
-					commandField.appendText("\n");
-				}
-			}
-		});
+        // Solves an extra enter keypress after keypress returns
+        commandField.setOnKeyReleased(event -> {
+            commandField.setEditable(true);
+        });
 
-		// Solves an extra enter keypress after keypress returns
-		commandField.setOnKeyReleased(event -> {
-			commandField.setEditable(true);
-		});
-
-		// Initialize Controller singleton
-		ConsoleController.initController(model, this);
-		consoleController = ConsoleController.getController();
-	}
+        // Initialize Controller singleton
+        ConsoleController.initController(model, this);
+        consoleController = ConsoleController.getController();
+    }
 }

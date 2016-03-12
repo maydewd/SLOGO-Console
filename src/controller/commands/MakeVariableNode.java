@@ -14,7 +14,8 @@ public class MakeVariableNode extends ControlProcedureNode {
 
     @Override
     public void addParameter (AbstractExpressionNode node) throws ParsingException {
-        String error = String.format(getErrorMessage("InvalidParameter"), getText(), SyntaxType.VARIABLE);
+        String error =
+                String.format(getErrorMessage("InvalidParameter"), getText(), SyntaxType.VARIABLE);
         if (getChildren().size() == 0 && !isVariable(node)) {
             throw new ParsingException(error);
         }

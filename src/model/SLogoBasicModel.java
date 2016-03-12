@@ -179,9 +179,9 @@ public class SLogoBasicModel implements IBasicModel {
         myOptionsModel = optionsModel;
     }
 
-	@Override
-	public Turtle getActiveTurtle() {
-		return myTurtleModel.getActiveTurtle();
-	}
+    @Override
+    public Turtle getActiveTurtle () {
+        return myTurtleModel.getActiveTurtle();
+    }
 
 }

@@ -6,23 +6,23 @@ public class Point {
     private double myY;
 
     public Point (double x, double y) {
-    	setX(x);
-    	setY(y);
+        setX(x);
+        setY(y);
     }
-    
+
     public double getX () {
         return myX;
     }
-    
-    private void setX( double x) {
+
+    private void setX (double x) {
         myX = x;
     }
 
     public double getY () {
         return myY;
     }
-    
-    private void setY(double y) {
+
+    private void setY (double y) {
         myY = y;
     }
 }

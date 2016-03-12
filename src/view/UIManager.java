@@ -17,10 +17,11 @@ import javafx.stage.Stage;
 import model.IAdvancedModel;
 import model.IAdvancedModelManager;
 
+
 /**
  * Created by Tim on 22/02/16.
  */
-public class UIManager implements UIManagerTabInterface{
+public class UIManager implements UIManagerTabInterface {
 
     public static final double DEFAULT_SPACING = 10;
     public static final double DEFAULT_X_SIZE = 400;
@@ -33,10 +34,10 @@ public class UIManager implements UIManagerTabInterface{
     private IAdvancedModelManager myManager;
     private HostServices myHostServices;
     private TabPane myTabs;
-    
+
     private int counter = 1;
 
-    public UIManager(Stage primaryStage, IAdvancedModelManager model, HostServices hostServices){
+    public UIManager (Stage primaryStage, IAdvancedModelManager model, HostServices hostServices) {
         // Init vars
         myStage = primaryStage;
         myGroup = new Group();
@@ -45,7 +46,7 @@ public class UIManager implements UIManagerTabInterface{
         myManager = model;
         myModel = model;
         myHostServices = hostServices;
-        
+
         myTabs = new TabPane();
         Tab main = new Tab("WorkSpace " + counter);
         main.setOnSelectionChanged(e -> myManager.switchToWorkspace(0));
@@ -58,7 +59,7 @@ public class UIManager implements UIManagerTabInterface{
         myStage.show();
     }
 
-    private Pane buildSubView(){
+    private Pane buildSubView () {
         // Create the views
         BaseUIView myTurtleView = new TurtleView(myModel);
         BaseUIView myConsoleView = new ConsoleView(myModel);
@@ -71,34 +72,34 @@ public class UIManager implements UIManagerTabInterface{
         HBox myPaneContainer = new HBox(0);
         VBox myMainPane = new VBox(DEFAULT_SPACING);
         myMainPane.getChildren().addAll(mySettingsMenu.getNode(),
-                                                         myTurtleView.getNode(),
-                                                         myConsoleView.getNode());
+                                        myTurtleView.getNode(),
+                                        myConsoleView.getNode());
 
         Accordion mySidePane = new Accordion();
-        mySidePane.getPanes().addAll(  new TitledPane("Variables", myVariableView.getNode()),
-                                     new TitledPane("Command History", myCommandHistoryView.getNode()),
-                                        new TitledPane("User Commands", myUserCommandListView.getNode()));
+        mySidePane.getPanes().addAll(new TitledPane("Variables", myVariableView.getNode()),
+                                     new TitledPane("Command History",
+                                                    myCommandHistoryView.getNode()),
+                                     new TitledPane("User Commands",
+                                                    myUserCommandListView.getNode()));
         mySidePane.setExpandedPane(mySidePane.getPanes().get(0));
         myPaneContainer.getChildren().addAll(myMainPane, mySidePane);
-        
+
         return myPaneContainer;
     }
-    
-    
-    public Stage getStage(){
+
+    public Stage getStage () {
         return myStage;
     }
 
-    private void setupInput(){
-//      Quit the program if you press ESCAPE
-//      Helpful for debugging.
-        this.myStage.getScene().setOnKeyPressed(event -> {
-                if(event.getCode().equals(KeyCode.ESCAPE)){
-                    System.exit(0);
-                }
+    private void setupInput () {
+        // Quit the program if you press ESCAPE
+        // Helpful for debugging.
+        myStage.getScene().setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ESCAPE)) {
+                System.exit(0);
+            }
         });
     }
-
 
     @Override
     public void addTab (File settings) {
@@ -106,7 +107,7 @@ public class UIManager implements UIManagerTabInterface{
             myManager.loadNewWorkspace(settings);
         }
         catch (ConfigurationException e) {
-            
+
         }
         Tab tab = new Tab("Workspace " + counter);
         int index = counter - 1;
@@ -115,7 +116,6 @@ public class UIManager implements UIManagerTabInterface{
         tab.setOnSelectionChanged(e -> myManager.switchToWorkspace(index));
         myTabs.getTabs().add(tab);
     }
-
 
     @Override
     public void addTab () {

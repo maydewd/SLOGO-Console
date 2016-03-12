@@ -3,8 +3,9 @@ package view;
 import javafx.scene.control.CustomMenuItem;
 import model.IBasicModel;
 
+
 public class BackgroundColorSelector extends ColorSelector {
-    
+
     public BackgroundColorSelector (IBasicModel basicModel) {
         super(basicModel);
         getMenu().setText("Background Color");

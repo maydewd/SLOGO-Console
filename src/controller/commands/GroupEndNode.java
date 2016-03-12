@@ -33,7 +33,5 @@ public class GroupEndNode extends AbstractExpressionNode {
         String error = String.format(getErrorMessage("CantGetChildren"), SyntaxType.GROUPEND);
         throw new ParsingException(error);
     }
-    
-    
 
 }

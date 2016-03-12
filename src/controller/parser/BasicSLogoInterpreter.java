@@ -50,12 +50,12 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
         double oldHeading = getModelActions().getTurtleHeading();
         double diffX = x - oldCoords.getX();
         double diffY = y - oldCoords.getY();
-        double degrees = Math.atan(diffY/diffX);
-        if ((diffY>=0 && diffX>=0) || (diffY<=0 && diffX>=0)) {
-            degrees=180*degrees/Math.PI;
+        double degrees = Math.atan(diffY / diffX);
+        if ((diffY >= 0 && diffX >= 0) || (diffY <= 0 && diffX >= 0)) {
+            degrees = 180 * degrees / Math.PI;
         }
-        else if((diffY>=0 && diffX<0) || (diffY<=0 && diffX<=0)){
-        	degrees=180+180*degrees/Math.PI;
+        else if ((diffY >= 0 && diffX < 0) || (diffY <= 0 && diffX <= 0)) {
+            degrees = 180 + 180 * degrees / Math.PI;
         }
         getModelActions().setTurtleHeading(degrees);
         return Math.abs(degrees - oldHeading);
@@ -123,18 +123,22 @@ public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
     @Override
     public double isPenDown () {
-        if (getModelActions().getPenDown())
+        if (getModelActions().getPenDown()) {
             return 1;
-        else
+        }
+        else {
             return 0;
+        }
     }
 
     @Override
     public double isShowing () {
-        if (getModelActions().getTurtleVisibility())
+        if (getModelActions().getTurtleVisibility()) {
             return 1;
-        else
+        }
+        else {
             return 0;
+        }
     }
 
     @Override

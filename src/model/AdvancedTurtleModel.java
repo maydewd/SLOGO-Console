@@ -32,7 +32,7 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
     public ReadOnlyListProperty<StampInfo> stampsProperty () {
         return myStamps;
     }
-    
+
     public void clearStamps () {
         stampsProperty().clear();
         changeAndNotify();
@@ -40,7 +40,8 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
 
     public void drawStamp () {
         myStamps.add(new StampInfo(getActiveTurtle().getLocation(),
-                                   getActiveTurtleImageIndex().getValue(), getActiveTurtle().getHeading()));
+                                   getActiveTurtleImageIndex().getValue(),
+                                   getActiveTurtle().getHeading()));
         changeAndNotify();
     }
 
@@ -103,9 +104,9 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
 
     private void forSelectedTurtles (Consumer<? super Turtle> action) {
         List<Turtle> selectedTurtles = allTurtlesProperty().entrySet().stream()
-                                       .filter(entry -> selectedTurtlesProperty().contains(entry.getKey()))
-                                       .map(entry -> entry.getValue())
-                                       .collect(Collectors.toList());
+                .filter(entry -> selectedTurtlesProperty().contains(entry.getKey()))
+                .map(entry -> entry.getValue())
+                .collect(Collectors.toList());
         selectedTurtles.forEach(action);
     }
 

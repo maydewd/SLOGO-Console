@@ -4,35 +4,34 @@ import javafx.beans.property.ListProperty;
 import model.IBasicModel;
 import view.BaseUIView;
 
+
 /**
  * Created by Tim on 01/03/16.
  */
-public class CommandHistoryController implements IListDataController{
+public class CommandHistoryController implements IListDataController {
 
-	private BaseUIView myView;
-	private IBasicModel myModel;
-	ListProperty<String> commandHistoryProperty;
+    private IBasicModel myModel;
+    ListProperty<String> commandHistoryProperty;
 
-	public CommandHistoryController(BaseUIView view, IBasicModel model){
-		myView = view;
-		myModel = model;
+    public CommandHistoryController (BaseUIView view, IBasicModel model) {
+        myModel = model;
 
-		initialize();
-	}
+        initialize();
+    }
 
-	private void initialize(){
-		commandHistoryProperty = myModel.commandHistoryProperty();
-		commandHistoryProperty.addListener((observable, oldValue, newValue) -> {
-			updateOLData();
-		});
-	}
+    private void initialize () {
+        commandHistoryProperty = myModel.commandHistoryProperty();
+        commandHistoryProperty.addListener( (observable, oldValue, newValue) -> {
+            updateOLData();
+        });
+    }
 
-	@Override
-	public void initDataIntoOL() {
-	}
+    @Override
+    public void initDataIntoOL () {
+    }
 
-	@Override
-	public void updateOLData() {
+    @Override
+    public void updateOLData () {
 
-	}
+    }
 }

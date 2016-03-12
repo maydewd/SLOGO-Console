@@ -55,6 +55,7 @@ public class Turtle implements TurtleInfo {
         setMyImageIndex(imageIndex);
     }
 
+    @Override
     public double getHeading () {
         return myHeading;
     }
@@ -63,6 +64,7 @@ public class Turtle implements TurtleInfo {
         myHeading = heading;
     }
 
+    @Override
     public Point getLocation () {
         return myLocation;
     }
@@ -77,13 +79,15 @@ public class Turtle implements TurtleInfo {
         Point newLoc = new Point(newX, newY);
 
         ArrayList<LineInfo> myLines = new ArrayList<>();
-        myLines.add(new LineInfo(myLocation, newLoc, isPenDown, myPenColorIndexProperty.get(), getLineThickness(), getLineType()));
+        myLines.add(new LineInfo(myLocation, newLoc, isPenDown, myPenColorIndexProperty.get(),
+                                 getLineThickness(), getLineType()));
 
         setLocation(newLoc);
 
         return myLines;
     }
 
+    @Override
     public boolean isPenDown () {
         return isPenDown;
     }
@@ -100,6 +104,7 @@ public class Turtle implements TurtleInfo {
         myPenColorIndexProperty.set(penColorIndex);
     }
 
+    @Override
     public boolean isVisible () {
         return isVisible;
     }

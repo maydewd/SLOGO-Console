@@ -17,7 +17,7 @@ import model.IBasicModel;
  * Created by Tim on 29/02/16.
  */
 public class VariableView extends BaseUIView {
-    
+
     public static final int DEFAULT_HEIGHT = 200;
     public static final int DEFAULT_WIDTH = 200;
 
@@ -48,7 +48,7 @@ public class VariableView extends BaseUIView {
 
         tableView.getColumns().add(varName);
         tableView.getColumns().add(varValue);
-        
+
         setNode(tableView);
     }
 

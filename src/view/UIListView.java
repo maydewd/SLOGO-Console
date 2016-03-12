@@ -18,11 +18,9 @@ public abstract class UIListView extends BaseUIView {
 
     private ObservableList<String> myObservableList;
 
-
-
     public UIListView (IAdvancedModel model, ObservableList<String> listToWatch) {
         super(DEFAULT_WIDTH, DEFAULT_HEIGHT, model);
-        this.myObservableList = listToWatch;
+        myObservableList = listToWatch;
 
         init();
         setNode(listView);
@@ -33,7 +31,7 @@ public abstract class UIListView extends BaseUIView {
         listView.setItems(myObservableList);
 
         listView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2){
+            if (event.getClickCount() == 2) {
                 ConsoleController.getController()
                         .executeCommand(listView.getSelectionModel().getSelectedItem());
             }

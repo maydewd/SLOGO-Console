@@ -14,7 +14,7 @@ public class SineNode extends SimpleProcedureNode {
 
     @Override
     public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
-        return Math.sin(getChildren().get(0).execute(commands)*Math.PI/180);
+        return Math.sin(getChildren().get(0).execute(commands) * Math.PI / 180);
     }
 
 }

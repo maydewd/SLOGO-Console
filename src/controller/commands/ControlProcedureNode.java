@@ -2,6 +2,7 @@ package controller.commands;
 
 import controller.parser.ParsingException;
 
+
 public abstract class ControlProcedureNode extends SimpleProcedureNode {
 
     public ControlProcedureNode (String text, int numberParameters) {

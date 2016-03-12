@@ -1,9 +1,8 @@
 package model;
 
-
 public class RGBColor {
-	
-	private static final int MAX_SATURATION = 255;
+
+    private static final int MAX_SATURATION = 255;
 
     private int myRed;
     private int myGreen;
@@ -58,6 +57,5 @@ public class RGBColor {
         String blueHex = String.format("%2s", Integer.toHexString(getBlue())).replace(" ", "0");
         return new StringBuilder().append(redHex).append(greenHex).append(blueHex).toString();
     }
-    
-    
+
 }

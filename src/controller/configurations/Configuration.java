@@ -10,7 +10,6 @@ public class Configuration {
     private String turtleCount;
     private String languageIndex;
     private List<String> paletteList;
-    private String commandLibFileName;
 
     public Configuration (String backgroundIndex,
                           List<String> imageFiles,
@@ -25,7 +24,7 @@ public class Configuration {
     }
 
     private void setPaletteList (List<String> palette) {
-        this.paletteList = palette;
+        paletteList = palette;
 
     }
 

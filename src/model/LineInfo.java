@@ -1,7 +1,7 @@
 package model;
 
 public class LineInfo {
-    
+
     private static final double DEFAULT_THICKNESS = 1.0d;
     private static final LineType DEFAULT_TYPE = LineType.SOLID;
 
@@ -11,21 +11,26 @@ public class LineInfo {
     private int myColor;
     private double myThickness;
     private LineType myType;
-    
+
     public LineInfo (Point start, Point end, boolean visible, int color) {
         this(start, end, visible, color, DEFAULT_THICKNESS, DEFAULT_TYPE);
     }
-    
-    public LineInfo (Point start, Point end, boolean visible, int color, double thickness, LineType lineType) {
+
+    public LineInfo (Point start,
+                     Point end,
+                     boolean visible,
+                     int color,
+                     double thickness,
+                     LineType lineType) {
         setStart(start);
         setEnd(end);
         setVisibility(visible);
         setColor(color);
-    	setThickness(thickness);
-    	setType(lineType);
+        setThickness(thickness);
+        setType(lineType);
     }
 
-	public Point getStart () {
+    public Point getStart () {
         return myStart;
     }
 
@@ -40,13 +45,13 @@ public class LineInfo {
     private void setEnd (Point end) {
         myEnd = end;
     }
-    
+
     public boolean getVisibility () {
         return myVisibility;
     }
-    
+
     private void setVisibility (boolean v) {
-    	myVisibility = v;
+        myVisibility = v;
     }
 
     public int getColor () {
@@ -56,22 +61,22 @@ public class LineInfo {
     private void setColor (int color) {
         myColor = color;
     }
-    
+
     private void setThickness (double thickness) {
-    	myThickness = thickness;
+        myThickness = thickness;
     }
-    
+
     public double getThickness () {
-    	return myThickness;
+        return myThickness;
     }
-    
+
     private void setType (LineType lineType) {
-    	myType = lineType;
-  		
-  	}
+        myType = lineType;
+
+    }
 
     public LineType getTypeIndex () {
-    	return myType;
+        return myType;
     }
 
 }

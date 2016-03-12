@@ -5,6 +5,7 @@ import java.util.List;
 import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
+
 public abstract class TurtleCommandNode extends SimpleProcedureNode {
 
     public TurtleCommandNode (String text) {
@@ -26,7 +27,7 @@ public abstract class TurtleCommandNode extends SimpleProcedureNode {
         commands.tellAll(oldSelected);
         return lastValue;
     }
-    
+
     protected abstract double executeSingle (IAdvancedSLogoCommands commands) throws ParsingException;
 
 }
