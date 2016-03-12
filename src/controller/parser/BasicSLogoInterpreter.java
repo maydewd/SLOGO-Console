@@ -6,6 +6,14 @@ import model.IBasicModel;
 import model.Point;
 
 
+/**
+ * Interpreter for Basic SLogo command functionality. Mediates communication between nodes and
+ * model.
+ *
+ * @author Carine Torres
+ * @author David Maydew
+ * @author Zdravko
+ */
 public class BasicSLogoInterpreter implements IBasicSLogoCommands {
 
     private IBasicModel myModelActions;

@@ -12,6 +12,12 @@ import controller.commands.AbstractExpressionNode;
 import javafx.beans.property.MapProperty;
 
 
+/**
+ * Parser for SLogo commands that
+ *
+ * @author David Maydew
+ *
+ */
 public class SLogoParser {
     private SLogoNodeFactory myNodeFactory;
 

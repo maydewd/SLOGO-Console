@@ -3,6 +3,12 @@ package controller.commands;
 import controller.parser.ParsingException;
 
 
+/**
+ * Intermediate abstract type for facilitating implementation of control nodes
+ *
+ * @author David Maydew
+ *
+ */
 public abstract class ControlProcedureNode extends SimpleProcedureNode {
 
     public ControlProcedureNode (String text, int numberParameters) {

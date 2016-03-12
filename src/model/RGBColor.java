@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * Utility class for representing colors without ties to JavaFX or some other visuals.
+ *
+ * @author David Maydew
+ *
+ */
 public class RGBColor {
 
     private static final int MAX_SATURATION = 255;

@@ -19,6 +19,12 @@ import controller.commands.VariableNode;
 import javafx.beans.property.MapProperty;
 
 
+/**
+ * Factory for all command nodes that uses regex to determine type
+ *
+ * @author David Maydew
+ *
+ */
 public class SLogoNodeFactory {
 
     private static final String COMMAND_PACKAGE = "controller.commands.";
@@ -31,10 +37,24 @@ public class SLogoNodeFactory {
     private String myCurrentLanguage;
     private Map<String, Pattern> myCommandPatterns;
 
+    /**
+     * Creates a new factory with specified patterns
+     *
+     * @param patternMap syntax patterns
+     */
     public SLogoNodeFactory (Map<String, Pattern> patternMap) {
         setTypePatternMap(patternMap);
     }
 
+    /**
+     * returns the node for a given key, language, and set of user commands
+     *
+     * @param token key of node to be parsed
+     * @param currentLanguage
+     * @param commandsProperty user defined commands
+     * @return Root node for this tree
+     * @throws ParsingException
+     */
     public AbstractExpressionNode createNode (String token,
                                               String currentLanguage,
                                               MapProperty<String, List<String>> commandsProperty) throws ParsingException {
@@ -126,6 +146,11 @@ public class SLogoNodeFactory {
         return NO_MATCH;
     }
 
+    /**
+     * Update language to current patterns in a resource bundle
+     *
+     * @param newLanguage
+     */
     private void loadNewLanguage (String newLanguage) {
         ResourceBundle newBundle = ResourceBundle.getBundle(LANGUAGE_PACKAGE + newLanguage);
         Enumeration<String> iter = newBundle.getKeys();

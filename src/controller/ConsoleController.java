@@ -33,7 +33,7 @@ public class ConsoleController {
     /**
      * Method to initialize the controller Singleton before getting it with the getController()
      * calls
-     * 
+     *
      * @param model
      * @param view
      */
@@ -45,7 +45,7 @@ public class ConsoleController {
 
     /**
      * Returns the ConsoleController if it has been initialized
-     * 
+     *
      * @return controller may be null if initController has not been called first
      */
     public static ConsoleController getController () {

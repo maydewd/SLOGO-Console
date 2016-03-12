@@ -5,6 +5,13 @@ import java.util.List;
 import javafx.beans.property.ReadOnlyListProperty;
 
 
+/**
+ * Description of available methods for use with an advanced model.
+ *
+ * @author David Maydew
+ * @author Carine Torres
+ *
+ */
 public interface IAdvancedModel extends IBasicModel {
 
     void addSelectedTurtle (int IDnumber);

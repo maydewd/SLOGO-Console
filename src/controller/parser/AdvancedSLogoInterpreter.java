@@ -6,6 +6,13 @@ import model.IAdvancedModel;
 import model.RGBColor;
 
 
+/**
+ * Interpreter for AdvancedSLogo command functionality. Mediates communication between nodes and
+ * model.
+ *
+ * @author Carine Torres
+ * @author David Maydew
+ */
 public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter
         implements IAdvancedSLogoCommands {
 

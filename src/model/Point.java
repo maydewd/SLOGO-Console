@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * Immutable representation of a 2-d position
+ *
+ * @author David Maydew
+ *
+ */
 public class Point {
 
     private double myX;

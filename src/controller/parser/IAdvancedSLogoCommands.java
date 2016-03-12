@@ -4,42 +4,125 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * Interface detailing available commands associated with extended SLogo
+ *
+ * @author Carine Torres
+ * @author David Maydew
+ *
+ */
 public interface IAdvancedSLogoCommands extends IBasicSLogoCommands {
 
-    public List<Integer> getSelectedTurtles ();
+    /**
+     * @return list of IDs of the selected (sometimes called active) turtles
+     */
+    List<Integer> getSelectedTurtles ();
 
-    public List<Integer> getAllTurtles ();
+    /**
+     * @return list of IDs of all turtles
+     */
+    List<Integer> getAllTurtles ();
 
-    public double setBackground (int index);
+    /**
+     * @param index of background color
+     * @return background index
+     */
+    double setBackground (int index);
 
-    public double setPenColor (int index);
+    /**
+     * @param index of pen color to set
+     * @return pen color index
+     */
+    double setPenColor (int index);
 
-    public double setPenSize (double pixels);
+    /**
+     * @param pixels thickness of pen stroke
+     * @return pen stroke thickness
+     */
+    double setPenSize (double pixels);
 
-    public double setShape (int index);
+    /**
+     * @param index of shape to set
+     * @return shape index
+     */
+    double setShape (int index);
 
-    public double setPalette (int index, int r, int g, int b);
+    /**
+     * @param index of palette to set
+     * @param r red value of color
+     * @param g green value of color
+     * @param b blue value of color
+     * @return palette index
+     */
+    double setPalette (int index, int r, int g, int b);
 
-    public double getPenColor ();
+    /**
+     * @return active pen color index
+     */
+    double getPenColor ();
 
-    public double getShape ();
+    /**
+     * @return active shape index
+     */
+    double getShape ();
 
-    public double stamp ();
+    /**
+     * creates a stamp on all active turtles
+     *
+     * @return index of turtle image
+     */
+    double stamp ();
 
-    public double clearStamps ();
+    /**
+     * clear all stamps from all turtles
+     *
+     * @return 1 if stamps were cleared, 0 if not
+     */
+    double clearStamps ();
 
-    public double getCurrentActiveID ();
+    /**
+     * @return the id of the active turtle
+     */
+    double getCurrentActiveID ();
 
-    public double getTurtleCount ();
+    /**
+     * @return number of turtles created
+     */
+    double getTurtleCount ();
 
-    public double tell (Integer id);
+    /**
+     * activate the given turtle
+     *
+     * @param id turtle to activate
+     * @return id of turtle
+     */
+    double tell (Integer id);
 
-    public double tellAll (List<Integer> ids);
+    /**
+     * activate all the given turtles
+     *
+     * @param ids all turtles to activate
+     * @return last turtle id in list
+     */
+    double tellAll (List<Integer> ids);
 
+    /**
+     * @param name command name
+     * @param params list of variable pararmeters
+     * @return
+     */
     double defineCommand (String name, List<String> params);
 
+    /**
+     * @return a map of variables at this point in time
+     */
     Map<String, Double> getAllVariables ();
 
+    /**
+     * restore variables from a given map
+     *
+     * @param allVars variable map
+     */
     void setAllVariables (Map<String, Double> allVars);
 
 }
