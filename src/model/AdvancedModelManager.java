@@ -29,6 +29,7 @@ public class AdvancedModelManager implements IAdvancedModelManager {
     public AdvancedModelManager () {
         defaultConfigFile =
                 new File(getClass().getClassLoader().getResource(DEFAULT_CONFIG_FILE).getFile());
+        createNewWorkspace();
     }
 
     @Override
