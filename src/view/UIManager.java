@@ -107,6 +107,7 @@ public class UIManager implements UIManagerTabInterface{
         counter++;
         tab.setContent(buildSubView());
         tab.setOnSelectionChanged(e -> myManager.switchToWorkspace(index));
+        myTabs.getTabs().add(tab);
     }
 
 
@@ -118,5 +119,6 @@ public class UIManager implements UIManagerTabInterface{
         counter++;
         tab.setContent(buildSubView());
         tab.setOnSelectionChanged(e -> myManager.switchToWorkspace(index));
+        myTabs.getTabs().add(tab);
     }
 }
