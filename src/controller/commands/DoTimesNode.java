@@ -4,30 +4,13 @@ import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
-public class DoTimesNode extends ControlProcedureNode {
+public class DoTimesNode extends NumberedLoopNode {
 
     private static final int DO_NUM_PARAMS = 2;
+    private static final int FIRST_LIST_PARAMS = 2;
 
     public DoTimesNode (String text) {
         super(text, DO_NUM_PARAMS);
-    }
-
-    @Override
-    public void addParameter (AbstractExpressionNode node) throws ParsingException {
-        if (!isList(node)) {
-            String error = String.format(getErrorMessage("InvalidParameter"),
-                                         getText(), SyntaxType.LISTSTART);
-            throw new ParsingException(error);
-        }
-        else if (getChildren().size() == 0 && (node.getChildren().size() != 2 ||
-                                               !isVariable(node.getChildren().get(0)))) {
-            String error = String.format(getErrorMessage("InvalidListParameter"),
-                                         getText(), SyntaxType.VARIABLE);
-            throw new ParsingException(error);
-        }
-        else {
-            getChildren().add(node);
-        }
     }
 
     @Override
@@ -41,6 +24,11 @@ public class DoTimesNode extends ControlProcedureNode {
             lastValue = getChildren().get(1).execute(commands);
         }
         return lastValue;
+    }
+
+    @Override
+    protected int getFirstExpectedCount () {
+        return FIRST_LIST_PARAMS;
     }
 
 }

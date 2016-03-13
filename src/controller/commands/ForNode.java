@@ -4,30 +4,13 @@ import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
-public class ForNode extends ControlProcedureNode {
+public class ForNode extends NumberedLoopNode {
 
     private static final int FOR_NUM_PARAMS = 2;
+    private static final int FIRST_LIST_PARAMS = 4;
 
     public ForNode (String text) {
         super(text, FOR_NUM_PARAMS);
-    }
-
-    @Override
-    public void addParameter (AbstractExpressionNode node) throws ParsingException {
-        if (!isList(node)) {
-            String error = String.format(getErrorMessage("InvalidParameter"),
-                                         getText(), SyntaxType.LISTSTART);
-            throw new ParsingException(error);
-        }
-        else if (getChildren().size() == 0 && (node.getChildren().size() != 4 ||
-                                               !isVariable(node.getChildren().get(0)))) {
-            String error = String.format(getErrorMessage("InvalidListParameter"),
-                                         getText(), SyntaxType.VARIABLE);
-            throw new ParsingException(error);
-        }
-        else {
-            getChildren().add(node);
-        }
     }
 
     @Override
@@ -43,6 +26,11 @@ public class ForNode extends ControlProcedureNode {
             lastValue = getChildren().get(1).execute(commands);
         }
         return lastValue;
+    }
+
+    @Override
+    protected int getFirstExpectedCount () {
+        return FIRST_LIST_PARAMS;
     }
 
 }

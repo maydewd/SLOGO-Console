@@ -6,24 +6,12 @@ import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
-public class AskWithNode extends ControlProcedureNode {
+public class AskWithNode extends AbsQueryNode {
 
     private static final int ASKW_NUM_PARAMS = 2;
 
     public AskWithNode (String text) {
         super(text, ASKW_NUM_PARAMS);
-    }
-
-    @Override
-    public void addParameter (AbstractExpressionNode node) throws ParsingException {
-        if (!isList(node)) {
-            String error = String.format(getErrorMessage("InvalidParameter"),
-                                         getText(), SyntaxType.LISTSTART);
-            throw new ParsingException(error);
-        }
-        else {
-            getChildren().add(node);
-        }
     }
 
     @Override

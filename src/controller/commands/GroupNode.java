@@ -1,16 +1,10 @@
 package controller.commands;
 
-import java.util.LinkedList;
-import java.util.List;
 import controller.parser.IAdvancedSLogoCommands;
 import controller.parser.ParsingException;
 
 
-public class GroupNode extends AbstractExpressionNode {
-
-    private List<AbstractExpressionNode> myChildren = new LinkedList<AbstractExpressionNode>();
-
-    private boolean isClosed;
+public class GroupNode extends UnlimitedParamNode {
 
     public GroupNode (String token) {
         super(token, SyntaxType.GROUPSTART);
@@ -19,11 +13,6 @@ public class GroupNode extends AbstractExpressionNode {
     @Override
     public double execute (IAdvancedSLogoCommands commands) throws ParsingException {
         return getChildren().get(0).execute(commands);
-    }
-
-    @Override
-    public boolean areParametersComplete () {
-        return isClosed();
     }
 
     @Override
@@ -37,19 +26,6 @@ public class GroupNode extends AbstractExpressionNode {
         else {
             getChildren().add(node);
         }
-    }
-
-    @Override
-    protected List<AbstractExpressionNode> getChildren () {
-        return myChildren;
-    }
-
-    public boolean isClosed () {
-        return isClosed;
-    }
-
-    private void setClosed (boolean closed) {
-        isClosed = closed;
     }
 
     @Override
