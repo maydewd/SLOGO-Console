@@ -14,8 +14,6 @@ public class Turtle implements TurtleInfo {
     public static final double DEFAULT_LINE_THICKNESS = 1.0d;
     public static final LineType DEFAULT_LINE_TYPE = LineType.SOLID;
 
-    private double myHeading = 0;
-    private Point myLocation = new Point(0, 0);
     private boolean isPenDown = true;
     private IntegerProperty myPenColorIndexProperty = new SimpleIntegerProperty(DEFAULT_PEN_INDEX);
     private boolean isVisible = true;
@@ -24,6 +22,7 @@ public class Turtle implements TurtleInfo {
     private boolean isSelected = true;
     private double myLineThickness;
     private LineType myLineType;
+    private MovementModule myMovementModule = new MovementModule();
 
     public Turtle () {
         this(DEFAULT_ID);
@@ -57,32 +56,28 @@ public class Turtle implements TurtleInfo {
 
     @Override
     public double getHeading () {
-        return myHeading;
+        return myMovementModule.getHeading();
     }
 
     public void setHeading (double heading) {
-        myHeading = heading;
+        myMovementModule.setHeading(heading);
     }
 
     @Override
     public Point getLocation () {
-        return myLocation;
+        return myMovementModule.getLocation();
     }
 
     public void setLocation (Point location) {
-        myLocation = location;
+        myMovementModule.setLocation(location);
     }
 
     public List<LineInfo> moveForward (double pixels) {
-        double newX = myLocation.getX() + Math.cos(Math.toRadians(myHeading)) * pixels;
-        double newY = myLocation.getY() + Math.sin(Math.toRadians(myHeading)) * pixels;
-        Point newLoc = new Point(newX, newY);
+        Point newLoc = myMovementModule.moveForward(pixels);
 
         ArrayList<LineInfo> myLines = new ArrayList<>();
-        myLines.add(new LineInfo(myLocation, newLoc, isPenDown, myPenColorIndexProperty.get(),
+        myLines.add(new LineInfo(getLocation(), newLoc, isPenDown, myPenColorIndexProperty.get(),
                                  getLineThickness(), getLineType()));
-
-        setLocation(newLoc);
 
         return myLines;
     }
@@ -162,6 +157,14 @@ public class Turtle implements TurtleInfo {
 
     public double getLineThickness () {
         return myLineThickness;
+    }
+
+    public MovementModule getMovementModule () {
+        return myMovementModule;
+    }
+
+    public void setMovementModule (MovementModule module) {
+        myMovementModule = module;
     }
 
 }
