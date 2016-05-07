@@ -125,4 +125,20 @@ public interface IAdvancedSLogoCommands extends IBasicSLogoCommands {
      */
     void setAllVariables (Map<String, Double> allVars);
 
+    /**
+     * sets the current window border behavior such that if the turtle moves past an edge of the
+     * window, it will disappear until it is moved back into view
+     * 
+     * @return 2
+     */
+    double windowTurtles ();
+
+    /**
+     * sets the current window border behavior such that any move that attempts to take the turtle
+     * past the edge of the window will stop at the edge
+     * 
+     * @return 3
+     */
+    double fenceTurtles ();
+
 }

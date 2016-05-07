@@ -22,7 +22,7 @@ public class Turtle implements TurtleInfo {
     private boolean isSelected = true;
     private double myLineThickness;
     private LineType myLineType;
-    private MovementModule myMovementModule = new MovementModule();
+    private WindowMovementModule myMovementModule = new WindowMovementModule();
 
     public Turtle () {
         this(DEFAULT_ID);
@@ -73,10 +73,11 @@ public class Turtle implements TurtleInfo {
     }
 
     public List<LineInfo> moveForward (double pixels) {
-        Point newLoc = myMovementModule.moveForward(pixels);
+        Point oldLoc = myMovementModule.getLocation();
+        myMovementModule.moveForward(pixels);
 
         ArrayList<LineInfo> myLines = new ArrayList<>();
-        myLines.add(new LineInfo(getLocation(), newLoc, isPenDown, myPenColorIndexProperty.get(),
+        myLines.add(new LineInfo(oldLoc, getLocation(), isPenDown, myPenColorIndexProperty.get(),
                                  getLineThickness(), getLineType()));
 
         return myLines;
@@ -159,11 +160,11 @@ public class Turtle implements TurtleInfo {
         return myLineThickness;
     }
 
-    public MovementModule getMovementModule () {
+    public WindowMovementModule getMovementModule () {
         return myMovementModule;
     }
 
-    public void setMovementModule (MovementModule module) {
+    public void setMovementModule (WindowMovementModule module) {
         myMovementModule = module;
     }
 

@@ -156,4 +156,14 @@ public class SLogoAdvancedModel extends SLogoBasicModel implements IAdvancedMode
 
     }
 
+    @Override
+    public void windowTurtles () {
+        myTurtleModel.windowTurtles();
+    }
+
+    @Override
+    public void fenceTurtles () {
+        myTurtleModel.fenceTurtles();
+    }
+
 }

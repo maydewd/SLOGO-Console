@@ -7,15 +7,15 @@ package model;
  * @author David Maydew
  *
  */
-public class MovementModule {
+public class WindowMovementModule {
 
     private double myHeading = 0;
     private Point myLocation = new Point(0, 0);
 
-    public MovementModule () {
+    public WindowMovementModule () {
     }
     
-    public MovementModule (MovementModule previousModule) {
+    public WindowMovementModule (WindowMovementModule previousModule) {
         myHeading = previousModule.getHeading();
         myLocation = previousModule.getLocation();
     }
@@ -41,13 +41,11 @@ public class MovementModule {
      * window border behavior.
      * 
      * @param pixels to move forward by
-     * @return the new location after moving
      */
-    public Point moveForward (double pixels) {
+    public void moveForward (double pixels) {
         double newX = myLocation.getX() + Math.cos(Math.toRadians(myHeading)) * pixels;
         double newY = myLocation.getY() + Math.sin(Math.toRadians(myHeading)) * pixels;
         Point newLoc = new Point(newX, newY);
         setLocation(newLoc);
-        return newLoc;
     }
 }

@@ -288,4 +288,14 @@ public class AdvancedModelManager implements IAdvancedModelManager {
         myActiveModel.addTurtle(id);
     }
 
+    @Override
+    public void windowTurtles () {
+        myActiveModel.windowTurtles();
+    }
+
+    @Override
+    public void fenceTurtles () {
+        myActiveModel.fenceTurtles();
+    }
+
 }

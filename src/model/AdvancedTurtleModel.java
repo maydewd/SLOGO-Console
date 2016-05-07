@@ -126,4 +126,16 @@ public class AdvancedTurtleModel extends BasicTurtleModel {
         this.myThickness = myThickness;
     }
 
+    public void windowTurtles () {
+        forAllTurtles(turtle -> turtle
+                .setMovementModule(new WindowMovementModule(turtle.getMovementModule())));
+        changeAndNotify();
+    }
+
+    public void fenceTurtles () {
+        forAllTurtles(turtle -> turtle
+                .setMovementModule(new FencedMovementModule(turtle.getMovementModule())));
+        changeAndNotify();
+    }
+
 }

@@ -139,4 +139,18 @@ public class AdvancedSLogoInterpreter extends BasicSLogoInterpreter
         getModelActions().variableMapProperty().putAll(allVars);
     }
 
+    @Override
+    public double windowTurtles () {
+        getModelActions().windowTurtles();
+        return 2;
+    }
+
+    @Override
+    public double fenceTurtles () {
+        getModelActions().fenceTurtles();
+        return 3;
+    }
+    
+    
+
 }

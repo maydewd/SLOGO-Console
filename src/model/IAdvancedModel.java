@@ -45,5 +45,9 @@ public interface IAdvancedModel extends IBasicModel {
     TurtleInfo getTurtle (int id);
 
     void addTurtle (int id);
+    
+    void windowTurtles();
+    
+    void fenceTurtles();
 
 }

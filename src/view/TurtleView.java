@@ -29,7 +29,7 @@ import model.TurtleInfo;
 public class TurtleView extends BaseUIView implements Observer {
 
     private static final int HEADING_OFFSET = 90;
-    public static final int DEFAULT_WIDTH = 500;
+    public static final int DEFAULT_WIDTH = 550;
     public static final int DEFAULT_HEIGHT = 407;
 
     public static final int TURTLE_HEIGHT = 25;
